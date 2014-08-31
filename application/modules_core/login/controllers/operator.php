@@ -53,7 +53,7 @@ class Operator extends Operatorlogin_base {
 		$this->m_login->user_log_leave(array($this->session->userdata('session_operator')['user_id']));
 		// destroy the session
 		$this->session->unset_userdata('session_operator');
-		redirect('login/operatorlogin');
+		redirect('login/operator');
 	}
 
 	// page title
