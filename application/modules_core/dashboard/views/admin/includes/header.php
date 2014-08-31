@@ -34,6 +34,7 @@
     <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
  -->
+
 <section>
 
 
@@ -57,7 +58,12 @@
           
             <h5 class="sidebartitle actitle">Account</h5>
             <ul class="nav nav-pills nav-stacked nav-bracket mb30">
-                <li><a href="<?php echo base_url(); ?>login//admin/logout"><i class="icon-off"></i> Logout</a>
+                <li>
+                <?php if($this->session->userdata('session_operator')['portal_id']==2){ ?>
+                  <a href="<?php echo base_url(); ?>login/operator/logout"><i class="icon-off"></i> Logout</a>
+                <?php }else{ ?>
+                  <a href="<?php echo base_url(); ?>login/admin/logout"><i class="icon-off"></i> Logout</a>
+                <?php } ?>                
                 </li>
             </ul>
         </div>
@@ -86,8 +92,13 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                      <li><a href="<?php echo base_url(); ?>login/admin/logout"><i class="icon-off"></i> Logout</a>
-                      </li>
+                    <li>
+                    <?php if($this->session->userdata('session_operator')['portal_id']==2){ ?>
+                      <a href="<?php echo base_url(); ?>login/operator/logout"><i class="icon-off"></i> Logout</a>
+                    <?php }else{ ?>
+                      <a href="<?php echo base_url(); ?>login/admin/logout"><i class="icon-off"></i> Logout</a>
+                    <?php } ?>                
+                    </li>
                 </ul>
               </div>
             </li>
