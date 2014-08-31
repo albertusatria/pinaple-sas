@@ -1,0 +1,122 @@
+/* CSS Custom / Overrride */
+.clear-space, /submit-form-regis{
+	clear: both;
+	margin: 30px 0;
+}
+/* table */
+.table{
+	float: left;
+}
+/* Page Header */
+.pageheader h2{
+	max-width: 300px;
+	margin-left: 50px;
+}
+.pageheader h2 i{
+	margin-left: -50px;
+}
+/* -- breadcrumb */
+.pageheader .breadcrumb-wrapper{
+	max-width: 500px;
+	text-align: right;
+}
+.pageheader .breadcrumb-wrapper .label{
+	padding: 0;
+}
+/* end breadcrumb */
+/* end Page Header */
+
+
+/* Registration */
+#validationWizard .tab-content{
+	padding: 35px 15px 15px 15px;
+}
+.tambah-wali{
+	margin-bottom: 30px;
+}
+/* payment page */
+.select-students-container{
+	min-height: 150px;
+}
+.select-students-container .chosen-container-single .chosen-single{
+	padding: 9px;
+}
+.btn-cari-bayar{
+	padding: 8px 60px;
+}
+.title-pembayaran{
+	text-transform: capitalize;
+	color: #428bca;
+}
+.payment .dataTables_filter input{
+	width: 650px !important;
+}
+.payment tbody tr td:hover{
+	cursor: pointer;
+}
+.payment-details .pay-fines{
+	padding: 5px !important;
+}
+.payment-details td.totals, .payment-details td.price, .payment-details .right, .float-right{
+	text-align: right;
+}
+.payment-details td.totals, .payment-details td.totals-value{
+	font-weight: bold;
+	color: #000;
+}
+.float-right{
+	float: right;
+}
+.center-panel{
+	margin: 0 auto;
+}
+.select-bank{
+	margin-top: 10px;
+}
+/* end payment page */
+
+/* Students Grade */
+.action-grades input{
+	text-align: center;
+	margin: 0 auto;
+	display: block;
+}
+.action-grades{
+	margin-top: 45px;
+}
+.table-grades.table-email td:nth-child(2){
+	width: 580px !important;
+}
+.check-all > input{
+	padding: 8px;
+}
+.check-all {
+	width: 18px;
+	margin: 0 10px;
+}
+.check-all, .students-title-grades{
+	float: left;
+}
+.students-title-grades{
+	width: 455px;
+	margin-left: 20px;
+}
+#graduation button, #nextLevel button{
+	color: #000;
+}
+#graduation button.disabled, #nextLevel button.disabled{
+	color: #b1b1b1;
+}
+/* end Students Grade */
+/* amount input stye */
+input[readonly], input[readonly="readonly"]
+{
+    border:0;
+    background-color: transparent;
+}
+.amount-price{
+	text-align: right;
+	width: 80px;
+	margin-left: 10px;
+}
+/* end amount input stye */
