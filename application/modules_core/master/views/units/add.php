@@ -4,8 +4,8 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>setting/unit">Manage Unit</a></li>
-          <li class="active">Setup Unit</li>
+          <li><a href="<?php echo base_url();?>master/units">Manage Unit</a></li>
+          <li class="active">Add Unit</li>
         </ol>
       </div>
     </div>

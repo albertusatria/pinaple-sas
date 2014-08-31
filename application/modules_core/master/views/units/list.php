@@ -24,7 +24,7 @@
           <h3 class="panel-title">Manage Unit</h3>
           <p>
         Don't Touch this data unless you're confident. <br><br>
-            <a href="<?php echo base_url(); ?>setting/unit/add" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add New Unit</a>
+            <a href="<?php echo base_url(); ?>master/units/add" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add New Unit</a>
           </p>
         </div>
         <div class="panel-body">
@@ -53,7 +53,7 @@
                                             <td><?php echo $result->nama_kepala_ref; ?></td>
                                             <td><?php echo $result->no_registrasi; ?></td>                                            
                                             <td>
-	                                               <a href="<?php echo base_url(); ?>setting/unit/edit/<?php echo $result->id_unit; ?>">
+	                                               <a href="<?php echo base_url(); ?>master/units/edit/<?php echo $result->id_unit; ?>">
 	                                                <i class="fa fa-edit"></i></a>
 	                                                &nbsp;&nbsp;
 	                                                <i class="fa fa-trash-o" onclick="hapus(<?php echo $result->id_unit ?>,'<?php echo $result->unit ?>')"></i>
