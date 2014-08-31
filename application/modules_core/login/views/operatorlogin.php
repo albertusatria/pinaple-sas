@@ -106,13 +106,10 @@ jQuery("#sasPanel").validate({
 		username : "Username required.",
 		password : "Password required."
 	},
-    highlight: function(element) {
+	highlight: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-    },
-    success: function(element) {
-      jQuery(element).closest('.form-group').removeClass('has-error');
     }
-  });
+});
 </script>
 </body>
 </html>
