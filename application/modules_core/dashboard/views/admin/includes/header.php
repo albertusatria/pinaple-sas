@@ -75,7 +75,7 @@
 
   </div><!-- leftpanel -->
 
-  <div class="mainpanel" style="background-color:#dbcaba">
+  <div class="mainpanel">
 
        <div class="headerbar">
         
