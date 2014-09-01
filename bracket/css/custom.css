@@ -3,6 +3,15 @@
 	clear: both;
 	margin: 30px 0;
 }
+/* required fields */
+em.danger{
+	color: #d9534f;
+}
+
+.validation-pass {
+	margin-bottom: -20px !important;
+}
+/* end required fields */
 /* table */
 .table{
 	float: left;
