@@ -28,7 +28,7 @@
 </script>
 <script type="text/javascript" language="javascript">
   function hapus(no,nama){
-    if(confirm('Yakin akan menghapus '+nama+' ini?'))
-      window.location = "<?php echo base_url(); ?>setting/unit/delete/"+no;
+    if(confirm('Are you sure want to delete '+nama+' ?'))
+      window.location = "<?php echo base_url(); ?>master/units/delete/"+no;
   }
 </script>

@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>setting/unit/add_process" enctype="multipart/form-data">
+    <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>master/units/add_process" enctype="multipart/form-data">
     
     <div class="contentpanel">
 
