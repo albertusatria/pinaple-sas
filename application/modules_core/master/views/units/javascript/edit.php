@@ -29,15 +29,18 @@
 
 <script type="text/javascript">
 jQuery("#sasPanel").validate({
-  messages: {
-    id_unit : "ID Unit is required.",
-    unit : "Unit is required.",    
-    jenjang : "Jenjang is required."
-    kategori: "Kategori is required."
-    },
-    highlight: function(element) {
+	messages: {
+		id_unit : "ID Unit is required.",
+		unit : "Unit name is required",
+		jenjang : "Level is required.",
+		kategori: "Category is required."
+	},
+	highlight: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-    }  
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error').addClass('validation-pass');
+    }
 });
 </script>
 <script>

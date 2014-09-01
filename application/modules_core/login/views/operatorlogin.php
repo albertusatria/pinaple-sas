@@ -67,7 +67,7 @@
 					<div class="form-group">
                     	<input type="password" name="password" class="form-control pword" placeholder="Password" required/>
 					</div>
-                    <a href="#"><small>Forgot Your Password?</small></a>
+<!--                     <a href="#"><small>Forgot Your Password?</small></a> -->
                     <button class="btn btn-success btn-block">Sign In</button>
                     
                 </form>
@@ -108,6 +108,9 @@ jQuery("#sasPanel").validate({
 	},
 	highlight: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error').addClass('validation-pass').css('margin-bottom', '-20px');
     }
 });
 </script>

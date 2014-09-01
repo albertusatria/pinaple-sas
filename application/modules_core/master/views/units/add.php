@@ -1,5 +1,5 @@
     <div class="pageheader">
-      <h2><i class="fa fa-group"></i> Manage Portal</h2>
+      <h2><i class="fa fa-sort-numeric-desc"></i> Manage Unit </h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
@@ -27,13 +27,13 @@
             <a href="#" class="panel-close">&times;</a>
             <a href="#" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">Setup Unit</h4>
-          <p>Please give Tahun Ajaran information</p>
+          <h4 class="panel-title">Add Unit</h4>
+          <p>Field(s) with<em class="danger">*</em> mark is requried.</p>
         </div>
         <div class="panel-body panel-body-nopadding">
           
            <div class="form-group">
-              <label class="col-sm-3 control-label">ID Unit *</label>
+              <label class="col-sm-3 control-label">ID Unit<em class="danger">*</em></label>
               <div class="col-sm-2">
                 <input name="id_unit" class="form-control" maxlength="9" type="text" value="<?php echo $this->session->flashdata('id_unit'); ?>" required />
               </div>
@@ -52,14 +52,14 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Nama Unit *</label>
+              <label class="col-sm-3 control-label">Unit Name<em class="danger">*</em></label>
               <div class="col-sm-4">
                 <input name="unit" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('unit');?>" required/>
               </div>
             </div>
 
              <div class="form-group">
-              <label class="col-sm-3 control-label">Kategori *</label>
+              <label class="col-sm-3 control-label">Category<em class="danger">*</em></label>
               <div class="col-sm-3">
                 <select class="form-control input-sm mb15" name="kategori" required>
                     <option value="">-- SELECT --</option>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Jenjang *</label>
+              <label class="col-sm-3 control-label">Level<em class="danger">*</em></label>
               <div class="col-sm-1">
                 <input name="jenjang" type="text" class="form-control" maxlength="1" value="<?php echo $this->session->flashdata('jenjang');?>" required/>
               </div>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Kepala Unit</label>
+              <label class="col-sm-3 control-label">Unit Chief</label>
               <div class="col-sm-4">
               <select class="form-control input-sm mb15" name="nama_kepala">
                  <option value="">-- SELECT --</option>
@@ -96,14 +96,14 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">No. Registrasi</label>
+              <label class="col-sm-3 control-label">No. Registration</label>
               <div class="col-sm-3">
                 <input name="no_registrasi" type="text" class="form-control" maxlength="10" value="<?php echo $this->session->flashdata('no_registrasi');?>"/>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">No. Telpon</label>
+              <label class="col-sm-3 control-label">Phone</label>
               <div class="col-sm-3">
                 <input name="no_telpon" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('no_telpon');?>"/>
               </div>
@@ -117,14 +117,14 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Alamat</label>
+              <label class="col-sm-3 control-label">Address</label>
               <div class="col-sm-4">
                 <input name="alamat" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('alamat');?>"/>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Kota</label>
+              <label class="col-sm-3 control-label">City</label>
               <div class="col-sm-3">
                 <input name="kota" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('kota');?>"/>
               </div>
@@ -145,7 +145,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">No. Fax</label>
+              <label class="col-sm-3 control-label">Fax</label>
               <div class="col-sm-3">
                 <input name="no_fax" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('no_fax');?>"/>
               </div>
