@@ -11,6 +11,9 @@ em.danger{
 .validation-pass {
 	margin-bottom: -20px !important;
 }
+.has-error .error{
+	display: block;
+}
 /* end required fields */
 /* table */
 .table{
