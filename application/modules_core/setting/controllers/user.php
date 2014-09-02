@@ -52,7 +52,7 @@ class User extends Admin_base {
 		$data['user'] = $this->user;
 		// load template
 		$data['title']		  = "Setup User PinapleSAS";
-		$data['main_content'] = "setting/user/add";
+		$data['layout'] = "setting/user/add";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -144,7 +144,7 @@ class User extends Admin_base {
 		$data['result'] = $this->m_user->get_user_by_slug($user_slug);
 		// load template
 		$data['title']	= "Edit User PinapleSAS";
-		$data['main_content'] = "setting/user/edit_profile";
+		$data['layout'] = "setting/user/edit_profile";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -225,7 +225,7 @@ class User extends Admin_base {
 		$data['result'] = $this->m_user->get_user_by_slug($user_slug);
 		// load template
 		$data['title']	= "Edit User PinapleSAS";
-		$data['main_content'] = "setting/user/edit_account";
+		$data['layout'] = "setting/user/edit_account";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -299,7 +299,7 @@ class User extends Admin_base {
 		$data['result'] = $this->m_user->get_user_by_slug($user_slug);
 		// load template
 		$data['title'] = "Setting Password User PinapleSAS";
-		$data['main_content'] = "setting/user/edit_password";
+		$data['layout'] = "setting/user/edit_password";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -347,7 +347,7 @@ class User extends Admin_base {
 		$data['result'] = $this->m_user->get_user_by_slug($user_slug);
 		// load template
 		$data['title'] = "Setting User PinapleSAS";
-		$data['main_content'] = "setting/user/delete";
+		$data['layout'] = "setting/user/delete";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

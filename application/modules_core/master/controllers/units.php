@@ -8,7 +8,7 @@ class Units extends Operator_base {
 
 		// load all the related model here
 		$this->load->model('m_unit');
-		$this->load->model('m_guru_karyawan');
+		$this->load->model('m_employees');
 		
 		// load portal
 		$this->load->helper('text');
