@@ -37,9 +37,11 @@ jQuery("#sasPanel").validate({
 	},
 	highlight: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	  jQuery(element).closest('div').addClass('error');
     },
     success: function(element) {
       jQuery(element).closest('.form-group').removeClass('has-error').addClass('validation-pass');
+	  jQuery(element).closest('div').removeClass('error').addClass('success');
     }
 });
 </script>

@@ -123,6 +123,7 @@ class Units extends Operator_base {
 		$data['title']	= "Edit Unit PinapleSAS";
 		$data['message'] = $this->session->flashdata('message');
 		$data['layout'] = "master/units/edit";
+		$data['javascript'] = "master/units/javascript/edit";		
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
