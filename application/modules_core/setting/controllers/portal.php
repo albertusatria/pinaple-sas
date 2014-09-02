@@ -50,7 +50,7 @@ class Portal extends Admin_base {
 		// load template
 
 		$data['title'] = "Add Portal PinapleSAS";
-		$data['main_content'] = "setting/portal/add";
+		$data['layout'] = "setting/portal/add";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -95,7 +95,7 @@ class Portal extends Admin_base {
 		$data['result'] = $this->m_portal->get_portal_by_slug($portal_slug);
 		// load template
 		$data['title'] = "Edit Portal PinapleSAS";
-		$data['main_content'] = "setting/portal/edit";
+		$data['layout'] = "setting/portal/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -142,7 +142,7 @@ class Portal extends Admin_base {
 		$data['result'] = $this->m_portal->get_portal_by_slug($portal_slug);
 		// load template
 		$data['title'] = "Delete Portal Area PinapleSAS";
-		$data['main_content'] = "setting/portal/delete";
+		$data['layout'] = "setting/portal/delete";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

@@ -52,7 +52,7 @@ class Role extends Admin_base {
 		$data['user'] = $this->user;
 		// load template
 		$data['title']	= "Add Role PinapleSAS";
-		$data['main_content'] = "setting/role/add";
+		$data['layout'] = "setting/role/add";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -103,7 +103,7 @@ class Role extends Admin_base {
 		$data['result'] = $this->m_role->get_role_by_slug($role_slug);
 		// load template
 		$data['title']	= "Setup Role PinapleSAS";
-		$data['main_content'] = "setting/role/edit";
+		$data['layout'] = "setting/role/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -152,7 +152,7 @@ class Role extends Admin_base {
 		$data['result'] = $this->m_role->get_role_by_slug($role_slug);
 		// load template
 		$data['title']	= "Delete Role PinapleSAS";
-		$data['main_content'] = "setting/role/delete";
+		$data['layout'] = "setting/role/delete";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

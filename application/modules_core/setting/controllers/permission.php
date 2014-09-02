@@ -57,7 +57,7 @@ class Permission extends Admin_base {
 		$data['rs_menu'] = $this->m_menu->get_all_menu_by_portal_role(array($role_slug, $role_slug, $data['result']['portal_id']));
 		// load template
 		$data['title']	= "Edit Permission PinapleSAS";
-		$data['main_content'] = "setting/permission/edit";
+		$data['layout'] = "setting/permission/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
