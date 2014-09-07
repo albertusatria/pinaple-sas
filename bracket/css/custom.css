@@ -29,7 +29,7 @@ em.danger{
 }
 /* -- breadcrumb */
 .pageheader .breadcrumb-wrapper{
-	max-width: 500px;
+	max-width: 580px;
 	text-align: right;
 }
 .pageheader .breadcrumb-wrapper .label{
