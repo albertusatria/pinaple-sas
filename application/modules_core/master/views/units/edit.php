@@ -168,7 +168,7 @@
              <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                   <button class="btn btn-primary">Submit</button>&nbsp;
-                  <button class="btn btn-default" onclick="history.go(-1);">Cancel</button>
+                  <a class="btn btn-default" onclick="history.go(-1);">Cancel</a>
                 </div>
              </div>
         </div><!-- panel-footer -->
