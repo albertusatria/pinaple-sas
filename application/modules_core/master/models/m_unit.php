@@ -63,8 +63,8 @@ class m_unit extends CI_Model {
         $this->db->update('units',$params,array('id'=>$params['id']));
     }
 
-    function delete_unit($params) {
-       $this->db->delete('units',$params,array('id'=>$params['id']));
-    }
+    // function delete_unit($params) {
+    //    $this->db->delete('units',$params,array('id'=>$params['id']));
+    // }
     
 }

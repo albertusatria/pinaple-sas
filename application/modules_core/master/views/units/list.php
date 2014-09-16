@@ -52,7 +52,7 @@
 	                                               <a href="<?php echo base_url(); ?>master/units/edit/<?php echo $result->id; ?>">
 	                                                <i class="fa fa-edit"></i></a>
 	                                                &nbsp;&nbsp;
-	                                                <a href="#" onclick="hapus(<?php echo $result->id ?>,'<?php echo $result->name ?>')"><i class="fa fa-trash-o"></i></a>
+	                                                <!-- <a href="#" onclick="hapus(<?php echo $result->id ?>,'<?php echo $result->name ?>')"><i class="fa fa-trash-o"></i></a> -->
 		                                        </td>
 		                                    </tr>
 		                                <?php $no++; endforeach ; ?>
