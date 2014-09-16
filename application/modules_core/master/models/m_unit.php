@@ -8,14 +8,14 @@ class m_unit extends CI_Model {
     }
 
     function get_all_unit(){
-        return $this->db->get('ref_unit')->result();
+        return $this->db->get('units')->result();
     }
 
     function get_all_unit_for_administration_cost(){
         $sql = "SELECT u.*
-            FROM ref_unit u
-            WHERE id_unit <> '0000'
-            ORDER BY u.id_unit";
+            FROM units u
+            WHERE id <> '0000'
+            ORDER BY u.id";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -26,9 +26,9 @@ class m_unit extends CI_Model {
 
     function get_all_unit_except_self($id){
         $sql = "SELECT u.*
-            FROM ref_unit u
-            WHERE u.id_unit <> '$id' 
-            ORDER BY u.id_unit";
+            FROM units u
+            WHERE u.id <> '$id' 
+            ORDER BY u.id";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -38,11 +38,12 @@ class m_unit extends CI_Model {
     }
 
     function get_all_unit_completed(){
-        $sql = "SELECT u.*, gk.nama_lengkap AS nama_kepala_ref
-            FROM ref_unit u 
-            LEFT JOIN users_guru_karyawan gk ON gk.nik = u.nama_kepala
-            ORDER BY u.id_unit";
+        $sql = "SELECT u.*, gk.full_name AS headmaster_name
+            FROM units u 
+            LEFT JOIN users_employee gk ON gk.nik = u.headmaster_id
+            ORDER BY u.id";
         $query = $this->db->query($sql);
+        // echo "<pre>"; print_r($query->result());die;
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
@@ -51,19 +52,19 @@ class m_unit extends CI_Model {
     }
 
     function get_unit_by_id($id){
-        return $this->db->get_where('ref_unit',array('id_unit'=>$id))->row();
+        return $this->db->get_where('units',array('id'=>$id))->row();
     }
 
     function add_unit($params) {
-        $this->db->insert('ref_unit',$params);
+        $this->db->insert('units',$params);
     }
 
     function edit_unit($params) {
-        $this->db->update('ref_unit',$params,array('id_unit'=>$params['id_unit']));
+        $this->db->update('units',$params,array('id'=>$params['id']));
     }
 
     function delete_unit($params) {
-       $this->db->delete('ref_unit',$params,array('id_unit'=>$params['id_unit']));
+       $this->db->delete('units',$params,array('id'=>$params['id']));
     }
     
 }

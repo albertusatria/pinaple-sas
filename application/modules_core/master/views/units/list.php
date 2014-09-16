@@ -32,9 +32,7 @@
             <table class="table" id="table1">
 		                            <thead>
 		                                <tr>
-		                                    <th>#</th>
 		                                    <th>ID</th>
-		                                    <th>ID Parent</th>
                                         <th>Kategori</th>
 		                                    <th>Nama Unit</th>
                                         <th>Kepala Unit</th>
@@ -45,22 +43,21 @@
 		                            <tbody>
 		                                <?php $no = 1; foreach ($rs_unit as $result): ?>
 		                                    <tr>
-		                                        <td><?php echo $no; ?></td>
-		                                        <td><?php echo $result->id_unit; ?></td>
-                                            <td><?php echo $result->id_parent; ?></td>
-                                            <td><?php echo $result->kategori; ?></td>
-                                            <td><?php echo $result->unit; ?></td>
-                                            <td><?php echo $result->nama_kepala_ref; ?></td>
-                                            <td><?php echo $result->no_registrasi; ?></td>                                            
+		                                        <td><?php echo $result->id; ?></td>
+                                            <td><?php echo $result->category; ?></td>
+                                            <td><?php echo $result->name; ?></td>
+                                            <td><?php echo $result->headmaster_name; ?></td>
+                                            <td><?php echo $result->registration_number; ?></td>                                            
                                             <td>
-	                                               <a href="<?php echo base_url(); ?>master/units/edit/<?php echo $result->id_unit; ?>">
+	                                               <a href="<?php echo base_url(); ?>master/units/edit/<?php echo $result->id; ?>">
 	                                                <i class="fa fa-edit"></i></a>
 	                                                &nbsp;&nbsp;
-	                                                <a href="#" onclick="hapus(<?php echo $result->id_unit ?>,'<?php echo $result->unit ?>')"><i class="fa fa-trash-o"></i></a>
+	                                                <a href="#" onclick="hapus(<?php echo $result->id ?>,'<?php echo $result->name ?>')"><i class="fa fa-trash-o"></i></a>
 		                                        </td>
 		                                    </tr>
 		                                <?php $no++; endforeach ; ?>
-		                            </tbody>           </table>
+		                            </tbody>          
+                               </table>
           </div><!-- table-responsive -->
           <div class="clearfix mb30"></div>
         </div><!-- panel-body -->

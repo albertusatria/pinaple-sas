@@ -35,17 +35,17 @@
            <div class="form-group">
               <label class="col-sm-3 control-label">ID Unit<em class="danger">*</em></label>
               <div class="col-sm-2">
-                <input name="id_unit" class="form-control" maxlength="9" type="text" value="<?php echo $this->session->flashdata('id_unit'); ?>" required />
+                <input name="id" class="form-control" maxlength="9" type="text" value="<?php echo $this->session->flashdata('id'); ?>" required />
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Parent</label>
               <div class="col-sm-4">
-              <select class="form-control input-sm mb15" name="id_parent">
+              <select class="form-control input-sm mb15" name="parent_id">
                  <option value="">-- SELECT --</option>
                     <?php foreach ($rs_parent as $data) : ?>
-                        <option value="<?php echo $data->id_unit; ?>"><?php echo $data->id_unit." | ".$data->unit; ?></option>
+                        <option value="<?php echo $data->id; ?>"><?php echo $data->id." | ".$data->name; ?></option>
                     <?php endforeach ; ?>
               </select>
               </div>
@@ -54,14 +54,14 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Unit Name<em class="danger">*</em></label>
               <div class="col-sm-4">
-                <input name="unit" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('unit');?>" required/>
+                <input name="name" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('name');?>" required/>
               </div>
             </div>
 
              <div class="form-group">
               <label class="col-sm-3 control-label">Category<em class="danger">*</em></label>
               <div class="col-sm-3">
-                <select class="form-control input-sm mb15" name="kategori" required>
+                <select class="form-control input-sm mb15" name="category" required>
                     <option value="">-- SELECT --</option>
                     <option value="AKADEMIS">AKADEMIS</option>
                     <option value="NON AKADEMIS">NON AKADEMIS</option>
@@ -70,26 +70,26 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Level<em class="danger">*</em></label>
+              <label class="col-sm-3 control-label">Stage<em class="danger">*</em></label>
               <div class="col-sm-1">
-                <input name="jenjang" type="text" class="form-control" maxlength="1" value="<?php echo $this->session->flashdata('jenjang');?>" required/>
+                <input name="stage" type="text" class="form-control" maxlength="1" value="<?php echo $this->session->flashdata('stage');?>" required/>
               </div>
             </div>
-            
+            <!-- 
             <div class="form-group">
               <label class="col-sm-3 control-label">Logo</label>
               <div class="col-sm-7">
                  <input name="unitfile" class="form-control"  class="span5" type="file" />
               </div>
             </div>
-
+            -->
             <div class="form-group">
-              <label class="col-sm-3 control-label">Unit Chief</label>
+              <label class="col-sm-3 control-label">Chief / Headmaster of this unit</label>
               <div class="col-sm-4">
-              <select class="form-control input-sm mb15" name="nama_kepala">
+              <select class="form-control input-sm mb15" name="headmaster_id">
                  <option value="">-- SELECT --</option>
                     <?php foreach ($rs_kepala as $data) : ?>
-                        <option value="<?php echo $data->nik; ?>"><?php echo $data->nama_lengkap; ?></option>
+                        <option value="<?php echo $data->nik; ?>"><?php echo $data->full_name; ?></option>
                     <?php endforeach ; ?>
               </select>
               </div>
@@ -98,14 +98,49 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">No. Registration</label>
               <div class="col-sm-3">
-                <input name="no_registrasi" type="text" class="form-control" maxlength="10" value="<?php echo $this->session->flashdata('no_registrasi');?>"/>
+                <input name="registration_number" type="text" class="form-control" maxlength="10" value="<?php echo $this->session->flashdata('registration_number');?>"/>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Phone</label>
               <div class="col-sm-3">
-                <input name="no_telpon" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('no_telpon');?>"/>
+                <input name="phone" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('phone');?>"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Address</label>
+              <div class="col-sm-4">
+                <input name="address" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('address');?>"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">City</label>
+              <div class="col-sm-3">
+                <input name="city" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('city');?>"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">District</label>
+              <div class="col-sm-3">
+                <input name="district" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('district');?>"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Village</label>
+              <div class="col-sm-3">
+                <input name="village" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('village');?>"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Fax</label>
+              <div class="col-sm-3">
+                <input name="fax" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('fax');?>"/>
               </div>
             </div>
 
@@ -117,44 +152,9 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Address</label>
-              <div class="col-sm-4">
-                <input name="alamat" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('alamat');?>"/>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-3 control-label">City</label>
-              <div class="col-sm-3">
-                <input name="kota" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('kota');?>"/>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Kecamatan</label>
-              <div class="col-sm-3">
-                <input name="kecamatan" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('kecamatan');?>"/>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Kelurahan</label>
-              <div class="col-sm-3">
-                <input name="kelurahan" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('kelurahan');?>"/>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Fax</label>
-              <div class="col-sm-3">
-                <input name="no_fax" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('no_fax');?>"/>
-              </div>
-            </div>
-
-            <div class="form-group">
               <label class="col-sm-3 control-label">Website</label>
               <div class="col-sm-4">
-                <input name="website" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('website');?>"/>
+                <input name="web" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('web');?>"/>
               </div>
             </div>
 

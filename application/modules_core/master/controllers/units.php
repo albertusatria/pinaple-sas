@@ -52,7 +52,7 @@ class Units extends Operator_base {
 		$data['user'] = $this->user;
 
 		$data['rs_parent'] = $this->m_unit->get_all_unit();
-		$data['rs_kepala'] = $this->m_guru_karyawan->get_all_ugk();
+		$data['rs_kepala'] = $this->m_employees->get_all_ue();
 
 		// load template
 		$data['title']		  = "Add Unit PinapleSAS";
@@ -66,10 +66,10 @@ class Units extends Operator_base {
 	// add process
 	public function add_process() {
 		// form validation
-		$this->form_validation->set_rules('id_unit', 'ID Unit', 'required|trim|xss_clean|callback_check_id_unit');
-		$this->form_validation->set_rules('unit', 'Nama Unit', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('kategori', 'Kategori', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('id', 'Unit ID', 'required|trim|xss_clean|callback_check_id_unit');
+		$this->form_validation->set_rules('name', 'Unit Name', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('stage', 'Number of Stage', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('category', 'Category', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
@@ -83,22 +83,22 @@ class Units extends Operator_base {
 		} else {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
-				'id_unit'		=> $this->input->post('id_unit'),
-				'id_parent'		=> $this->input->post('id_parent'),
-				'unit'			=> $this->input->post('unit'),
-				'kategori'		=> $this->input->post('kategori'),
-				'jenjang'		=> $this->input->post('jenjang'),
+				'id'		=> $this->input->post('id'),
+				'parent_id'		=> $this->input->post('parent_id'),
+				'unit'			=> $this->input->post('name'),
+				'category'		=> $this->input->post('category'),
+				'stage'		=> $this->input->post('stage'),
 				//'logo'		=> $this->input->post('status'),
-				'nama_kepala'	=> $this->input->post('nama_kepala'),
-				'no_registrasi'	=> $this->input->post('no_registrasi'),
-				'no_telpon'		=> $this->input->post('no_telpon'),
-				'email'			=> $this->input->post('email'),
-				'alamat'		=> $this->input->post('alamat'),
-				'kota'			=> $this->input->post('kota'),
-				'kecamatan'		=> $this->input->post('kecamatan'),
-				'kelurahan'		=> $this->input->post('kelurahan'),
-				'no_fax'		=> $this->input->post('no_fax'),
-				'email'			=> $this->input->post('email')
+				'headmaster_id'	=> $this->input->post('headmaster_id'),
+				'registration_number'	=> $this->input->post('registration_number'),
+				'address'		=> $this->input->post('address'),
+				'city'			=> $this->input->post('city'),
+				'district'		=> $this->input->post('district'),
+				'village'			=> $this->input->post('village'),
+				'phone'		=> $this->input->post('phone'),
+				'fax'		=> $this->input->post('fax'),
+				'email'		=> $this->input->post('email'),
+				'web'			=> $this->input->post('web')
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/units/add');
@@ -116,8 +116,9 @@ class Units extends Operator_base {
 		$data['user'] = $this->user;
 		// get tahun ajaran row
 		$data['rs_parent'] = $this->m_unit->get_all_unit_except_self($id);
-		$data['rs_kepala'] = $this->m_guru_karyawan->get_all_ugk();
+		$data['rs_kepala'] = $this->m_employees->get_all_ue();
 		$data['result'] = $this->m_unit->get_unit_by_id($id);
+		// print_r($data['result']);die;
 		
 		// load template
 		$data['title']	= "Edit Unit PinapleSAS";
@@ -130,10 +131,10 @@ class Units extends Operator_base {
 	// edit process
 	public function edit_process() {
 		// form validation
-		$this->form_validation->set_rules('id_unit', 'ID Unit', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('unit', 'Nama Unit', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('kategori', 'Kategori', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('id', 'Unit ID', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('name', 'Unit name', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('stage', 'Number of Stage', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('category', 'Category', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('email', 'Email', 'valid_email|trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
@@ -147,22 +148,22 @@ class Units extends Operator_base {
 		} else {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
-				'id_unit'		=> $this->input->post('id_unit'),
-				'id_parent'		=> $this->input->post('id_parent'),
-				'unit'			=> $this->input->post('unit'),
-				'kategori'		=> $this->input->post('kategori'),
-				'jenjang'		=> $this->input->post('jenjang'),
+				'id'		=> $this->input->post('id'),
+				'parent_id'		=> $this->input->post('parent_id'),
+				'unit'			=> $this->input->post('name'),
+				'category'		=> $this->input->post('category'),
+				'stage'		=> $this->input->post('stage'),
 				//'logo'		=> $this->input->post('status'),
-				'nama_kepala'	=> $this->input->post('nama_kepala'),
-				'no_registrasi'	=> $this->input->post('no_registrasi'),
-				'no_telpon'		=> $this->input->post('no_telpon'),
-				'email'			=> $this->input->post('email'),
-				'alamat'		=> $this->input->post('alamat'),
-				'kota'			=> $this->input->post('kota'),
-				'kecamatan'		=> $this->input->post('kecamatan'),
-				'kelurahan'		=> $this->input->post('kelurahan'),
-				'no_fax'		=> $this->input->post('no_fax'),
-				'email'			=> $this->input->post('email')
+				'headmaster_id'	=> $this->input->post('headmaster_id'),
+				'registration_number'	=> $this->input->post('registration_number'),
+				'address'		=> $this->input->post('address'),
+				'city'			=> $this->input->post('city'),
+				'district'		=> $this->input->post('district'),
+				'village'			=> $this->input->post('village'),
+				'phone'		=> $this->input->post('phone'),
+				'fax'		=> $this->input->post('fax'),
+				'email'		=> $this->input->post('email'),
+				'web'			=> $this->input->post('web')
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/units/edit/'.$this->input->post('id_unit'));
