@@ -24,7 +24,7 @@ jQuery(document).ready(function() {
 	jQuery(".chosen-select").chosen({'width':'100%','white-space':'nowrap'});
     
 	// With Form Validation Wizard
-	jQuery("#regisForm").validate({
+	var $validator = jQuery("#regisForm").validate({
 		highlight: function(element) {
 		  jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		},
