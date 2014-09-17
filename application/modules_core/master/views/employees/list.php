@@ -1,10 +1,10 @@
     <div class="pageheader">
-      <h2><i class="fa fa-group"></i>Employees Manage</h2>
+      <h2><i class="fa fa-group"></i>Employees Management</h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li class="active">Employees Manage </li>
+          <li class="active">Employees Management </li>
         </ol>
       </div>
     </div>
@@ -21,7 +21,7 @@
       
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Employees Manage</h3>
+          <h3 class="panel-title">Employees Management</h3>
           <p>
         Don't Touch this data unless you're confident. <br><br>
             <a href="<?php echo base_url(); ?>master/employees/add" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add New Employee</a>
