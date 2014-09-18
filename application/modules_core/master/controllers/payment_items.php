@@ -7,7 +7,11 @@ class Payment_items extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
-
+		$this->load->model('registration/m_extra');
+		$this->load->model('m_tahun_ajaran');
+		$this->load->model('m_unit');
+		$this->load->model('m_items_type');		
+		
 		// load portal
 		$this->load->helper('text');
 		// page title
@@ -29,7 +33,13 @@ class Payment_items extends Operator_base {
 		$data['menu']				= $this->menu();
 		// user detail
 		$data['user']				= $this->user;
-
+		//message
+		$data['message'] = $this->session->flashdata('message');
+		//unit
+		$data['ls_unit'] = $this->m_extra->get_unit();
+		//tahun ajaran
+		$data['rs_tahun_ajaran'] = $this->m_tahun_ajaran->get_all_tahun_ajaran();		
+		
 		$data['layout'] = "master/payment_items/list";
 		$data['javascript'] = "master/payment_items/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
