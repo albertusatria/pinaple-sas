@@ -34,9 +34,14 @@
   });
 </script>
 <script type="text/javascript">
+  function tambah(){
+    var sy_id = document.getElementById('sy_id').value;
+    var u_id  = document.getElementById('u_id').value;
+    window.location = "<?php echo base_url(); ?>master/payment_items/add/"+sy_id+"/"+u_id;
+  }
   function hapus(no,nama){
-    if(confirm('Yakin akan menghapus '+nama+' ini?'))
-      window.location = "<?php echo base_url(); ?>setting/tahun_ajaran/delete/"+no;
+    if(confirm('Are you sure to delete this item?'))
+      window.location = "<?php echo base_url(); ?>master/payment_items/delete/"+no;
   }
 </script>
 

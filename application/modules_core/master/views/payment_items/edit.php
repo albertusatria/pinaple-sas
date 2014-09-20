@@ -4,15 +4,15 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>setting/tahun_ajaran/">Manage Tahun Ajaran</a></li>
-          <li class="active">Manage Tahun Ajaran <?php echo $r_ta->tahun_ajaran; ?></li>
+          <li><a href="<?php echo base_url();?>master/payment_items/">Manage Payment Items</a></li>
+          <li class="active">Manage Payment Item for School Year <?php echo $r_sy->name; ?></li>
         </ol>
       </div>
     </div>
 
-    <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>setting/tahun_ajaran/edit_cost_process">
+    <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>master/payment_items/edit_process">
     
-    <input type="hidden" name="tahun_ajaran_id" value="<?php echo $r_ta->id; ?>"/>
+    <input type="hidden" name="school_year_id" value="<?php echo $r_sy->id; ?>"/>
     <input type="hidden" name="id" value="<?php echo $r_ac->id; ?>"/>
 
     <div class="contentpanel">
@@ -30,8 +30,8 @@
             <a href="#" class="panel-close">&times;</a>
             <a href="#" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">Setup Costs Tahun Ajaran <?php echo $r_ta->tahun_ajaran; ?></h4>
-          <p>Please give Cost Tahun Ajaran information</p>
+          <h4 class="panel-title">School Year Costs Setup <?php echo $r_sy->name; ?></h4>
+          <p>Please give Administration Cost for School Year Information</p>
         </div>
         <div class="panel-body panel-body-nopadding">
           
@@ -41,9 +41,9 @@
                 <select class="form-control input-sm mb15" name="unit_id" required>
                     <option value="">-- SELECT --</option>
                     <?php foreach ($rs_unit as $data) : ?>
-                        <option value="<?php echo $data->id_unit; ?>"
-                        <?php if($data->id_unit==$r_ac->unit_id){echo "selected='selected'";} ?>
-                        ><?php echo $data->unit; ?></option>
+                        <option value="<?php echo $data->id; ?>"
+                        <?php if($data->id==$r_ac->unit_id){echo "selected='selected'";} ?>
+                        ><?php echo $data->name; ?></option>
                     <?php endforeach ; ?>
                 </select>
               </div>
