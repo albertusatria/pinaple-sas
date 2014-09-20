@@ -9,8 +9,15 @@
     </div>
 </div>
 <div class="contentpanel">
-	<div class="row">
 
+	 <?php if ($message != null ) : ?>
+      <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Well done!</strong>   <?php echo $message; ?>
+        </div>
+      <?php endif ; ?>
+
+	<div class="row">
 		<div class="col-md-12">
 		  <div class="panel panel-default">
 		  
@@ -20,21 +27,28 @@
 		      </div>
 		      <h4 class="panel-title">Manage Payment Items</h4>
 		      <p>This is form to search Payment Items based on <strong> academic year </strong> and <strong>units</strong></p>
+		      <br/>
+		      <a href="#" data-title="Add Data" class="tip" ><span onclick="tambah();"><i class="fa fa-plus" ></i> Add New Payment Items</span></a>
 		    </div>
 		    
-		    <form>
+		    <form method="POST" action="<?php echo base_url(); ?>master/payment_items">
 		    <div class="panel-body">
 		      <div class="row row-pad-5">
-		        <div class="col-lg-5">
-		          <select class="form-control chosen-select" data-placeholder="Choose Academic Year..." required>
-					  <option value=""></option>
-		              <option value="2013/2014">2013/2014</option>                  
+		        <div class="col-lg-3">
+		          <select id='sy_id' class="form-control chosen-select" data-placeholder="Choose Academic Year..." name='sy_id' required>
+					  	<?php foreach ($rs_school_year as $result): ?>
+					  	<option value="<?php echo $result->id; ?>" <?php if($result->id==$sy_id){echo "selected='selected'";} ?>
+					  	><?php echo $result->name; ?><?php if($result->status=='aktif'){echo " (AKTIF)";} ?>
+					  	</option>                  
+		          		<?php endforeach; ?>
 		          </select>
 		        </div>
-		        <div class="col-lg-5">
-		          <select class="form-control chosen-select" data-placeholder="Choose Units..." required>
-					  <option value=""></option>
-		              <option value="United States">KB</option>                  
+		        <div class="col-lg-4">
+		          <select id='u_id' class="form-control chosen-select" data-placeholder="Choose Units..." name='u_id' required>
+					  	<?php foreach ($rs_unit as $result): ?>
+					  	<option value="<?php echo $result->id; ?>" <?php if($result->id==$u_id){echo "selected='selected'";} ?>
+					  	><?php echo $result->name; ?></option>                  
+		          		<?php endforeach; ?>                 
 		          </select>
 		        </div>
 		        <div class="col-lg-2">
@@ -61,33 +75,22 @@
 				          </tr>
 				        </thead>
 				        <tbody>
-				          <tr>
-				            <td>1</td>
-				            <td>DPP</td>
-				            <td class="price">300000</td>
-			                <td class="table-action-hide">
-			                  <a href="#"><i class="fa fa-pencil"></i></a>
-			                  <a href="#" class="delete-row"><i class="fa fa-trash-o"></i></a>
-			                </td>
-				          </tr>
-				          <tr>
-				            <td>2</td>
-				            <td>SPP</td>
-				            <td class="price">500000</td>
-			                <td class="table-action-hide">
-			                  <a href="#"><i class="fa fa-pencil"></i></a>
-			                  <a href="#" class="delete-row"><i class="fa fa-trash-o"></i></a>
-			                </td>
-				          </tr>
-				          <tr>
-				            <td>3</td>
-				            <td>Uniform</td>
-				            <td class="price">30000</td>
-			                <td class="table-action-hide">
-			                  <a href="#"><i class="fa fa-pencil"></i></a>
-			                  <a href="#" class="delete-row"><i class="fa fa-trash-o"></i></a>
-			                </td>
-				          </tr>
+				       	<?php if(empty($rs_items)){ ?>
+				       		<tr><td colspan="4" align="center"> -- there are no items -- </td></tr>
+				       	<?php }else{ ?>	
+					        <?php $no = 1; foreach ($rs_items as $result): ?>
+					          <tr>				          
+					            <td><?php echo @$no; ?></td>
+					            <td><?php echo @$result->item_name; ?></td>
+					            <td class="price"><?php echo @$result->item_amount; ?></td>
+				                <td class="table-action-hide">
+				                  <a href="<?php echo base_url(); ?>master/payment_items/edit/<?php echo $result->sy_id; ?>/<?php echo $result->id; ?>"><i class="fa fa-pencil"></i></a>
+				                  <a><i class="fa fa-trash-o" onclick="hapus(<?php echo $result->id ?>)"></i></a>
+				                </td>
+					          </tr>
+					         <?php $no++; endforeach ; ?>
+				       	<?php } ?>
+   				    
 				        </tbody>
 				      </table>
 				      </div><!-- table-responsive -->

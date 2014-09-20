@@ -8,15 +8,14 @@ class Payment_items extends Operator_base {
 
 		// load all the related model here
 		$this->load->model('registration/m_extra');
-		$this->load->model('m_tahun_ajaran');
+		$this->load->model('initiation/m_school_year');
 		$this->load->model('m_unit');
 		$this->load->model('m_items_type');		
-		
+		$this->load->model('m_administration_costs');
 		// load portal
 		$this->load->helper('text');
 		// page title
 		$this->page_title();
-
 		// active page
 		$active['parent_active'] = "payment_configuration";
 		$active['child_active'] = "payment_items";
@@ -30,16 +29,31 @@ class Payment_items extends Operator_base {
 
 		// two of these is a must
 		// menu
-		$data['menu']				= $this->menu();
+		$data['menu']	= $this->menu();
 		// user detail
-		$data['user']				= $this->user;
+		$data['user']	= $this->user;
 		//message
 		$data['message'] = $this->session->flashdata('message');
-		//unit
-		$data['ls_unit'] = $this->m_extra->get_unit();
 		//tahun ajaran
-		$data['rs_tahun_ajaran'] = $this->m_tahun_ajaran->get_all_tahun_ajaran();		
-		
+		$data['rs_school_year'] = $this->m_school_year->get_all_school_year();		
+		//unit
+		$data['rs_unit'] = $this->m_unit->get_all_unit_for_administration_cost();
+
+		if($this->input->post('sy_id')){
+			//die($this->input->post('sy_id').$this->input->post('u_id'));
+			$data['sy_id'] = $this->input->post('sy_id');
+			$data['u_id']  = $this->input->post('u_id');
+			$data['rs_items'] = $this->m_administration_costs->get_all_costs_by_sy_u($data['sy_id'],$data['u_id']);		
+		}elseif($this->session->flashdata('id_sy')){
+			$data['sy_id'] = $this->session->flashdata('id_sy');
+			$data['u_id']  = $this->session->flashdata('id_u');
+			$data['rs_items'] = $this->m_administration_costs->get_all_costs_by_sy_u($data['sy_id'],$data['u_id']);
+		}else{
+			$data['sy_id'] = $this->input->post('sy_id');
+			$data['u_id'] = $this->input->post('u_id');
+			$data['rs_items'] = 0;
+		}
+
 		$data['layout'] = "master/payment_items/list";
 		$data['javascript'] = "master/payment_items/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
@@ -51,43 +65,29 @@ class Payment_items extends Operator_base {
 		$this->session->set_userdata($data);
 	}
 
-	public function list_costs($id){
-		// user_auth
-		$this->check_auth('U');
 
-		// menu
-		$data['menu'] = $this->menu();
-		// user detail
-		$data['user'] = $this->user;
-		$data['r_ta'] = $this->m_tahun_ajaran->get_tahun_ajaran_by_id($id);
-		$data['rs_ta_costs'] = $this->m_tahun_ajaran->get_all_ta_costs($id);
-		// load template
-		$data['message'] = $this->session->flashdata('message');
-		$data['title']		  = "Setup Tahun Ajaran Costs PinapleSAS";
-		$data['main_content'] = "setting/tahun_ajaran/list_costs";
-		$this->load->view('dashboard/admin/template', $data);
-	}
-
-	public function add_cost($ta_id) {
+	public function add($sy_id,$u_id='') {
 		// user_auth
 		$this->check_auth('C');
-
 		// menu
 		$data['menu'] = $this->menu();
 		// user detail
 		$data['user'] = $this->user;
 		// load template
-		$data['r_ta'] = $this->m_tahun_ajaran->get_tahun_ajaran_by_id($ta_id);
+		$data['r_sy'] = $this->m_school_year->get_school_year_by_id($sy_id);
 		$data['rs_unit'] = $this->m_unit->get_all_unit_for_administration_cost();
-		$data['rs_it'] = $this->m_items_type->get_all_items_type_for_administration_cost();
+		$data['u_id'] = $u_id;
+		$data['rs_it'] = $this->m_items_type->get_all_items_type();
 		$data['message'] = $this->session->flashdata('message');
-		$data['title']		  = "Setup Tahun Ajaran PinapleSAS";
-		$data['main_content'] = "setting/tahun_ajaran/add_cost";
+		$data['title']	= "Payment Items Setup PinapleSAS";
+		$data['layout'] = "master/payment_items/add";
+		//$data['javascript'] = "master/payment_items/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
+
 	}
 
 	// add process
-	public function add_cost_process() {
+	public function add_process() {
 		// form validation
 		$this->form_validation->set_rules('unit_id', 'Unit', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('item_type_id', 'Item Type', 'required|trim|xss_clean|callback_check_duplicate_cost');
@@ -95,10 +95,12 @@ class Payment_items extends Operator_base {
 
 		if ($this->form_validation->run() == TRUE) {
 			// insert
-			$this->m_tahun_ajaran->add_administration_costs($this->input->post());
+			$this->m_administration_costs->add_administration_costs($this->input->post());
 			$data['message'] = "Data successfully added";
+			$data['id_sy'] = $this->input->post('school_year_id');
+			$data['id_u'] = $this->input->post('unit_id');
 			$this->session->set_flashdata($data);
-			redirect('setting/tahun_ajaran/list_costs/'.$this->input->post('tahun_ajaran_id'));
+			redirect('master/payment_items/');
 		} else {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
@@ -107,11 +109,11 @@ class Payment_items extends Operator_base {
 				'amount'		=> $this->input->post('amount')
 			);
 			$this->session->set_flashdata($data);
-			redirect('setting/tahun_ajaran/add_cost/'.$this->input->post('tahun_ajaran_id'));
+			redirect('master/payment_items/add/'.$this->input->post('school_year_id'));
 		}
 	}
 
-	public function edit_cost($ta_id,$ac_id) {
+	public function edit($sy_id,$ac_id) {
 		// user_auth
 		$this->check_auth('U');
 
@@ -120,18 +122,18 @@ class Payment_items extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		// load template
-		$data['r_ta'] = $this->m_tahun_ajaran->get_tahun_ajaran_by_id($ta_id);
-		$data['r_ac'] = $this->m_tahun_ajaran->get_administration_cost_by_id($ac_id);
+		$data['r_sy'] = $this->m_school_year->get_school_year_by_id($sy_id);
+		$data['r_ac'] = $this->m_administration_costs->get_administration_cost_by_id($ac_id);
 		$data['rs_unit'] = $this->m_unit->get_all_unit_for_administration_cost();
-		$data['rs_it'] = $this->m_items_type->get_all_items_type_for_administration_cost();
-		$data['message'] = $this->session->flashdata('message');
-		$data['title']		  = "Setup Tahun Ajaran PinapleSAS";
-		$data['main_content'] = "setting/tahun_ajaran/edit_cost";
+		$data['rs_it'] = $this->m_items_type->get_all_items_type();
+		$data['message']= $this->session->flashdata('message');
+		$data['title']  = "Payment Items Setup PinapleSAS";
+		$data['layout'] = "master/payment_items/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
 	// add process
-	public function edit_cost_process() {
+	public function edit_process() {
 		// form validation
 		$this->form_validation->set_rules('unit_id', 'Unit', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('item_type_id', 'Item Type', 'required|trim|xss_clean|callback_check_duplicate_cost_except_self');
@@ -139,10 +141,12 @@ class Payment_items extends Operator_base {
 
 		if ($this->form_validation->run() == TRUE) {
 			// insert
-			$this->m_tahun_ajaran->edit_administration_costs($this->input->post());
+			$this->m_administration_costs->edit_administration_costs($this->input->post());
 			$data['message'] = "Data successfully edited";
+			$data['id_sy'] = $this->input->post('school_year_id');
+			$data['id_u'] = $this->input->post('unit_id');
 			$this->session->set_flashdata($data);
-			redirect('setting/tahun_ajaran/list_costs/'.$this->input->post('tahun_ajaran_id'));
+			redirect('master/payment_items/');
 		} else {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
@@ -151,16 +155,16 @@ class Payment_items extends Operator_base {
 				'amount'		=> $this->input->post('amount')
 			);
 			$this->session->set_flashdata($data);
-			redirect('setting/tahun_ajaran/edit_cost/'.$this->input->post('tahun_ajaran_id').'/'.$this->input->post('id'));
+			redirect('master/payment_items/edit/'.$this->input->post('school_year_id').'/'.$this->input->post('id'));
 		}
 	}
 
 	public function check_duplicate_cost($it_id)
 	{
-		$ta_id=$this->input->post('tahun_ajaran_id');
+		$sy_id=$this->input->post('school_year_id');
 		$un_id=$this->input->post('unit_id');
 		//die($ta_id." : ".$un_id." : ".$it_id);
-		$check=$this->m_tahun_ajaran->get_check_duplicate_cost($ta_id,$un_id,$it_id);
+		$check=$this->m_administration_costs->get_check_duplicate_cost($sy_id,$un_id,$it_id);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_cost', 'Duplicate Item Type on the Unit!');
 			return false;       
@@ -172,10 +176,10 @@ class Payment_items extends Operator_base {
 
 	public function check_duplicate_cost_except_self($it_id)
 	{
-		$ta_id=$this->input->post('tahun_ajaran_id');
+		$sy_id=$this->input->post('school_year_id');
 		$un_id=$this->input->post('unit_id');
 		$id = $this->input->post('id');
-		$check=$this->m_tahun_ajaran->get_check_duplicate_cost_except_self($id,$ta_id,$un_id,$it_id);
+		$check=$this->m_administration_costs->get_check_duplicate_cost_except_self($id,$sy_id,$un_id,$it_id);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_cost_except_self', 'Duplicate Item Type on the Unit!');
 			return false;       
@@ -185,14 +189,20 @@ class Payment_items extends Operator_base {
       	}
 	}
 
-	public function delete_cost($ta,$id) {
+	public function delete($id) {
 		// user_auth
 		$this->check_auth('D');
+
+		$r_item = $this->m_administration_costs->get_administration_cost_by_id($id);
 		
 		$params['id']=$id;
-		$this->m_tahun_ajaran->delete_administration_costs($params);
+		$this->m_administration_costs->delete_administration_costs($params);
+		
 		$data['message'] = "Data successfully deleted";
+		$data['id_sy'] = $r_item->school_year_id;
+		$data['id_u'] = $r_item->unit_id;
 		$this->session->set_flashdata($data);
-		redirect('setting/tahun_ajaran/list_costs/'.$ta);
+		
+		redirect('master/payment_items/');
 	}
 }
