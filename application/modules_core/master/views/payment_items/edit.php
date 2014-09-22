@@ -26,10 +26,6 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-btns">
-            <a href="#" class="panel-close">&times;</a>
-            <a href="#" class="minimize">&minus;</a>
-          </div>
           <h4 class="panel-title">School Year Costs Setup <?php echo $r_sy->name; ?></h4>
           <p>Please give Administration Cost for School Year Information</p>
         </div>
