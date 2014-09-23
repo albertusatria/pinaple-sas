@@ -9,10 +9,11 @@ class m_employees extends CI_Model {
 
     function get_all_ue(){
         return $this->db->get('users_employee')->result();
+
     }
 
     function get_all_unit_completed(){
-        $sql = "SELECT gk.*
+        $sql = "SELECT ue.*
             FROM users_employee ue 
             ORDER BY ue.nik";
         $query = $this->db->query($sql);

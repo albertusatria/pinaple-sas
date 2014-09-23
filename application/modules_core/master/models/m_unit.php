@@ -11,6 +11,28 @@ class m_unit extends CI_Model {
         return $this->db->get('units')->result();
     }
 
+    function get_all_unit_academic($unit_id = ''){
+
+        $show = 'result()';
+        if ($unit_id == '')
+        {
+            $sql = "SELECT id,name,stage FROM units WHERE category = 'akademis'";
+            $show = 'result';
+        }
+        else 
+        {
+            $sql = "SELECT id,name,stage FROM units WHERE id = '$unit_id'";
+            $show = 'row';
+        }
+        $query = $this->db->query($sql);
+        // echo '<pre>'; print_r($query->result());die;
+        if ($query->num_rows() > 0) {
+            return $query->$show();
+        } else {
+            return array();
+        }
+    }    
+
     function get_all_unit_for_administration_cost(){
         $sql = "SELECT u.*
             FROM units u
