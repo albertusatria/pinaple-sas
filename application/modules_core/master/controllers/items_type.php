@@ -50,6 +50,8 @@ class Items_type extends Operator_base {
 	public function add_items() {
 		// form validation
 		
+		$this->check_auth('C');
+		
 		$this->form_validation->set_rules('name', 'Item Type Name', 'required|trim|xss_clean|callback_check_duplicate_items');
 		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
 
@@ -98,13 +100,13 @@ class Items_type extends Operator_base {
 	// add process
 	public function edit_process() {
 		// form validation
-		$this->form_validation->set_rules('name', 'Item Type Name', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('name', 'Item Type Name', 'required|trim|xss_clean|callback_check_duplicate_items_ex_self');
 		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
 			// insert
 			$data = array(
-				'id'			=> $this->uri->segment(4, 0),
+				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
 				'description'	=> $this->input->post('description')
 			);
@@ -121,7 +123,7 @@ class Items_type extends Operator_base {
 				'description'	=> $this->input->post('description')
 			);
 			$this->session->set_flashdata($data);
-			redirect('master/items_type/edit/'.$this->uri->segment(4, 0));
+			redirect('master/items_type/edit/'.$this->input->post('id'));
 		}
 	}
 	
@@ -143,6 +145,19 @@ class Items_type extends Operator_base {
 		$check=$this->m_items_type->get_check_duplicate_items($item_name);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_items', 'Found duplicated for '.$item_name.'! Please review your input.');
+			return false;       
+		}
+		else{
+	        return true;
+      	}
+	}
+
+	public function check_duplicate_items_ex_self($items_name)
+	{
+		$id=$this->input->post('id');
+		$check=$this->m_items_type->get_check_duplicate_items_ex_self($items_name,$id);
+	    if (!empty($check)){
+			$this->form_validation->set_message('check_duplicate_items', 'Found duplicated for '.$items_name.'! Please review your input.');
 			return false;       
 		}
 		else{

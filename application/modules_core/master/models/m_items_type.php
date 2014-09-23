@@ -19,6 +19,24 @@ class m_items_type extends CI_Model {
         return $this->db->get_where('items_type',array('name'=>$item_name))->row();
     }
     
+    function get_check_duplicate_items_ex_self($item_name,$id){
+        $sql = "SELECT 
+                    it.*
+                FROM items_type it
+                WHERE
+                    it.name='$item_name' AND
+                    it.id<>'$id'
+                ";
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
     function add_items_type($params) {
         $this->db->insert('items_type',$params);
     } 
