@@ -33,6 +33,7 @@ class School_year extends Operator_base {
 		$data['message'] = $this->session->flashdata('message');
 		$data['title']	 = "School Year Setup PinapleSAS";
 		$data['layout']  = "initiation/school_year/list";
+		$data['javascript'] = "initiation/school_year/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
