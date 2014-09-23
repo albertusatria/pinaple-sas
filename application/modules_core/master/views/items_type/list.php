@@ -76,7 +76,7 @@
         </div>	<!-- col-6 -->			
 
 		<div class="col-md-6">
-			<form id="newItemstype" method="POST" action="<?php echo base_url(); ?>master/items_type/add_items" class="form-horizontal">
+			<form id="newPacket" method="POST" action="<?php echo base_url(); ?>master/items_type/add_items" class="form-horizontal">
 			  <div class="panel panel-default">
 			      <div class="panel-heading">
 			        <div class="panel-btns">

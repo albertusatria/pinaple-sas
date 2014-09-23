@@ -32,6 +32,7 @@ class Employees extends Operator_base {
 		$data['message'] = $this->session->flashdata('message');
 		$data['title']		  = "Employees Setup PinapleSAS";
 		$data['layout'] = "master/employees/list";
+		$data['javascript'] = "master/employees/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -51,6 +52,7 @@ class Employees extends Operator_base {
 		$data['message'] = $this->session->flashdata('message');
 		$data['title'] = "Employees Setup PinapleSAS";
 		$data['layout'] = "master/employees/add";
+		$data['javascript'] = "master/employees/javascript/add";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -117,6 +119,7 @@ class Employees extends Operator_base {
 		$data['title']	= "Employees Edit PinapleSAS";
 		$data['message'] = $this->session->flashdata('message');
 		$data['layout'] = "master/employees/edit";
+		$data['javascript'] = "master/employees/javascript/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

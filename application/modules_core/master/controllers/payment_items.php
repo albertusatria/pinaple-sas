@@ -81,7 +81,7 @@ class Payment_items extends Operator_base {
 		$data['message'] = $this->session->flashdata('message');
 		$data['title']	= "Payment Items Setup PinapleSAS";
 		$data['layout'] = "master/payment_items/add";
-		//$data['javascript'] = "master/payment_items/javascript/list";
+		$data['javascript'] = "master/payment_items/javascript/add";
 		$this->load->view('dashboard/admin/template', $data);
 
 	}
@@ -129,6 +129,7 @@ class Payment_items extends Operator_base {
 		$data['message']= $this->session->flashdata('message');
 		$data['title']  = "Payment Items Setup PinapleSAS";
 		$data['layout'] = "master/payment_items/edit";
+		$data['javascript'] = "master/payment_items/javascript/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

@@ -26,3 +26,8 @@ jQuery("#sasPanel").validate({
 	}    
 });
 </script>
+<script type="text/javascript" language="javascript">
+  function gotoback(){
+      window.location = "<?php echo base_url(); ?>master/items_type/";
+  }
+</script>

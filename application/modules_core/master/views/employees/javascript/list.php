@@ -26,3 +26,9 @@
   
   });
 </script>
+<script type="text/javascript" language="javascript">
+  function hapus(no,nama){
+    if(confirm('Yakin akan menghapus '+nama+' ini?'))
+      window.location = "<?php echo base_url(); ?>master/employees/delete/"+no;
+  }
+</script>

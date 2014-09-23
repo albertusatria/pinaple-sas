@@ -1,15 +1,15 @@
 <div class="pageheader">
-    <h2><i class="fa fa-folder-o"></i>Items Type</h2>
+    <h2><i class="fa fa-folder-o"></i>Packet</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Master Data&nbsp;&nbsp;/&nbsp;&nbsp;Items Type</li>
+        <li class="active">Payment Configuration&nbsp;&nbsp;/&nbsp;&nbsp;Packet</li>
       </ol>
     </div>
 </div>
 
-<form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>master/items_type/edit_process">
+<form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>master/invoice_packet/edit_process">
 
     <div class="contentpanel">
 
@@ -22,7 +22,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4 class="panel-title">Edit Items Type</h4>
+          <h4 class="panel-title">Edit Packet</h4>
         </div>
         <div class="panel-body panel-body-nopadding">
           
