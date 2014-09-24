@@ -58,10 +58,10 @@ class m_school_year extends CI_Model {
     function get_active_year(){
        $sql = "SELECT *
                 FROM school_year
-                WHERE status = 'active' limit 1";
+                WHERE status = 'aktif' limit 1";
 
         $query = $this->db->query($sql);
-        //echo '<pre>'; print_r($query->result()); die;
+        // echo '<pre>'; print_r($query->result()); die;
         if ($query->num_rows() > 0) {
             return $query->row();
         } else {
