@@ -3,6 +3,8 @@
 	clear: both;
 	margin: 30px 0;
 }
+.hovered{ cursor: pointer; cursor: hand; }
+
 /* required fields */
 em.danger{
 	color: #d9534f;
@@ -15,6 +17,7 @@ em.danger{
 	display: block;
 }
 /* end required fields */
+
 /* table */
 .table{
 	float: left;

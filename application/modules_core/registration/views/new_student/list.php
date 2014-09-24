@@ -4,8 +4,7 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li><a href="<?php echo base_url();?>setting/pendaftaran">Manage New Registration</a></li>
-        <li class="active">New Student Registration</li>
+        <li class="active">Registration Data &nbsp; / &nbsp; New Student Registration</li>
       </ol>
     </div>
 </div>
