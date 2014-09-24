@@ -40,10 +40,10 @@
               <div id="validationWizard" class="basic-wizard">
                 
                 <ul class="nav nav-pills nav-justified" id="form-regis-siswa">
-                  <li class="info-siswa"><a href="#vtab1" data-toggle="tab"><span>Step 1:</span> Registration Information </a></li>
+                  <li class="info-siswa"><a href="#vtab1" data-toggle="tab"><span>Step 1:</span> Registration Info. </a></li>
                   <li class="asal-sekolah"><a href="#vtab2" data-toggle="tab"><span>Step 2:</span> Student Information </a></li>
                   <li class="prestasi"><a href="#vtab3" data-toggle="tab"><span>Step 3:</span> Student Achievements </a></li>
-                  <li class="info-wali"><a href="#vtab4" data-toggle="tab"><span>Final Step</span> Parents Information </a></li>
+                  <li class="info-wali"><a href="#vtab4" data-toggle="tab"><span>Final Step</span> Parents Info. </a></li>
                 </ul>
 
                 
@@ -62,22 +62,25 @@
             </div>
           </div>                                 
 
-        <div class="form-group origin-BU">
+       
+
+		<div class="form-group origin-BU">
           <label class="col-sm-3 control-label">Last School Origin <span class="asterisk">*</span></label>
-		  <div class="col-sm-8">
-              <div class="rdio rdio-primary">
-                <input type="radio" id="bu" value="BU" name="siswa[siswa_sekolah_asal]" required="">
-                <label for="bu">Budi Utama</label>
-              </div>
-              <div class="rdio rdio-primary">
-                <input type="radio" id="others" value="others" name="siswa[siswa_sekolah_asal]" required="">
-                <label for="others">Others</label>
-              </div>
-              <div class="last-school others" style="width:400px;margin-left:20px;display:none;">
-				  <input type="text" name="siswa[siswa_originschool]" placeholder="Please Input Last School Name" class="form-control" />
-				  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first student</p>
-              </div>
-		  </div>
+          <div class="col-sm-8">
+            <div class="rdio rdio-primary">
+              <input type="radio" id="bu" value="bu" name="siswa[siswa_sekolah_asal]" required="">
+              <label for="bu">Budi Utama</label>
+            </div><!-- rdio -->
+            <div class="rdio rdio-primary">
+              <input type="radio" value="" id="others" name="siswa[siswa_sekolah_asal]">
+              <label for="others">Others</label>
+            </div><!-- rdio -->
+			<div class="last-school others" style="width:400px;margin-left:20px;display:none;">
+			  <input type="text" name="siswa[siswa_originschool]" placeholder="Please Input Last School Name" class="form-control" />
+			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first student</p>
+			</div>
+			<label class="error" for="siswa[siswa_sekolah_asal]"></label>
+          </div>
         </div>
 
 		<div class="form-group">
