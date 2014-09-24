@@ -4,7 +4,8 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Payment Configuration&nbsp;&nbsp;/&nbsp;&nbsp;Packet</li>
+        <li><a href="<?php echo base_url();?>master/invoice_packet" >Invoice Packet</a></li>
+        <li class="active">Packet</li>
       </ol>
     </div>
 </div>
@@ -25,15 +26,8 @@
           <h4 class="panel-title">Edit Packet</h4>
         </div>
         <div class="panel-body panel-body-nopadding">
-          
-			<div class="form-group">
-	          <label class="col-sm-3 control-label">ID <span class="asterisk">*</span></label>
-	          <div class="col-sm-9">
-	            <input type="text" name="id_show" value="<?php echo $result->id?>" class="form-control" placeholder="Type Items Type ID's..." required disabled/>
-              <input type="hidden" name="id" value="<?php echo $result->id?>" required/>
-	          </div>
-	        </div>
-	        
+        
+          <input type="hidden" name="id" value="<?php echo $result->id?>" required/> 
 	        <div class="form-group">
 	          <label class="col-sm-3 control-label">Name <span class="asterisk">*</span></label>
 	          <div class="col-sm-9">
@@ -46,9 +40,7 @@
 	          <div class="col-sm-9">
 	            <textarea rows="5" name="description" class="form-control" placeholder="Type Items Type description..." required><?php echo $result->description?></textarea>
 	          </div>
-	        </div>
-         
-          
+	        </div>          
         </div><!-- panel-body -->
         
         <div class="panel-footer">
@@ -59,7 +51,6 @@
                 </div>
              </div>
         </div><!-- panel-footer -->
-
         
       </div><!-- panel -->            
     </div><!-- contentpanel -->
