@@ -4,7 +4,7 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li class="active">Pengaturan Buka Kelas Thn Ajaran : <?php echo $active_school_year->name?></li>
+          <li class="active">Pengaturan Buka s Thn Ajaran : <?php echo $active_school_year->name?></li>
         </ol>
       </div>
     </div>
@@ -30,16 +30,16 @@
                 <th style="width:20%;"></th>
               </thead>
               <tbody>
-                                    <?php $no = 1; foreach ($units as $unit): ?>
-                                        <tr>
-                                            <td><?php echo $no; ?></td>
-                                            <td><?php echo $unit->name; ?></td>
-                                            <td>
-                                               <a href="<?php echo base_url(); ?>initiation/class_open/class_list/<?php echo $unit->id; ?>">
-                                               Buka Kelas</a>
-                                            </td>
-                                        </tr>
-                                    <?php $no++; endforeach ; ?>
+                  <?php $no = 1; foreach ($units as $unit): ?>
+                      <tr>
+                          <td><?php echo $no; ?></td>
+                          <td><?php echo $unit->name; ?></td>
+                          <td>
+                             <a href="<?php echo base_url(); ?>initiation/class_open/class_list/<?php echo $unit->id; ?>">
+                             Buka Kelas</a>
+                          </td>
+                      </tr>
+                  <?php $no++; endforeach ; ?>
               </tbody>
            </table>
           </div><!-- table-responsive -->

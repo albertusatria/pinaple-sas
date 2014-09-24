@@ -37,7 +37,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Coach 1 </label> optional
               <div class="col-sm-7">
-                <select class="form-control input-sm" name="extra_coach1" required>
+                <select class="form-control input-sm" name="extra_coach1">
                   <option value="">-- SELECT COACH 1--</option>
                   <?php foreach ($coaches as $coach) : ?>
                     <option value="<?php echo $coach->nik ?>" <?php if($this->session->flashdata('extra_coach1') == $coach->nik) : echo "selected"; endif; ?> > <?php echo $coach->full_name?></option>
@@ -50,7 +50,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Coach 2 </label> optional
               <div class="col-sm-7">
-                <select class="form-control input-sm" name="extra_coach2" required>
+                <select class="form-control input-sm" name="extra_coach2">
                   <option value="">-- SELECT COACH 2--</option>
                   <?php foreach ($coaches as $coach) : ?>
                     <option value="<?php echo $coach->nik ?>" <?php if($this->session->flashdata('extra_coach1') == $coach->nik) : echo "selected"; endif; ?> > <?php echo $coach->full_name?></option>
@@ -73,7 +73,7 @@
              <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                   <button class="btn btn-primary">Save</button>&nbsp;
-                  <button class="btn btn-default">Back</button>
+                  <a href="<?php echo base_url()?>initiation/extra_open/extra_list/<?php echo $unit->id ?>" class="btn btn-default">Back</a>
                 </div>
              </div>
           </div><!-- panel-footer -->

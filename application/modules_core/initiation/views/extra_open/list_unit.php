@@ -4,7 +4,7 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li class="active">Pengaturan Buka Kelas Thn Ajaran : <?php echo $active_school_year->name?></li>
+          <li class="active">Pengaturan Buka Extra Thn Ajaran : <?php echo $active_school_year->name?></li>
         </ol>
       </div>
     </div>
@@ -15,9 +15,9 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Pengaturan Buka Kelas Untuk Tahun Ajaran : <?php echo $active_school_year->name?></h3>
+          <h3 class="panel-title">Pengaturan Buka Extra Untuk Tahun Ajaran : <?php echo $active_school_year->name?></h3>
           <p>
-        Menu ini digunakan untuk melakukan pengaturan kelas-kelas yang digunakan pada tahun ajaran <?php echo $active_school_year->name?>
+        Menu ini digunakan untuk melakukan pengaturan extrakurikuler pada tahun ajaran <?php echo $active_school_year->name?>
           </p>
         </div>
         
