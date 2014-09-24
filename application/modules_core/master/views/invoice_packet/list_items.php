@@ -4,7 +4,8 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Payment Configuration&nbsp;&nbsp;/&nbsp;&nbsp;Packet</li>
+        <li><a href="<?php echo base_url();?>master/invoice_packet" >Invoice Packet</a></li>
+        <li class="active">Packet Items</li>
       </ol>
     </div>
 </div>
@@ -15,8 +16,8 @@
 		  <div class="panel panel-default">
 		  
 		    <div class="panel-heading">
-		      <h4 class="panel-title">List Packet</h4>
-		      <p>List of all available Packet</p>
+		      <h4 class="panel-title">List Packet Items <b><?php echo @$r_packet->name; ?></b></h4>
+		      <p>List of all available Packet Items</p>
 		    </div>
 			<!-- Table Results -->
 			<div class="panel panel-default">
@@ -42,24 +43,21 @@
 				        <thead>
 				          <tr>
 				            <th>No #</th>
-				            <th>Packet Name</th>
-				            <th>Description</th>
+				            <th>Packet Items Name</th>
 				            <th></th>
 				          </tr>
 				        </thead>
 				        <tbody>
-				       	<?php if(empty($rs_packet)){ ?>
+				       	<?php if(empty($rs_packet_items)){ ?>
 				       		<tr><td colspan="4" align="center"> -- there is no packet -- </td></tr>
 				       	<?php }else{ ?>	
-					        <?php $no = 1; foreach ($rs_packet as $result): ?>
+					        <?php $no = 1; foreach ($rs_packet_items as $result): ?>
 					          <tr>				          
 					            <td><?php echo @$no; ?></td>
-					            <td><?php echo @$result->name; ?></td>
-					            <td class="price"><?php echo @$result->description; ?></td>
-				                <td class="table-action-hide">
-				                  <a href="<?php echo base_url(); ?>master/invoice_packet/edit/<?php echo $result->id; ?>"><i class="fa fa-pencil"></i></a>
-				                  <a href="<?php echo base_url(); ?>master/invoice_packet/list_items/<?php echo $result->id; ?>"><i class="fa fa-file"></i></a>
-				                  <a href="#" class="delete-row" onclick="hapus(<?php echo $result->id ?>)">
+					            <td><?php echo @$result->item_type_name; ?></td>					      
+				                <td class="table-action-hide">				                 
+				                  <a href="#" class="delete-row" 
+				                  onclick="hapus(<?php echo $result->id ?>,'<?php echo $result->item_type_name ?>',<?php echo $r_packet->id;?>)">
 				                  	<i class="fa fa-trash-o"></i>
 				                  </a>
 				                </td>
@@ -77,13 +75,13 @@
         </div>	<!-- col-6 -->			
 
 		<div class="col-md-6">
-			<form id="newItemstype" method="POST" action="<?php echo base_url(); ?>master/invoice_packet/add" class="form-horizontal">
+			<form id="newItemstype" method="POST" action="<?php echo base_url(); ?>master/invoice_packet/add_item" class="form-horizontal">
 			  <div class="panel panel-default">
 			      <div class="panel-heading">
 			        <div class="panel-btns">
 			          <a href="#" class="minimize">&minus;</a>
 			        </div>
-			        <h4 class="panel-title">New Packet Form</h4>
+			        <h4 class="panel-title">New Packet Items <b><?php echo @$r_packet->name; ?></b> Form</h4>
 			        <p>Please provide the name and description for new packet.</p>		      			        
 			      </div>
 			      <div class="panel-body">
@@ -104,20 +102,23 @@
 						</div>					
 						<?php endif ; ?>
 					<?php endif;?>
-			        		        
+			        
+			        <input type="hidden" name="packet_id" value="<?php echo $r_packet->id; ?>" required />		        
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">Name <span class="asterisk">*</span></label>
 			          <div class="col-sm-9">
-			            <input type="text" name="name" class="form-control" placeholder="Type Items Type name..." required />
+			           <select class="form-control input-sm mb15" name="item_type_id" required>
+	                   <option value="">-- SELECT --</option>
+	                   <?php foreach ($rs_items_type as $result): ?>
+	                    <option value="<?php echo @$result->id; ?>" 
+	                  	<?php if($this->session->flashdata('item_type_id')==$result->id){ echo "selected='selected'"; } ?>
+	                    ><?php echo @$result->name; ?>
+	                    </option>
+		               <?php endforeach ; ?>
+		               </select>
 			          </div>
 			        </div>
-			        
-			        <div class="form-group">
-			          <label class="col-sm-3 control-label">Description <span class="asterisk">*</span></label>
-			          <div class="col-sm-9">
-			            <textarea rows="5" name="description" class="form-control" placeholder="Type Items Type description..." required></textarea>
-			          </div>
-			        </div>
+
 			      </div><!-- panel-body -->
 			      <div class="panel-footer">
 			        <div class="row">
