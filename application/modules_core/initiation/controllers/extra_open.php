@@ -232,7 +232,7 @@ class Extra_open extends Operator_base {
 
 	// page title
 	public function page_title() {
-		$data['page_title'] = 'School Year';
+		$data['page_title'] = 'Extra Open';
 		$this->session->set_userdata($data);
 	}
 }
