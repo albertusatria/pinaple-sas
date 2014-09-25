@@ -380,7 +380,7 @@
 	                <label for="ina_ibu">Indonesian</label>
 	              </div>
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_ibu]" required="">
+	                <input type="radio" id="foreign_ibu" value="foreign" name="siswa[kewarganegaraan_ibu]" required="">
 	                <label for="foreign_ibu">Foreign</label>
 	              </div>
 				  <label class="error" for="siswa[kewarganegaraan_ibu]"></label>	              
