@@ -168,7 +168,7 @@
           </div>           
                       
           <div class="form-group">
-            <label class="col-sm-3 control-label">Childern number ... of ...<span class="asterisk">*</span></label>
+            <label class="col-sm-3 control-label">Children number ... of ...<span class="asterisk">*</span></label>
             <div class="col-sm-3">
                <input type="text" placeholder="children number ..." name="siswa[siswa_anak_ke]" class="form-control" required/>
             </div> 
@@ -196,12 +196,12 @@
           <label class="col-sm-3 control-label">Citizen</label>
 		  <div class="col-sm-8">
               <div class="rdio rdio-primary">
-                <input type="radio" id="ina" value="ina" name="siswa[siswa_kewarganegaraan]" required="">
-                <label for="ina">Indonesian</label>
+                <input type="radio" id="ina_siswa" value="ina" name="siswa[siswa_kewarganegaraan]" required="">
+                <label for="ina_siswa">Indonesian</label>
               </div>
               <div class="rdio rdio-primary">
-                <input type="radio" id="foreign" value="foreign" name="siswa[siswa_kewarganegaraan]" required="">
-                <label for="foreign">Foreign</label>
+                <input type="radio" id="foreign_siswa" value="foreign" name="siswa[siswa_kewarganegaraan]" required="">
+                <label for="foreign_siswa">Foreign</label>
               </div>
 			  <label class="error" for="siswa[siswa_kewarganegaraan]"></label>
 		  </div>
@@ -308,12 +308,12 @@
               <label class="col-sm-3 control-label">Citizen</label>
 			  <div class="col-sm-8">
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="ina" value="ina" name="siswa[kewarganegaraan_ayah]" required="">
-	                <label for="ina">Indonesian</label>
+	                <input type="radio" id="ina_ayah" value="ina" name="siswa[kewarganegaraan_ayah]" required="">
+	                <label for="ina_ayah">Indonesian</label>
 	              </div>
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_ayah]" required="">
-	                <label for="foreign">Foreign</label>
+	                <input type="radio" id="foreign_ayah" value="foreign" name="siswa[kewarganegaraan_ayah]" required="">
+	                <label for="foreign_ayah">Foreign</label>
 	              </div>
 				  <label class="error" for="siswa[kewarganegaraan_ayah]"></label>
 			  </div>              
@@ -376,12 +376,12 @@
               <label class="col-sm-3 control-label">Citizen</label>
 			  <div class="col-sm-8">
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="ina" value="ina" name="siswa[kewarganegaraan_ibu]" required="">
-	                <label for="ina">Indonesian</label>
+	                <input type="radio" id="ina_ibu" value="ina" name="siswa[kewarganegaraan_ibu]" required="">
+	                <label for="ina_ibu">Indonesian</label>
 	              </div>
 	              <div class="rdio rdio-primary">
 	                <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_ibu]" required="">
-	                <label for="foreign">Foreign</label>
+	                <label for="foreign_ibu">Foreign</label>
 	              </div>
 				  <label class="error" for="siswa[kewarganegaraan_ibu]"></label>	              
 			  </div>              
