@@ -9,6 +9,7 @@ class New_student extends Operator_base {
 		// load all the related model here
 		$this->load->model('initiation/m_school_year');
 		$this->load->model('m_extra');
+		$this->load->model('m_registration');
 		// load portal
 		$this->load->helper('text');
 		// page title
@@ -89,14 +90,13 @@ class New_student extends Operator_base {
 		            'home_phone' => $value['telpon_rumah'],
 
 		            'guardian_full_name' => $value['nama_lengkap_wali'],
-		            'guardian_cell_phone' => $value['hp_wali'],
 		            'guardian_job' => $value['pekerjaan_wali'],
 		            'guardian_citizen' => $value['kewarganegaraan_wali'],
 
 		            'status'			=> 'SISWA',
 		            'registration_type'	=> $value['registration_type'],
-					'date_created'		=> $this->get_now(),
-					'date_updated'		=> $this->get_now()
+					'created_on'		=> $this->get_now(),
+					'updated_on'		=> $this->get_now()
 				);
 				//masukan ke tabel siswa
 				$insert = $this->m_registration->add_new_student($input);
@@ -114,7 +114,7 @@ class New_student extends Operator_base {
 					'updated_on'	=> $this->get_now()
 				);
 				//masukan ke tabel siswa_prestasi
-				$insert = $this->m_pendaftaran->add_new_student_achievement($input);
+				$insert = $this->m_registration->add_new_student_achievement($input);
 			}
 		}
 		$data['message'] = "Data successfully added";

@@ -196,11 +196,11 @@
           <label class="col-sm-3 control-label">Citizen</label>
 		  <div class="col-sm-8">
               <div class="rdio rdio-primary">
-                <input type="radio" id="ina_siswa" value="ina" name="siswa[siswa_kewarganegaraan]" required="">
+                <input type="radio" id="ina_siswa" value="WNI" name="siswa[siswa_kewarganegaraan]" required="">
                 <label for="ina_siswa">Indonesian</label>
               </div>
               <div class="rdio rdio-primary">
-                <input type="radio" id="foreign_siswa" value="foreign" name="siswa[siswa_kewarganegaraan]" required="">
+                <input type="radio" id="foreign_siswa" value="WNA" name="siswa[siswa_kewarganegaraan]" required="">
                 <label for="foreign_siswa">Foreign</label>
               </div>
 			  <label class="error" for="siswa[siswa_kewarganegaraan]"></label>
@@ -305,7 +305,7 @@
             </div>                                                           
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Citizen</label>
+              <label class="col-sm-3 control-label">Nationality</label>
 			  <div class="col-sm-8">
 	              <div class="rdio rdio-primary">
 	                <input type="radio" id="ina_ayah" value="ina" name="siswa[kewarganegaraan_ayah]" required="">
@@ -373,7 +373,7 @@
             </div>                                                           
 
             <div class="form-group">
-              <label class="col-sm-3 control-label">Citizen</label>
+              <label class="col-sm-3 control-label">Nationality</label>
 			  <div class="col-sm-8">
 	              <div class="rdio rdio-primary">
 	                <input type="radio" id="ina_ibu" value="ina" name="siswa[kewarganegaraan_ibu]" required="">
@@ -420,7 +420,7 @@
               <div class="col-sm-3">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                <input type="text" name="siswa[hp_wali]" placeholder="Phone/Cellphone Number" class="form-control">
+                <input type="text" name="siswa[telpon_rumah]" placeholder="Phone/Cellphone Number" class="form-control">
                 </div>
               </div>
             </div> 

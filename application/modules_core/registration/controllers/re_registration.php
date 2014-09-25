@@ -9,7 +9,6 @@ class Re_registration extends Operator_base {
 
 		// load all the related model here
 		$this->load->model('m_extra');
-		$this->load->model('m_registration');
 		// load portal
 		$this->load->helper('text');
 		// page title
