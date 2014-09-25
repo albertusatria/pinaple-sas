@@ -1,6 +1,6 @@
 <?php
 
-class m_packet extends CI_Model {
+class m_packets extends CI_Model {
 
     function __construct() {
         // Call the Model constructor
@@ -8,21 +8,21 @@ class m_packet extends CI_Model {
     }
 
     function get_all_packet(){
-        return $this->db->get('packet')->result();
+        return $this->db->get('packets')->result();
     }
 
     function get_total_rows(){
-        return $this->db->get('packet')->num_rows();
+        return $this->db->get('packets')->num_rows();
     }
     
     function get_check_duplicate_packet($packet_name){
-        return $this->db->get_where('packet',array('name'=>$packet_name))->row();
+        return $this->db->get_where('packets',array('name'=>$packet_name))->row();
     }
 
     function get_check_duplicate_packet_ex_self($packet_name,$id){
         $sql = "SELECT 
                     p.*
-                FROM packet p
+                FROM packets p
                 WHERE
                     p.name='$packet_name' AND
                     p.id<>'$id'
@@ -38,19 +38,19 @@ class m_packet extends CI_Model {
     }
     
     function add_packet($params) {
-        $this->db->insert('packet',$params);
+        $this->db->insert('packets',$params);
     } 
 
     function get_packet_by_id($id){
-        return $this->db->get_where('packet',array('id'=>$id))->row();
+        return $this->db->get_where('packets',array('id'=>$id))->row();
     }
 
     function edit_packet($params) {
-        $this->db->update('packet',$params,array('id'=>$params['id']));
+        $this->db->update('packets',$params,array('id'=>$params['id']));
     }
 
     function delete_packet($params) {
-       $this->db->delete('packet',$params,array('id'=>$params['id']));
+       $this->db->delete('packets',$params,array('id'=>$params['id']));
     }
 
 }

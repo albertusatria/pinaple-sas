@@ -7,7 +7,7 @@ class Invoice_packet extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
-		$this->load->model('m_packet');	
+		$this->load->model('m_packets');	
 		$this->load->model('m_packet_items');
 		$this->load->model('m_items_type');
 
