@@ -19,7 +19,7 @@ class m_packet_items extends CI_Model {
                     pi.item_type_id,
                     it.name item_type_name
                   FROM packet_items pi
-                INNER JOIN packet p ON p.id=pi.packet_id
+                INNER JOIN packets p ON p.id=pi.packet_id
                 INNER JOIN items_type it ON it.id=pi.item_type_id 
                 WHERE pi.packet_id='$id'";
 
@@ -36,7 +36,7 @@ class m_packet_items extends CI_Model {
         $sql = "SELECT 
                     pi.*
                   FROM packet_items pi
-                INNER JOIN packet p ON p.id=pi.packet_id
+                INNER JOIN packets p ON p.id=pi.packet_id
                 INNER JOIN items_type it ON it.id=pi.item_type_id 
                 WHERE pi.packet_id = '$p_id' 
                   AND pi.item_type_id = '$it_id'";
