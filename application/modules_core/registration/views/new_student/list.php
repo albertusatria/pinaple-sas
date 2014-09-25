@@ -153,7 +153,7 @@
                 <input type="radio" id="perempuan" value="P" name="siswa[siswa_jk]" required/>
                 <label for="perempuan">Female</label>
               </div>
-              <!-- <label class="error" for="jk"></label> -->
+              <label class="error" for="siswa[siswa_jk]"></label>
             </div>
           </div>
 
@@ -203,6 +203,7 @@
                 <input type="radio" id="foreign" value="foreign" name="siswa[siswa_kewarganegaraan]" required="">
                 <label for="foreign">Foreign</label>
               </div>
+			  <label class="error" for="siswa[siswa_kewarganegaraan]"></label>
 		  </div>
         </div>
             
@@ -299,6 +300,7 @@
                   <input type="text" placeholder="Ex : 3000000" id="penghasilan-ayah" name="siswa[penghasilan_ayah]" class="form-control" required>
                   <span class="input-group-addon">.00</span>
                 </div>
+                <label class="error" for="penghasilan-ayah"></label>
               </div>
             </div>                                                           
 
@@ -313,6 +315,7 @@
 	                <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_ayah]" required="">
 	                <label for="foreign">Foreign</label>
 	              </div>
+				  <label class="error" for="siswa[kewarganegaraan_ayah]"></label>
 			  </div>              
             </div>
             
@@ -365,6 +368,7 @@
                   <input type="text" placeholder="Ex : 3000000" id="penghasilan-ibu" name="siswa[penghasilan_ibu]" class="form-control" required>
                   <span class="input-group-addon">.00</span>
                 </div>
+				<label class="error" for="penghasilan-ibu"></label>
               </div>
             </div>                                                           
 
@@ -379,6 +383,7 @@
 	                <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_ibu]" required="">
 	                <label for="foreign">Foreign</label>
 	              </div>
+				  <label class="error" for="siswa[kewarganegaraan_ibu]"></label>	              
 			  </div>              
             </div>
 
@@ -441,22 +446,20 @@
                 </div>
             </div>            
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Home Citizen</label>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Citizen</label>
-			  <div class="col-sm-8">
-	              <div class="rdio rdio-primary">
-	                <input type="radio" id="ina" value="ina" name="siswa[kewarganegaraan_wali]" required="">
-	                <label for="ina">Indonesian</label>
-	              </div>
-	              <div class="rdio rdio-primary">
-	                <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_wali]" required="">
-	                <label for="foreign">Foreign</label>
-	              </div>
-			  </div>              
-            </div>
-            </div>
+			  <div class="form-group">
+				  <label class="col-sm-3 control-label">Citizen</label>
+				  <div class="col-sm-8">
+			          <div class="rdio rdio-primary">
+			            <input type="radio" id="ina" value="ina" name="siswa[kewarganegaraan_wali]" required="">
+			            <label for="ina">Indonesian</label>
+			          </div>
+			          <div class="rdio rdio-primary">
+			            <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_wali]" required="">
+			            <label for="foreign">Foreign</label>
+			          </div>
+					  <label class="error" for="siswa[kewarganegaraan_wali]"></label>
+				  </div>              
+				</div>
             
             <br/><br/>
                                                                                                                                                       
