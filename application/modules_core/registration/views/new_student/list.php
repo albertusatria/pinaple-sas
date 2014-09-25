@@ -420,7 +420,7 @@
               <div class="col-sm-3">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                <input type="text" name="siswa[telpon_rumah]" placeholder="Phone/Cellphone Number" class="form-control">
+                <input type="text" name="siswa[hp_wali]" placeholder="Phone/Cellphone Number" class="form-control">
                 </div>
               </div>
             </div> 
