@@ -2,6 +2,7 @@
 require_once( APPPATH . 'modules_core/base/controllers/operator_base.php' );
 
 class Re_registration extends Operator_base {
+
 	public function __construct() {
 		// call the controller construct
 		parent::__construct();
@@ -32,7 +33,7 @@ class Re_registration extends Operator_base {
 		//message
 		$data['message'] = $this->session->flashdata('message');
 		//unit
-		$data['ls_unit'] = $this->m_extra->get_unit();
+		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
 		
 		$data['layout'] = "registration/re_registration/list";
 		$data['javascript'] = "registration/re_registration/javascript/list";
