@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<form id="regisForm" class="form" method="POST" action="<?php echo base_url(); ?>setting/pendaftaran/add_process">
+<form id="regisForm" class="form" method="POST" action="<?php echo base_url(); ?>registration/new_student/add_process">
         
     <div class="contentpanel">
 
@@ -46,7 +46,7 @@
                 </ul>
 
                 
-                <div class="tab-content">
+                  <div class="tab-content">
 
                   <!--   Informasi Siswa   -->
                   <div class="tab-pane" id="vtab1">
@@ -55,8 +55,8 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Academic Year <span class="asterisk">*</span></label>
             <div class="col-sm-3">
-              <input type="text" name="siswa_tahun_mulai" class="form-control" value="2014/2015" disabled />
-              <input type="hidden" name="siswa[siswa_tahun_mulai]" class="form-control" value="2014/2015" />
+              <input type="text" name="siswa_tahun_mulai" class="form-control" value="<?php echo $active_school_year->name ?>" disabled />
+              <input type="hidden" name="siswa[siswa_tahun_mulai]" class="form-control" value="<?php echo $active_school_year->id ?>" />
               <input type="hidden" name="siswa[profil]" class="form-control" value="yes" />
             </div>
           </div>                                 
@@ -67,20 +67,34 @@
           <label class="col-sm-3 control-label">Last School Origin <span class="asterisk">*</span></label>
           <div class="col-sm-8">
             <div class="rdio rdio-primary">
-              <input type="radio" id="bu" value="bu" name="siswa[siswa_sekolah_asal]" required="">
+              <input type="radio" id="bu" value="BUDI-UTAMA" name="siswa[siswa_sekolah_asal]" required="" >
               <label for="bu">Budi Utama</label>
             </div><!-- rdio -->
             <div class="rdio rdio-primary">
-              <input type="radio" value="" id="others" name="siswa[siswa_sekolah_asal]">
+              <input type="radio" value="OTHERS" id="others" name="siswa[siswa_sekolah_asal]" checked>
               <label for="others">Others</label>
             </div><!-- rdio -->
-			<div class="last-school others" style="width:400px;margin-left:20px;display:none;">
-			  <input type="text" name="siswa[siswa_originschool]" placeholder="Please Input Last School Name" class="form-control" />
-			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first student</p>
-			</div>
-			<label class="error" for="siswa[siswa_sekolah_asal]"></label>
+      			<div class="last-school others" style="width:400px;margin-left:20px;">
+      			  <input type="text" name="siswa[siswa_originschool]" placeholder="Please Input Last School Name" class="form-control" />
+      			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first student</p>
+      			</div>
+			     <label class="error" for="siswa[siswa_sekolah_asal]"></label>
           </div>
-        </div>
+    </div>
+
+    <div class="form-group origin-BU">
+          <label class="col-sm-3 control-label">Registration Type <span class="asterisk">*</span></label>
+          <div class="col-sm-8">
+            <div class="rdio rdio-primary">
+              <input type="radio" id="new" value="NEW" name="siswa[registration_type]" required="" checked>
+              <label for="new">NEW STUDENT</label>
+            </div><!-- rdio -->
+            <div class="rdio rdio-primary">
+              <input type="radio" value="TRANSFER" id="transfer" name="siswa[registration_type]">
+              <label for="transfer">TRANSFER STUDENT</label>
+            </div><!-- rdio -->
+          </div>
+    </div>
 
 		<div class="form-group">
 		  <label class="col-sm-3 control-label">Grades <span class="asterisk">*</span></label>
@@ -162,12 +176,6 @@
               <input type="text" placeholder="from ..." name="siswa[siswa_saudara]" class="form-control" required/>
             </div>   
           </div>
-         <div class="form-group">
-            <label class="col-sm-3 control-label">Address<span class="asterisk">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" name="siswa[siswa_alamat]" placeholder="Alamat tinggal siswa di Yogyakarta" class="form-control" required/>
-            </div>                       
-          </div>          
 
 		 <div class="form-group">
           <label class="col-sm-3 control-label">Religion</label>

@@ -84,18 +84,18 @@ jQuery(document).ready(function() {
         [
             {"modelMakeID" : "0","modelMake" : "Pilih jenjang sekolah"},        
             <?php $no = 1; foreach ($ls_unit as $unit): ?>
-                {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->unit ?>"},
+                {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->name ?>"},
             <?php $no++; endforeach ; ?>
         ]};
 	var modelTypeJsonList = {
 	
 	    <?php $no = 1; foreach ($ls_unit as $unit): ?>
 	
-	      "<?php echo $unit->unit ?>" :
+	      "<?php echo $unit->name ?>" :
 	        [
-	            <?php for ($i = 1; $i <= $unit->jenjang; $i++) : ?>
-	                {"modelTypeID" : "<?php echo $unit->id_unit ?>","modelType" : "<?php echo $i ?>"}
-	              <?php if ($i + 1 <= $unit->jenjang) : ?>
+	            <?php for ($i = 1; $i <= $unit->stage; $i++) : ?>
+	                {"modelTypeID" : "<?php echo $unit->id ?>","modelType" : "<?php echo $i ?>"}
+	              <?php if ($i + 1 <= $unit->stage) : ?>
 	              ,
 	              <?php endif; ?>
 	            <?php endfor; ?>

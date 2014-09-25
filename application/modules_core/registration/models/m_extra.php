@@ -7,17 +7,18 @@ class m_extra extends CI_Model {
         parent::__construct();
     }
 
-    // get menu by slug
-    function get_unit($id_unit = '') {
+
+    function get_all_unit_academic($unit_id = ''){
+
         $show = 'result()';
-        if ($id_unit == '')
+        if ($unit_id == '')
         {
-            $sql = "SELECT id_unit,unit,jenjang FROM ref_unit WHERE kategori = 'AKADEMIS'";
+            $sql = "SELECT id,name,stage FROM units WHERE category = 'akademis'";
             $show = 'result';
         }
         else 
         {
-            $sql = "SELECT id_unit,unit,jenjang FROM ref_unit WHERE id_unit = '$id_unit'";
+            $sql = "SELECT id,name,stage FROM units WHERE id = '$unit_id'";
             $show = 'row';
         }
         $query = $this->db->query($sql);
@@ -27,7 +28,8 @@ class m_extra extends CI_Model {
         } else {
             return array();
         }
-    }
+    }   
+
 
     function get_extra_by_unit($id_unit) {
         $sql = "SELECT * FROM ref_extrakurikuler WHERE id_unit = '$id_unit'";
