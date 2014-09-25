@@ -1,6 +1,6 @@
 <?php
 
-class m_pendaftaran extends CI_Model {
+class M_registration extends CI_Model {
 
     function __construct() {
         // Call the Model constructor
