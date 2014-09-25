@@ -34,6 +34,9 @@
     <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
  -->
+<div id="ajax-loader">
+    <div><i class="fa fa-spinner fa-spin"></i></div>
+</div>
 
 <section>
 
