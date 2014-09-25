@@ -71,7 +71,7 @@ class New_student extends Operator_base {
 		            'father_full_name' => $value['nama_lengkap_ayah'],
 		            'father_pob' => $value['tempat_lahir_ayah'],
 		            'father_dob' => $value['tgl_lahir_ayah'],
-		            'hp_ayah' => $value['hp_ayah'],
+		            'father_cell_phone' => $value['hp_ayah'],
 		            'father_job' => $value['pekerjaan_ayah'],
 		            'father_salary' => $value['penghasilan_ayah'],
 		            'father_citizen' => $value['kewarganegaraan_ayah'],
