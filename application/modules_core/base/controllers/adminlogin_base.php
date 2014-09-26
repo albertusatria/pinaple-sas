@@ -14,7 +14,7 @@ class Adminlogin_base extends CI_Controller {
 	// get user login
 	protected function get_user_login() {
 		// get user login
-		$session = $this->session->userdata('mahatala_admin');
+		$session = $this->session->userdata('session_admin');
 		$this->user = $session;
 	}
 }
