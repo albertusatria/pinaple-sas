@@ -31,23 +31,21 @@
 	      <p>This is form to search students who wants to <strong> re-register </strong> their ID</p>
 	    </div>
 	    
-		<form method="POST" id="reRegis" action="<?php echo base_url(); ?>">
-			<div class="panel-body">
-			  <div class="row row-pad-5">
-				  <div class="form-group">
-					  
-			          <div class="col-lg-8">
-			            <input type="text" name="name" class="form-control" placeholder="Type student's Name or NIS..." required="">
-			          </div>
-			          
-			          <div class="col-lg-4">
-			            <button class="btn btn-primary btn-block">Search</button>
-			          </div>      
-			                  	
-			    </div>
-			  </div><!-- row -->
-			</div><!-- panel-body -->
-		</form>
+		<div class="panel-body">
+		  <div class="row row-pad-5">
+			  <div class="form-group">
+				  
+		          <div class="col-lg-8">
+		            <input type="text" name="name" id="keyword" class="form-control" placeholder="Type student's Name or NIS..." required="">
+		          </div>
+		          
+		          <div class="col-lg-4">
+		            <a id="btnCari" class="btn btn-primary btn-block">Search</a>
+		          </div>      
+		                  	
+		    </div>
+		  </div><!-- row -->
+		</div><!-- panel-body -->
 	    
 	  </div><!-- panel -->
 	</div>
@@ -55,69 +53,91 @@
   <!-- end Search Form -->
         
   <!-- Search Result -->
-  <div class="row">
-  
-	<div class="col-md-6 students-id" data-toggle="modal" data-target="#initPacket">
-		<div class="people-item">
-		  <div class="media">
-		    <div class="media-body">
-		      <h5 class="student-id text-info">23090479</h5>
-		      <h4 class="student-name text-primary">Simon Megadewandanu</h4>
-		      <div class="text-muted"><i class="fa fa-puzzle-piece"></i> SMP, 3th Grade</div>
-		      <div class="text-muted"><i class="fa fa-map-marker"></i> Jalan Dr. Wahidin 5 - 25 Yogyakarta</div>
-		    </div>
-		  </div>
-		</div>
-	</div> 
-
-	<div class="col-md-6 students-id" data-toggle="modal" data-target="#initPacket">
-		<div class="people-item">
-		  <div class="media">
-		    <div class="media-body">
-		      <h5 class="student-id text-info">23090470</h5>
-		      <h4 class="student-name text-primary">Awan Megadewandanu</h4>
-		      <div class="text-muted"><i class="fa fa-puzzle-piece"></i> SMP, 2nd Grade</div>
-		      <div class="text-muted"><i class="fa fa-map-marker"></i> Jalan Dr. Wahidin 5 - 25 Yogyakarta</div>
-		    </div>
-		  </div>
-		</div>
-	</div> 
+  <div class="row" id="searchResult">
 	 
   </div>
   <!-- end Search Result --> 
   
   <!-- Modal --> 
-  <form method="POST" id="reRegis" action="<?php echo base_url(); ?>">
   <div id="initPacket" class="modal fade initPacket" tabindex="-1" role="dialog" aria-labelledby="initPacketLabel" aria-hidden="true">
 	 <div class="modal-dialog">
 	    <div class="modal-content">
+
+		  <form method="POST" id="reRegis" action="<?php echo base_url(); ?>registration/re_registration/re_registration_process">
+
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	        <h4 class="modal-title" id="initPacketLabel"><strong></strong> - Initialization Payment Packet</h4>
 	      </div>
+
 	      <div class="modal-body">
+		    <input type="hidden" id="school_year_id" name="school_year_id" class="form-control"  value="<?php echo $active_school_year->id ?>"/>
+		    <input type="hidden" id="nis_choosen" name="nis" class="form-control" value="" />
+
+			<div class="form-group">
+			  <label class="col-sm-3 control-label">Paket yang digunakan <span class="asterisk">*</span></label>
+			  <div class="col-sm-9">
+			  	<select class="form-control" id="pilihPaket" name="id_paket">
+			  		<option value="">Paket Pra Yueliang dan Yueliang</option>
+			  		<option value="">Paket Pra Taiyang</option>
+			  	</select>
+			  </div>
+			</div>
+
 			<div class="form-group">
 			  <label class="col-sm-3 control-label">DPP <span class="asterisk">*</span></label>
 			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="DPP Cost..." value="2300000" required />
+			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya DPP ..." value="2300000" required disabled/>
 			  </div>
 			</div>
-			
 			<div class="form-group">
-			  <label class="col-sm-3 control-label">SPP <span class="asterisk">*</span></label>
+			  <label class="col-sm-3 control-label">Seragam <span class="asterisk">*</span></label>
 			  <div class="col-sm-9">
-			    <input type="text" name="SPP" class="form-control spp price" placeholder="SPP Cost per month..." value="130000" required />
+			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya Seragam ..." value="2300000" required disabled/>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="col-sm-3 control-label">Minifield & Fieldtrip / Tahun <span class="asterisk">*</span></label>
+			  <div class="col-sm-9">
+			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya Minifield dan Fieltrip..." value="2300000" required disabled/>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="col-sm-3 control-label">Uang Kegiatan / Tahun <span class="asterisk">*</span></label>
+			  <div class="col-sm-9">
+			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Uang Kegiatan..." value="2300000" required disabled/>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="col-sm-3 control-label">Wisuda Tutup Tahun <span class="asterisk">*</span></label>
+			  <div class="col-sm-9">
+			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya Wisuda..." value="2300000" required disabled/>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <label class="col-sm-3 control-label">DPP <span class="asterisk">*</span></label>
+			  <div class="col-sm-9">
+			    <input type="text" name="dpp" class="form-control dpp price" placeholder="DPP Cost..." value="2300000" required disabled/>
+			  </div>
+			</div>			
+			<div class="form-group">
+			  <label class="col-sm-3 control-label">SPP Bulanan<span class="asterisk">*</span></label>
+			  <div class="col-sm-9">
+			    <input type="text" name="SPP" class="form-control spp price" placeholder="SPP Cost per month..." value="130000" required disabled/>
 			  </div>
 			</div>
 	      </div>
+
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary">Save</button>
+	        <button type="submit" class="btn btn-primary">Save</button>
 	      </div>
+
+		  </form>
+
 	    </div><!-- modal-content -->
 	  </div><!-- modal-dialog -->  
   </div>
-  </form>
   <!-- end Modal --> 
   
 </div><!-- contentpanel -->
