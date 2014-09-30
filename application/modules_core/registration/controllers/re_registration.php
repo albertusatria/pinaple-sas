@@ -54,22 +54,79 @@ class Re_registration extends Operator_base {
 	    echo json_encode($data);
 	}
 
+	public function get_list_paket()
+	{
+		foreach ($_POST as $value) {
+			$unit_id = $value['unit_id'];
+			$current = $value['current'];
+			$start = $value['start'];
+		}
+		$data = $this->m_registration->get_list_paket($unit_id,$current,$start);
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+	}
+
+	public function get_list_packet_item()
+	{
+		foreach ($_POST as $value) {
+			$packet_id = $value['packet_id'];
+		}
+		$data = $this->m_registration->get_list_packet_item($packet_id);
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+
+	}
+
 	public function re_registration_process()
 	{
+		// echo '<pre>';print_r($this->input->post());die;
 		// user_auth
 		$this->check_auth('C');
 
 		$this->form_validation->set_rules('nis', 'nis', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('school_year_id', 'school year id', 'required|trim|xss_clean');
-
+		$this->form_validation->set_rules('invoice', 'Invoice List', 'required|trim|xss_clean');
 
 		$params = array(
 				'nis'			 => $this->input->post('nis'),
 				'school_year_id' => $this->input->post('school_year_id'),
 				'created_on'	 => $this->get_now()
 			);
-		
+
+		$jumlah = 0;
 		if ($this->m_registration->add_re_registration($params)) {
+
+			foreach ($this->input->post('invoice') as $invo) {
+				$params = array(
+					'packet_id' => $invo['packet_id'],
+					'item_type_id' => $invo['item_type_id'],
+					'qty' => 1,
+					'amount' => $invo['amount'],
+					'period_id' => NULL,
+					'scholarship' => 0,
+					);
+				if ($invo['period_id'] != '' OR $invo['period_id'] != NULL) {
+					$params['period_id'] = $invo['period_id'];
+					$jumlah = $invo['amount'];
+				} 
+				$this->m_registration->add_invoices($params);
+			}
+
+			// generate 11 SPP
+			for ($i = 2; $i <= 12 ; $i++) { 
+				$params = array(
+					'packet_id' => NULL,
+					'item_type_id' => '6',
+					'qty' => 1,
+					'amount' => $jumlah,
+					'period_id' => $i,
+					'scholarship' => 0,
+					);
+				$this->m_registration->add_invoices($params);
+			}
+
+
+
 			// $this->_generate_invoice($params,$id_unit);
 			$data['message'] = "Siswa nis : ".$this->input->post('nis')." telah berhasil didaftarulangkan..";
 		}

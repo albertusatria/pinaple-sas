@@ -62,4 +62,44 @@ class M_registration extends CI_Model {
         }        
     }
 
+    function add_invoices($params) {
+        $insert = $this->db->insert('invoices',$params);        
+        if($insert) {
+            return true;
+        } else {
+            return false;
+        }        
+    }
+
+    function get_list_paket($unit_id,$start,$current) {
+
+        if ($start = $current) {
+            // siswa baru
+            $sql = "SELECT * FROM packet p WHERE p.unit_id = '$unit_id' AND p.for_new_student = 'TRUE' AND p.stage = '$current' ";
+        } else {
+            // siswa lama daftar ulang
+            $sql = "SELECT * FROM packet p WHERE p.unit_id = '$unit_id' AND p.for_new_student = 'FALSE' AND p.stage = '$current' ";            
+        }
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
+    function get_list_packet_item($packet_id) {
+        $sql = "SELECT p.*,i.name,i.type,per.name as name_of_period FROM packet_detail p 
+                LEFT JOIN items_type i ON p.item_type_id = i.id
+                LEFT JOIN periods per ON p.period_id = per.id
+                WHERE p.packet_id = '$packet_id'";            
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+
+    }
+
 }
