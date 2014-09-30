@@ -84,49 +84,9 @@
 			  </div>
 			</div>
 
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">DPP <span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya DPP ..." value="2300000" required disabled/>
-			  </div>
-			</div>
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">Seragam <span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya Seragam ..." value="2300000" required disabled/>
-			  </div>
-			</div>
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">Minifield & Fieldtrip / Tahun <span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya Minifield dan Fieltrip..." value="2300000" required disabled/>
-			  </div>
-			</div>
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">Uang Kegiatan / Tahun <span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Uang Kegiatan..." value="2300000" required disabled/>
-			  </div>
-			</div>
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">Wisuda Tutup Tahun <span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="Biaya Wisuda..." value="2300000" required disabled/>
-			  </div>
-			</div>
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">DPP <span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="dpp" class="form-control dpp price" placeholder="DPP Cost..." value="2300000" required disabled/>
-			  </div>
-			</div>			
-			<div class="form-group">
-			  <label class="col-sm-3 control-label">SPP Bulanan<span class="asterisk">*</span></label>
-			  <div class="col-sm-9">
-			    <input type="text" name="SPP" class="form-control spp price" placeholder="SPP Cost per month..." value="130000" required disabled/>
-			  </div>
-			</div>
+			<div id="paymentItemList">
 	      </div>
+
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
