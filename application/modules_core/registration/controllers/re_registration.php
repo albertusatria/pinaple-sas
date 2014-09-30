@@ -98,12 +98,14 @@ class Re_registration extends Operator_base {
 
 			foreach ($this->input->post('invoice') as $invo) {
 				$params = array(
+					'nis' => $this->input->post('nis'),
 					'packet_id' => $invo['packet_id'],
 					'item_type_id' => $invo['item_type_id'],
 					'qty' => 1,
 					'amount' => $invo['amount'],
 					'period_id' => NULL,
 					'scholarship' => 0,
+					'dc' => $this->get_now()
 					);
 				if ($invo['period_id'] != '' OR $invo['period_id'] != NULL) {
 					$params['period_id'] = $invo['period_id'];
@@ -115,12 +117,14 @@ class Re_registration extends Operator_base {
 			// generate 11 SPP
 			for ($i = 2; $i <= 12 ; $i++) { 
 				$params = array(
+					'nis' => $this->input->post('nis'),
 					'packet_id' => NULL,
 					'item_type_id' => '6',
 					'qty' => 1,
 					'amount' => $jumlah,
 					'period_id' => $i,
 					'scholarship' => 0,
+					'dc' => $this->get_now()
 					);
 				$this->m_registration->add_invoices($params);
 			}
