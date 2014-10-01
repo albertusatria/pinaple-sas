@@ -16,7 +16,15 @@
 <script src="<?php echo base_url()?>bracket/js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/custom.js"></script>
 
+<script type="text/javascript" language="javascript">
+  function hapus(no,id,nama){
+    if(confirm('Are you sure to delete '+nama+'?'))
+      window.location = "<?php echo base_url(); ?>placement/classes/delete/"+no+"/"+id;
+  }
+</script>
+
 <script type="text/javascript">
+/*
 $( document ).ready(function() {
    $('#gradesSiswa').on('click', '#btnRight', function(){
         var selectedOpts = $('#lstBox1 option:selected');
@@ -44,9 +52,11 @@ $( document ).ready(function() {
         return false;
     });   
 });
+*/
 </script>
 
 <script type="text/javascript">
+/*
 $( document ).ready(function() {
     var modelMakeJsonList = {"modelMakeTable" : 
         [
@@ -93,5 +103,5 @@ var modelTypeJsonList = {
         var selectedMake = $('#jenjangSekolah option:selected').text();
         updateSelectSchoolBox(selectedMake);
     });       
-});
+});*/
 </script>
