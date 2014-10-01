@@ -51,7 +51,7 @@
                       <td><?php echo $siswa->status; ?></td>
                       <td><?php echo $siswa->conclusion; ?></td>
                       <td>
-                         <a href="<?php echo base_url(); ?>placement/classes/delete/<?php echo $result->id; ?>">
+                         <a href='#' onclick="hapus('<?php echo $siswa->id; ?>','<?php echo $result->id; ?>','<?php echo $siswa->full_name; ?>')" >
                           <i class="fa fa-trash-o"></i></a>                                            
                       </td>
                   </tr>

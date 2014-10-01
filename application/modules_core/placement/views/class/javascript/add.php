@@ -18,27 +18,28 @@
 <script src="<?php echo base_url();?>bracket/js/dropzone.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/colorpicker.js"></script>
 
-<script src="<?php echo base_url();?>bracket/js/wysihtml5-0.3.0.min.js"></script> 
-<script src="<?php echo base_url();?>bracket/js/bootstrap-wysihtml5.js"></script> 
-<script src="<?php echo base_url();?>bracket/js/ckeditor/ckeditor.js"></script> 
-<script src="<?php echo base_url();?>bracket/js/ckeditor/adapters/jquery.js"></script> 
-
 <script src="<?php echo base_url();?>bracket/js/jquery.validate.min.js"></script>
+<script src="<?php echo base_url()?>bracket/js/jquery.datatables.min.js"></script>
 
 <script src="<?php echo base_url();?>bracket/js/custom.js"></script>
 
-<script type="text/javascript">
-jQuery("#sasPanel").validate({
-  messages: {
-    unit_id : "Unit is required.",
-    item_type_id : "Item Type is required.",    
-    amount: "Amount is required."
-    },
-    highlight: function(element) {
-      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-    }  
-});
+<script>
+  jQuery(document).ready(function() {
+    
+    jQuery('#table1').dataTable();
+    
+    // Chosen Select
+    jQuery("select").chosen({
+      'min-width': '100px',
+      'white-space': 'nowrap',
+      disable_search_threshold: 10
+    });
+    
+  
+  });
 </script>
+
+
 <script>
 jQuery(document).ready(function(){
     
@@ -76,6 +77,16 @@ jQuery(document).ready(function(){
             jQuery('#colorpicker3').val('#'+hex);
         }
     });
+   
+  // Date Picker
+  jQuery('#datepicker').datepicker();
+  
+  jQuery('#datepicker-inline').datepicker();
+  
+  jQuery('#datepicker-multiple').datepicker({
+    numberOfMonths: 3,
+    showButtonPanel: true
+  });
   
   // Spinner
   var spinner = jQuery('#spinner').spinner();
@@ -91,5 +102,6 @@ jQuery(document).ready(function(){
   jQuery('#timepicker2').timepicker({showMeridian: false});
   jQuery('#timepicker3').timepicker({minuteStep: 15});
 
+  
 });
 </script>

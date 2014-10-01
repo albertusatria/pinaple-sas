@@ -86,7 +86,7 @@ class Classes extends Operator_base {
 
 	}
 
-	public function add_siswa($id_unit = "",$id_buka = "",$tingkat = "")
+	public function add_student($id = '')
 	{
 		// user_auth
 		$this->check_auth('C');
@@ -97,42 +97,41 @@ class Classes extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		// get portal list
-		$data['unit']				= $this->m_extra->get_unit($id_unit);
+		$data['result'] = $this->m_class->get_open_class_by_id($id);
+		$u_id=$data['result']->unit_id;
+		$data['unit']	= $this->m_units->get_unit_by_id($u_id);
 		// get tahun ajaran
-		$data['tahun']				= $this->m_tahun_ajaran->get_tahun_aktif();
-		$thn = $data['tahun']->tahun_ajaran;
-		// get portal by slug
-		$data['result']				= $this->m_kelas->get_kelas_buka_by_unit_tahun_detail($id_buka);
-		// get avaiable student
-		$data['siswas']				= $this->m_kelas->get_siswa_qualifikasi($id_unit,$tingkat,$thn);
+		$data['year']	= $this->m_school_year->get_active_year();
+		// get assigned student
+		$data['siswas']	= $this->m_class->get_class_student_registered($u_id);
 		// load template
 		$data['title']	= "Students Grades PinapleSAS";
-		
-		$data['main_content'] = "setting/penempatan_kelas/add";
+		$data['layout'] = "placement/class/add";
+		$data['javascript'] = "placement/class/javascript/add";
 		$this->load->view('dashboard/admin/template', $data);
 
 	}
 
-	public function add_process($id_unit = '',$id_buka = '')
+	public function add_process($id='')
 	{
-		if ($id_unit == '' OR $id_buka == '')
+		if ($id == '')
 		{
-			echo "forbidden";die;
+			echo "forbidden"; die();
 		}
 
 		// echo "<pre>"; print_r($_POST);die;
 
 		foreach ($_POST as $value) 
 		{
-				if (isset($value['check']))
-				{
-					$params = array(
-						'nis' 		=> $value['nis'],
-		            	'tahun_ajaran' 	=> $value['tahun_ajaran'],
-		            	'id_buka' 	=> $value['id_buka']
-		            	);
-					$this->m_kelas->add_siswa_kelas($params);
-				}
+			if (isset($value['check']))
+			{
+				$params = array(
+					'nis' 		=> $value['nis'],
+	            	'class_id' 	=> $value['class_id'],
+	            	'status' 	=> "BERJALAN"
+	            	);
+				$this->m_class->add_class_student($params);
+			}
 				// echo "<pre>"; print_r($_POST); die;
 
 		}
@@ -140,21 +139,19 @@ class Classes extends Operator_base {
 			$data['message'] = "Data successfully added";
 
 			$this->session->set_flashdata($data);
-			redirect('setting/penempatan_kelas/penempatan/' . $id_unit .'/'. $id_buka);
+			redirect('placement/classes/placement/'.$id);
 	}
 
-	public function hapus($id_unit = "",$id_buka = "",$id = "")
+	public function delete($id = "",$c_id)
 	{
 	// user_auth
 		$this->check_auth('D');
-
-		
-		if ($this->m_kelas->delete_siswa_kelas($id)) {
+		$params['id']=$id;
+		if ($this->m_class->delete_class_student($params)) {
 			$data['message'] = "Data successfully deleted";
 		}
 		$this->session->set_flashdata($data);
-		redirect('setting/penempatan_kelas/penempatan/' . $id_unit .'/'. $id_buka);
-
+		redirect('placement/classes/placement/'.$c_id);
 	}
 
 	// page title

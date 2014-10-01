@@ -31,11 +31,12 @@ class m_class extends CI_Model {
         return $this->db->get_where('classes',array('id'=>$id))->row();
     }
 
-    function get_class_student($c_id){ //us bakal dihubungkan dari tabel reregistration
+    function get_class_student($c_id){ 
         $sql = "SELECT cs.*, us.full_name 
                 FROM class_students cs 
                 LEFT JOIN users_student us ON us.nis=cs.nis                 
-                WHERE cs.class_id = '$c_id'
+                WHERE us.status = 'SISWA'
+                AND cs.class_id = '$c_id'
                 ";
         $query = $this->db->query($sql);
         // echo '<pre>'; print_r($query->result());die;
@@ -43,6 +44,44 @@ class m_class extends CI_Model {
             return $query->result();
         } else {
             return array();
+        }
+    }
+
+    function get_class_student_registered($u_id=''){ //us bakal dihubungkan dari tabel reregistration
+        $sql = "SELECT rr.*, us.full_name, us.current_level, u.name unit_name
+                FROM re_registration rr 
+                LEFT JOIN users_student us ON us.nis=rr.nis
+                LEFT JOIN units u ON u.id=us.unit_id
+                LEFT JOIN class_students cs ON cs.nis=rr.nis           
+                WHERE us.unit_id = '$u_id'
+                AND us.status = 'SISWA' 
+                AND
+                (cs.nis IS NULL OR cs.nis='BERAKHIR')
+                ";
+        $query = $this->db->query($sql);
+        // echo '<pre>'; print_r($query->result());die;
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    function add_class_student($params) {
+        $insert = $this->db->insert('class_students',$params);        
+        if($insert) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function delete_class_student($params) {
+        $del=$this->db->delete('class_students',$params,array('id'=>$params['id']));
+        if($del) {
+            return true;
+        } else {
+            return false;
         }
     }
 
