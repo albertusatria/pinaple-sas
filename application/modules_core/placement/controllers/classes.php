@@ -8,7 +8,7 @@ class Classes extends Operator_base {
 		// load model
 		
 		$this->load->model('initiation/m_school_year');
-		$this->load->model('master/m_unit');
+		$this->load->model('master/m_units');
 		$this->load->model('m_extra');
 		$this->load->model('m_class');
 		// load permission
@@ -26,7 +26,7 @@ class Classes extends Operator_base {
 		// user detail
 		$data['user']		= $this->user;
 		// get portal list
-		$data['ls_unit']	= $this->m_unit->get_all_unit();
+		$data['ls_unit']	= $this->m_units->get_all_unit();
 		// get tahun ajaran
 		$data['year']		= $this->m_school_year->get_active_year();
 		// load template
@@ -47,7 +47,7 @@ class Classes extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		// get portal list
-		$data['unit']	= $this->m_unit->get_unit_by_id($u_id);
+		$data['unit']	= $this->m_units->get_unit_by_id($u_id);
 		// get tahun ajaran
 		$data['year']	= $this->m_school_year->get_active_year();
 		$sy_id = $data['year']->id;
@@ -73,7 +73,7 @@ class Classes extends Operator_base {
 		
 		$data['result'] = $this->m_class->get_open_class_by_id($id);
 		$u_id=$data['result']->unit_id;
-		$data['unit']	= $this->m_unit->get_unit_by_id($u_id);
+		$data['unit']	= $this->m_units->get_unit_by_id($u_id);
 		// get tahun ajaran
 		$data['year']	= $this->m_school_year->get_active_year();
 		// get assigned student

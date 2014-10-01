@@ -7,7 +7,7 @@ class Units extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
-		$this->load->model('m_unit');
+		$this->load->model('m_units');
 		$this->load->model('m_employees');
 		
 		// load portal
@@ -32,7 +32,7 @@ class Units extends Operator_base {
 		// user detail
 		$data['user']				= $this->user;
 		
-		$data['rs_unit'] = $this->m_unit->get_all_unit_completed();
+		$data['rs_unit'] = $this->m_units->get_all_unit_completed();
 		$data['message'] = $this->session->flashdata('message');
 		
 		$data['layout'] = "master/units/list";
@@ -51,7 +51,7 @@ class Units extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 
-		$data['rs_parent'] = $this->m_unit->get_all_unit();
+		$data['rs_parent'] = $this->m_units->get_all_unit();
 		$data['rs_kepala'] = $this->m_employees->get_all_ue();
 
 		// load template
@@ -76,7 +76,7 @@ class Units extends Operator_base {
 			// insert
 			$params=$this->input->post();
 
-			$this->m_unit->add_unit($params);
+			$this->m_units->add_unit($params);
 			$data['message'] = "Data successfully added";
 			$this->session->set_flashdata($data);
 			redirect('master/units');
@@ -115,9 +115,9 @@ class Units extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		// get tahun ajaran row
-		$data['rs_parent'] = $this->m_unit->get_all_unit_except_self($id);
+		$data['rs_parent'] = $this->m_units->get_all_unit_except_self($id);
 		$data['rs_kepala'] = $this->m_employees->get_all_ue();
-		$data['result'] = $this->m_unit->get_unit_by_id($id);
+		$data['result'] = $this->m_units->get_unit_by_id($id);
 		// print_r($data['result']);die;
 		
 		// load template
@@ -141,7 +141,7 @@ class Units extends Operator_base {
 			// insert
 			$params=$this->input->post();
 
-			$this->m_unit->edit_unit($params);
+			$this->m_units->edit_unit($params);
 			$data['message'] = "Data successfully edited";
 			$this->session->set_flashdata($data);
 			redirect('master/units');
@@ -172,7 +172,7 @@ class Units extends Operator_base {
 
 	public function check_id_unit($id)
 	{
-		$cek=$this->m_unit->get_unit_by_id($id);
+		$cek=$this->m_units->get_unit_by_id($id);
 	    if (!empty($cek)){
 			$this->form_validation->set_message('check_id_unit', 'ID Unit is already used');
 			return false;       
@@ -188,7 +188,7 @@ class Units extends Operator_base {
 		$this->check_auth('D');
 		
 		$params['id_unit']=$id;
-		$this->m_unit->delete_unit($params);
+		$this->m_units->delete_unit($params);
 		$data['message'] = "Data successfully deleted";
 		$this->session->set_flashdata($data);
 		redirect('master/units');

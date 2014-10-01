@@ -8,7 +8,7 @@ class Extra_open extends Operator_base {
 		// load model
 		$this->load->model('m_school_year');
 		$this->load->model('m_extra_open');
-		$this->load->model('master/m_unit');
+		$this->load->model('master/m_units');
 		$this->load->model('master/m_employees');
 		// load user
 		$this->load->helper('text');
@@ -33,7 +33,7 @@ class Extra_open extends Operator_base {
 		// get active school year information
 		$data['active_school_year'] = $this->m_school_year->get_active_year();
 		// get unit list
-		$data['units'] = $this->m_unit->get_all_unit_academic();
+		$data['units'] = $this->m_units->get_all_unit_academic();
 
 		// load template
 		$data['title']	 = "Class Open Setup PinapleSAS";
@@ -64,7 +64,7 @@ class Extra_open extends Operator_base {
 		// get list of class
 		$data['extras'] = $this->m_extra_open->get_extra_list($unit_id, $schyear);
 		// get unit list
-		$data['unit'] = $this->m_unit->get_all_unit_academic($unit_id);
+		$data['unit'] = $this->m_units->get_all_unit_academic($unit_id);
 
 		// load template
 		$data['title']	 = "Class Open Setup PinapleSAS";
@@ -90,7 +90,7 @@ class Extra_open extends Operator_base {
 		// get school year active id
 		$schyear = $data['active_school_year']->id;
 		// get unit list
-		$data['unit'] = $this->m_unit->get_unit_by_id($unit_id);
+		$data['unit'] = $this->m_units->get_unit_by_id($unit_id);
 		// get unit list
 		$data['coaches'] = $this->m_employees->get_all_ue();
 		// load template
@@ -161,7 +161,7 @@ class Extra_open extends Operator_base {
 		// get school year active id
 		$schyear = $data['active_school_year']->id;
 		// get unit list
-		$data['unit'] = $this->m_unit->get_unit_by_id($unit_id);
+		$data['unit'] = $this->m_units->get_unit_by_id($unit_id);
 		// get unit list
 		$data['extra'] = $this->m_extra_open->get_extras($extra_id);
 		// get unit list

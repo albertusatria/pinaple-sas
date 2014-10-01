@@ -7,7 +7,6 @@ class School_year extends Operator_base {
 		parent::__construct();
 		// load model
 		$this->load->model('m_school_year');
-		$this->load->model('master/m_unit');
 		$this->load->model('master/m_items_type');
 		// load user
 		$this->load->helper('text');
