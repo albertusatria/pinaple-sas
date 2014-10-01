@@ -41,9 +41,9 @@
 				      <table class="table table-hidaction table-hover mb30">
 				        <thead>
 				          <tr>
-				            <th>No #</th>
-				            <th>Packet Name</th>
-				            <th>Description</th>
+				            <th width="10%">No.</th>
+				            <th width="70%">Packet Name</th>
+				            <!--<th width="20%" align="right" style="text-align:right;">Desc.</th>-->
 				            <th></th>
 				          </tr>
 				        </thead>
@@ -55,7 +55,7 @@
 					          <tr>				          
 					            <td><?php echo @$no; ?></td>
 					            <td><?php echo @$result->name; ?></td>
-					            <td class="price"><?php echo @$result->description; ?></td>
+					            <!--<td class="price"><?php echo @$result->description; ?></td>-->
 				                <td class="table-action-hide">
 				                  <a href="<?php echo base_url(); ?>master/invoice_packet/edit/<?php echo $result->id; ?>"><i class="fa fa-pencil"></i></a>
 				                  <a href="<?php echo base_url(); ?>master/invoice_packet/list_items/<?php echo $result->id; ?>"><i class="fa fa-file"></i></a>
@@ -112,6 +112,47 @@
 			          </div>
 			        </div>
 			        
+			        <div class="form-group">
+			          <label class="col-sm-3 control-label">Unit <span class="asterisk">*</span></label>
+			          <div class="col-sm-8">
+			          <select name="unit_id" class="form-control">
+			          	<?php foreach ($rs_unit as $result): ?>
+			          	<?php if($result->id!='0000'){ ?>
+			            	<option value=<?php echo $result->id ?> required><?php echo $result->name ?></option>
+			          	<?php } ?>
+			          	<?php endforeach; ?>
+			          </select>
+			          </div>
+			        </div>
+
+			        <div class="form-group">
+			          <label class="col-sm-3 control-label">Stage <span class="asterisk">*</span></label>
+			         	<div class="col-sm-2">
+				         	<select name="stage" class="form-control">
+					    
+					            <option value="1" required>1</option>
+					            <option value="2" required>2</option>
+					            <option value="3" required>3</option>
+					            <option value="4" required>4</option>
+					            <option value="5" required>5</option>
+					            <option value="6" required>6</option>
+					          	
+				          	</select>
+			          	</div>
+			        </div>
+
+			        <div class="form-group">
+			          <label class="col-sm-3 control-label">New Student <span class="asterisk">*</span></label>
+			          <div class="col-sm-3">
+			            <select name="for_new_student" class="form-control" >
+				    
+				            <option value="FALSE" required>NO</option>
+				            <option value="TRUE" required>YES</option>
+				           				          	
+			          	</select>
+			          </div>
+			        </div>
+
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">Description <span class="asterisk">*</span></label>
 			          <div class="col-sm-9">

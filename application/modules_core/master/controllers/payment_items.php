@@ -9,7 +9,7 @@ class Payment_items extends Operator_base {
 		// load all the related model here
 		$this->load->model('registration/m_extra');
 		$this->load->model('initiation/m_school_year');
-		$this->load->model('m_unit');
+		$this->load->model('m_units');
 		$this->load->model('m_items_type');		
 		$this->load->model('m_administration_costs');
 		// load portal
@@ -37,7 +37,7 @@ class Payment_items extends Operator_base {
 		//tahun ajaran
 		$data['rs_school_year'] = $this->m_school_year->get_all_school_year();		
 		//unit
-		$data['rs_unit'] = $this->m_unit->get_all_unit_for_administration_cost();
+		$data['rs_unit'] = $this->m_units->get_all_unit_for_administration_cost();
 
 		if($this->input->post('sy_id')){
 			//die($this->input->post('sy_id').$this->input->post('u_id'));
@@ -75,7 +75,7 @@ class Payment_items extends Operator_base {
 		$data['user'] = $this->user;
 		// load template
 		$data['r_sy'] = $this->m_school_year->get_school_year_by_id($sy_id);
-		$data['rs_unit'] = $this->m_unit->get_all_unit_for_administration_cost();
+		$data['rs_unit'] = $this->m_units->get_all_unit_for_administration_cost();
 		$data['u_id'] = $u_id;
 		$data['rs_it'] = $this->m_items_type->get_all_items_type();
 		$data['message'] = $this->session->flashdata('message');
@@ -124,7 +124,7 @@ class Payment_items extends Operator_base {
 		// load template
 		$data['r_sy'] = $this->m_school_year->get_school_year_by_id($sy_id);
 		$data['r_ac'] = $this->m_administration_costs->get_administration_cost_by_id($ac_id);
-		$data['rs_unit'] = $this->m_unit->get_all_unit_for_administration_cost();
+		$data['rs_unit'] = $this->m_units->get_all_unit_for_administration_cost();
 		$data['rs_it'] = $this->m_items_type->get_all_items_type();
 		$data['message']= $this->session->flashdata('message');
 		$data['title']  = "Payment Items Setup PinapleSAS";

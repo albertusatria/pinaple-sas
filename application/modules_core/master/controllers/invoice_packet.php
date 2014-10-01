@@ -7,6 +7,7 @@ class Invoice_packet extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
+		$this->load->model('m_units');
 		$this->load->model('m_packets');	
 		$this->load->model('m_packet_items');
 		$this->load->model('m_items_type');
@@ -35,7 +36,8 @@ class Invoice_packet extends Operator_base {
 
 		$data['message'] = $this->session->flashdata('message');
 
-		$data['rs_packet'] = $this->m_packet->get_all_packet();		
+		$data['rs_packet'] = $this->m_packets->get_all_packet();
+		$data['rs_unit'] = $this->m_units->get_all_unit();				
 		$data['layout'] = "master/invoice_packet/list";
 		$data['javascript'] = "master/invoice_packet/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
@@ -57,7 +59,7 @@ class Invoice_packet extends Operator_base {
 				'description'	=> $this->input->post('description')
 			);
 		
-			$this->m_packet->add_packet($data);
+			$this->m_packets->add_packet($data);
 			$data['message'] = "Data successfully added";
 			$this->session->set_flashdata($data);
 			redirect('master/invoice_packet/');
@@ -80,8 +82,8 @@ class Invoice_packet extends Operator_base {
 		$data['menu'] = $this->menu();
 		// user detail
 		$data['user'] = $this->user;
-		$data['result'] = $this->m_packet->get_packet_by_id($id);
-
+		$data['result'] = $this->m_packets->get_packet_by_id($id);
+		$data['rs_unit'] = $this->m_units->get_all_unit();	
 		// load template
 		$data['message']= $this->session->flashdata('message');
 		$data['title']  = "Edit Packet";
@@ -104,7 +106,7 @@ class Invoice_packet extends Operator_base {
 				'description'	=> $this->input->post('description')
 			);
 		
-			$this->m_packet->edit_packet($data);
+			$this->m_packets->edit_packet($data);
 			$data['message'] = "Data successfully edited";
 			$this->session->set_flashdata($data);
 			redirect('master/invoice_packet/');
@@ -126,7 +128,7 @@ class Invoice_packet extends Operator_base {
 		$this->check_auth('D');
 		
 		$params['id']=$id;
-		$this->m_packet->delete_packet($params);
+		$this->m_packets->delete_packet($params);
 		$data['message'] = "Data successfully deleted";
 		$this->session->set_flashdata($data);
 		redirect('master/invoice_packet');
@@ -134,7 +136,7 @@ class Invoice_packet extends Operator_base {
 	
 	public function check_duplicate_packet($packet_name)
 	{
-		$check=$this->m_packet->get_check_duplicate_packet($packet_name);
+		$check=$this->m_packets->get_check_duplicate_packet($packet_name);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_packet', 'Found duplicated for '.$packet_name.'! Please review your input.');
 			return false;       
@@ -147,7 +149,7 @@ class Invoice_packet extends Operator_base {
 	public function check_duplicate_packet_ex_self($packet_name)
 	{
 		$id=$this->input->post('id');
-		$check=$this->m_packet->get_check_duplicate_packet_ex_self($packet_name,$id);
+		$check=$this->m_packets->get_check_duplicate_packet_ex_self($packet_name,$id);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_packet_ex_self', 'Found duplicated for '.$packet_name.'! Please review your input.');
 			return false;       
@@ -170,7 +172,7 @@ class Invoice_packet extends Operator_base {
 
 		$data['message'] = $this->session->flashdata('message');
 
-		$data['r_packet'] = $this->m_packet->get_packet_by_id($id);
+		$data['r_packet'] = $this->m_packets->get_packet_by_id($id);
 		$data['rs_packet_items'] = $this->m_packet_items->get_all_packet_items_by_p_id($id);
 		$data['rs_items_type'] = $this->m_items_type->get_all_items_type();		
 		$data['layout'] = "master/invoice_packet/list_items";

@@ -35,6 +35,48 @@
 	          </div>
 	        </div>
 	        
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Unit <span class="asterisk">*</span></label>
+            <div class="col-sm-8">
+            <select name="unit_id" class="form-control">
+              <?php foreach ($rs_unit as $unit): ?>
+                  <?php if($result->id!='0000'){ ?>
+                    <option value=<?php echo $unit->id ?> <?php if($unit->id==$result->unit_id){echo "selected='selected'";} ?> required>
+                    <?php echo $unit->name ?></option>
+                  <?php } ?>
+              <?php endforeach; ?>
+            </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Stage <span class="asterisk">*</span></label>
+            <div class="col-sm-2">
+              <select name="stage" class="form-control">
+          
+                  <option value="1" required>1</option>
+                  <option value="2" required>2</option>
+                  <option value="3" required>3</option>
+                  <option value="4" required>4</option>
+                  <option value="5" required>5</option>
+                  <option value="6" required>6</option>
+                  
+                </select>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">New Student <span class="asterisk">*</span></label>
+            <div class="col-sm-3">
+              <select name="for_new_student" class="form-control" >
+        
+                <option value="FALSE"  <?php if($result->for_new_student=='FALSE'){echo "selected='selected'";} ?>  required>NO</option>
+                <option value="TRUE" <?php if($result->for_new_student=='TRUE'){echo "selected='selected'";} ?> required>YES</option>
+                                  
+              </select>
+            </div>
+          </div>
+
 	        <div class="form-group">
 	          <label class="col-sm-3 control-label">Description <span class="asterisk">*</span></label>
 	          <div class="col-sm-9">

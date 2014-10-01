@@ -1,6 +1,6 @@
 <?php
 
-class m_unit extends CI_Model {
+class m_units extends CI_Model {
 
     function __construct() {
         // Call the Model constructor
