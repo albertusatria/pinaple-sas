@@ -75,10 +75,10 @@ class M_registration extends CI_Model {
 
         if ($start = $current) {
             // siswa baru
-            $sql = "SELECT * FROM packet p WHERE p.unit_id = '$unit_id' AND p.for_new_student = 'TRUE' AND p.stage = '$current' ";
+            $sql = "SELECT * FROM packets p WHERE p.unit_id = '$unit_id' AND p.for_new_student = 'TRUE' AND p.stage = '$current' ";
         } else {
             // siswa lama daftar ulang
-            $sql = "SELECT * FROM packet p WHERE p.unit_id = '$unit_id' AND p.for_new_student = 'FALSE' AND p.stage = '$current' ";            
+            $sql = "SELECT * FROM packets p WHERE p.unit_id = '$unit_id' AND p.for_new_student = 'FALSE' AND p.stage = '$current' ";            
         }
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {

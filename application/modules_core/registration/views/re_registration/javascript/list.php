@@ -124,9 +124,10 @@ jQuery(document).ready(function() {
 
     // Delete row in a table
     jQuery('#searchResult').on('click','.daftar',function(){
-		var unit = jQuery('#searchResult').find('input.student-unit').val();		
-		var current = jQuery('#searchResult').find('input.student-current').val();		
-		var start = jQuery('#searchResult').find('input.student-start').val();		
+
+		var unit =  jQuery(this).closest('div').find('input.student-unit').val();		
+		var current =  jQuery(this).closest('div').find('input.student-current').val();		
+		var start =  jQuery(this).closest('div').find('input.student-start').val();		
 		console.log('student unit : '+unit);
 		console.log('student start : '+start);
 		console.log('student current : '+current);
@@ -200,6 +201,7 @@ jQuery(document).ready(function() {
 			var num   = 1;
 			item[num] = {};
 			item[num]['packet_id'] = jQuery(this).val();
+
 
 			jQuery('#ajax-loader').show(); 
 		    jQuery.ajax({

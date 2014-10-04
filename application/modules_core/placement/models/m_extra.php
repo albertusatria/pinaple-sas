@@ -7,6 +7,42 @@ class m_extra extends CI_Model {
         parent::__construct();
     }
 
+    function get_enroll_open_extra_by_u_sy($u_id,$sy_id){
+        $sql = "SELECT e.*, COUNT(es.id) enroll_count
+                FROM extras e
+                LEFT JOIN extra_students es ON es.extra_id=e.id
+                WHERE e.unit_id = '$u_id'
+                AND e.school_year_id = '$sy_id'
+                GROUP BY e.id";
+        $query = $this->db->query($sql);
+        // echo '<pre>'; print_r($query->result());die;
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }    
+
+    function get_open_extra_by_id($id){
+        return $this->db->get_where('extras',array('id'=>$id))->row();
+    }
+
+    function get_extra_student($c_id){ 
+        $sql = "SELECT es.*, us.full_name 
+                FROM extra_students es
+                LEFT JOIN users_student us ON us.nis=es.nis                 
+                WHERE us.status = 'SISWA'
+                AND es.extra_id = '$c_id'
+                ";
+        $query = $this->db->query($sql);
+        // echo '<pre>'; print_r($query->result());die;
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
     // get menu by slug
     function get_unit($id_unit = '') {
         $show = 'result()';
@@ -24,6 +60,26 @@ class m_extra extends CI_Model {
         // echo '<pre>'; print_r($query->result());die;
         if ($query->num_rows() > 0) {
             return $query->$show();
+        } else {
+            return array();
+        }
+    }
+
+    function get_registered_student_not_enroll_in_this_extra($extra_id = '',$u_id ='')
+    {
+        //ambil semua siswa yang belum diregiskan
+        $sql = "SELECT rr.*, us.full_name, us.current_level, u.name unit_name
+                FROM re_registration rr 
+                LEFT JOIN users_student us ON us.nis=rr.nis
+                LEFT JOIN units u ON u.id=us.unit_id
+                WHERE us.unit_id = '$u_id'
+                AND us.status = 'SISWA' 
+                AND rr.nis NOT IN (SELECT es.nis FROM extra_students es WHERE rr.nis = es.nis AND es.half_period = '1' AND es.extra_id = '$extra_id')
+                ";
+        $query = $this->db->query($sql);
+        // echo '<pre>'; print_r($query->result());die;
+        if ($query->num_rows() > 0) {
+            return $query->result();
         } else {
             return array();
         }
@@ -50,6 +106,25 @@ class m_extra extends CI_Model {
             return array();
         }        
     }
+
+    function add_extra_student($params) {
+        $insert = $this->db->insert('extra_students',$params);        
+        if($insert) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function delete_extra_student($params) {
+        $del=$this->db->delete('extra_students',$params,array('id'=>$params['id']));
+        if($del) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // add menu
     function add_extra($id_unit,$params) {
         $this->db->where('id_unit',$id_unit);
