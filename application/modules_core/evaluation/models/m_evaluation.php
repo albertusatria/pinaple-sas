@@ -31,10 +31,6 @@ class m_class extends CI_Model {
         return $this->db->get_where('classes',array('id'=>$id))->row();
     }
 
-    function get_open_class_by_year($sy_id){
-        return $this->db->get_where('classes',array('school_year_id'=>$sy_id))->row();
-    }
-
     function get_class_student($c_id){ 
         $sql = "SELECT cs.*, us.full_name 
                 FROM class_students cs 
@@ -49,17 +45,6 @@ class m_class extends CI_Model {
         } else {
             return array();
         }
-    }
-
-    function get_class_student_by_id($id){
-        $sql = "SELECT us.*
-                FROM class_students cs 
-                LEFT JOIN users_student us ON us.nis=cs.nis                 
-                WHERE us.status = 'SISWA'
-                AND cs.id = '$id'
-                ";
-        $query = $this->db->query($sql);
-        return $query->row();
     }
 
     function get_class_student_registered($u_id=''){ //us bakal dihubungkan dari tabel reregistration
@@ -100,35 +85,6 @@ class m_class extends CI_Model {
         }
     }
 
-    function update_student_conclusion($id,$input) {
-        $this->db->where('id',$id);
-        $update = $this->db->update('class_students',$input);        
-        if($update) {
-            return true;
-        } else {
-            return false;
-        }    
-    }
-
-    function get_complete_class_student_row($id){
-        $sql =  "SELECT cs.id,cs.nis,c.level,u.stage,u.id id_unit,us.current_level
-                    FROM class_students cs
-                    LEFT JOIN classes c ON c.id=cs.class_id
-                    LEFT JOIN units u ON u.id=c.unit_id
-                    LEFT JOIN users_student us ON us.nis=cs.nis
-                    WHERE cs.id = '$id' AND cs.status='BERAKHIR'
-                ";
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        } else {
-            return array();
-        } 
-    }
-
-    function update_evaluation_users_student($params){
-        $this->db->update('users_student',$params,array('nis'=>$params['nis']));
-    }
 
 //----------------------------------------------------------------------------------
 
