@@ -21,29 +21,33 @@
 		    </div>
 			<!-- Table Results -->
 			<div class="panel panel-default">
+					<form id="newItemstype" method="POST" 
+					action="<?php echo base_url(); ?>master/invoice_initiation/edit_amount" class="form-horizontal">
+			        <input type="hidden" name="packet_id_amount" value="<?php echo $r_packet->id; ?>" required />		        
 				<div class="panel-body">	
-					<?php if ($message != null ) : ?>
-						<?php if ($message == "Data successfully deleted"):?>
+					<?php if ($message_amount != null ) : ?>
+						<?php if ($message_amount != "Data successfully edited"):?>
 						<div class="alert alert-success">
 				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
 				            ×</button>
-				            <strong>Well done!</strong> <?php echo $message; ?>
+				            <strong>Well done!</strong> <?php echo $message_amount; ?>
 						</div>
-						<?php elseif ($message == "Data successfully edited"):?> 
+						<?php elseif ($message_amount == "Data successfully edited"):?> 
 						<div class="alert alert-success">
 				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
 				            ×</button>
-				            <?php echo $message; ?>
+				            <?php echo $message_amount; ?>
 						</div>						
 						<?php endif;?>
 					<?php endif;?>
 					<div class="row row-pad-5">        
 				      <div class="table-responsive">
-				      <table class="table table-hidaction table-hover mb30">
+				      <table class="table table-hidaction table-hover mb30" id="priceTable">
 				        <thead>
 				          <tr>
 				            <th>No #</th>
 				            <th>Packet Items Name</th>
+				            <th>Amount</th>
 				            <th></th>
 				          </tr>
 				        </thead>
@@ -54,7 +58,10 @@
 					        <?php $no = 1; foreach ($rs_packet_items as $result): ?>
 					          <tr>				          
 					            <td><?php echo @$no; ?></td>
-					            <td><?php echo @$result->item_type_name; ?> <?php if ($result->period_id != NULL) : echo "( Bulan " . $result->period_name . " )"; endif; ?></td>					      
+					            <td>
+									<input type="hidden" class="form-control" name="data[<?php echo $no; ?>][id]" value="<?php echo @$result->id; ?>">
+					            	<?php echo @$result->item_type_name; ?> <?php if ($result->period_id != NULL) : echo "( Bulan " . $result->period_name . " )"; endif; ?></td>					      
+					            <td><input type="text" class="form-control price" name="data[<?php echo $no; ?>][amount]" value="<?php echo @$result->amount; ?>"></td>
 				                <td class="table-action-hide">				                 
 				                  <a href="#" class="delete-row" 
 				                  onclick="hapus(<?php echo $result->id ?>,'<?php echo $result->item_type_name ?>',<?php echo $r_packet->id;?>)">
@@ -68,14 +75,24 @@
 				        </tbody>
 				      </table>
 				      </div><!-- table-responsive -->
-					</div>		
+					</div>
 				</div><!-- panel-body -->
+			      <div class="panel-footer">
+			        <div class="row">
+			          <div class="col-sm-9 col-sm-offset-3">
+			            <button class="btn btn-primary">Submit</button>
+			            <button type="reset" class="btn btn-default">Reset</button>
+			          </div>
+			        </div>
+			      </div>
+				</form>
+			    
 			</div><!-- 2nd panel -->		    		    
 		  </div><!-- panel -->
         </div>	<!-- col-6 -->			
 
 		<div class="col-md-6">
-			<form id="newItemstype" method="POST" action="<?php echo base_url(); ?>master/invoice_packet/add_item" class="form-horizontal">
+			<form id="newItemstype" method="POST" action="<?php echo base_url(); ?>master/invoice_initiation/add_item" class="form-horizontal">
 			  <div class="panel panel-default">
 			      <div class="panel-heading">
 			        <div class="panel-btns">

@@ -54,7 +54,16 @@
 					        <?php $no = 1; foreach ($rs_packet as $result): ?>
 					          <tr>				          
 					            <td><?php echo @$no; ?></td>
-					            <td><?php echo @$result->name; ?></td>
+					            <td><strong class="text text-danger"><?php echo @$result->name; ?></strong>
+					            	<br>
+					            	<?php echo @$result->unit_name; ?>
+					            	<br>
+					            	<?php if ($result->for_new_student == 'TRUE') : ?>
+					            		Untuk Siswa Baru ( Jenjang : <?php echo @$result->stage; ?> )
+					            	<?php else : ?>
+					            		Untuk Siswa Lama ( Jenjang : <?php echo @$result->stage; ?> )
+						            <?php endif; ?>
+					            	</td>
 					            <!--<td class="price"><?php echo @$result->description; ?></td>-->
 				                <td class="table-action-hide">
 				                  <a href="<?php echo base_url(); ?>master/invoice_packet/edit/<?php echo $result->id; ?>"><i class="fa fa-pencil"></i></a>

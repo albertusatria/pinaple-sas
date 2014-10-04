@@ -1,6 +1,6 @@
 <?php
 
-class m_packet_items extends CI_Model {
+class M_packet_items_year extends CI_Model {
 
     function __construct() {
         // Call the Model constructor
@@ -8,7 +8,7 @@ class m_packet_items extends CI_Model {
     }
 
     function get_all_packet_items(){
-        return $this->db->get('packet_detail')->result();
+        return $this->db->get('packet_detail_year')->result();
     }
 
     function get_all_packet_items_by_p_id($id){
@@ -19,9 +19,10 @@ class m_packet_items extends CI_Model {
                     pd.item_type_id,
                     it.name item_type_name,
                     pd.period_id,
-                    ps.name period_name
-                  FROM packet_detail pd
-                LEFT JOIN packets p ON p.id=pd.packet_id
+                    ps.name period_name,
+                    pd.amount
+                  FROM packet_detail_year pd
+                LEFT JOIN packets_year p ON p.id=pd.packet_id
                 LEFT JOIN items_type it ON it.id=pd.item_type_id 
                 LEFT JOIN periods ps ON ps.id=pd.period_id 
                 WHERE pd.packet_id='$id'";
@@ -57,8 +58,8 @@ class m_packet_items extends CI_Model {
     function get_check_duplicate_packet_items($it_id,$p_id){
         $sql = "SELECT 
                     pi.*
-                  FROM packet_detail pi
-                INNER JOIN packets p ON p.id=pi.packet_id
+                  FROM packet_detail_year pi
+                INNER JOIN packets_year p ON p.id=pi.packet_id
                 INNER JOIN items_type it ON it.id=pi.item_type_id 
                 WHERE pi.packet_id = '$p_id' 
                   AND pi.item_type_id = '$it_id'";
@@ -73,11 +74,22 @@ class m_packet_items extends CI_Model {
     }
     
     function add_packet_items($params) {
-        $this->db->insert('packet_detail',$params);
+        $this->db->insert('packet_detail_year',$params);
     } 
 
     function delete_packet_items($params) {
-       $this->db->delete('packet_detail',$params,array('id'=>$params['id']));
+       $this->db->delete('packet_detail_year',$params,array('id'=>$params['id']));
+    }
+
+    function edit_amount($id,$params) {
+        $this->db->where('id',$id);
+        $update = $this->db->update('packet_detail_year',$params);
+        if ($update) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }
