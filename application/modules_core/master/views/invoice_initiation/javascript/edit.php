@@ -11,36 +11,34 @@
 <script src="<?php echo base_url()?>bracket/js/autoNumeric.js"></script>
 <script src="<?php echo base_url();?>bracket/js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/custom.js"></script>
+
 <script type="text/javascript">
-  jQuery(document).ready(function() {
-    
-	// Show aciton upon row hover
-	jQuery('.table-hidaction tbody tr').hover(function(){
-	  jQuery(this).find('.table-action-hide a').animate({opacity: 1});
-	},function(){
-	  jQuery(this).find('.table-action-hide a').animate({opacity: 0});
-	});
-  
-    
-	// Basic Form
-	jQuery("#newPacket").validate({
-		highlight: function(element) {
-		  jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-	},
-		success: function(element) {
-		  jQuery(element).closest('.form-group').removeClass('has-error').css('margin-bottom', '-20px');
-		}
-	});
-  
+jQuery("#sasPanel").validate({
+  messages: {
+    name : "Item Type name is required.",    
+    description: "Description of Item Type is required."
+    },
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+	success: function(element) {
+	  jQuery(element).closest('.form-group').removeClass('has-error').css('margin-bottom', '-20px');
+	}    	
+});
+
+jQuery(document).ready(function(){
+	
 	//Get All Unit & Jenjang
-    var modelMakeJsonList = {"modelMakeTable" : 
+	jQuery('#jenjangSekolah').live('click',function(){
+    	var modelMakeJsonList = {"modelMakeTable" : 
         [
-            {"modelMakeID" : "0","modelMake" : "Choose School Grades"},        
+            {"modelMakeID" : "0","modelMake" : "Choose School Units"},        
             <?php $no = 1; foreach ($ls_unit as $unit): ?>
                 {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->name ?>"},
             <?php $no++; endforeach ; ?>
         ]};
-	var modelTypeJsonList = {
+        
+		var modelTypeJsonList = {
 	
 	    <?php $no = 1; foreach ($ls_unit as $unit): ?>
 	
@@ -69,7 +67,8 @@
 	        console.log('updating with',make);
 	        var listItems= "";
 	        for (var i = 0; i < modelTypeJsonList[make].length; i++){
-	            listItems+= "<option value='" + modelTypeJsonList[make][i].modelTypeID + "'>" + modelTypeJsonList[make][i].modelType + "</option>";
+	            listItems+= "<option value='" + modelTypeJsonList[make][i].modelTypeID + "'>"
+	            + modelTypeJsonList[make][i].modelType + "</option>";
 	        }
 	        $("select#jenjangKelas").html(listItems);
 	    }
@@ -77,15 +76,13 @@
 	    $("select#jenjangSekolah").on('change',function(){
 	        var selectedMake = $('#jenjangSekolah option:selected').text();
 	        updateSelectSchoolBox(selectedMake);
-	    });    		
-     //Get All Unit & Jenjang  
-  
-  });   
+	    });  
+	});  		
+     //Get All Unit & Jenjang	
+});
 </script>
-<script type="text/javascript">
-  function hapus(no,nama){
-    if(confirm('Are you sure to delete '+nama+' item?'))
-      window.location = "<?php echo base_url(); ?>master/invoice_packet/delete/"+no;
+<script type="text/javascript" language="javascript">
+  function gotoback(){
+      window.location = "<?php echo base_url(); ?>master/invoice_packet/";
   }
 </script>
-

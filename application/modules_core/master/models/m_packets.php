@@ -8,7 +8,12 @@ class m_packets extends CI_Model {
     }
 
     function get_all_packet(){
-        return $this->db->get('packets')->result();
+        $sql = "SELECT p.*,u.name'unit_name' FROM packets p
+                LEFT JOIN units u ON u.id = p.unit_id
+                ORDER BY p.unit_id, p.id
+                ";
+
+        return $this->db->query($sql)->result();
     }
 
     function get_total_rows(){

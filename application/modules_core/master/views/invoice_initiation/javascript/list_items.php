@@ -37,6 +37,18 @@
 		}
 	});
 
+	jQuery('#priceTable tbody tr td input.price').on('focus',function(){
+      if (jQuery(this).val() == 0 ) {
+        jQuery(this).val('');
+      }
+	});
+
+	jQuery('#priceTable tbody tr td input.price').on('blur',function(){
+      if (jQuery(this).val() == "" ) {
+        jQuery(this).val('0');
+      }	
+	});
+
 	jQuery("#inputName").on('change',function(){
 
 	    var item = {};
@@ -72,6 +84,10 @@
 	});
   
   });   
+
+
+
+
 </script>
 <script type="text/javascript">
   function hapus(no,nama,id){

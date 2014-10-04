@@ -39,6 +39,7 @@ class Invoice_packet extends Operator_base {
 		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
 		
 		$data['rs_packet'] = $this->m_packets->get_all_packet();
+		// echo "<pre>"; print_r($data['rs_packet']); die;
 		$data['rs_unit'] = $this->m_units->get_all_unit();				
 		$data['layout'] = "master/invoice_packet/list";
 		$data['javascript'] = "master/invoice_packet/javascript/list";
@@ -58,7 +59,10 @@ class Invoice_packet extends Operator_base {
 			// insert
 			$data = array(
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'unit_id'			=> $this->input->post('unit_id'),
+				'for_new_student'	=> $this->input->post('for_new_student'),
+				'stage'	=> $this->input->post('stage')
 			);
 		
 			$this->m_packets->add_packet($data);
@@ -178,6 +182,7 @@ class Invoice_packet extends Operator_base {
 
 		$data['r_packet'] = $this->m_packets->get_packet_by_id($id);
 		$data['rs_packet_items'] = $this->m_packet_items->get_all_packet_items_by_p_id($id);
+		// echo "<pre>"; print_r($data['rs_packet_items']);die;
 		$data['rs_items_type'] = $this->m_items_type->get_all_items_type();		
 		$data['layout'] = "master/invoice_packet/list_items";
 		$data['javascript'] = "master/invoice_packet/javascript/list_items";
@@ -186,6 +191,8 @@ class Invoice_packet extends Operator_base {
 
 	public function add_item() {
 		// form validation
+		// print_r($this->input->post());die;
+
 		$this->check_auth('C');
 
 		$this->form_validation->set_rules('item_type_id', 'Item Name', 'required|trim|xss_clean|callback_check_duplicate_packet_items');
@@ -196,6 +203,11 @@ class Invoice_packet extends Operator_base {
 				'item_type_id' => $this->input->post('item_type_id'),
 				'packet_id'	=> $this->input->post('packet_id')
 			);
+
+			if ($this->input->post('payment_type') == 'MONTHLY PAYMENT') 
+			{
+				$params['period_id'] = '1';
+			}
 		
 			$this->m_packet_items->add_packet_items($params);
 			$data['message'] = "Data successfully added";
@@ -232,6 +244,18 @@ class Invoice_packet extends Operator_base {
 		$data['message'] = "Data successfully deleted";
 		$this->session->set_flashdata($data);
 		redirect('master/invoice_packet/list_items/'.$p_id);
+	}
+
+	public function get_detail_of_payment_item() {
+		foreach ($_POST as $value) 
+		{
+			$id = $value['id'];
+		}
+		//masukan ke tabel siswa
+		$query = $this->m_packet_items->get_detail_of_payment_item($id);
+		header('Content-Type: application/json');
+	    echo json_encode($query);
+
 	}
 
 	// page title
