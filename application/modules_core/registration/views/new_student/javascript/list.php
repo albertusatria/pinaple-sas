@@ -82,7 +82,7 @@ jQuery(document).ready(function() {
 	//Get All Unit & Jenjang
     var modelMakeJsonList = {"modelMakeTable" : 
         [
-            {"modelMakeID" : "0","modelMake" : "Pilih jenjang sekolah"},        
+            {"modelMakeID" : "0","modelMake" : "Choose School Units"},        
             <?php $no = 1; foreach ($ls_unit as $unit): ?>
                 {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->name ?>"},
             <?php $no++; endforeach ; ?>
