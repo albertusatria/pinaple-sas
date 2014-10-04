@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once( APPPATH . 'modules_core/base/controllers/operator_base.php' );
 
-class Classes extends Operator_base {
+class Extras_first extends Operator_base {
 	public function __construct() {
 		// call the controller construct
 		parent::__construct();
@@ -16,10 +16,12 @@ class Classes extends Operator_base {
 		// page title
 		$this->page_title();
 
+
 		// active page
 		$active['parent_active'] = "students_placement";
-		$active['child_active'] = "class_placement";
+		$active['child_active'] = "extra_placement_first";
 		$this->session->set_userdata($active);		
+
 	}
 
 	public function index()
@@ -36,14 +38,14 @@ class Classes extends Operator_base {
 		$data['year']		= $this->m_school_year->get_active_year();
 		// load template
 		$data['title']	= "Students Placement Setting Pinaple SAS";
-		$data['layout'] = "placement/class/list";
-		$data['javascript'] = "placement/class/javascript/list";
+		$data['layout'] = "placement/extra/list";
+		$data['javascript'] = "placement/extra/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
-	public function list_class($u_id="")
+	public function list_extra($u_id="")
 	{
-	// user_auth
+		// user_auth
 		$this->check_auth('R');
 
 		$data['message'] = $this->session->flashdata('message');
@@ -57,11 +59,11 @@ class Classes extends Operator_base {
 		$data['year']	= $this->m_school_year->get_active_year();
 		$sy_id = $data['year']->id;
 		// get portal by slug
-		$data['classes'] = $this->m_class->get_enroll_open_class_by_u_sy($u_id,$sy_id);
+		$data['extras'] = $this->m_extra->get_enroll_open_extra_by_u_sy($u_id,$sy_id);
 		// load template
 		$data['title']	= "Students Placement Setting Pinaple SAS";
-		$data['layout'] = "placement/class/list_class";
-		$data['javascript'] = "placement/class/javascript/list_class";
+		$data['layout'] = "placement/extra/list_extra";
+		$data['javascript'] = "placement/extra/javascript/list_extra";
 		$this->load->view('dashboard/admin/template', $data);
 	}	
 
@@ -76,17 +78,18 @@ class Classes extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		
-		$data['result'] = $this->m_class->get_open_class_by_id($id);
+		$data['result'] = $this->m_extra->get_open_extra_by_id($id);
+
 		$u_id=$data['result']->unit_id;
 		$data['unit']	= $this->m_units->get_unit_by_id($u_id);
 		// get tahun ajaran
 		$data['year']	= $this->m_school_year->get_active_year();
 		// get assigned student
-		$data['siswas']	= $this->m_class->get_class_student($id);
+		$data['siswas']	= $this->m_extra->get_extra_student($id);
 		// load template
 		$data['title']	= "Students Placement Setting Pinaple SAS";
-		$data['layout'] = "placement/class/placement";
-		$data['javascript'] = "placement/class/javascript/placement";
+		$data['layout'] = "placement/extra/placement";
+		$data['javascript'] = "placement/extra/javascript/placement";
 		$this->load->view('dashboard/admin/template', $data);
 
 	}
@@ -102,17 +105,17 @@ class Classes extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		// get portal list
-		$data['result'] = $this->m_class->get_open_class_by_id($id);
+		$data['result'] = $this->m_extra->get_open_extra_by_id($id);
 		$u_id=$data['result']->unit_id;
 		$data['unit']	= $this->m_units->get_unit_by_id($u_id);
 		// get tahun ajaran
 		$data['year']	= $this->m_school_year->get_active_year();
 		// get assigned student
-		$data['siswas']	= $this->m_class->get_class_student_registered($u_id);
+		$data['siswas']	= $this->m_extra->get_registered_student_not_enroll_in_this_extra($id,$u_id);
 		// load template
 		$data['title']	= "Students Grades PinapleSAS";
-		$data['layout'] = "placement/class/add";
-		$data['javascript'] = "placement/class/javascript/add";
+		$data['layout'] = "placement/extra/add";
+		$data['javascript'] = "placement/extra/javascript/add";
 		$this->load->view('dashboard/admin/template', $data);
 
 	}
@@ -132,10 +135,11 @@ class Classes extends Operator_base {
 			{
 				$params = array(
 					'nis' 		=> $value['nis'],
-	            	'class_id' 	=> $value['class_id'],
+	            	'extra_id' 	=> $value['extra_id'],
+	            	'half_period' 	=> '1',
 	            	'status' 	=> "BERJALAN"
 	            	);
-				$this->m_class->add_class_student($params);
+				$this->m_extra->add_extra_student($params);
 			}
 				// echo "<pre>"; print_r($_POST); die;
 
@@ -144,7 +148,7 @@ class Classes extends Operator_base {
 			$data['message'] = "Data successfully added";
 
 			$this->session->set_flashdata($data);
-			redirect('placement/classes/placement/'.$id);
+			redirect('placement/extras_first/placement/'.$id);
 	}
 
 	public function delete($id = "",$c_id)
@@ -152,16 +156,16 @@ class Classes extends Operator_base {
 	// user_auth
 		$this->check_auth('D');
 		$params['id']=$id;
-		if ($this->m_class->delete_class_student($params)) {
+		if ($this->m_extra->delete_extra_student($params)) {
 			$data['message'] = "Data successfully deleted";
 		}
 		$this->session->set_flashdata($data);
-		redirect('placement/classes/placement/'.$c_id);
+		redirect('placement/extras_first/placement/'.$c_id);
 	}
 
 	// page title
 	public function page_title() {
-		$data['page_title'] = 'Penempatan Kelas';
+		$data['page_title'] = 'Extra Placement';
 		$this->session->set_userdata($data);
 	}
 }
