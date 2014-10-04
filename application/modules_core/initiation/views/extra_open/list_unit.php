@@ -1,18 +1,15 @@
     <div class="pageheader">
-      <h2><i class="fa fa-group"></i>Pengaturan Buka Kelas Thn Ajaran : <?php echo $active_school_year->name?></h2>
+      <h2><i class="fa fa-group"></i>Extra Open for <?php echo $active_school_year->name?></h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li class="active">Pengaturan Buka Extra Thn Ajaran : <?php echo $active_school_year->name?></li>
+          <li class="active">Extra Open : <?php echo $active_school_year->name?></li>
         </ol>
       </div>
     </div>
         
     <div class="contentpanel">
-      
-
-
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Pengaturan Buka Extra Untuk Tahun Ajaran : <?php echo $active_school_year->name?></h3>
@@ -36,7 +33,7 @@
                           <td><?php echo $unit->name; ?></td>
                           <td>
                              <a href="<?php echo base_url(); ?>initiation/extra_open/extra_list/<?php echo $unit->id; ?>">
-                             Buka Kelas</a>
+                             Buka Extra</a>
                           </td>
                       </tr>
                   <?php $no++; endforeach ; ?>
