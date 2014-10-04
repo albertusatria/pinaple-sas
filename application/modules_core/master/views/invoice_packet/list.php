@@ -112,35 +112,22 @@
 			          </div>
 			        </div>
 			        
-			        <div class="form-group">
-			          <label class="col-sm-3 control-label">Unit <span class="asterisk">*</span></label>
-			          <div class="col-sm-8">
-			          <select name="unit_id" class="form-control">
-			          	<?php foreach ($rs_unit as $result): ?>
-			          	<?php if($result->id!='0000'){ ?>
-			            	<option value=<?php echo $result->id ?> required><?php echo $result->name ?></option>
-			          	<?php } ?>
-			          	<?php endforeach; ?>
-			          </select>
-			          </div>
-			        </div>
-
-			        <div class="form-group">
-			          <label class="col-sm-3 control-label">Stage <span class="asterisk">*</span></label>
-			         	<div class="col-sm-2">
-				         	<select name="stage" class="form-control">
-					    
-					            <option value="1" required>1</option>
-					            <option value="2" required>2</option>
-					            <option value="3" required>3</option>
-					            <option value="4" required>4</option>
-					            <option value="5" required>5</option>
-					            <option value="6" required>6</option>
-					          	
-				          	</select>
-			          	</div>
-			        </div>
-
+					<div class="form-group">
+					  <label class="col-sm-3 control-label">Grades <span class="asterisk">*</span></label>
+					  <div class="col-sm-5">
+					    <select name="unit_id" id="jenjangSekolah" class="form-control" required>
+					     <option value="" selected="selected">Choose School Units</option>
+					    </select>
+					    <label class="error" for="jenjangSekolah"></label>
+					  </div>
+					   <div class="col-sm-4">
+					    <select name="stage" id="jenjangKelas" class="form-control" required>
+					      <option value="" selected="selected">Choose Units Level</option>
+					    </select>
+					    <label class="error" for="jenjangKelas"></label>
+					  </div>					  
+					</div> 			        
+					
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">New Student <span class="asterisk">*</span></label>
 			          <div class="col-sm-3">

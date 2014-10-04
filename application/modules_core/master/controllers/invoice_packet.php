@@ -11,7 +11,8 @@ class Invoice_packet extends Operator_base {
 		$this->load->model('m_packets');	
 		$this->load->model('m_packet_items');
 		$this->load->model('m_items_type');
-
+		$this->load->model('registration/m_extra');
+		
 		// load portal
 		$this->load->helper('text');
 		// page title
@@ -35,7 +36,8 @@ class Invoice_packet extends Operator_base {
 		$data['user']	= $this->user;
 
 		$data['message'] = $this->session->flashdata('message');
-
+		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
+		
 		$data['rs_packet'] = $this->m_packets->get_all_packet();
 		$data['rs_unit'] = $this->m_units->get_all_unit();				
 		$data['layout'] = "master/invoice_packet/list";
@@ -84,6 +86,8 @@ class Invoice_packet extends Operator_base {
 		$data['user'] = $this->user;
 		$data['result'] = $this->m_packets->get_packet_by_id($id);
 		$data['rs_unit'] = $this->m_units->get_all_unit();	
+		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
+		
 		// load template
 		$data['message']= $this->session->flashdata('message');
 		$data['title']  = "Edit Packet";

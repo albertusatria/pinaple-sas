@@ -23,7 +23,62 @@ jQuery("#sasPanel").validate({
     },
 	success: function(element) {
 	  jQuery(element).closest('.form-group').removeClass('has-error').css('margin-bottom', '-20px');
-	}    
+	}    	
+});
+
+jQuery(document).ready(function(){
+	
+	//Get All Unit & Jenjang
+	jQuery('#jenjangSekolah').live('click',function(){
+    	var modelMakeJsonList = {"modelMakeTable" : 
+        [
+            {"modelMakeID" : "0","modelMake" : "Choose School Units"},        
+            <?php $no = 1; foreach ($ls_unit as $unit): ?>
+                {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->name ?>"},
+            <?php $no++; endforeach ; ?>
+        ]};
+        
+		var modelTypeJsonList = {
+	
+	    <?php $no = 1; foreach ($ls_unit as $unit): ?>
+	
+	      "<?php echo $unit->name ?>" :
+	        [
+	            <?php for ($i = 1; $i <= $unit->stage; $i++) : ?>
+	                {"modelTypeID" : "<?php echo $unit->id ?>","modelType" : "<?php echo $i ?>"}
+	              <?php if ($i + 1 <= $unit->stage) : ?>
+	              ,
+	              <?php endif; ?>
+	            <?php endfor; ?>
+	        ],
+	    <?php $no++; endforeach ; ?>		
+			};
+
+	
+		//Now that the doc is fully ready - populate the lists   
+		//Next comes the make
+	      var ModelListItems= "";
+	      for (var i = 0; i < modelMakeJsonList.modelMakeTable.length; i++){
+	        ModelListItems+= "<option value='" + modelMakeJsonList.modelMakeTable[i].modelMakeID + "'>" + modelMakeJsonList.modelMakeTable[i].modelMake + "</option>";
+	      }
+	      $("#jenjangSekolah").html(ModelListItems);
+	    
+	    var updateSelectSchoolBox = function(make) {
+	        console.log('updating with',make);
+	        var listItems= "";
+	        for (var i = 0; i < modelTypeJsonList[make].length; i++){
+	            listItems+= "<option value='" + modelTypeJsonList[make][i].modelTypeID + "'>"
+	            + modelTypeJsonList[make][i].modelType + "</option>";
+	        }
+	        $("select#jenjangKelas").html(listItems);
+	    }
+	   
+	    $("select#jenjangSekolah").on('change',function(){
+	        var selectedMake = $('#jenjangSekolah option:selected').text();
+	        updateSelectSchoolBox(selectedMake);
+	    });  
+	});  		
+     //Get All Unit & Jenjang	
 });
 </script>
 <script type="text/javascript" language="javascript">
