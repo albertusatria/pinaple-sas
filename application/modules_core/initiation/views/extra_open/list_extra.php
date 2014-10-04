@@ -50,7 +50,8 @@
                              <a href="<?php echo base_url(); ?>initiation/extra_open/edit/<?php echo $unit->id; ?>/<?php echo $extra->id; ?>">
                               <i class="fa fa-pencil"></i></a>
                               &nbsp;&nbsp;
-                             <a href="<?php echo base_url(); ?>initiation/extra_open/delete/<?php echo $unit->id; ?>/<?php echo $extra->id; ?>">
+                             <a href="<?php echo base_url(); ?>initiation/extra_open/delete/<?php echo $unit->id; ?>/<?php echo $extra->id; ?>"
+                              onsubmit="return confirm('Do you want to delete the following data? All of students who enrolled will be remove as well')">
                               <i class="fa fa-trash-o"></i></a>                                            
                           </td>
                       </tr>
