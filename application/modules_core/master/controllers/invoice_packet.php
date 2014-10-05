@@ -73,7 +73,11 @@ class Invoice_packet extends Operator_base {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'unit_id'			=> $this->input->post('unit_id'),
+				'for_new_student'	=> $this->input->post('for_new_student'),
+				'stage'	=> $this->input->post('stage')
+
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/invoice_packet/');
@@ -111,7 +115,10 @@ class Invoice_packet extends Operator_base {
 			$data = array(
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'unit_id'			=> $this->input->post('unit_id'),
+				'for_new_student'	=> $this->input->post('for_new_student'),
+				'stage'			=> $this->input->post('stage')
 			);
 		
 			$this->m_packets->edit_packet($data);
@@ -123,7 +130,10 @@ class Invoice_packet extends Operator_base {
 				'message'		=> str_replace("\n", "", validation_errors()),
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'unit_id'			=> $this->input->post('unit_id'),
+				'for_new_student'	=> $this->input->post('for_new_student'),
+				'stage'			=> $this->input->post('stage')
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/invoice_packet/edit/'.$this->input->post('id'));
