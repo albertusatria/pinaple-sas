@@ -56,12 +56,16 @@ class Re_registration extends Operator_base {
 
 	public function get_list_paket()
 	{
+
+		$data['year']	= $this->m_school_year->get_active_year();
+		$sy_id = $data['year']->id;
+
 		foreach ($_POST as $value) {
 			$unit_id = $value['unit_id'];
 			$current = $value['current'];
 			$start = $value['start'];
 		}
-		$data = $this->m_registration->get_list_paket($unit_id,$current,$start);
+		$data = $this->m_registration->get_list_paket($unit_id,$current,$start,$sy_id);
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}
