@@ -29,7 +29,7 @@ class m_school_year extends CI_Model {
         }
     }
 
-    function get_active_status($id){
+    function get_active_status($id=''){
        $sql = "SELECT *
                 FROM school_year
                 WHERE status = 'aktif' AND id<>'$id'";
