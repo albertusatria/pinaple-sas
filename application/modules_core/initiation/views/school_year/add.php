@@ -4,8 +4,8 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>setting/tahun_ajaran">School Year Management</a></li>
-          <li class="active">School Year Setup</li>
+          <li><a href="<?php echo base_url();?>setting/tahun_ajaran">School Year</a></li>
+          <li class="active">School Year Add</li>
         </ol>
       </div>
     </div>

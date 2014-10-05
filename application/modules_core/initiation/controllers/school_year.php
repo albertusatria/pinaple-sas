@@ -58,7 +58,7 @@ class School_year extends Operator_base {
 		//$this->form_validation->set_rules('user_id', '', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('name', 'School Year Name', 'required|trim|xss_clean|callback_check_school_year');
 		$this->form_validation->set_rules('start', 'Start', 'required|trim|xss_clean|max_length[10]');
-		$this->form_validation->set_rules('end', 'End', 'required|trim|xss_clean|max_length[10]|callback_check_less['.$this->input->post('mulai').']');
+		$this->form_validation->set_rules('end', 'End', 'required|trim|xss_clean|max_length[10]|callback_check_less['.$this->input->post('start').']');
 		$this->form_validation->set_rules('status', 'Status', 'required|trim|xss_clean|callback_check_status');
 
 		if ($this->form_validation->run() == TRUE) {

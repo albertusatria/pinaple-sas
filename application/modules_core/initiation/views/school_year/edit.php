@@ -4,8 +4,8 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>setting/tahun_ajaran">School Year Management</a></li>
-          <li class="active">School Year Setup</li>
+          <li><a href="<?php echo base_url();?>setting/tahun_ajaran">School Year</a></li>
+          <li class="active">School Year Edit</li>
         </ol>
       </div>
     </div>
@@ -64,8 +64,8 @@
               <div class="col-sm-2">
                 <select class="form-control input-sm mb15" name="status" required>
                     <option value="">-- SELECT --</option>
-                    <option value="AKTIF" <?php if($result->status=="aktif"){ echo "selected='true'";}?> >AKTIF</option>
-                    <option value="TIDAK AKTIF" <?php if($result->status=="tidak aktif"){ echo "selected='true'";}?>>TIDAK AKTIF</option>
+                    <option value="aktif" <?php if($result->status=="aktif"){ echo "selected='true'";}?> >AKTIF</option>
+                    <option value="tidak aktif" <?php if($result->status=="tidak aktif"){ echo "selected='true'";}?>>TIDAK AKTIF</option>
                 </select>
               </div>
             </div>
