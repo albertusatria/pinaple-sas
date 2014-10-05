@@ -4,7 +4,9 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Master Data&nbsp;&nbsp;/&nbsp;&nbsp;Items Type</li>
+        <li>Master Data</li>
+        <li><a href="<?php echo base_url();?>master/items_type">Items Type Manage</a></li>
+        <li class="active">Items Type Setup</li>
       </ol>
     </div>
 </div>

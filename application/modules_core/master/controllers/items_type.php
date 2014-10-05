@@ -58,7 +58,7 @@ class Items_type extends Operator_base {
 		if ($this->form_validation->run() == TRUE) {
 			// insert
 			$data = array(
-				'id'			=> $this->m_items_type->get_total_rows(),
+				//'id'			=> $this->m_items_type->get_total_rows(),
 				'name'			=> $this->input->post('name'),
 				'description'	=> $this->input->post('description')
 			);
@@ -70,7 +70,7 @@ class Items_type extends Operator_base {
 		} else {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
-				'id'			=> $this->m_items_type->get_total_rows(),
+				//'id'			=> $this->m_items_type->get_total_rows(),
 				'name'			=> $this->input->post('name'),
 				'description'	=> $this->input->post('description')
 			);
