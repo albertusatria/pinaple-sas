@@ -4,7 +4,8 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Payment Configuration&nbsp;&nbsp;/&nbsp;&nbsp;Packet</li>
+        <li>Payment Configuration</li>
+      	<li class="active">Invoice Packet</li>
       </ol>
     </div>
 </div>
@@ -68,7 +69,7 @@
 				                <td class="table-action-hide">
 				                  <a href="<?php echo base_url(); ?>master/invoice_packet/edit/<?php echo $result->id; ?>"><i class="fa fa-pencil"></i></a>
 				                  <a href="<?php echo base_url(); ?>master/invoice_packet/list_items/<?php echo $result->id; ?>"><i class="fa fa-file"></i></a>
-				                  <a href="#" class="delete-row" onclick="hapus(<?php echo $result->id ?>)">
+				                  <a href="#" class="delete-row" onclick="hapus('<?php echo $result->id ?>','<?php echo $result->name ?>')">
 				                  	<i class="fa fa-trash-o"></i>
 				                  </a>
 				                </td>

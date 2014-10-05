@@ -5,8 +5,8 @@
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
           <li>Master</li>
-          <li><a href="<?php echo base_url();?>master/employees">Employees Manage</a></li>
-          <li class="active">Employee Setup</li>
+          <li><a href="<?php echo base_url();?>master/employees">Employees</a></li>
+          <li class="active">Employee Add</li>
         </ol>
       </div>
     </div>

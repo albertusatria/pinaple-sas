@@ -5,7 +5,7 @@
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
         <li>Master Data</li>
-        <li class="active">Items Type Manage</li>
+        <li class="active">Items Type</li>
       </ol>
     </div>
 </div>
