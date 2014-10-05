@@ -4,7 +4,8 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Master Data&nbsp;&nbsp;/&nbsp;&nbsp;Items Type</li>
+        <li>Master Data</li>
+        <li class="active">Items Type Manage</li>
       </ol>
     </div>
 </div>
@@ -84,7 +85,7 @@
 			        </div>
 			        <h4 class="panel-title">New Items Type Form</h4>
 			        <p>Please provide the name and description for new item type.</p>
-					<p style="color:#428bca;">(ID is not the same as Number on left side.)</p>		      			        
+					<!--<p style="color:#428bca;">(ID is not the same as Number on left side.)</p>-->      			        
 			      </div>
 			      <div class="panel-body">
 					<?php if ($message != null ) : ?>
@@ -104,14 +105,14 @@
 						</div>					
 						<?php endif ; ?>
 					<?php endif;?>
-
+<!--
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">ID <span class="asterisk">*</span></label>
 			          <div class="col-sm-9">
 			            <input type="text" name="id" value="<?php echo $rs_num_rows;?>"class="form-control" placeholder="Type Items Type ID's..." required disabled/>
 			          </div>
 			        </div>
-			        
+-->		        
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">Name <span class="asterisk">*</span></label>
 			          <div class="col-sm-9">

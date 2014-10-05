@@ -4,6 +4,7 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
+          <li>Master</li>
           <li class="active">Employees Management </li>
         </ol>
       </div>

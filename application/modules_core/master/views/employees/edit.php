@@ -4,7 +4,8 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>master/employees">Employee Manage</a></li>
+          <li>Master</li>
+          <li><a href="<?php echo base_url();?>master/employees">Employees Manage</a></li>
           <li class="active">Employee Setup</li>
         </ol>
       </div>
@@ -98,14 +99,27 @@
              <div class="form-group">
               <label class="col-sm-3 control-label">Postal Code</label>
               <div class="col-sm-3">
-                <input name="pob" type="postal_code" class="form-control" maxlength="30" value="<?php echo  $result->postal_code;?>"/>
+                <input name="postal_code" type="postal_code" class="form-control" maxlength="30" value="<?php echo  $result->postal_code;?>"/>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Religion</label>
               <div class="col-sm-2">
-                <input name="religion" type="text" class="form-control" maxlength="15" value="<?php echo  $result->religion;?>"/>
+                <select class="form-control input-sm mb15" name="religion">
+                  <option value="">-- SELECT --</option>
+                  <option value="Budha" <?php if($result->religion=="Budha"){echo "selected='selected'";}?>>Budha</option>
+                  <option value="Hindhu" <?php if($result->religion=="Hindhu"){echo "selected='selected'";}?>>Hindhu</option>
+                  <option value="Islam" <?php if($result->religion=="Islam"){echo "selected='selected'";}?>>Islam</option>
+                  <option value="Katolik" <?php if($result->religion=="Katolik"){echo "selected='selected'";}?>>Katolik</option>
+                  <option value="Kong Hu Chu" <?php if($result->religion=="Kong Hu Chu"){echo "selected='selected'";}?>>Kong Hu Chu</option>
+                  <option value="Kristen" <?php if($result->religion=="Kristen"){echo "selected='selected'";}?>>Kristen</option>
+                  <!--
+                    <?php foreach ($rs_class as $data) : ?>
+                        <option value="<?php echo $data->id; ?>"><?php echo $data->class; ?></option>
+                    <?php endforeach ; ?>
+                  -->
+                </select>
               </div>
             </div>
 
@@ -159,7 +173,24 @@
               <label class="col-sm-3 control-label">Class</label>
               <div class="col-sm-2">
               <select class="form-control input-sm mb15" name="class">
-                 <option value="">-- SELECT --</option>
+                  <option value="">-- SELECT --</option>
+                   <option value="IA" <?php if($result->class=="IA"){echo "selected='selected'";}?>>IA</option>
+                  <option value="IB" <?php if($result->class=="IB"){echo "selected='selected'";}?>>IB</option>
+                  <option value="IC" <?php if($result->class=="IC"){echo "selected='selected'";}?>>IC</option>
+                  <option value="ID" <?php if($result->class=="ID"){echo "selected='selected'";}?>>ID</option>
+                  <option value="IIA" <?php if($result->class=="IIA"){echo "selected='selected'";}?>>IIA</option>
+                  <option value="IIB" <?php if($result->class=="IIB"){echo "selected='selected'";}?>>IIB</option>
+                  <option value="IIC" <?php if($result->class=="IIC"){echo "selected='selected'";}?>>IIC</option>
+                  <option value="IID" <?php if($result->class=="IID"){echo "selected='selected'";}?>>IID</option>
+                  <option value="IIIA" <?php if($result->class=="IIIA"){echo "selected='selected'";}?>>IIIA</option>
+                  <option value="IIIB" <?php if($result->class=="IIIB"){echo "selected='selected'";}?>>IIIB</option>
+                  <option value="IIIC" <?php if($result->class=="IIIC"){echo "selected='selected'";}?>>IIIC</option>
+                  <option value="IIID" <?php if($result->class=="IIID"){echo "selected='selected'";}?>>IIID</option>
+                  <option value="IVA" <?php if($result->class=="IVA"){echo "selected='selected'";}?>>IVA</option>
+                  <option value="IVB" <?php if($result->class=="IVB"){echo "selected='selected'";}?>>IVB</option>
+                  <option value="IVC" <?php if($result->class=="IVC"){echo "selected='selected'";}?>>IVC</option>
+                  <option value="IVD" <?php if($result->class=="IVD"){echo "selected='selected'";}?>>IVD</option>
+                  <option value="IVE" <?php if($result->class=="IVE"){echo "selected='selected'";}?>>IVE</option>
                   <!--
                     <?php foreach ($rs_class as $data) : ?>
                         <option value="<?php echo $data->id; ?>"><?php echo $data->class; ?></option>

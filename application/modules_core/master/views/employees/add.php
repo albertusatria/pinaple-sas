@@ -4,7 +4,8 @@
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>setting/unit">Employee Manage</a></li>
+          <li>Master</li>
+          <li><a href="<?php echo base_url();?>master/employees">Employees Manage</a></li>
           <li class="active">Employee Setup</li>
         </ol>
       </div>
@@ -104,7 +105,20 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Religion</label>
               <div class="col-sm-2">
-                <input name="religion" type="text" class="form-control" maxlength="15" value="<?php echo $this->session->flashdata('religion');?>"/>
+              <select class="form-control input-sm mb15" name="religion">
+                  <option value="">-- SELECT --</option>
+                  <option value="Budha" <?php if($this->session->flashdata('religion')=="Budha"){echo "selected='selected'";}?>>Budha</option>
+                  <option value="Hindhu" <?php if($this->session->flashdata('religion')=="Hindhu"){echo "selected='selected'";}?>>Hindhu</option>
+                  <option value="Islam" <?php if($this->session->flashdata('religion')=="Islam"){echo "selected='selected'";}?>>Islam</option>
+                  <option value="Katolik" <?php if($this->session->flashdata('religion')=="Katolik"){echo "selected='selected'";}?>>Katolik</option>
+                  <option value="Kong Hu Chu" <?php if($this->session->flashdata('religion')=="Kong Hu Chu"){echo "selected='selected'";}?>>Kong Hu Chu</option>
+                  <option value="Kristen" <?php if($this->session->flashdata('religion')=="Kristen"){echo "selected='selected'";}?>>Kristen</option>
+                  <!--
+                    <?php foreach ($rs_class as $data) : ?>
+                        <option value="<?php echo $data->id; ?>"><?php echo $data->class; ?></option>
+                    <?php endforeach ; ?>
+                  -->
+                </select>
               </div>
             </div>
 
@@ -158,7 +172,24 @@
               <label class="col-sm-3 control-label">Class</label>
               <div class="col-sm-2">
               <select class="form-control input-sm mb15" name="class">
-                 <option value="">-- SELECT --</option>
+                  <option value="">-- SELECT --</option>
+                  <option value="IA" <?php if($this->session->flashdata('class')=="IA"){echo "selected='selected'";}?>>IA</option>
+                  <option value="IB" <?php if($this->session->flashdata('class')=="IB"){echo "selected='selected'";}?>>IB</option>
+                  <option value="IC" <?php if($this->session->flashdata('class')=="IC"){echo "selected='selected'";}?>>IC</option>
+                  <option value="ID" <?php if($this->session->flashdata('class')=="ID"){echo "selected='selected'";}?>>ID</option>
+                  <option value="IIA" <?php if($this->session->flashdata('class')=="IIA"){echo "selected='selected'";}?>>IIA</option>
+                  <option value="IIB" <?php if($this->session->flashdata('class')=="IIB"){echo "selected='selected'";}?>>IIB</option>
+                  <option value="IIC" <?php if($this->session->flashdata('class')=="IIC"){echo "selected='selected'";}?>>IIC</option>
+                  <option value="IID" <?php if($this->session->flashdata('class')=="IID"){echo "selected='selected'";}?>>IID</option>
+                  <option value="IIIA" <?php if($this->session->flashdata('class')=="IIIA"){echo "selected='selected'";}?>>IIIA</option>
+                  <option value="IIIB" <?php if($this->session->flashdata('class')=="IIIB"){echo "selected='selected'";}?>>IIIB</option>
+                  <option value="IIIC" <?php if($this->session->flashdata('class')=="IIIC"){echo "selected='selected'";}?>>IIIC</option>
+                  <option value="IIID" <?php if($this->session->flashdata('class')=="IIID"){echo "selected='selected'";}?>>IIID</option>
+                  <option value="IVA" <?php if($this->session->flashdata('class')=="IVA"){echo "selected='selected'";}?>>IVA</option>
+                  <option value="IVB" <?php if($this->session->flashdata('class')=="IVB"){echo "selected='selected'";}?>>IVB</option>
+                  <option value="IVC" <?php if($this->session->flashdata('class')=="IVC"){echo "selected='selected'";}?>>IVC</option>
+                  <option value="IVD" <?php if($this->session->flashdata('class')=="IVD"){echo "selected='selected'";}?>>IVD</option>
+                  <option value="IVE" <?php if($this->session->flashdata('class')=="IVE"){echo "selected='selected'";}?>>IVE</option>
                   <!--
                     <?php foreach ($rs_class as $data) : ?>
                         <option value="<?php echo $data->id; ?>"><?php echo $data->class; ?></option>
