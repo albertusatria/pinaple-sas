@@ -59,7 +59,7 @@ class Invoice_initiation extends Operator_base {
 		$this->check_auth('C');
 
 		$this->form_validation->set_rules('name', 'Packet Name', 'required|trim|xss_clean|callback_check_duplicate_packet');
-		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
+		//$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
 
@@ -147,7 +147,7 @@ class Invoice_initiation extends Operator_base {
 	public function edit_process() {
 		// form validation
 		$this->form_validation->set_rules('name', 'Packet Name', 'required|trim|xss_clean|callback_check_duplicate_packet_ex_self');
-		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
+		//$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
 			// insert
@@ -193,7 +193,7 @@ class Invoice_initiation extends Operator_base {
 	
 	public function check_duplicate_packet($packet_name)
 	{
-		$check=$this->m_packets->get_check_duplicate_packet($packet_name);
+		$check=$this->m_packets_initiation->get_check_duplicate_packet($packet_name);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_packet', 'Found duplicated for '.$packet_name.'! Please review your input.');
 			return false;       
@@ -206,7 +206,7 @@ class Invoice_initiation extends Operator_base {
 	public function check_duplicate_packet_ex_self($packet_name)
 	{
 		$id=$this->input->post('id');
-		$check=$this->m_packets->get_check_duplicate_packet_ex_self($packet_name,$id);
+		$check=$this->m_packets_initiation->get_check_duplicate_packet_ex_self($packet_name,$id);
 	    if (!empty($check)){
 			$this->form_validation->set_message('check_duplicate_packet_ex_self', 'Found duplicated for '.$packet_name.'! Please review your input.');
 			return false;       

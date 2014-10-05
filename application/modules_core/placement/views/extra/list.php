@@ -4,6 +4,7 @@
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
+      <li>Student Placement</li>
       <li class="active">Extras Placement for 1st Semester </li>
     </ol>
   </div>

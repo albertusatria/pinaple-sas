@@ -4,8 +4,9 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li><a href="<?php echo base_url();?>master/invoice_packet" >Invoice Packet</a></li>
-        <li class="active">Packet</li>
+        <li>Payment Configuration</li>
+        <li><a href="<?php echo base_url();?>master/invoice_initiation" >Invoice Initiation</a></li>
+        <li class="active">Invoice Initiation Edit</li>
       </ol>
     </div>
 </div>
@@ -74,9 +75,9 @@
           </div>
 
 	        <div class="form-group">
-	          <label class="col-sm-3 control-label">Description <span class="asterisk">*</span></label>
+	          <label class="col-sm-3 control-label">Description </label>
 	          <div class="col-sm-9">
-	            <textarea rows="5" name="description" class="form-control" placeholder="Type Items Type description..." required><?php echo $result->description?></textarea>
+	            <textarea rows="5" name="description" class="form-control" placeholder="Type Items Type description..."><?php echo $result->description?></textarea>
 	          </div>
 	        </div>          
         </div><!-- panel-body -->
