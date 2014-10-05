@@ -4,8 +4,9 @@
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-      <li><a href="<?php echo base_url();?>placement/extras_first">Unit List</a></li>
-      <li><a href="<?php echo base_url();?>placement/extras_first/list_extra<?php echo $result->unit_id ?>">Extra List</a></li>
+      <li>Student Placement</li>
+      <li><a href="<?php echo base_url();?>placement/extras_first">Extra Placement</a></li>
+      <li><a href="<?php echo base_url();?>placement/extras_first/list_extra/<?php echo $unit->id?>">Menu <?php echo $unit->name?></a></li>
       <li><a href="<?php echo base_url();?>placement/extras_first/placement/<?php echo $result->id?>">Extra <?php echo $result->name?></a></li>
       <li class="active">Add Student</li>
     </ol>

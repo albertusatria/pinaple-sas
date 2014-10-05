@@ -4,8 +4,9 @@
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
+      <li>Student Placement</li>
       <li><a href="<?php echo base_url();?>placement/classes">Class Placement</a></li>
-      <li class="active">Student Placement <?php echo $unit->name?></li>
+      <li class="active">Menu <?php echo $unit->name?></li>
     </ol>
   </div>
 </div>

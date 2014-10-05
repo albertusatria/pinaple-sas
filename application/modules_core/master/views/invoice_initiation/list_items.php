@@ -4,8 +4,9 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li><a href="<?php echo base_url();?>master/invoice_packet" >Invoice Packet</a></li>
-        <li class="active">Packet Items</li>
+        <li>Payment Configuration</li>
+        <li><a href="<?php echo base_url();?>master/invoice_initiation" >Invoice Initiation</a></li>
+        <li class="active">Packet Items Setup</li>
       </ol>
     </div>
 </div>
