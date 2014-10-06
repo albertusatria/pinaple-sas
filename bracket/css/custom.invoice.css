@@ -1,0 +1,90 @@
+/* CSS Invoice */
+#resultsInvoice_length, #resultsInvoice_info, #resultsInvoice_paginate,
+#resultsInvoice_filter,  #resultsInvoice thead, #resultsInvoice .sorting_asc, #resultsInvoice > tbody > tr > td:nth-child(2){
+	display: none;
+}
+#resultsInvoice_filter{
+	float: left;
+}
+#resultsInvoice_filter input{
+	width: 265px;
+}
+.result-panel .panel-body{
+	padding: 5px;
+}
+#resultsInvoice > tbody > tr:nth-child(1) > td:nth-child(1){
+	border-top: 0;
+}
+#resultsInvoice > tbody > tr > td{
+	padding: 10px 20px;
+}
+#resultsInvoice td h4{
+	float: left;
+}
+#resultsInvoice td .add{
+	float: right;
+	color: #ffae00;
+}
+
+.bills-info, .details-info{
+	clear: both;
+}
+.bills-info .panel{
+	box-shadow: none !important;
+}
+.bills-info .panel-collapse.in .panel-body{
+	border-bottom: none;	
+}
+.bills-info .details-link{
+	color: #6ea8ea;
+}
+.bills-info .details-link:hover{
+	text-decoration: none;
+}
+.bills-info .details-info{
+	border-top: 1px solid #f0f0f0;
+}
+
+.list-details-items{
+	width: 100%;
+}
+.list-details-items dt, .list-details-items dd{
+	margin: 5px 0;
+	float: left;
+}
+.list-details-items dt{
+	width: 50%;
+	text-align: left;
+}
+.list-details-items dd{
+	text-align: right;
+}
+.list-details-items dd.price{
+	width: 40%;
+}
+.list-details-items dd.add-to{
+	margin-left: 10px;
+	width: 5%;
+}
+
+#invoiceTable > tbody > tr > td:nth-child(1){
+	width: 300px;
+}
+#invoiceTable > tbody > tr > td:nth-child(3),
+#invoiceTable > tbody > tr > td:nth-child(4){
+	width: 180px;
+}
+#invoiceTable dl{
+	width: 100%;
+	margin: 10px;
+}
+#invoiceTable dl dd, #invoiceTable dl dt{
+	width: 50%;
+	float: left;
+}
+#invoiceTable dl dt{
+	text-align: left;
+}
+#invoiceTable dl dd{
+	text-align: right;
+}
