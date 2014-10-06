@@ -161,7 +161,7 @@ class Classes extends Operator_base {
 
 	// page title
 	public function page_title() {
-		$data['page_title'] = 'Penempatan Kelas';
+		$data['page_title'] = 'Class Placement';
 		$this->session->set_userdata($data);
 	}
 }

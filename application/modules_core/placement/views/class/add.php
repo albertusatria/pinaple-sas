@@ -21,7 +21,7 @@
         <a href="#" class="panel-close">&times;</a>
         <a href="#" class="minimize">&minus;</a>
       </div>
-      <h4 class="panel-title">Add Student of Class <?php echo $result->name?> </h4>
+      <h4 class="panel-title">Enroll Student to Class "<?php echo $result->name?>" </h4>
       <p>School Year: <?php echo $year->name?></p><br><br>
     </div>
     <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>placement/classes/add_process/<?php echo $result->id?>">

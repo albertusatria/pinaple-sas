@@ -23,9 +23,6 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Class Open Management <?php echo $unit->name ?> for School Year : <?php echo $year->name?></h3>
-      <p>
-    Add & Delete Class Open Management<br><br>
-      </p>
     </div>
     <div class="panel-body">
       <div class="table-responsive">

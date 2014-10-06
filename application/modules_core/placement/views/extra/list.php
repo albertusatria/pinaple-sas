@@ -1,5 +1,5 @@
 <div class="pageheader">
-  <h2><i class="fa fa-group"></i> Extras Placement </h2>
+  <h2><i class="fa fa-group"></i> 1st Extras Placement For School Year: <?php echo $year->name?></h2>
   <div class="breadcrumb-wrapper">
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
