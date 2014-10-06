@@ -2,17 +2,13 @@
 $val = '';
 $this->load->model('placement/m_class');
 ?>
-
-
-
     <div class="pageheader">
-      <h2><i class="fa fa-gavel"></i>Students Grades</h2>
+      <h2><i class="fa fa-gavel"></i>Students Evaluation</h2>
       <div class="breadcrumb-wrapper">
         <span class="label">You are here:</span>
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-          <li><a href="<?php echo base_url();?>setting/students">Students</a></li>
-          <li class="active">Students Grades</li>
+          <li class="active">Students Evaluation</li>
         </ol>
       </div>
     </div>
@@ -32,7 +28,7 @@ $this->load->model('placement/m_class');
           <div class="panel-btns">
             <a href="#" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">Filter</h4>
+          <h4 class="panel-title">Students Evaluation</h4>
           <p><span class="asterisk">*</span> required</p>
         </div><!-- panel-heading -->
         <div class="panel-body">
