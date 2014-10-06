@@ -164,7 +164,8 @@
               <input type="text" name="siswa[siswa_tempat_lahir]" placeholder="Place of Birth, ex. : Yogyakarta, ..." class="form-control" required/>
             </div>
             <div class="col-sm-3">
-              <input type="text" placeholder="Date of Birth dd/mm/yyyy" name="siswa[siswa_tgl_lahir]" id="tgl_lahir" class="form-control" required>
+              <input type="text" placeholder="Date of Birth: dd-mm-yyyy" name="siswa[siswa_tgl_lahir_show]" id="tgl_lahir" class="form-control" required>
+              <input type="hidden" name="siswa[siswa_tgl_lahir]" id="hidden_dob">
             </div>
           </div>           
                       
@@ -272,7 +273,8 @@
                 <input type="text" name="siswa[tempat_lahir_ayah]" placeholder="Place of Birth, ex. : Yogyakarta, ..." class="form-control"/>
               </div>
               <div class="col-sm-3">
-                <input type="text" placeholder="Date of Birth dd/mm/yyyy" name="siswa[tgl_lahir_ayah]" id="tgl_lahir_ayah" class="form-control">
+                <input type="text" placeholder="Date of Birth: dd-mm-yyyy" name="siswa[tgl_lahir_ayah_show]" id="tgl_lahir_ayah" class="form-control">
+                <input type="hidden" name="siswa[tgl_lahir_ayah]" id="hidden_dob_ayah">
               </div>
             </div>                        
 
@@ -340,7 +342,8 @@
                 <input type="text" name="siswa[tempat_lahir_ibu]" placeholder="Place of Birth, ex. : Yogyakarta, ..." class="form-control"/>
               </div>
               <div class="col-sm-3">
-                <input type="text" placeholder="Date of Birth dd/mm/yyyy" name="siswa[tgl_lahir_ibu]" id="tgl_lahir_ayah" class="form-control">
+                <input type="text" placeholder="Date of Birth: dd-mm-yyyy" name="siswa[tgl_lahir_ibu_show]" id="tgl_lahir_ibu" class="form-control">
+                <input type="hidden" name="siswa[tgl_lahir_ibu]" id="hidden_dob_ibu">
               </div>
             </div>                        
 

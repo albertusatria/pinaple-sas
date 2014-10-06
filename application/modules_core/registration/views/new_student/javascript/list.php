@@ -59,6 +59,25 @@ jQuery(document).ready(function() {
 	jQuery("#penghasilan").mask("999.999.999.999");	  
 
 	//End General Setting
+
+	jQuery('#tgl_lahir').datepicker({ 
+      dateFormat: 'dd-mm-yy',
+      altField: '#hidden_dob' ,
+      altFormat: 'yy-mm-dd'
+    });
+
+  	jQuery('#tgl_lahir_ayah').datepicker({ 
+      dateFormat: 'dd-mm-yy',
+      altField: '#hidden_dob_ayah' ,
+      altFormat: 'yy-mm-dd'
+    });
+
+    jQuery('#tgl_lahir_ibu').datepicker({ 
+      dateFormat: 'dd-mm-yy',
+      altField: '#hidden_dob_ibu' ,
+      altFormat: 'yy-mm-dd'
+    });
+
 });
 </script>
 
