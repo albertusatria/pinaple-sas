@@ -1,5 +1,5 @@
 <div class="pageheader">
-  <h2><i class="fa fa-group"></i>Extra Placement</h2>
+  <h2><i class="fa fa-group"></i>Extra Placement For School Year: <?php echo $year->name?></h2>
   <div class="breadcrumb-wrapper">
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
@@ -26,7 +26,7 @@
       <div class="panel-btns">
         <a href="#" class="minimize">&minus;</a>
       </div>
-      <h4 class="panel-title">List of Students enroll in Extrakurikuler "<?php echo $result->name?>" </h4>
+      <h4 class="panel-title">List of Students enrolled in Extrakurikuler: "<?php echo $result->name?>" </h4>
       <p>School Year: <?php echo $year->name?><br>
         First Semester
       </p><br><br>

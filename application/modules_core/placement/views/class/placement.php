@@ -26,9 +26,10 @@
       <div class="panel-btns">
         <a href="#" class="minimize">&minus;</a>
       </div>
-      <h4 class="panel-title">List of Class Student <?php echo $result->name?> </h4>
+      <h4 class="panel-title">List of Students enrolled in class: "<?php echo $result->name?>" </h4>
       <p>School Year: <?php echo $year->name?></p><br><br>
-      <a href="<?php echo base_url(); ?>placement/classes/add_student/<?php echo $result->id; ?>" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add Student</a>
+      <a href="<?php echo base_url(); ?>placement/classes/add_student/<?php echo $result->id; ?>" 
+      data-title="Add Data" class="btn btn-danger tip"><i class="fa fa-plus"></i> Add Student</a>
     </div><!-- panel-heading -->
     <form id="daftarUlang" class="form-horizontal">
 
@@ -63,8 +64,7 @@
       <div class="clearfix mb30"></div>
     </div><!-- panel-body -->
 <div class="panel-footer">
-      <button id="cariSiswa" class="btn btn-warning">Seacrh</button>
-  </div>
+</div>
 </form>        
   </div><!-- panel -->                      
 </div><!-- contentpanel -->
