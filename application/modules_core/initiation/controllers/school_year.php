@@ -49,6 +49,7 @@ class School_year extends Operator_base {
 		$data['message']= $this->session->flashdata('message');
 		$data['title']  = "School Year Setup PinapleSAS";
 		$data['layout'] = "initiation/school_year/add";
+		$data['javascript'] = "initiation/school_year/javascript/add";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -96,6 +97,7 @@ class School_year extends Operator_base {
 		$data['title']	= "School Year Edit PinapleSAS";
 		$data['message'] = $this->session->flashdata('message');
 		$data['layout'] = "initiation/school_year/edit";
+		$data['javascript'] = "initiation/school_year/javascript/edit";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

@@ -56,7 +56,7 @@
                                                <!-- <a href="<?php echo base_url(); ?>initiation/school_year/list_costs/<?php echo $result->id; ?>">
                                                   <i class="fa fa-file"></i></a> -->
                                                   &nbsp;&nbsp;
-	                                                <i class="fa fa-trash-o" onclick="hapus(<?php echo $result->id ?>,'<?php echo $result->name ?>')"></i>
+	                                                <i class="fa fa-trash-o" onclick="hapus('<?php echo $result->id ?>','<?php echo $result->name ?>')"></i>
 		                                        </td>
 		                                    </tr>
 		                                <?php $no++; endforeach ; ?>
