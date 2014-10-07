@@ -67,6 +67,9 @@
 	width: 5%;
 }
 
+.table-invoice thead > tr > th:nth-child(4){
+	text-align: right;
+}
 #invoiceTable > tbody > tr > td:nth-child(1){
 	width: 300px;
 }

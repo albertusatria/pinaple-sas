@@ -204,7 +204,7 @@
                 <tbody>
                     <tr>
                         <td><strong>TOTAL :</strong></td>
-                        <td class="price">91600</td>
+                        <td class="price"></td>
                     </tr>
                 </tbody>
             </table>
