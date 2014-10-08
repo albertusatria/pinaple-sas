@@ -28,7 +28,6 @@ class M_registration extends CI_Model {
     }
 
     function get_list_siswa($keyword) {
-
         $sql = "SELECT *
                 FROM school_year
                 WHERE status = 'aktif'

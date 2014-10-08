@@ -7,6 +7,7 @@ class Payments extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
+		$this->load->model('m_payments');
 
 		// load portal
 		$this->load->helper('text');
@@ -42,6 +43,35 @@ class Payments extends Operator_base {
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
+	//ajax request
+	public function get_siswa_info()
+	{
+		foreach ($_POST as $value) {
+			$keyword = $value['keyword'];
+		}
+		$data = $this->m_payments->get_list_siswa($keyword);
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+	}
+
+	public function get_siswa_invoice()
+	{
+		foreach ($_POST as $value) {
+			$nis = $value['nis'];
+		}
+		$data = $this->m_payments->get_siswa_invoice($nis);
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+	}
+
+	public function payment_process()
+	{
+		foreach ($_POST as $value => $val) {
+			$data = $this->m_payments->payment_process($val['id'],$val);
+		}
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+	}
 
 	// page title
 	public function page_title() {
