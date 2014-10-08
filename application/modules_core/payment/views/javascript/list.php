@@ -283,8 +283,8 @@ function updateGrandTotal()
 			    if (data.length > 0)
 			    {
 			   		console.log(data);
-			   		console.log("banyaknya data : "+data.length);
-			   		return false;
+			   		// console.log("banyaknya data : "+data.length);
+			   		// return false;
 			   		//tampilkan list siswanya
 
 				   	jQuery('#resultsInvoice tbody tr').remove();
