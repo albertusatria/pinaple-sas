@@ -13,111 +13,75 @@
 
   <?php if ($message != null ) : ?>
   <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <strong>Well done!</strong>   <?php echo $message; ?>
-    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Well done!</strong>   <?php echo $message; ?>
+  </div>
   <?php endif ; ?>
 
  
-  <div class="row">
-  
-	<div class="col-md-4">
+<div class="row">
+  	<div class="col-md-4">
 
-	  <!-- search panel -->
-	  <div class="panel panel-default search-panel">
-	    <div class="panel-heading">
-	      <h5 class="panel-title">Search Invoice by NIS / Student's Name</h5>
-	    </div>
-		<div class="panel-body">
-		  <div class="row row-pad-5">
-			  <div class="form-group">
-				  
-		          <div class="col-lg-8">
-		            <input type="text" name="name" id="keyword" class="form-control" placeholder="Type student's Name or NIS..." required="">
-		          </div>
-		          
-		          <div class="col-lg-4">
-		            <a id="btnCari" class="btn btn-primary btn-block">Search</a>
-		          </div>      
-		                  	
-		    </div>
-		  </div><!-- row -->
+    <!-- search panel -->
+    <div class="panel panel-default search-panel" id="searchPanel">
+    <div class="panel-heading">
+      	<h5 class="panel-title">Search Invoice by NIS / Student's Name</h5>
+    </div>
+	<div class="panel-body">
+	  	<div class="row row-pad-5">
+		  	<div class="form-group">				  
+	          	<div class="col-lg-8">
+	            	<input type="text" name="name" id="keyword" class="form-control" 
+	            	placeholder="Type student's Name or NIS..." required="" value="0496">
+	          	</div>
+	        
+	         	<div class="col-lg-4">
+	        	    <a id="btnCari" class="btn btn-primary btn-block">Search</a>
+	         	 </div>      		                  	
+
+	          	<div class="table-responsive">
+	            	<table class="table" id="resultSiswa">
+	              		<thead>
+							<tr>
+    	                		<th></th>
+	        	            	<th></th>
+							</tr>
+		             	</thead>
+	              		<tbody class="table-striped">
+ 	              			 <tr>
+ 	              			 	<td colspan="2">No result found</td>
+ 	              			 </tr>
+		              </tbody>
+		           </table>
+				 </div><!-- table-responsive -->		  
+
+	    	</div>
+	  	</div><!-- row -->
 		</div><!-- panel-body -->
-	  </div><!-- panel search container-->
-	  <!-- search panel -->
-	  
-	  <!-- result panel -->
-	  <div class="panel panel-default result-panel">
-	    <div class="panel-heading">
+  	</div><!-- panel search container-->
+  
+	<!-- invoice panel -->
+    <div class="panel panel-default result-panel" id="invoicePanel" style="display:none">
+    	<div class="panel-heading">
 			<select id="filter" class="form-control input-lg">
-			    <option value="">Show all</option>
-			    <option value="Billed Invoice">Billed Invoice</option>
-			    <option value="Invoice Accidental">Invoice Accidental</option>
+		    	<option value="">Show all</option>
+		    	<option value="Billed Invoice">Billed Invoice</option>
+		    	<option value="Invoice Accidental">Invoice Accidental</option>
 			</select>	      
-	    </div>
+    	</div>
 		<div class="panel-body">
-		  <div class="row row-pad-5">
-	          <div class="table-responsive">
-	            <table class="table" id="resultsInvoice">
-	              <thead>
-					<tr>
-    	                <th></th>
-	                    <th></th>
-					</tr>
-	              </thead>
-	              <tbody class="table-striped">
-	                 <tr class="odd billed">
-	                    <td class="items">
-	                    	<h4>Invoice #123456</h4>
-							<a href="#" class="add all">
-								<i class="fa fa-plus"></i>
-							</a>
+		  	<div class="row row-pad-5">
+	          	<div class="table-responsive">
+	            	<table class="table" id="resultsInvoice">
+	              		<thead>
+							<tr>
+    	                		<th></th>
+	        	            	<th></th>
+							</tr>
+		             	</thead>
+	              		<tbody class="table-striped">
 
-							
-							<div class="bills-info">
-					          <div class="panel-group">
-					            <div class="panel">
-					            	<h5><span class="price" value="200000">200000</span></h5>
-				                  	<a class="details-link" data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#ID-1">
-				                    	Details
-									</a>
-					              <div id="ID-1" class="details-info panel-collapse collapse">
-					                <div class="panel-body">
-										<dl class="list-details-items">
-											<dt>SPP</dd>
-											<dd class="price" value="500000">500000</dd>
-											<dd class="add-to">
-												<a href="#" class="add">
-													<i class="fa fa-plus"></i>
-												</a>
-											</dd>
-											
-											<dt>Seragam</dd>
-											<dd class="price" value="500000">500000</dd>
-											<dd class="add-to">
-												<a href="#" class="add">
-													<i class="fa fa-plus"></i>
-												</a>
-											</dd>
-											
-											<dt>DPP</dd>
-											<dd class="price" value="1000000">1000000</dd>
-											<dd class="add-to">
-												<a href="#" class="add">
-													<i class="fa fa-plus"></i>
-												</a>
-											</dd>
-										</ul>
-					                </div>
-					              </div>
-					            </div>
-					          </div>																							
-							</div>
-							
-	                    </td>
-	                    <td>Billed Invoice</td>
-	                 </tr>
-	                 <tr class="even accidental">
+<!-- 	                 <tr class="even accidental">
 	                    <td class="items">
 	                    	<h4>Seragam</h4>
 							<a href="#" class="add all">
@@ -132,7 +96,7 @@
 							</div>							          	
 	                    </td>
 	                    <td>Invoice Accidental</td>	                    
-	                 </tr>
+	                 </tr> -->
 	              </tbody>
 	           </table>
 			 </div><!-- table-responsive -->		  
@@ -211,7 +175,7 @@
             
             <div class="text-right btn-invoice">
                 <button class="btn btn-white"><i class="fa fa-print mr5"></i> Print Invoice</button>
-                <button class="btn btn-primary mr5"><i class="fa fa-money mr5"></i> Make A Payment</button>                
+                <button class="btn btn-primary mr5" id="bayarDab"><i class="fa fa-money mr5"></i> Make A Payment</button>                
             </div>
             
             <div class="mb40"></div>
