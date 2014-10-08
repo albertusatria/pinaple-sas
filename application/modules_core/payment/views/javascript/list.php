@@ -36,14 +36,13 @@ jQuery(document).ready(function() {
 	jQuery('#btnCari').on('click',function(){
 		var keyword = jQuery('#keyword').val();
 		searchSiswa(keyword);
-		//pencarian
-		//yang dicari
+
+		return false;
 	});	
 	//init currency format
 	jQuery('.price').autoNumeric('init', {aSign:'Rp', pSign:'p', aSep:'.', aDec:',' });
-	
+	jQuery('.dataTables_filter input').attr("placeholder", "enter seach terms here");
 
-	
 });
 </script>
 
@@ -385,7 +384,9 @@ function updateGrandTotal()
 					    //         '</div>'+
 
 		            }
-
+					
+					jQuery('.price').formatCurrency({region: 'id-ID'});
+					
 					/* Initialise datatables */
 				    var oTable = jQuery('#resultsInvoice').dataTable();
 
@@ -430,7 +431,6 @@ function updateGrandTotal()
 	      });          
 
         });
-
 		return false;
 	});
 
