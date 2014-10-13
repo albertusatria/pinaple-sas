@@ -20,6 +20,13 @@
     </div>
   <?php endif ; ?>
 
+  <?php if ($error != null ) : ?>
+  <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Warning!</strong> <?php echo $error; ?>
+    </div>
+  <?php endif ; ?>
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Manage Class on Unit <?php echo $unit->name ?></h3>

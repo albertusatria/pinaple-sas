@@ -53,6 +53,7 @@ class Class_open extends Operator_base {
 
 		// load error message if any
 		$data['message'] = $this->session->flashdata('message');
+		$data['error'] = $this->session->flashdata('error');
 		// menu
 		$data['menu'] = $this->menu();
 		// user detail
@@ -221,11 +222,16 @@ class Class_open extends Operator_base {
 			redirect('initiation/class_open/');
 		}
 
-		if ($this->m_class_open->delete_class($class_id)) {
-			$data['message'] = "Data has been successfully deleted";
-		} else {
-			$data['message'] = "Cannot delete the data";			
+		if($this->m_class_open->check_class_students_by_ci($class_id)){
+			$data['error'] = "Data has students, can't be delete";
+		}else{
+			if ($this->m_class_open->delete_class($class_id)) {
+				$data['message'] = "Data has been successfully deleted";
+			}else{
+				$data['error'] = "Cannot delete the data";			
+			}
 		}
+
 		$this->session->set_flashdata($data);
 		redirect('initiation/class_open/class_list/' . $unit_id);
 	}
