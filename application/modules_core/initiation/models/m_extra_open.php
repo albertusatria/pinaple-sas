@@ -65,4 +65,12 @@ class M_extra_open extends CI_Model {
     	return false;
     }
 
+     function check_extra_students_by_xi($extra_id){
+        $cek = $this->db->get_where('extra_students',array('extra_id'=>$extra_id))->result();
+        if(count($cek)>0)
+            return true;
+        else
+            return false;
+    }
+
 }

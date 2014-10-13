@@ -61,4 +61,12 @@ class M_class_open extends CI_Model {
     	}
     }
 
+    function check_class_students_by_ci($class_id){
+        $cek = $this->db->get_where('class_students',array('class_id'=>$class_id))->result();
+        if(count($cek)>0)
+            return true;
+        else
+            return false;
+    }
+
 }
