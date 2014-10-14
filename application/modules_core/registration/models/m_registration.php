@@ -52,6 +52,43 @@ class M_registration extends CI_Model {
         }
     }
 
+     function get_list_siswa_next_year($keyword) {
+        $sql = "SELECT *
+                FROM school_year
+                WHERE status = 'aktif'
+                LIMIT 1";
+        $query = $this->db->query($sql);
+        $schoolyear = $query->row();
+
+        $cy = $schoolyear->name;
+        $ecy = explode("-", $cy);
+        $ny1 = $ecy[1];
+        $ny2 = (int) $ecy[1] + 1;
+        $ny = $ny1."-".$ny2;
+
+        $sql = "SELECT *
+                FROM school_year
+                WHERE name = '$ny'
+                LIMIT 1";
+        $query = $this->db->query($sql);
+        $nsy = $query->row();
+        $id = $nsy->id;
+
+        $sql = "SELECT s.*, u.name FROM users_student s 
+                LEFT JOIN units u ON s.unit_id = u.id 
+                WHERE (s.nis LIKE '%$keyword%' OR s.full_name LIKE '%$keyword%') AND s.status = 'SISWA' AND 
+                NOT EXISTS (SELECT *
+                    FROM   re_registration r
+                    WHERE  s.nis = r.nis AND r.school_year_id = '$id')
+                LIMIT 10";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
     function add_re_registration($params) {
         $insert = $this->db->insert('re_registration',$params);        
         if($insert) {

@@ -69,6 +69,30 @@ class m_school_year extends CI_Model {
         }
     }
 
+     function get_year_after_active_year(){
+        $sql = "SELECT *
+                FROM school_year
+                WHERE status = 'aktif' limit 1";
+        $query = $this->db->query($sql)->row();
+        $cy = $query->name;
+        $ecy = explode("-", $cy);
+        $ny1 = $ecy[1];
+        $ny2 = (int) $ecy[1] + 1;
+        $ny = $ny1."-".$ny2;
+
+        $sql = "SELECT *
+                FROM school_year
+                WHERE name = '$ny' limit 1";
+        $next_query = $this->db->query($sql);
+
+        //echo '<pre>'; print_r($next_query->row()); die();
+        if ($next_query->num_rows() > 0) {
+            return $next_query->row();
+        } else {
+            return array();
+        }
+    }
+
     function get_all_periods(){
         return $this->db->get('periods')->result();
     }
