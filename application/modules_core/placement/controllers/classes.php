@@ -107,8 +107,9 @@ class Classes extends Operator_base {
 		$data['unit']	= $this->m_units->get_unit_by_id($u_id);
 		// get tahun ajaran
 		$data['year']	= $this->m_school_year->get_active_year();
+		$sy_id = $data['year']->id;
 		// get assigned student
-		$data['siswas']	= $this->m_class->get_class_student_registered($u_id);
+		$data['siswas']	= $this->m_class->get_class_student_registered($u_id,$sy_id);
 		// load template
 		$data['title']	= "Students Grades PinapleSAS";
 		$data['layout'] = "placement/class/add";

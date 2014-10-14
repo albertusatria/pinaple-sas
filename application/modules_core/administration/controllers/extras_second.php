@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once( APPPATH . 'modules_core/base/controllers/operator_base.php' );
 
-class Extras_first extends Operator_base {
+class Extras_second extends Operator_base {
 	public function __construct() {
 		// call the controller construct
 		parent::__construct();
@@ -9,8 +9,8 @@ class Extras_first extends Operator_base {
 		
 		$this->load->model('initiation/m_school_year');
 		$this->load->model('master/m_units');
-		$this->load->model('m_extra');
-		$this->load->model('m_class');
+		$this->load->model('placement/m_extra');
+		$this->load->model('placement/m_class');
 		// load permission
 		$this->load->helper('text');
 		// page title
@@ -18,8 +18,8 @@ class Extras_first extends Operator_base {
 
 
 		// active page
-		$active['parent_active'] = "students_placement";
-		$active['child_active'] = "extra_placement_first";
+		$active['parent_active'] = "school_administration";
+		$active['child_active'] = "extra_placement_second";
 		$this->session->set_userdata($active);		
 
 	}
@@ -38,8 +38,8 @@ class Extras_first extends Operator_base {
 		$data['year']		= $this->m_school_year->get_active_year();
 		// load template
 		$data['title']	= "Students Placement Setting Pinaple SAS";
-		$data['layout'] = "placement/extra/list";
-		$data['javascript'] = "placement/extra/javascript/list";
+		$data['layout'] = "administration/extra/list";
+		$data['javascript'] = "administration/extra/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
@@ -62,8 +62,8 @@ class Extras_first extends Operator_base {
 		$data['extras'] = $this->m_extra->get_enroll_open_extra_by_u_sy($u_id,$sy_id);
 		// load template
 		$data['title']	= "Students Placement Setting Pinaple SAS";
-		$data['layout'] = "placement/extra/list_extra";
-		$data['javascript'] = "placement/extra/javascript/list_extra";
+		$data['layout'] = "administration/extra/list_extra";
+		$data['javascript'] = "administration/extra/javascript/list_extra";
 		$this->load->view('dashboard/admin/template', $data);
 	}	
 
@@ -85,11 +85,11 @@ class Extras_first extends Operator_base {
 		// get tahun ajaran
 		$data['year']	= $this->m_school_year->get_active_year();
 		// get assigned student
-		$data['siswas']	= $this->m_extra->get_extra_student($id,1);
+		$data['siswas']	= $this->m_extra->get_extra_student($id,2);
 		// load template
 		$data['title']	= "Students Placement Setting Pinaple SAS";
-		$data['layout'] = "placement/extra/placement";
-		$data['javascript'] = "placement/extra/javascript/placement";
+		$data['layout'] = "administration/extra/placement";
+		$data['javascript'] = "administration/extra/javascript/placement";
 		$this->load->view('dashboard/admin/template', $data);
 
 	}
@@ -112,11 +112,11 @@ class Extras_first extends Operator_base {
 		$data['year']	= $this->m_school_year->get_active_year();
 		$sy_id = $data['year']->id;
 		// get assigned student
-		$data['siswas']	= $this->m_extra->get_registered_student_not_enroll_in_this_extra($id,$u_id,$sy_id,1);
+		$data['siswas']	= $this->m_extra->get_registered_student_not_enroll_in_this_extra($id,$u_id,$sy_id,2);
 		// load template
 		$data['title']	= "Students Grades PinapleSAS";
-		$data['layout'] = "placement/extra/add";
-		$data['javascript'] = "placement/extra/javascript/add";
+		$data['layout'] = "administration/extra/add";
+		$data['javascript'] = "administration/extra/javascript/add";
 		$this->load->view('dashboard/admin/template', $data);
 
 	}
@@ -137,7 +137,7 @@ class Extras_first extends Operator_base {
 				$params = array(
 					'nis' 		=> $value['nis'],
 	            	'extra_id' 	=> $value['extra_id'],
-	            	'half_period' 	=> '1',
+	            	'half_period' 	=> '2',
 	            	'status' 	=> "BERJALAN"
 	            	);
 				$this->m_extra->add_extra_student($params);
@@ -149,7 +149,7 @@ class Extras_first extends Operator_base {
 			$data['message'] = "Data successfully added";
 
 			$this->session->set_flashdata($data);
-			redirect('placement/extras_first/placement/'.$id);
+			redirect('administration/extras_first/placement/'.$id);
 	}
 
 	public function delete($id = "",$c_id)
@@ -161,7 +161,7 @@ class Extras_first extends Operator_base {
 			$data['message'] = "Data successfully deleted";
 		}
 		$this->session->set_flashdata($data);
-		redirect('placement/extras_first/placement/'.$c_id);
+		redirect('administration/extras_first/placement/'.$c_id);
 	}
 
 	// page title

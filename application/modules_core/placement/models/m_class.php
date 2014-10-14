@@ -62,14 +62,15 @@ class m_class extends CI_Model {
         return $query->row();
     }
 
-    function get_class_student_registered($u_id=''){ //us bakal dihubungkan dari tabel reregistration
+    function get_class_student_registered($u_id='',$sy_id=''){ //us bakal dihubungkan dari tabel reregistration
         $sql = "SELECT rr.*, us.full_name, us.current_level, u.name unit_name
                 FROM re_registration rr 
                 LEFT JOIN users_student us ON us.nis=rr.nis
                 LEFT JOIN units u ON u.id=us.unit_id
                 LEFT JOIN class_students cs ON cs.nis=rr.nis           
                 WHERE us.unit_id = '$u_id'
-                AND us.status = 'SISWA' 
+                AND us.status = 'SISWA'
+                AND rr.school_year_id = '$sy_id' 
                 AND
                 (cs.nis IS NULL OR cs.nis='BERAKHIR')
                 ";
