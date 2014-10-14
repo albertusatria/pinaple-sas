@@ -1,11 +1,11 @@
 <div class="pageheader">
-    <h2><i class="fa fa-archive"></i>Re-registration</h2>
+    <h2><i class="fa fa-archive"></i>Next Year Registration</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li>Registration Data </li>
-        <li class="active">Re-registration</li>
+        <li>School Administration</li>
+        <li class="active">Next Year Registration</li>
       </ol>
     </div>
 </div>
@@ -28,8 +28,8 @@
 	      <div class="panel-btns">
 	        <a href="#" class="minimize">−</a>
 	      </div>
-	      <h4 class="panel-title">Search Students of School Year: <strong><?php echo $active_school_year->name ?></strong></h4>
-	      <p>This is form to search students who wants to <strong> re-register </strong> their ID</p>
+	      <h4 class="panel-title">Search Students of School Year: <strong><?php echo $school_year->name ?></strong></h4>
+	      <p>This is form to search students who wants to <strong> next year register </strong> their ID</p>
 	    </div>
 	    
 		<div class="panel-body">
@@ -64,7 +64,7 @@
 	 <div class="modal-dialog">
 	    <div class="modal-content">
 
-		  <form method="POST" id="reRegis" action="<?php echo base_url(); ?>registration/re_registration/re_registration_process">
+		  <form method="POST" id="reRegis" action="<?php echo base_url(); ?>administration/next_year_registrations/next_year_registration_process">
 
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -72,7 +72,7 @@
 	      </div>
 
 	      <div class="modal-body">
-		    <input type="hidden" id="school_year_id" name="school_year_id" class="form-control"  value="<?php echo $active_school_year->id ?>"/>
+		    <input type="hidden" id="school_year_id" name="school_year_id" class="form-control"  value="<?php echo $school_year->id ?>"/>
 		    <input type="hidden" id="nis_choosen" name="nis" class="form-control" value="" />
 
 			<div class="form-group">
