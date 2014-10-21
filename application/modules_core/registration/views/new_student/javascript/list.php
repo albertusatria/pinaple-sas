@@ -98,6 +98,40 @@ jQuery(document).ready(function() {
 	});	
 	//End Js Handling Originate School
 	
+	//check NIS
+	jQuery('.loading-image-nis').hide();
+	jQuery('#check-nis').click(function(){
+		//set validator
+		var thisInput = jQuery(this).closest('.form-group').find('input'); 
+		var inputNIS = thisInput.val();
+		if(inputNIS == "")
+		{
+			thisInput.closest('.form-group').closest('.form-group').addClass('has-error');
+			jQuery('.nis-result').addClass('text-danger').text('This field is required');
+		}
+		else
+		{
+			//reset all elements used for validation
+			thisInput.closest('.form-group').closest('.form-group').removeClass('has-error');
+			thisInput.next().hide();
+			jQuery('.nis-result').removeClass('text-danger').hide();
+			
+			//loader show
+			jQuery('.loading-image-nis').show();
+	
+			//loader hide
+			var timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+			    jQuery(".loading-image-nis").hide();                                                     
+	
+			    //result info
+				jQuery('.nis-result').addClass('text-danger').text('text buat hasil checking NIS, jika NIS sudah belum ganti kelas jadi : text-success').show();		    
+			}, 2000);	
+		}
+		return false;
+	});
+	
 	//Get All Unit & Jenjang
     var modelMakeJsonList = {"modelMakeTable" : 
         [

@@ -77,7 +77,7 @@
             </div><!-- rdio -->
       			<div class="last-school others" style="width:400px;margin-left:20px;">
       			  <input type="text" name="siswa[siswa_originschool]" placeholder="Please Input Last School Name" class="form-control" />
-      			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first student</p>
+      			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first school</p>
       			</div>
 			     <label class="error" for="siswa[siswa_sekolah_asal]"></label>
           </div>
@@ -118,6 +118,13 @@
             <label class="col-sm-3 control-label">NIS <span class="asterisk">*</span></label>
             <div class="col-sm-6">
               <input type="text" name="siswa[siswa_nis]" placeholder="Nama Induk Siswa / No Pendaftaran" class="form-control" required />
+              <div id='nis_availability_result'>
+              	<img class="loading-image-nis" src="<?php echo base_url()?>bracket/images/loaders/loader1.gif" alt="loaders nim">
+              	<p class="nis-result"></p>
+              </div> 
+            </div>
+            <div class="col-sm-2">
+            	<a class="btn btn-maroon" id="check-nis">Check NIS availability</a>
             </div>
           </div>
                                         
