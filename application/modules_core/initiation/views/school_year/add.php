@@ -38,6 +38,7 @@
             <input name="name" class="form-control" maxlength="9" type="text" value="<?php echo $this->session->flashdata('name'); ?>" required />
             <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
           </div>
+          <label class="col-sm-2 control-label">format: "xxxx-xxxx"</label>
         </div>
 
        <div class="form-group">
