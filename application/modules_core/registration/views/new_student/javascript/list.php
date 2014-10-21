@@ -179,5 +179,35 @@ jQuery(document).ready(function() {
 	        updateSelectSchoolBox(selectedMake);
 	    });    		
      //Get All Unit & Jenjang
+     
+     //address information
+	 jQuery('#fathAddress').keyup(function() {
+	    var fatherAddress = jQuery(this).val();
+	    jQuery('#studAddress').val(fatherAddress).attr('disabled',true);
+	  }).keyup();     
+	  
+	 jQuery('.student-address').on('change',function(){
+		 var selectedAddress = jQuery(this).find(':selected').text();
+	 	 var fatherAddress = document.getElementById('fathAddress').value;
+	 	 var motherAddress = document.getElementById('momAddress').value;
+	 	 console.log(fatherAddress);
+
+		 if(selectedAddress == 'Parents')
+		 {
+			 jQuery('#studAddress').val(fatherAddress).attr('disabled',true);
+		 }
+		 else if(selectedAddress == 'Father')
+		 {
+			 jQuery('#studAddress').val(fatherAddress).attr('disabled',true);			 
+		 }
+		 else if(selectedAddress == 'Mother')
+		 {
+			 jQuery('#studAddress').val(motherAddress).attr('disabled',true);
+		 }
+		 else
+		 {
+			 jQuery('#studAddress').val('');
+		 }
+	 });
 });
 </script>
