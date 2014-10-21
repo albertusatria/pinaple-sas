@@ -57,7 +57,7 @@ class School_year extends Operator_base {
 	public function add_process() {
 		// form validation
 		//$this->form_validation->set_rules('user_id', '', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('name', 'School Year Name', 'required|trim|xss_clean|callback_check_school_year');
+		$this->form_validation->set_rules('name', 'School Year Name', 'required|trim|xss_clean|callback_check_school_year|callback_check_sy_format');
 		$this->form_validation->set_rules('start', 'Start', 'required|trim|xss_clean|max_length[10]');
 		$this->form_validation->set_rules('end', 'End', 'required|trim|xss_clean|max_length[10]|callback_check_less['.$this->input->post('start').']');
 		$this->form_validation->set_rules('status', 'Status', 'required|trim|xss_clean|callback_check_status');
@@ -103,7 +103,7 @@ class School_year extends Operator_base {
 
 	// edit process
 	public function edit_process() {
-		$this->form_validation->set_rules('name', 'name', 'required|trim|xss_clean|callback_check_school_year');
+		$this->form_validation->set_rules('name', 'name', 'required|trim|xss_clean|callback_check_school_year|callback_check_sy_format');
 		$this->form_validation->set_rules('start', 'start', 'required|trim|xss_clean|max_length[10]');
 		$this->form_validation->set_rules('end', 'end', 'required|trim|xss_clean|max_length[10]|callback_check_less['.$this->input->post('start').']');
 		$this->form_validation->set_rules('status', 'Status', 'required|trim|xss_clean|callback_check_status');
@@ -137,6 +137,25 @@ class School_year extends Operator_base {
 		}
 		else{
 		    return TRUE;
+		}
+	}
+
+	public function check_sy_format($sy) {
+		$esy = explode("-", $sy);
+		$sy1 = strlen($esy[0]);
+		$sy2 = strlen($esy[1]);
+		$isy = (int)$esy[1]-(int)$esy[0];
+		if($sy1<>4 || $sy2<>4 || $isy<>1){
+			$this->form_validation->set_message('check_sy_format', 'School Year Format is invalid');
+			return FALSE;
+		}
+		else{
+			if($esy[0]>=$esy[1]){
+				$this->form_validation->set_message('check_sy_format', 'First School Year can not be greater than Second School Year');
+			    return FALSE;
+			}else{
+		    	return TRUE;
+			}
 		}
 	}
 
