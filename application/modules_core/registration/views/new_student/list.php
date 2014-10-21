@@ -77,7 +77,7 @@
             </div><!-- rdio -->
       			<div class="last-school others" style="width:400px;margin-left:20px;">
       			  <input type="text" name="siswa[siswa_originschool]" placeholder="Please Input Last School Name" class="form-control" />
-      			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first student</p>
+      			  <p class="text-info" style="font-size:11px;">* Leave this field if Budi Utama is their first school</p>
       			</div>
 			     <label class="error" for="siswa[siswa_sekolah_asal]"></label>
           </div>
@@ -118,6 +118,13 @@
             <label class="col-sm-3 control-label">NIS <span class="asterisk">*</span></label>
             <div class="col-sm-6">
               <input type="text" name="siswa[siswa_nis]" placeholder="Nama Induk Siswa / No Pendaftaran" class="form-control" required />
+              <div id='nis_availability_result'>
+              	<img class="loading-image-nis" src="<?php echo base_url()?>bracket/images/loaders/loader1.gif" alt="loaders nim">
+              	<p class="nis-result"></p>
+              </div> 
+            </div>
+            <div class="col-sm-2">
+            	<a class="btn btn-maroon" id="check-nis">Check NIS availability</a>
             </div>
           </div>
                                         
@@ -195,7 +202,7 @@
         </div>                        
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Citizen</label>
+          <label class="col-sm-3 control-label">Citizen <span class="asterisk">*</span></label>
 		  <div class="col-sm-8">
               <div class="rdio rdio-primary">
                 <input type="radio" id="ina_siswa" value="WNI" name="siswa[siswa_kewarganegaraan]" required="">
@@ -286,7 +293,14 @@
                   <input type="text" name="siswa[hp_ayah]" placeholder="Father's phone number" class="form-control">
                 </div>
               </div>              
-            </div>                                              
+            </div>     
+            
+			<div class="form-group">
+              <label class="col-sm-3 control-label">Address <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="siswa-mother-address" placeholder="Address where student's father life" class="form-control" id="fathAddress" required/>
+              </div>                       
+            </div>                                                      
 
 	   		 <div class="form-group">
 	              <label class="col-sm-3 control-label">Jobs</label>
@@ -357,6 +371,13 @@
               </div>              
             </div>                                              
 
+			<div class="form-group">
+              <label class="col-sm-3 control-label">Address <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="siswa-mother-address" placeholder="Address where student's mother life" class="form-control" id="momAddress" required/>
+              </div>                       
+            </div> 
+
         	 <div class="form-group">
                   <label class="col-sm-3 control-label">Jobs</label>
                   <div class="col-sm-2">
@@ -394,7 +415,7 @@
             <br/><br/>
 
             <div class="form-group">
-              <h4 class="col-sm-4 control-label text-danger ">Informasi Tempat tinggal <span class="asterisk">*</span></h4>
+              <h4 class="col-sm-4 control-label text-danger ">Student Address Information<span class="asterisk">*</span></h4>
             </div>  
 
             <hr/>
@@ -402,7 +423,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Student life with</label>
               <div class="col-sm-3">
-                <select class="form-control chosen-select" data-placeholder="Student life with ..." name="siswa[tinggal_bersama]">
+                <select class="form-control chosen-select student-address" data-placeholder="Student life with ..." name="siswa[tinggal_bersama]">
                   <option value="Parents" selected>Parents</option>
                   <option value="Father">Father</option>
                   <option value="Mother">Mother</option>
@@ -415,7 +436,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Address<span class="asterisk">*</span></label>
               <div class="col-sm-6">
-                <input type="text" name="siswa[alamat_lengkap]" placeholder="Address where student's life" class="form-control" required/>
+                <input type="text" name="siswa[alamat_lengkap]" placeholder="Address where student's life" class="form-control" id="studAddress" required/>
               </div>                       
             </div>  
                   
