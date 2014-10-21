@@ -33,7 +33,7 @@ class Payments extends Operator_base {
 		//message
 		$data['message'] = $this->session->flashdata('message');
 		//unit
-		//$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
+		//$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		
 		// get active school year
 		//$data['active_school_year'] = $this->m_school_year->get_active_year();		

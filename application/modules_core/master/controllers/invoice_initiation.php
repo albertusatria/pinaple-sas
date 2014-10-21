@@ -13,7 +13,6 @@ class Invoice_initiation extends Operator_base {
 		$this->load->model('m_packet_items');
 		$this->load->model('m_packet_items_year');
 		$this->load->model('m_items_type');
-		$this->load->model('registration/m_extra');
 		$this->load->model('initiation/m_school_year');
 		
 		// load portal
@@ -39,7 +38,7 @@ class Invoice_initiation extends Operator_base {
 		$data['user']	= $this->user;
 
 		$data['message'] = $this->session->flashdata('message');
-		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
+		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		$data['year']	= $this->m_school_year->get_active_year();
 		$sy_id = $data['year']->id;
 		
@@ -133,7 +132,7 @@ class Invoice_initiation extends Operator_base {
 		$data['result'] = $this->m_packets_initiation->get_packet_by_id($id);
 		// echo "<pre>"; print_r($data['result']); die;
 		$data['rs_unit'] = $this->m_units->get_all_unit();	
-		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
+		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		
 		// load template
 		$data['message']= $this->session->flashdata('message');

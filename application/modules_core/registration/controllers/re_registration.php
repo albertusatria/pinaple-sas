@@ -8,7 +8,7 @@ class Re_registration extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
-		$this->load->model('m_extra');
+		$this->load->model('master/m_units');
 		$this->load->model('m_registration');
 		$this->load->model('initiation/m_school_year');
 		// load portal
@@ -35,7 +35,7 @@ class Re_registration extends Operator_base {
 		//message
 		$data['message'] = $this->session->flashdata('message');
 		//unit
-		$data['ls_unit'] = $this->m_extra->get_all_unit_academic();
+		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		// get active school year
 		$data['active_school_year'] = $this->m_school_year->get_active_year();		
 		

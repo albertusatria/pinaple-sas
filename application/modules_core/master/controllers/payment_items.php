@@ -7,7 +7,6 @@ class Payment_items extends Operator_base {
 		parent::__construct();
 
 		// load all the related model here
-		$this->load->model('registration/m_extra');
 		$this->load->model('initiation/m_school_year');
 		$this->load->model('m_units');
 		$this->load->model('m_items_type');		
