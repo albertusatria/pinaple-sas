@@ -1,0 +1,76 @@
+/* Custom Datatables override stylesheet */
+
+
+/*----------------------------------------------------------------------------*/
+/* Pagination Full
+/*----------------------------------------------------------------------------*/
+.paging_simple_numbers {
+	line-height: 22px;
+	
+}
+.paging_simple_numbers a:active {
+	outline: none
+}
+.paging_simple_numbers a:hover {
+	text-decoration: none;
+}
+
+.paging_simple_numbers a.paginate_button,
+.paging_simple_numbers a.paginate_active {
+	border: 1px solid #ddd;
+	padding: 6px 12px;
+	margin-right: 5px;
+	cursor: pointer;
+	color: #636E7B;
+	line-height: 21px;
+	float: left;
+	position: relative;
+	background: #fff;
+	display: inline-block;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.paging_simple_numbers > li:first-child > a,
+.paging_simple_numbers > li:first-child > span {
+	border-bottom-left-radius: 3px;
+	border-top-left-radius: 3px;
+}
+
+.paging_simple_numbers a.paginate_button:hover {
+	text-decoration: none !important;
+	background-color: #E4E7EA;
+}
+
+.paging_simple_numbers a.paginate_button.current {
+	background-color: #1CAF9A;
+	border-color: #1CAF9A;
+	color: #fff;
+}
+
+.paging_simple_numbers a:focus {
+	text-decoration: none;
+}
+
+.paging_simple_numbers a.last {
+	margin-right: 0;
+}
+
+.paginate_button.disabled {
+	opacity: 0.5;
+}
+
+.paginate_button.disabled:hover {
+	cursor: default !important;
+	background-color: #fff !important;
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* Select
+/*----------------------------------------------------------------------------*/
+
+#all-students select{
+	width: 100%;
+}
