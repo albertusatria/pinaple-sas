@@ -86,7 +86,7 @@ jQuery(document).ready(function() {
 		                start = data[index]['start_level'];
 
 						jQuery('#searchResult').append(
-							'<div class="col-md-6 students-id">'+
+							'<div class="col-md-3 students-id">'+
 								'<div class="people-item">'+
 								  '<div class="media">'+
 								    '<div class="media-body">'+
@@ -95,9 +95,10 @@ jQuery(document).ready(function() {
 								      '<input type="hidden" class="student-unit" value="'+unit_id+'">'+
 								      '<input type="hidden" class="student-start" value="'+start+'">'+
 								      '<input type="hidden" class="student-current" value="'+current+'">'+
-								      '<div class="text-muted"><i class="fa fa-puzzle-piece"></i>'+unit+' ('+unit_id+'), Start '+start+', Tingkat '+current+'</div>'+
-								      '<div class="text-muted"><i class="fa fa-map-marker"></i>'+alamat+'</div>'+
-								      '<a href="#" class="btn btn-danger daftar" data-toggle="modal" data-target="#initPacket">Daftar Ulang!</a>'+
+								      '<div class="text-muted"><i class="fa fa-puzzle-piece"></i>Tingkat '+current+'</div>'+
+								      '<div class="text-muted"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;'+unit+'</div>'+
+								      '<a href="#" class="btn btn-danger btn-block daftar" data-toggle="modal"'+
+								      'data-target="#initPacket" style="margin-top:5px;">Daftar Ulang!</a>'+
 								    '</div>'+
 								  '</div>'+
 								'</div>'+
