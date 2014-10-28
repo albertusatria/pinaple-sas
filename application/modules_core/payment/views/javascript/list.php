@@ -52,8 +52,7 @@ jQuery(document).ready(function() {
 
 	//append all items
 	jQuery("#invoicePanel tbody").on('click','tr td a.add.all',function(){
-
-		// console.log('shit'); return false;		
+	
 		var dethis = $(this);
 
 		var itemTitle	= dethis.prev().text();
@@ -87,8 +86,13 @@ jQuery(document).ready(function() {
 				'<dl><small>'+detailList+'</small></dl>'+
 			'</td>'+
 			'<td><span class="qty '+is_editable+'" data-type="text" data-pk="1" data-original-title="Jumlah Item">1<span></td>'+
-			'<td><span class="price each" value='+price+'>'+price+'</span></td>'+
+			'<td>'+
+				'<span class="price each init-price" value='+price+'>'+price+'</span><br/>'+
+				'<p class="installment">'+
+					'<span class="label-installment">installment : </span><span class="inst-credit" value="0">0</span>'+
+			'</p></td>'+
 			'<td><span class="price subtotal" value='+price+'>'+price+'</span></td>'+
+			'<td><a class="action cancel"><i class="fa fa-minus-square"></i></a></td>'+			
 			'</tr>'
 		);
 
@@ -219,7 +223,7 @@ function updateGrandTotal()
 			   		//tampilkan list siswanya
 
 				   	jQuery('#resultSiswa tbody tr').remove();
-					var nis; var nama; var unit; var grade; var alamat; var current;
+					var nis, nama, unit, grade, alamat, current;
 		            for (index = 0; index < data.length; ++index) {
 		                nis = data[index]['nis'];
 		                nama = data[index]['full_name'];
@@ -233,9 +237,10 @@ function updateGrandTotal()
 		                    '<td>'+
 		                    	'<input type="hidden" class="nisSiswa" name="nisSiswa" value="'+nis+'">'+
 		                    	'<input type="hidden" class="namaSiswa" name="namaSiswa" value="'+nama+'">'+
-		                    	'<strong class="text-danger"> '+nama+' ('+nis+') </strong> <br>'+
-		                    	unit+'<br>'+
-		                    	'Kelas : '+
+		                    	'<strong class="text-danger"> Registrasi Ulang </strong>'+
+		                    	'<div class="text-muted"><i class="fa fa-user"></i>'+nama+' ('+nis+')</div>'+
+		                    	'<div class="text-muted"><i class="fa fa-puzzle-piece"></i>'+unit+'</div>'+
+		                    	'<div class="text-muted"><i class="fa fa-map-marker"></i>(kelas)</div>'+
 		                    '</td>'+
 		                    '<td>'+
 		                    	'<a href="#" class="pilih-siswa">'+
@@ -434,6 +439,48 @@ function updateGrandTotal()
 		return false;
 	});
 
+	//disable or cancel an item
+	jQuery("#invoiceTable tbody").on('click','.action',function(){
+		var dethis = jQuery(this);
+		var	priceSubstotal = 0;
+		if(dethis.hasClass('cancel'))
+		{
+			//change the classname of $this
+			dethis.removeClass('cancel').addClass('pay');
+
+			//change the icon
+			dethis.find('i').removeClass('fa-minus-square').addClass('fa-plus-square');
+
+			//change the value of qty to 0
+			var thisQty = dethis.closest('tr').find('.qty');
+			thisQty.text('0');
+			thisQty.editable('option', 'disabled', true);
+			
+			//change the value of subtotal to 0 and format the currency
+			dethis.closest('tr').find('.subtotal').attr('value','0').text('0').formatCurrency({region: 'id-ID'});
+			
+			updateGrandTotal();
+		}
+		else
+		{
+			//change the classname of $this
+			dethis.removeClass('pay').addClass('cancel');
+
+			//change the icon
+			dethis.find('i').removeClass('fa-plus-square').addClass('fa-minus-square');
+
+			//change the value of qty to 1
+			var thisQty = dethis.closest('tr').find('.qty');
+			thisQty.text('1');
+			thisQty.editable('option', 'disabled', false);
+
+			//change the value of subtotal
+			priceSubstotal = parseInt(dethis.closest('tr').find('.price').attr('value')) * 1;
+			dethis.closest('tr').find('.subtotal').attr('value',priceSubstotal).text(priceSubstotal).formatCurrency({region: 'id-ID'});
+			updateGrandTotal();			
+		}
+	});
+	
 	jQuery("#bayarDab").on('click',function(){
 
         var items = {};

@@ -7,13 +7,38 @@ var FormEditableInvoice = function () {
         //set editable element with success function to get their updated value
 		$('.qty').editable({
 			success: function(response, newValue) {
-
+				var dethis = $(this);
 				//update subtotal on the row
 				subTotal = parseInt(newValue) * price;
-				invoiceTable.find('span.subtotal').text(subTotal).attr('value',subTotal);
-				invoiceTable.find('span.subtotal').formatCurrency({region: 'id-ID'});
+				dethis.closest('tr').find('span.subtotal').text(subTotal).attr('value',subTotal);
+				dethis.closest('tr').find('span.subtotal').formatCurrency({region: 'id-ID'});
 				updateGrandTotal();
 			}		
+		});
+		
+		$('.inst-credit').editable({
+			success: function(response, newValue){
+				var dethis = $(this);
+
+				if (newValue > 0)
+				{
+					invoiceTable.find('span.init-price').addClass('off-price');
+					var qty = dethis.closest('tr').find('span.qty').text();
+					subTotal = parseInt(newValue) * qty;
+					dethis.closest('tr').find('span.inst-credit').formatCurrency({region: 'id-ID'});					
+				}
+				else
+				{
+					price = parseInt(dethis.closest('tr').find('.init-price').attr('value'));
+					invoiceTable.find('span.init-price').removeClass('off-price');
+					subTotal = 1 * price;
+				}
+													
+				dethis.closest('tr').find('span.subtotal').text(subTotal).attr('value',subTotal);
+				dethis.closest('tr').find('span.subtotal').formatCurrency({region: 'id-ID'});
+				updateGrandTotal();				
+			}
+			
 		});
 		
     }
