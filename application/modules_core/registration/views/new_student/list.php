@@ -31,8 +31,8 @@
                 <a href="#" class="minimize">&minus;</a>
               </div>
               <h4 class="panel-title">New Student Registration Form</h4>
-              <p>Use this form to add <strong>new student</strong><br>
-                <span class="asterisk">*</span> required</p>
+              <p>Use this form to add <strong>new student</strong> (<span class="asterisk">*</span>required)<br> 
+              or <a href="<?php echo base_url(); ?>registration/new_student/import_excel" data-title="Add Data" class="tip">Import from Excel</a></p>  
             </div>
             <div class="panel-body panel-body-nopadding">
               

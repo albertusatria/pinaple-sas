@@ -130,6 +130,30 @@ class New_student extends Operator_base {
         return $now;
 	}
 
+	public function import_excel(){
+		$this->check_auth('C');
+
+		$data['message'] = $this->session->flashdata('message');
+		$data['menu'] = $this->menu();
+		$data['user'] = $this->user;
+
+		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
+		$data['active_school_year'] = $this->m_school_year->get_active_year();		
+		
+		$data['layout'] = "registration/new_student/import_excel";
+		$data['javascript'] = "registration/new_student/javascript/import_excel";
+		$this->load->view('dashboard/admin/template', $data);
+	}
+
+	public function format_excel(){
+		//on working
+		redirect('registration/new_student/import_excel');
+	}
+
+	public function import_process(){
+		//on working
+	}
+
 	// page title
 	public function page_title() {
 		$data['page_title'] = 'New Students Registration Form';
