@@ -42,6 +42,14 @@
 	float: right;
 	color: #ffae00;
 }
+#resultSiswa td strong{
+	display: inline-block;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+#resultSiswa div .fa{
+	margin-right: 5px;
+}
 
 .bills-info, .details-info{
 	clear: both;
@@ -90,12 +98,16 @@
 .table-invoice thead > tr > th:nth-child(4){
 	text-align: right;
 }
+.table-invoice tbody > tr > td:last-child{
+	width: 1%;
+}
 #invoiceTable > tbody > tr > td:nth-child(1){
 	width: 300px;
 }
 #invoiceTable > tbody > tr > td:nth-child(3),
 #invoiceTable > tbody > tr > td:nth-child(4){
 	width: 180px;
+	text-align: right;
 }
 #invoiceTable dl{
 	width: 100%;
@@ -110,4 +122,25 @@
 }
 #invoiceTable dl dd{
 	text-align: right;
+}
+#invoiceTable .action.cancel{
+	color: #ffae00;
+}
+#invoiceTable .action:hover{
+	cursor: pointer;
+	cursor: hand;
+}
+
+.table-total > tbody > tr > td:last-child{
+	padding-right: 35px;
+	width: 	25%;
+}
+
+.installment{
+	text-transform: capitalize;
+	font-size: 12px;
+	margin-top: 10px;
+}
+.off-price{
+	color: #ccc;
 }
