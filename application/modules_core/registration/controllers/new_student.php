@@ -146,12 +146,105 @@ class New_student extends Operator_base {
 	}
 
 	public function format_excel(){
-		//on working
+		$this->load->helper('download');
+		$data = file_get_contents("./bracket/students.xls");
+		$name = 'students.xls';
+		force_download($name, $data);
 		redirect('registration/new_student/import_excel');
 	}
 
 	public function import_process(){
-		//on working
+		$this->load->library('excel_reader');		
+		////$config['upload_path'] = './temp_upload/';
+		$config['upload_path'] = './bracket/excel/';
+        $config['allowed_types'] = 'xls';
+ 
+        $this->load->library('upload', $config);
+ 
+        if (!$this->upload->do_upload())
+        {
+            $data = array('error' => $this->upload->display_errors());
+        	echo '<pre>';print_r($data); die; 
+        }
+        else
+        {
+        	$this->load->helper('date');
+	        $datestring = '%Y-%m-%d %H:%i:%s';
+	        $time = time();
+	        $now = mdate($datestring, $time);
+
+            $data = array('error' => false);
+            $upload_data = $this->upload->data();
+ 
+            $this->load->library('excel_reader');
+            $this->excel_reader->setOutputEncoding('CP1251');
+ 
+            $file =  $upload_data['full_path'];
+            $this->excel_reader->read($file);
+
+            error_reporting(E_ALL ^ E_NOTICE);
+ 
+            // Sheet 1
+            $data = $this->excel_reader->sheets[0] ;
+            $dataexcel = Array();
+            for ($i = 3; $i <= $data['numRows']; $i++) {
+ 
+                if($data['cells'][$i][2] == '') 
+                	break;            
+	            $dataexcel[$i-1]['nis'] 			 	= $data['cells'][$i][2];
+	            $dataexcel[$i-1]['full_name'] 			= $data['cells'][$i][3];
+	            $dataexcel[$i-1]['nick_name'] 			= $data['cells'][$i][4];
+	            $dataexcel[$i-1]['sex']					= $data['cells'][$i][5];
+	            $dataexcel[$i-1]['pob']					= $data['cells'][$i][6];
+	            $dataexcel[$i-1]['dob']					= $data['cells'][$i][7];
+	            $dataexcel[$i-1]['children_to']			= $data['cells'][$i][8];
+	            $dataexcel[$i-1]['sibling_number']		= $data['cells'][$i][9];
+	            $dataexcel[$i-1]['religion'] 			= $data['cells'][$i][10];
+	            $dataexcel[$i-1]['nationality']			= $data['cells'][$i][11];
+	            $dataexcel[$i-1]['previous_school']		= $data['cells'][$i][12];
+	            $dataexcel[$i-1]['previous_school_type']= $data['cells'][$i][13];
+				$dataexcel[$i-1]['father_full_name']	= $data['cells'][$i][14];
+	            $dataexcel[$i-1]['father_pob'] 			= $data['cells'][$i][15];
+	            $dataexcel[$i-1]['father_dob']			= $data['cells'][$i][16];
+	            $dataexcel[$i-1]['father_cell_phone']	= $data['cells'][$i][17];
+	            $dataexcel[$i-1]['father_job']			= $data['cells'][$i][18];
+	            $dataexcel[$i-1]['father_salary']		= $data['cells'][$i][19];
+	            $dataexcel[$i-1]['father_citizen']		= $data['cells'][$i][20];
+	            $dataexcel[$i-1]['mother_full_name']	= $data['cells'][$i][21];
+	            $dataexcel[$i-1]['mother_pob']			= $data['cells'][$i][22];
+	            $dataexcel[$i-1]['mother_dob']			= $data['cells'][$i][23];
+	            $dataexcel[$i-1]['mother_cell_phone']	= $data['cells'][$i][24];
+	            $dataexcel[$i-1]['mother_job']			= $data['cells'][$i][25];
+	            $dataexcel[$i-1]['mother_salary']		= $data['cells'][$i][26];
+	            $dataexcel[$i-1]['mother_citizen'] 		= $data['cells'][$i][27];
+	            $dataexcel[$i-1]['stay_with']			= $data['cells'][$i][28];
+	            $dataexcel[$i-1]['living_address']		= $data['cells'][$i][29];
+	            $dataexcel[$i-1]['home_phone'] 			= $data['cells'][$i][30];
+	            $dataexcel[$i-1]['guardian_full_name']	= $data['cells'][$i][31];
+	            $dataexcel[$i-1]['guardian_job'] 		= $data['cells'][$i][32];
+	            $dataexcel[$i-1]['guardian_citizen'] 	= $data['cells'][$i][33];
+				$dataexcel[$i-1]['created_on']			= $now;
+				$dataexcel[$i-1]['updated_on']			= $now;
+				$dataexcel[$i-1]['status'] 				= $data['cells'][$i][34];
+				$dataexcel[$i-1]['registration_type'] 	= $data['cells'][$i][35];
+				$sy_id=$this->m_school_year->get_school_year_by_name($data['cells'][$i][36]);
+				$dataexcel[$i-1]['start_school_year_id']= $sy_id->id;
+				$dataexcel[$i-1]['unit_id'] 			= $data['cells'][$i][37];
+				$dataexcel[$i-1]['start_level'] 		= $data['cells'][$i][38];
+				$dataexcel[$i-1]['current_level'] 		= $data['cells'][$i][39];
+				$dataexcel[$i-1]['class_id']			= 0;
+
+            }
+            // echo '<pre>'; print_r($dataexcel);die; 
+            delete_files($upload_data['file_path']);
+            $this->m_registration->import_students($dataexcel);
+        }
+        $data = array(
+		     'message' => 'Data Imported Successfully'
+	     );
+		// echo $data['message']; die;
+		$this->session->set_flashdata($data);
+		redirect('registration/new_student/import_excel');
 	}
 
 	// page title

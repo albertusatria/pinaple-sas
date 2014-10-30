@@ -15,6 +15,10 @@ class m_school_year extends CI_Model {
         return $this->db->get_where('school_year',array('id'=>$id))->row();
     }
 
+    function get_school_year_by_name($name){
+        return $this->db->get_where('school_year',array('name'=>$name))->row();
+    }
+
     function get_school_year_name($ta,$id){
         $sql = "SELECT *
                 FROM school_year
