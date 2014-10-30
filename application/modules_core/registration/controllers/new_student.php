@@ -147,7 +147,7 @@ class New_student extends Operator_base {
 
 	public function format_excel(){
 		$this->load->helper('download');
-		$data = file_get_contents("./bracket/students.xls");
+		$data = file_get_contents("./bracket/excel/format/students.xls");
 		$name = 'students.xls';
 		force_download($name, $data);
 		redirect('registration/new_student/import_excel');
@@ -156,7 +156,7 @@ class New_student extends Operator_base {
 	public function import_process(){
 		$this->load->library('excel_reader');		
 		////$config['upload_path'] = './temp_upload/';
-		$config['upload_path'] = './bracket/excel/';
+		$config['upload_path'] = './bracket/excel/temporary';
         $config['allowed_types'] = 'xls';
  
         $this->load->library('upload', $config);
