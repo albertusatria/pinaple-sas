@@ -17,6 +17,40 @@ class M_registration extends CI_Model {
         }
     }
 
+    function import_students($dataarray)
+    {
+        foreach ($dataarray as $params) {
+            //check duplicate apa nggra
+            $this->db->where('nis',$params['nis']);
+            $query = $this->db->get('users_student');
+            if ($query->num_rows() == 0 )
+            {
+                //if not found insert
+                if ($insert = $this->db->insert('users_student', $params))
+                {
+                    $success = true;
+                }
+                else
+                {
+                    return false;
+                }            
+            }
+            else {
+                //update or not?
+                $this->db->where('nis',$params['nis']);
+                if ($update = $this->db->update('users_student', $params))
+                {
+                    $success = true;
+                }
+                else
+                {
+                    return false;
+                }            
+            }
+        }
+        return true;
+    }
+
     // add menu
     function add_new_student_achievement($params) {
         $insert = $this->db->insert('students_achievement',$params);        
