@@ -61,8 +61,7 @@ jQuery(document).ready(function() {
 		item[num]['keyword'] = id;
 
 		//cari , jika katemu tampilkan pop up, pilih
-		
-		jQuery('#ajax-loader').show(); 
+	 
 	    jQuery.ajax({
 	    	type: "POST",
 	    	url: CI_ROOT+"administration/next_year_registrations/get_siswa_daftar_ulang",
@@ -73,7 +72,7 @@ jQuery(document).ready(function() {
 			    {
 			   		console.log(data);
 			   		//tampilkan list siswanya
-
+			   		jQuery('#ajax-loader').show();
 				   	jQuery('#searchResult div').remove();
 					var nis; var nama; var unit; var grade; var alamat; var current;
 		            for (index = 0; index < data.length; ++index) {
@@ -84,8 +83,10 @@ jQuery(document).ready(function() {
 		                alamat = data[index]['living_address'];
 		                current = data[index]['current_level'];
 		                start = data[index]['start_level'];
-
-						jQuery('#searchResult').append(
+						
+						//delay append data while loading
+						setTimeout(function() {
+							jQuery('#searchResult').append(
 							'<div class="col-md-6 students-id">'+
 								'<div class="people-item">'+
 								  '<div class="media">'+
@@ -102,7 +103,9 @@ jQuery(document).ready(function() {
 								  '</div>'+
 								'</div>'+
 							'</div>'
-						);				               
+							);							
+							jQuery('#ajax-loader').hide();    
+						}, 1000); // <-- time in milliseconds						
 		            }
 				}
 				else 
@@ -118,7 +121,6 @@ jQuery(document).ready(function() {
 		    }
 		});  	
 		
-		jQuery('#ajax-loader').hide(); 
 	    return false;
 	}
 
