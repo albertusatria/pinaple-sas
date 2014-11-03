@@ -39,6 +39,8 @@ class Status extends Operator_base {
 		// get active school year
 		$data['active_school_year'] = $this->m_school_year->get_active_year();		
 		
+		$data['ls_siswa'] = $this->m_registration->get_list_students_for_status();
+
 		$data['layout'] = "registration/status/list";
 		$data['javascript'] = "registration/status/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);

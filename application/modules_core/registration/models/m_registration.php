@@ -61,6 +61,32 @@ class M_registration extends CI_Model {
         }
     }
 
+    function get_list_students_for_status() {
+        $sql = "SELECT *
+                FROM school_year
+                WHERE status = 'aktif'
+                LIMIT 1";
+        $query = $this->db->query($sql);
+        $schoolyear = $query->row();
+        $id = $schoolyear->id;
+
+
+        $sql = "SELECT us.*, u.name, 
+                #level prayuliang dll untuk BK belum diquerykan
+                if(rr.school_year_id='$id','Registered','Un-Registered') as reg_status
+                FROM users_student us 
+                LEFT JOIN units u ON us.unit_id = u.id 
+                LEFT JOIN re_registration rr ON rr.nis = us.nis 
+                WHERE us.status='SISWA'
+                ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
     function get_list_siswa($keyword) {
         $sql = "SELECT *
                 FROM school_year
