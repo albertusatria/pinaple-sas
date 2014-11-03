@@ -28,7 +28,16 @@
 	      <div class="panel-btns">
 	        <a href="#" class="minimize">−</a>
 	      </div>
-	      <h4 class="panel-title">Search Students of School Year: <strong><?php echo $school_year->name ?></strong></h4>
+	      <h4 class="panel-title">Search Students of School Year: 
+	      	<strong>
+	      		<?php 
+	      		if(isset($school_year->name))
+	      			echo $school_year->name;
+	      		else 
+	      			echo "There are not Next School Year yet..";
+	      		?>
+	      	</strong>
+	      </h4>
 	      <p>This is form to search students who wants to <strong> next year register </strong> their ID</p>
 	    </div>
 	    
