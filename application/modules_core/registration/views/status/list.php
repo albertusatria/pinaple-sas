@@ -13,11 +13,11 @@
 <div class="contentpanel">
 
   <?php if ($message != null ) : ?>
-  <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <strong>Well done!</strong>   <?php echo $message; ?>
+	<div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Well done!</strong>   <?php echo $message; ?>
     </div>
-  <?php endif ; ?>
+  <?php endif; ?>
 
   <!-- Search Form -->  
   <div class="row">
@@ -54,7 +54,22 @@
 			                <th>Status</th>
 			            </tr>
 			        </tfoot>
-			 
+			 		
+			 		<tbody>
+			            <?php $no = 1; foreach ($ls_siswa as $siswa): ?>
+			            <tr>			            	
+			                <td><?php echo $siswa->nis; ?></td>
+			            	<td><?php echo $siswa->full_name; ?></td>
+			                <td><?php echo $siswa->name; ?></td>
+			                <td><?php echo $siswa->current_level; ?></td>
+			                <td><?php echo $siswa->reg_status; ?></td>
+							<td class="table-action">
+			                  <a href="#"><i class="fa fa-pencil"></i></a>
+			                </td>
+			            </tr>
+			            <?php $no++; endforeach ; ?>			        
+			        </tbody>
+				<!--			 
 			        <tbody>
 			            <tr>
 			            	<td>0442</td>
@@ -96,7 +111,8 @@
 			                  <a href="#"><i class="fa fa-pencil"></i></a>
 			                </td>
 			            </tr>
-			        </tbody>				
+			        </tbody>
+			    -->				
 				</table>
 			</div>
 		</div><!-- panel-body -->
