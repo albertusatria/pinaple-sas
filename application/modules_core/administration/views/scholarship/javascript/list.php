@@ -76,7 +76,7 @@ jQuery(document).ready(function() {
 						//delay append data while loading
 						setTimeout(function() {
 							jQuery('#searchResult').append(
-							'<div class="col-md-4 students-id">'+
+							'<div class="col-md-3 students-id">'+
 								'<div class="people-item">'+
 								  '<div class="media">'+
 								    '<div class="media-body">'+

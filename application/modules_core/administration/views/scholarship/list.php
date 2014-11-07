@@ -22,35 +22,101 @@
 
 	<!-- Panel Top -->  
 	<div class="row">
-	<div class="col-md-12">
-	  <div class="panel panel-default">
-	  
-	    <div class="panel-heading">
-	      <div class="panel-btns">
-	        <a href="#" class="minimize">−</a>
-	      </div>
-	      <h4 class="panel-title">Search Scholarship Recepients for <strong><?php echo $school_year->name ?></strong> School Year Calendars</h4>
-	      <p>This is form to search students who wants to <strong> next year register </strong> their ID</p>
-	    </div>
-	    
-		<div class="panel-body">
-		  <div class="row row-pad-5">
-			  <div class="form-group">
-				  
-		          <div class="col-lg-8">
-		            <input type="text" name="name" id="keyword" class="form-control" placeholder="Type student's Name or NIS..." required="">
-		          </div>
-		          
-		          <div class="col-lg-4">
-		            <a id="btnCari" class="btn btn-primary btn-block">Search</a>
-		          </div>      
-		                  	
+		<!-- Search Result -->
+		<div class="col-md-8">
+		  <div class="panel panel-default">
+		  
+		    <div class="panel-heading">
+		      <div class="panel-btns">
+		        <a href="#" class="minimize">−</a>
+		      </div>
+		      <h4 class="panel-title">Search Scholarship Recepients for <strong><?php echo $school_year->name ?></strong> School Year Calendars</h4>
+		      <p>This is form to search students who wants to <strong> next year register </strong> their ID</p>
 		    </div>
-		  </div><!-- row -->
-		</div><!-- panel-body -->
-	    
-	  </div><!-- panel -->
-	</div>
+		    
+			<div class="panel-body">
+			  <div class="row row-pad-5">
+				  <div class="form-group">
+					  
+			          <div class="col-lg-8">
+			            <input type="text" name="name" id="keyword" class="form-control" placeholder="Type student's Name or NIS..." required="">
+			          </div>
+			          
+			          <div class="col-lg-4">
+			            <a id="btnCari" class="btn btn-primary btn-block">Search</a>
+			          </div>      
+			                  	
+			    </div>
+			  </div><!-- row -->
+			</div><!-- panel-body -->
+		    
+		  </div><!-- panel -->
+		</div>
+		
+		<!-- Setup Scholarship-->
+		<div class="col-md-4">
+			<form id="newScholarship" method="POST" action="#" class="form-horizontal">
+			  <div class="panel panel-default">
+			      <div class="panel-heading">
+			        <div class="panel-btns">
+			          <a href="#" class="minimize maximize">&plus;</a>
+			        </div>
+			        <h4 class="panel-title">New Scholarship Form</h4>
+					
+			      </div>
+			      <div class="panel-body" style="display:none;">
+					<?php if ($message != null ) : ?>
+						<?php if ($message == "Data successfully added"):?>
+						<div class="alert alert-success">
+				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				            <strong>Well done!</strong> <?php echo $message; ?>
+						</div>
+						<?php elseif ($message == "Data successfully deleted"):?>
+						 
+						<?php elseif ($message == "Data successfully edited"):?> 
+						 
+						<?php else : ?>
+						<div class="alert alert-danger">
+				            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				            <?php echo $message; ?>
+						</div>					
+						<?php endif ; ?>
+					<?php endif;?>
+
+			        <div class="form-group">
+			          <div class="col-sm-12">
+			            <input type="text" name="name" class="form-control" placeholder="Type Scholarship name..." required />
+			          </div>
+			        </div>
+					
+					<div class="form-group">
+					  <div class="col-sm-12">
+					  	<div class="input-group">
+					  		<span class="input-group-addon">Rp</span>
+					  		<input type="text" class="form-control" placeholder="contoh: 3000000">
+					  		<span class="input-group-addon">.00</span>
+		                </div>
+					  </div>
+					</div>
+								        
+			        <div class="form-group">
+			          <div class="col-sm-12">
+			            <textarea rows="5" name="notes" class="form-control" placeholder="Type Scholarship notes..." required></textarea>
+			          </div>
+			        </div>
+			      </div><!-- panel-body -->
+			      <div class="panel-footer" style="display:none">
+			        <div class="row">
+			          <div class="col-sm-9 col-sm-offset-3">
+			            <button class="btn btn-primary">Submit</button>
+			            <button type="reset" class="btn btn-default">Reset</button>
+			          </div>
+			        </div>
+			      </div>
+			    
+			  </div><!-- panel -->
+          </form>
+		</div>
 	</div>
 	<!-- end Panel Top -->
 
