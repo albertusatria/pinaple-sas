@@ -105,14 +105,7 @@
 						</div>					
 						<?php endif ; ?>
 					<?php endif;?>
-<!--
-			        <div class="form-group">
-			          <label class="col-sm-3 control-label">ID <span class="asterisk">*</span></label>
-			          <div class="col-sm-9">
-			            <input type="text" name="id" value="<?php echo $rs_num_rows;?>"class="form-control" placeholder="Type Items Type ID's..." required disabled/>
-			          </div>
-			        </div>
--->		        
+					        
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">Name <span class="asterisk">*</span></label>
 			          <div class="col-sm-9">
