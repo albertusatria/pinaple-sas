@@ -4,6 +4,7 @@
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
+        <li>Administration School</li>
         <li class="active">Scholarship</li>
       </ol>
     </div>
@@ -18,7 +19,12 @@
   </div>
   <?php endif ; ?>
 
- 
+  <?php if ($eror != null ) : ?>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Warning!</strong>   <?php echo $eror; ?>
+  </div>
+  <?php endif ; ?>
 
 	<!-- Panel Top -->  
 	<div class="row">
@@ -55,16 +61,16 @@
 		
 		<!-- Setup Scholarship-->
 		<div class="col-md-4">
-			<form id="newScholarship" method="POST" action="#" class="form-horizontal">
+			<form id="newScholarship" method="POST" action="<?php echo base_url(); ?>administration/scholarship/add_process" class="form-horizontal">
 			  <div class="panel panel-default">
 			      <div class="panel-heading">
 			        <div class="panel-btns">
 			          <a href="#" class="minimize maximize">&plus;</a>
 			        </div>
 			        <h4 class="panel-title">New Scholarship Form</h4>
-					
 			      </div>
 			      <div class="panel-body" style="display:none;">
+					<!--
 					<?php if ($message != null ) : ?>
 						<?php if ($message == "Data successfully added"):?>
 						<div class="alert alert-success">
@@ -82,26 +88,28 @@
 						</div>					
 						<?php endif ; ?>
 					<?php endif;?>
-
+					-->
 			        <div class="form-group">
 			          <div class="col-sm-12">
-			            <input type="text" name="name" class="form-control" placeholder="Type Scholarship name..." required />
+			            <input type="text" name="name" class="form-control" placeholder="Type Scholarship name..." value="<?php echo $this->session->flashdata('name'); ?>" required />
 			          </div>
 			        </div>
 					
+			        <input type="hidden" id="school_year_id" name="school_year_id" class="form-control" value="<?php echo $school_year->id ?>"/>
+
 					<div class="form-group">
 					  <div class="col-sm-12">
 					  	<div class="input-group">
 					  		<span class="input-group-addon">Rp</span>
-					  		<input type="text" class="form-control" placeholder="contoh: 3000000">
-					  		<span class="input-group-addon">.00</span>
+					  		<input name="amount" type="text" class="form-control" placeholder="example: 3000000" value="<?php echo $this->session->flashdata('amount'); ?>">
+					  		<!--<span class="input-group-addon">.00</span>-->
 		                </div>
 					  </div>
 					</div>
 								        
 			        <div class="form-group">
 			          <div class="col-sm-12">
-			            <textarea rows="5" name="notes" class="form-control" placeholder="Type Scholarship notes..." required></textarea>
+			            <textarea rows="5" name="description" class="form-control" placeholder="Type Scholarship notes..." required><?php echo $this->session->flashdata('description'); ?></textarea>
 			          </div>
 			        </div>
 			      </div><!-- panel-body -->
@@ -135,7 +143,7 @@
 
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="initPacketLabel"><strong></strong> Scholarship Forms</h4>
+	        <h4 class="modal-title" id="initPacketLabel"><strong></strong>Scholarship Forms</h4>
 	      </div>
 
 	      <div class="modal-body">
@@ -143,18 +151,16 @@
 		    <input type="hidden" id="nis_choosen" name="nis" class="form-control" value="" />
 
 			<div class="form-group">
-			  <label class="col-sm-3 control-label"> Allocations Fund<span class="asterisk">*</span></label>
+			  <label class="col-sm-3 control-label">Allocations Fund<span class="asterisk">*</span></label>
 			  <div class="col-sm-9">
 			  	<div class="input-group">
 			  		<span class="input-group-addon">Rp</span>
-			  		<input type="text" class="form-control" placeholder="contoh: 3000000">
-			  		<span class="input-group-addon">.00</span>
+			  		<input type="text" class="form-control" placeholder="example: 3000000">
+			  		<!--<span class="input-group-addon">.00</span>-->
                 </div>
 			  </div>
 			</div>
 	      </div>
-
-
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
