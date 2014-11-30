@@ -124,16 +124,50 @@
 			    
 			  </div><!-- panel -->
           </form>
+          		<div class="panel panel-default">
+			      <div class="panel-heading">
+			        <div class="panel-btns">
+			          <a href="#" class="minimize maximize">&plus;</a>
+			        </div>
+			        <h4 class="panel-title">Scholarship List</h4>
+			      </div>
+				  <div class="panel-body" style="display:none;">
+					<table class="table">		
+			          <tr>
+			            <th width="5%" style="padding:2px;">No</th>
+			            <th style="padding:2px;">Name</th>
+			            <th colspan="2" style="padding:2px; text-align:center;">Amount</th>
+			            <th width="15%" style="padding:2px;"></th>
+			          </tr>
+				       	<?php if(empty($ls_scholarship)){ ?>
+				       		<tr><td colspan="4" align="center"> -- there is no scholarship -- </td></tr>
+				       	<?php }else{ ?>	
+					        <?php $no = 1; foreach ($ls_scholarship as $result): ?>
+					          <tr>				          
+					            <td><?php echo @$no; ?></td>
+					            <td><?php echo @$result->name; ?></td>
+					            <td>Rp</td>
+								<td style="text-align:right"><?php echo number_format(@$result->amount,2,",",".");?></td>
+				                <td>
+				                  <a href="<?php echo base_url(); ?>administration/scholarship/edit/<?php echo $result->id; ?>"><i class="fa fa-pencil"></i></a>
+				                  <a href="#" class="delete-row" onclick="hapus('<?php echo $result->id ?>','<?php echo $result->name ?>')">
+				                  	<i class="fa fa-trash-o"></i>
+				                  </a>
+				                </td>
+					          </tr>
+					         <?php $no++; endforeach ; ?>
+				       	<?php } ?>
+				    </table>
+				  </div>
+			  </div>
 		</div>
 	</div>
 	<!-- end Panel Top -->
 
-  <!-- Search Result -->
-  <div class="row" id="searchResult">
-	 
-  </div>
-  <!-- end Search Result --> 
-	            
+<!-- Search Result -->
+	<div class="row" id="searchResult"></div>
+<!-- end Search Result --> 
+
   <!-- Modal --> 
   <div id="initScholarship" class="modal fade initPacket" tabindex="-1" role="dialog" aria-labelledby="initPacketLabel" aria-hidden="true">
 	 <div class="modal-dialog">

@@ -113,3 +113,9 @@ jQuery(document).ready(function() {
 	
 });
 </script>
+<script type="text/javascript">
+  function hapus(no,nama){
+    if(confirm('Are you sure to delete '+nama+' item?'))
+      window.location = "<?php echo base_url(); ?>administration/scholarship/delete/"+no;
+  }
+</script>

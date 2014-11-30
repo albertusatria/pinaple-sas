@@ -11,6 +11,10 @@ class m_scholarship extends CI_Model {
         return $this->db->get('scholarship')->result();
     }
 
+    function get_scholarship_by_year($sy_id){
+        return $this->db->get_where('scholarship',array('school_year_id'=>$sy_id))->result();
+    }
+
     function get_total_rows(){
         return $this->db->get('scholarship')->num_rows();
     }

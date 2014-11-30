@@ -33,6 +33,8 @@ class Scholarship extends Operator_base {
 		$data['ls_unit']	= $this->m_units->get_all_unit();
 		// get tahun ajaran
 		$data['school_year']= $this->m_school_year->get_active_year();
+		$sy_id = $data['school_year']->id;
+		$data['ls_scholarship'] = $this->m_scholarship->get_scholarship_by_year($sy_id);
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
 		$data['eror'] = $this->session->flashdata('eror');
