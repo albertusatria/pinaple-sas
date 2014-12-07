@@ -67,12 +67,25 @@ class Payments extends Operator_base {
 	public function payment_process()
 	{
 		foreach ($_POST as $value => $val) {
-			$data = $this->m_payments->payment_process($val['id'],$val);
+			$params = array(
+				'status' => $val['status'],
+				'amount_paid' => $val['amount_paid'],
+				'last_payment_date' => $this->get_now()
+				);
+
+			$data = $this->m_payments->payment_process($val['id'],$params);
 		}
 		header('Content-Type: application/json');
 	    echo json_encode($data);		
 	}
 
+	public function get_now() {
+	    $this->load->helper('date');
+        $datestring = '%Y-%m-%d %H:%i:%s';
+        $time = time();
+        $now = mdate($datestring, $time);
+        return $now;
+	}
 	// page title
 	public function page_title() {
 		$data['page_title'] = 'Payment Page';
