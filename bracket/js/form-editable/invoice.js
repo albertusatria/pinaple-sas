@@ -17,8 +17,29 @@ var FormEditableInvoice = function () {
 		});
 		
 		$('.inst-credit').editable({
+            validate: function(value) {
+                var dethis = $(this);
+                if (parseInt(value) > parseInt(dethis.closest('tr').find('td input.pay-invoice-dab').val())) {
+                    value = dethis.closest('tr').find('td input.pay-invoice-dab').val();
+                    return "maksimum cicilan : " + value;
+                }
+            },
+
 			success: function(response, newValue){
 				var dethis = $(this);
+
+				dethis.closest('tr').find('td input.instalment-invoice-dab').val(newValue);					
+				console.log(dethis.closest('tr').find('td input.instalment-invoice-dab').val());				
+
+				if (parseInt(dethis.closest('tr').find('td input.instalment-invoice-dab').val()) > parseInt(dethis.closest('tr').find('td input.pay-invoice-dab').val()) ) 
+				{
+					console.log('lebih dari yang seharusnya dibayar')
+					dethis.closest('tr').find('td input.instalment-invoice-dab').val(newValue);					
+				}
+				else 
+				{
+					console.log('kurang dari yang seharusnya dibayar')
+				}
 
 				if (newValue > 0)
 				{

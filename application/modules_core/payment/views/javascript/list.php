@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
 	
 		var dethis = $(this);
 
-		var itemTitle	= dethis.prev().text();
+		var itemTitle	= dethis.closest('tr').find('td h5 span.judul').text();
 		var price		= dethis.next().find('h5 .price').attr("value");
 		var detailList	= dethis.next().find('.list-details-items').html();
 		var is_editable	= "editable";
@@ -82,6 +82,7 @@ jQuery(document).ready(function() {
 			'<td>'+
      			'<input type="hidden" class="id-invoice-dab" value="'+id+'">'+
      			'<input type="hidden" class="pay-invoice-dab" value="'+need_to_pay+'">'+
+     			'<input type="hidden" class="instalment-invoice-dab" value="0">'+
 				'<div class="text-primary"><strong>'+itemTitle+'</strong></div>'+
 				'<dl><small>'+detailList+'</small></dl>'+
 			'</td>'+
@@ -123,7 +124,7 @@ jQuery(document).ready(function() {
 	$('.add.all').on('click', function(){
 		var dethis = $(this);
 
-		var itemTitle	= dethis.prev().text();
+		var itemTitle	= dethis.closest('tr').find('td h5 span.judul').text();
 		var price		= dethis.next().find('h5 .price').attr("value");
 		var detailList	= dethis.next().find('.list-details-items').html();
 		var is_editable	= "editable";
@@ -291,8 +292,33 @@ function updateGrandTotal()
 			   		// return false;
 			   		//tampilkan list siswanya
 
-				   	jQuery('#resultsInvoice tbody tr').remove();
+					var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+
+
+					var today = new Date();
+					var dd = today.getDate();
+					var mm = today.getMonth()+1; //January is 0!
+					var yyyy = today.getFullYear();
+					if(dd<10) {
+					    dd='0'+dd
+					} 
+					if(mm<10) {
+					    mm='0'+mm
+					} 
+					today = yyyy+'-'+mm+'-'+dd;
+
+					// document.write(today);
+
+
 					var item_name;
+					var invoicelist = '';
+					var date1;
+					var date2;
+					var timeDiff;
+					var diffDays;	
+					var tahun_period;
+
+				   	jQuery('#resultsInvoice tbody tr').remove();
 		            for (index = 0; index < data.length; ++index) {
 		            	invoice_id = data[index]['id'];
 		                packet_name = data[index]['packet_name'];
@@ -300,21 +326,57 @@ function updateGrandTotal()
 		                amount = data[index]['amount'];
 		                amount_paid = data[index]['amount_paid'];
 		                period_name = data[index]['period_name'];
+		                deadline = data[index]['payment_deadline'];
 
 		                if (period_name != null) {
-		                	item_name = item_name + ' Bulan ' + period_name;
+							date2 = new Date(deadline);
+			                tahun_period = date2.getFullYear()
+		                	item_name = item_name + ' Bulan ' + period_name + ' ' + tahun_period;
 		                }
 		                need_to_pay = amount - amount_paid;
 
-		            if (index % 2 == 0) {
+		                console.log('hari ini : '+today)
+		                console.log('deadline : '+deadline);
 
+		                if (deadline != null) {
+							date1 = new Date(today);
+							date2 = new Date(deadline);
+							timeDiff = Math.abs(date2.getTime() - date1.getTime());
+							diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+			                if (date1 < date2) {
+			                	terlambat = '0';
+			                } else {
+			                	terlambat = '1';
+			                }
+		                } else {
+		                	diffDays = 'tidak ada';
+		                }
+		                console.log('perbedaan : '+diffDays);
 
-		            jQuery('#resultsInvoice > tbody:first').append(
-	                 		'<tr class="odd billed">'+
+			            if (index % 2 == 0) {
+		                 	invoicelist += '<tr class="odd billed">';
+		                }
+		                else {
+		                 	invoicelist += '<tr class="even billed">';		
+		                }
+		                	invoicelist +=
 	                    		'<td class="items">'+
 		                 			'<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
 		                 			'<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
-	                    			'<h5>'+item_name+'</h5>'+
+		                 			'<input type="hidden" class="item-name" value="'+item_name+'">'+
+	                    			'<h5><span class="judul">'+item_name+'</span>';
+
+                			if (diffDays != 'tidak ada') {
+                				if (terlambat == '0') {
+				                	invoicelist += '&nbsp;&nbsp;&nbsp; <span class="label label-success">'+diffDays+' days to go </span></h5>';
+                				} else {
+				                	invoicelist += '&nbsp;&nbsp;&nbsp; <span class="label label-danger">'+diffDays+' days late </span></h5>';
+                				}
+                			} else {
+			                	invoicelist += '</h5>';                				
+                			}
+
+		                	invoicelist +=
 										'<a href="#" class="add all">'+
 											'<i class="fa fa-plus"></i>'+
 										'</a>'+
@@ -327,69 +389,12 @@ function updateGrandTotal()
 									'</div>'+
 			                    '</td>'+
 			                    '<td>Billed Invoice</td>'+
-			                 '</tr>'
-						);			
-
-		            } else {
-
-
-		            jQuery('#resultsInvoice > tbody:first').append(
-	                 		'<tr class="even billed">'+
-	                    		'<td class="items">'+
-		                 			'<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
-		                 			'<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
-	                    			'<h5>'+item_name+'</h5>'+
-										'<a href="#" class="add all">'+
-											'<i class="fa fa-plus"></i>'+
-										'</a>'+
-									'<div class="bills-info">'+
-					 	  			   '<div class="panel-group">'+
-						            		'<div class="panel">'+
-						            			'<h5><span class="price" value="'+need_to_pay+'">'+need_to_pay+'</span></h5>'+
-							          		'</div>'+
-						          		'</div>'+						          																									
-									'</div>'+
-			                    '</td>'+
-			                    '<td>Billed Invoice</td>'+
-			                 '</tr>'
-						);			
-		            }
-
-					    //              	'<a class="details-link" data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#ID-1">'+
-					    //                	'Details'+
-						// '</a>'+
-					    //           '<div id="ID-1" class="details-info panel-collapse collapse">'+
-					    //             '<div class="panel-body">'+
-						// 	'<dl class="list-details-items">'+
-						// 		'<dt>SPP</dd>'+
-						// 		'<dd class="price" value="500000">500000</dd>'+
-						// 		'<dd class="add-to">'+
-						// 			'<a href="#" class="add">'+
-						// 				'<i class="fa fa-plus"></i>'+
-						// 			'</a>'+
-						// 		'</dd>'+
-						// 		'<dt>Seragam</dd>'+
-						// 		'<dd class="price" value="500000">500000</dd>'+
-						// 		'<dd class="add-to">'+
-						// 			'<a href="#" class="add">'+
-						// 				'<i class="fa fa-plus"></i>'+
-						// 			'</a>'+
-						// 		'</dd>'+
-								
-						// 		'<dt>DPP</dd>'+
-						// 		'<dd class="price" value="1000000">1000000</dd>'+
-						// 		'<dd class="add-to">'+
-						// 			'<a href="#" class="add">'+
-						// 				'<i class="fa fa-plus"></i>'+
-						// 			'</a>'+
-						// 		'</dd>'+
-						// 	'</ul>'+
-					    //             '</div>'+
-					    //           '</div>'+
-					    //         '</div>'+
+			                 '</tr>';
 
 		            }
-					
+
+		            jQuery('#resultsInvoice > tbody:first').append(invoicelist);					
+
 					jQuery('.price').formatCurrency({region: 'id-ID'});
 					
 					/* Initialise datatables */
@@ -489,15 +494,40 @@ function updateGrandTotal()
 
         jQuery("#invoiceTable tbody tr").each(function() {
         /* get Qty and EA Price */
-            // console.log(num);
-            items[num] = {};
-            items[num]['id'] = jQuery(this).find('td input.id-invoice-dab').val();
-            items[num]['amount_paid'] = jQuery(this).find('td input.pay-invoice-dab').val();
-            items[num]['status'] = 'PAID';
-            // console.log(JSON.stringify(items[num]));                        
-            num = num + 1;
+	        if ( jQuery(this).find('td span.subtotal').val() != 0 ) {
+
+
+	            // console.log(num);
+	            items[num] = {};
+	            items[num]['id'] = jQuery(this).find('td input.id-invoice-dab').val();
+
+	            //jika kurang dari yang harus dibayarkan 
+	            console.log('yang harus dibayarkan : '+jQuery(this).find('td input.pay-invoice-dab').val());
+	            console.log('instalment : '+jQuery(this).find('td input.instalment-invoice-dab').val())
+	            if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) == parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) ) 
+	            {
+		            items[num]['status'] = 'PAID';
+		            items[num]['amount_paid'] = '0';
+	            } 
+	            else if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) == 0) 
+	            {
+		            items[num]['status'] = 'PAID';
+		            items[num]['amount_paid'] = jQuery(this).find('td input.pay-invoice-dab').val();
+	            }
+	            else if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) < parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) ) 
+	            {
+		            items[num]['status'] = 'INSTALMENT';
+		            items[num]['amount_paid'] = jQuery(this).find('td input.instalment-invoice-dab').val();
+	            } 
+	            console.log(JSON.stringify(items[num]));                        
+	            num = num + 1;
+	        } else {
+	        	console.log('tidak dibayarkan')
+	        }
+
         });
 
+            // return false;
         // return false;
 
         //update span

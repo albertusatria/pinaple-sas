@@ -32,7 +32,7 @@ class M_payments extends CI_Model {
     function get_siswa_invoice($nis) {
         $sql = "SELECT i.*,t.name as item_name, p.name as period_name, y.name as packet_name 
                 FROM
-                (SELECT * FROM invoices WHERE nis = '$nis' AND status = 'UNPAID' ) i
+                (SELECT * FROM invoices WHERE nis = '$nis' AND status != 'PAID' ) i
                 LEFT JOIN items_type t ON i.item_type_id = t.id
                 LEFT JOIN periods p ON p.id = i.period_id
                 LEFT JOIN packets_year y ON i.packet_id = y.id";

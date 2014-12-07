@@ -80,7 +80,6 @@
 							</tr>
 		             	</thead>
 	              		<tbody class="table-striped">
-
 <!-- 	                 <tr class="even accidental">
 	                    <td class="items">
 	                    	<h4>Seragam</h4>
@@ -112,10 +111,6 @@
 	<div class="col-md-8">
 	  <div class="panel panel-default">
 	  
-	    <div class="panel-heading">
-	      <h4 class="panel-title">Form Invoice</h4>
-	    </div>
-	    
 		<div class="panel-body">
 			<div class="row">
                 <div class="col-sm-6">
