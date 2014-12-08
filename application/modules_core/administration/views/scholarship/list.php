@@ -170,7 +170,7 @@
 
   <!-- Modal --> 
   <div id="initScholarship" class="modal fade initPacket" tabindex="-1" role="dialog" aria-labelledby="initPacketLabel" aria-hidden="true">
-	 <div class="modal-dialog">
+	 <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 
 		  <form method="POST" id="scholarshipForm" action="<?php echo base_url(); ?>">
@@ -184,13 +184,13 @@
 		    <input type="hidden" id="school_year_id" name="school_year_id" class="form-control"  value="<?php echo $school_year->id ?>"/>
 		    <input type="hidden" id="nis_choosen" name="nis" class="form-control" value="" />
 
-			<div class="form-group">
+			<div class="form-group value-of-scholarsip">
 			  <label class="col-sm-3 control-label">Allocations Fund<span class="asterisk">*</span></label>
 			  <div class="col-sm-9">
 			  	<div class="input-group">
 			  		<span class="input-group-addon">Rp</span>
-			  		<input type="text" class="form-control" placeholder="example: 3000000">
-			  		<!--<span class="input-group-addon">.00</span>-->
+			  		<input type="text" class="form-control scholarship-value" placeholder="example: 3000000">
+			  		<span class="input-group-addon change-value"><i class="fa fa-edit"></i></span>
                 </div>
 			  </div>
 			</div>
@@ -198,7 +198,7 @@
 
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="submit" class="btn btn-primary">Save</button>
+	        <button type="button" class="btn btn-primary next-assign">Next</button>
 	      </div>
 
 		  </form>
