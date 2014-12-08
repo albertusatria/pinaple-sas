@@ -132,7 +132,8 @@
                     
                     <h5 class="subtitle mb10">To</h5>
                     <address>
-                        <strong>Simon Megadewandanu</strong><br>
+                    	<input type="hidden" id="nisPembayar" value="" />
+                        <strong><input type="text" id="namaPembayar" value="Payer name here ..."></strong><br>
                         Kelas 7 , Sekolah Menengah Pertama<br>
                         Tahun Ajaran 2014/2015<br>
                     </address>
@@ -162,6 +163,7 @@
             <table class="table table-total">
                 <tbody>
                     <tr>
+                    	<input type="hidden" id="totalPayment" value="0" />
                         <td><strong>TOTAL :</strong></td>
                         <td class="price"></td>
                     </tr>

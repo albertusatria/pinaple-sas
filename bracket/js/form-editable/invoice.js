@@ -5,7 +5,7 @@ var FormEditableInvoice = function () {
 		var invoiceTable = $('#invoiceTable');
 		var price = parseInt(invoiceTable.find('.price.each').attr('value'));
         //set editable element with success function to get their updated value
-		$('.qty').editable({
+		$('.qty.editable').editable({
 			success: function(response, newValue) {
 				var dethis = $(this);
 				//update subtotal on the row

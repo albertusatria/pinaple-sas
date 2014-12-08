@@ -64,6 +64,37 @@ class Payments extends Operator_base {
 	    echo json_encode($data);		
 	}
 
+	public function get_optional_payment_option() 
+	{
+		foreach ($_POST as $value => $val) {
+			$data = $this->m_payments->get_optional_payment_option($val);
+		}
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+
+	}
+
+	public function payment_create_nota() 
+	{
+		foreach ($_POST as $value => $val) {
+			$val['payment_date'] = $this->get_now();
+			$data = $this->m_payments->payment_create_nota($val);
+		}
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+
+	}
+
+	public function payment_create_nota_detail() {
+		foreach ($_POST as $value => $val) {
+			$data = $this->m_payments->payment_create_nota_detail($val);
+		}
+		header('Content-Type: application/json');
+	    echo json_encode($data);				
+	}
+
+
+
 	public function payment_process()
 	{
 		foreach ($_POST as $value => $val) {
@@ -75,8 +106,7 @@ class Payments extends Operator_base {
 
 			$data = $this->m_payments->payment_process($val['id'],$params);
 		}
-		header('Content-Type: application/json');
-	    echo json_encode($data);		
+		$this->session->set_flashdata('message', 'Transaksi berhasil disimpan');
 	}
 
 	public function get_now() {

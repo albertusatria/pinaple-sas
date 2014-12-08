@@ -44,6 +44,28 @@ class M_payments extends CI_Model {
         }        
     }
 
+    function get_optional_payment_option($data) {
+        $unit_id = $data['unit_id'];
+        $sql = "SELECT id,name,amount,unit_id
+                FROM items_type 
+                WHERE type = 'optional' AND is_deleted = '0'
+                ";
+        if ($unit_id != '') 
+        {
+            $sql .= " AND ( unit_id IS NULL OR unit_id = '$unit_id' ) ";
+        } else {
+            $sql .= " AND unit_id IS NULL ";            
+        }
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }        
+
+    }
+
+
     function payment_process($id,$params) {
         $this->db->where('id',$id);
         $update = $this->db->update('invoices',$params);
@@ -53,4 +75,22 @@ class M_payments extends CI_Model {
             return false;
         }
     }
+
+    function payment_create_nota($params) {
+        $insert = $this->db->insert('payments',$params);
+        if ($insert) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }        
+    }
+
+    function payment_create_nota_detail($params) {
+        $insert = $this->db->insert('payments_detail',$params);
+        if ($insert) {
+            return true;
+        } else {
+            return false;
+        }        
+    }    
 }
