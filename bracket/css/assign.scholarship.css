@@ -1,0 +1,33 @@
+/* Scholarsip Assignment Value styling */
+/*----------------------------------------------------------------------------*/
+/* Head Info
+/*----------------------------------------------------------------------------*/
+.value-of-scholarsip .fa-edit
+{
+	display: none;
+}
+.label-assignment
+{
+	text-transform: uppercase;
+}
+.value-of-scholarship
+{
+	float: right;
+	text-align: right;
+}
+/*----------------------------------------------------------------------------*/
+/* Scholarship Item
+/*----------------------------------------------------------------------------*/
+.modal-body hr
+{
+	margin-bottom: 0;
+}
+.assign-scholarships .item
+{
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+.assign-scholarships .item label
+{
+	margin: 10px 0;
+}

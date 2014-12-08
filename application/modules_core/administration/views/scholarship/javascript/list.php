@@ -119,3 +119,5 @@ jQuery(document).ready(function() {
       window.location = "<?php echo base_url(); ?>administration/scholarship/delete/"+no;
   }
 </script>
+<!-- JS code for assign scholarship value -->
+<?php $this->load->view('administration/scholarship/javascript/assign')?>
