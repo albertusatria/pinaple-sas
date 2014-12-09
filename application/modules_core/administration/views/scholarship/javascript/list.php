@@ -110,6 +110,10 @@ jQuery(document).ready(function() {
 
 	    return false;
 	}
+
+	jQuery('#searchResult').on('click','a.daftar',function(){
+		console.log(jQuery(this).closest('div').find('h5.student-id').text());
+	});
 	
 });
 </script>

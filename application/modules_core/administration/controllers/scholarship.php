@@ -10,6 +10,7 @@ class Scholarship extends Operator_base {
 		$this->load->model('initiation/m_school_year');
 		$this->load->model('registration/m_registration');
 		$this->load->model('administration/m_scholarship');
+		$this->load->model('payment/m_payments');
 		// load permission
 		$this->load->helper('text');
 		// page title
@@ -51,6 +52,16 @@ class Scholarship extends Operator_base {
 			$keyword = $value['keyword'];
 		}
 		$data = $this->m_registration->get_list_siswa($keyword);
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+	}
+
+	public function get_invoices_for_scholarship()
+	{
+		foreach ($_POST as $value) {
+			$nis = $value['nis'];
+		}
+		$data = $this->m_payments->get_siswa_invoice($nis);
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}

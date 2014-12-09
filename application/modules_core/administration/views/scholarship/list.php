@@ -194,6 +194,7 @@
                 </div>
 			  </div>
 			</div>
+		  <div class="modal-body-inside"></div>
 	      </div>
 
 	      <div class="modal-footer">
