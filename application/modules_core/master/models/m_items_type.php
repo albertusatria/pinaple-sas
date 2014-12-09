@@ -15,6 +15,29 @@ class m_items_type extends CI_Model {
         return $this->db->get('items_type')->num_rows();
     }
     
+    function get_items_type_by_type($type){
+        return $this->db->get_where('items_type',array('type'=>$type))->result();
+    }
+
+    function get_list_items_type($u_id,$keyword){
+        if($u_id=='all')
+            $suid="";
+        else
+            $suid="AND unit_id=".$u_id;
+
+        $sql = "SELECT *
+                FROM items_type 
+                WHERE name LIKE '%$keyword%' ".$suid."
+                AND type='OPTIONAL' AND is_deleted=0 
+                ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
     function get_check_duplicate_items($item_name){
         return $this->db->get_where('items_type',array('name'=>$item_name))->row();
     }
