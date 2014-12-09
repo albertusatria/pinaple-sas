@@ -33,6 +33,7 @@
 	          	<div class="col-lg-8">
 	            	<input type="text" name="name" id="keyword" class="form-control" 
 	            	placeholder="Type student's Name or NIS..." required="" value="0496">
+                    <a href="" id="no-nis-transaction-mode">Tanpa NIS</a>
 	          	</div>
 	        
 	         	<div class="col-lg-4">
@@ -133,7 +134,7 @@
                     <h5 class="subtitle mb10">To</h5>
                     <address>
                     	<input type="hidden" id="nisPembayar" value="" />
-                        <strong><input type="text" id="namaPembayar" value="Payer name here ..."></strong><br>
+                        <strong><input type="text" id="namaPembayar" placeholder="Payer name here ..." readonly></strong><br>
                         Kelas 7 , Sekolah Menengah Pertama<br>
                         Tahun Ajaran 2014/2015<br>
                     </address>
@@ -150,6 +151,7 @@
                 <th>Item</th>
                 <th>Qty</th>
                 <th>Price</th>
+                <th>Fine</th>
                 <th>Subtotal</th>
                 <th></th>
               </tr>

@@ -62,11 +62,34 @@ class M_payments extends CI_Model {
         } else {
             return array();
         }        
-
     }
 
+    function get_optional_payment_option_no_name() {
+        $sql = "SELECT id,name,amount,unit_id
+                FROM items_type 
+                WHERE type = 'optional' AND is_deleted = '0'
+                ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }        
+    }
 
     function payment_process($id,$params) {
+
+        //if instalment, upgrade from last amount paid
+        $status = $params['status'];
+        if ($status == 'INSTALMENT') {
+            $this->db->where('id',$id);
+            $query = $this->db->get('invoices');
+            if ($query->num_rows() == 1) {
+                $row = $query->row_array();
+                $params['amount_paid'] = $row['amount_paid'] + $params['amount_paid'];                
+            }
+        }
+
         $this->db->where('id',$id);
         $update = $this->db->update('invoices',$params);
         if ($update) {
@@ -74,6 +97,7 @@ class M_payments extends CI_Model {
         } else {
             return false;
         }
+
     }
 
     function payment_create_nota($params) {

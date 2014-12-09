@@ -62,7 +62,9 @@ jQuery(document).ready(function() {
 		var id 			= dethis.closest('td').find('input.id-invoice').val();
 		var is_editable	= '';
 		var need_to_pay = dethis.closest('td').find('input.pay-invoice').val();
-
+		var hari_terlambat = dethis.closest('td').find('input.day-terlambat').val();
+		var denda_terlambat = dethis.closest('td').find('input.fine-terlambat').val();
+		var subtot = Number(price) + Number(denda_terlambat);
 		// console.log(id + ' ' +need_to_pay);
 		// return false;
 		                 			// '<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
@@ -87,6 +89,8 @@ jQuery(document).ready(function() {
      			'<input type="hidden" class="init-invoice-dab" value="'+need_to_pay+'">'+
      			'<input type="hidden" class="pay-invoice-dab" value="'+need_to_pay+'">'+
      			'<input type="hidden" class="instalment-invoice-dab" value="0">'+
+     			'<input type="hidden" class="day-late-invoice-dab" value="'+hari_terlambat+'">'+
+     			'<input type="hidden" class="fine-invoice-dab" value="'+denda_terlambat+'">'+
      			'<input type="hidden" class="bayar-invoice-dab" value="YA">'+
 				'<div class="text-primary"><strong>'+itemTitle+'</strong></div>'+
 				'<dl><small>'+detailList+'</small></dl>'+
@@ -107,8 +111,24 @@ jQuery(document).ready(function() {
 				'<span class="price each init-price" value='+price+'>'+price+'</span><br/>'+
 				'<p class="installment">'+
 					'<span class="label-installment">installment : </span><span class="inst-credit" value="0">0</span>'+
-			'</p></td>'+
-			'<td><span class="price subtotal" value='+price+'>'+price+'</span></td>'+
+			'</p></td>';
+			if (denda_terlambat != 0) 
+			{
+			newRow += 
+			'<td>'+
+				'<span class="price each denda-price" value='+denda_terlambat+'>'+denda_terlambat+'</span><br/>'+
+				'<p class="installment">'+
+					'<span class="label-fines">days : </span><span class="days-credit" value="'+hari_terlambat+'">'+hari_terlambat+'</span>'+
+			'</p></td>';
+			} 
+			else 
+			{
+			newRow +=
+			'<td></td>';
+			}
+			newRow +=
+			// '<td><input type="text" class="form-control input-sm fines" value="'+denda_terlambat+'" /></td>'+
+			'<td><span class="price subtotal" value='+subtot+'>'+subtot+'</span></td>'+
 			'<td><a class="action cancel"><i class="fa fa-minus-square"></i></a></td>'+			
 			'</tr>';
 
@@ -369,6 +389,7 @@ function updateGrandTotal()
 			                	terlambat = '0';
 			                } else {
 			                	terlambat = '1';
+			                	fine = diffDays * 500;
 			                }
 		                } else {
 		                	diffDays = 'tidak ada';
@@ -385,8 +406,22 @@ function updateGrandTotal()
 	                    		'<td class="items">'+
 		                 			'<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
 		                 			'<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
-		                 			'<input type="hidden" class="item-name" value="'+item_name+'">'+
-	                    			'<h5><span class="judul">'+item_name+'</span>';
+		                 			'<input type="hidden" class="item-name" value="'+item_name+'">';
+
+                			if (diffDays != 'tidak ada') {
+                				if (terlambat == '0') {
+				                	invoicelist += '<input type="hidden" class="fine-terlambat" value="0">'+
+				                					'<input type="hidden" class="day-terlambat" value="0">';
+                				} else {
+				                	invoicelist += '<input type="hidden" class="fine-terlambat" value="'+fine+'">'+
+				                					'<input type="hidden" class="day-terlambat" value="'+diffDays+'">';
+                				}
+                			} else {
+				                	invoicelist += '<input type="hidden" class="fine-terlambat" value="0">'+
+				                					'<input type="hidden" class="day-terlambat" value="0">';                				
+                			}
+
+	                    			invoicelist += '<h5><span class="judul">'+item_name+'</span>';
 
                 			if (diffDays != 'tidak ada') {
                 				if (terlambat == '0') {
@@ -439,6 +474,8 @@ function updateGrandTotal()
 				                 			'<input type="hidden" class="id-invoice" value="0">'+
 				                 			'<input type="hidden" class="pay-invoice" value="'+amount+'">'+
 				                 			'<input type="hidden" class="item-name" value="'+name+'">'+
+				                			'<input type="hidden" class="fine-terlambat" value="0">'+
+				                					'<input type="hidden" class="day-terlambat" value="0">'+
 			                    			'<h5><span class="judul">'+name+'</span> <span class="label label-info">optional</span></h5>';
 				                	invoicelistOptional +=
 												'<a href="#" class="add all">'+
@@ -573,7 +610,9 @@ function updateGrandTotal()
         var item = {};
         var x = 1;
         item[x] = {};
-        item[x]['nis'] = jQuery('#nisPembayar').val();
+        if (jQuery('#nisPembayar').val() != '') {
+	        item[x]['nis'] = jQuery('#nisPembayar').val();
+        }
         item[x]['payer_name'] = jQuery('#namaPembayar').val();
         item[x]['amount'] = jQuery('#totalPayment').val();
         item[x]['payer_method'] = '0';
@@ -609,8 +648,16 @@ function updateGrandTotal()
 				        itemx[num]['qty'] = jQuery(this).find('td span.qty').text();
 				        itemx[num]['amount'] = jQuery(this).find('td input.init-invoice-dab').val();
 				        itemx[num]['instalment'] = jQuery(this).find('td input.instalment-invoice-dab').val();
-				        itemx[num]['fines'] = '0';
-				        itemx[num]['subtotal'] = jQuery(this).find('td input.pay-invoice-dab').val();
+				        itemx[num]['fines'] = jQuery(this).find('td input.fine-invoice-dab').val();
+				        if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) == 0) {
+
+				        itemx[num]['subtotal'] = ( parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) 
+				        							+ parseInt(jQuery(this).find('td input.fine-invoice-dab').val()) );
+
+				        } else {
+				        itemx[num]['subtotal'] = ( parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) 
+				        							+ parseInt(jQuery(this).find('td input.fine-invoice-dab').val()) );
+				        }
 
 			            // console.log(num);
 			            items[num] = {};
@@ -622,12 +669,12 @@ function updateGrandTotal()
 			            if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) == parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) ) 
 			            {
 				            items[num]['status'] = 'PAID';
-				            items[num]['amount_paid'] = '0';
+				            items[num]['amount_paid'] = parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) + parseInt(jQuery(this).find('td input.fine-invoice-dab').val());
 			            } 
 			            else if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) == 0) 
 			            {
 				            items[num]['status'] = 'PAID';
-				            items[num]['amount_paid'] = jQuery(this).find('td input.pay-invoice-dab').val();
+				            items[num]['amount_paid'] = parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) + parseInt(jQuery(this).find('td input.fine-invoice-dab').val());
 			            }
 			            else if (parseInt(jQuery(this).find('td input.instalment-invoice-dab').val()) < parseInt(jQuery(this).find('td input.pay-invoice-dab').val()) ) 
 			            {
@@ -642,7 +689,8 @@ function updateGrandTotal()
 			        }
 
 		        });
-	
+
+				// return false;	
 		        // return false;
 		        jQuery.ajax({
 		          	type: "POST",
@@ -686,6 +734,88 @@ function updateGrandTotal()
 		//bayar detail
 
  
+	});
+	
+	jQuery('#no-nis-transaction-mode').on('click',function(){
+		jQuery('#namaPembayar').removeAttr('readonly').attr('required','required');
+
+        jQuery('#searchPanel').fadeOut(function(){
+          jQuery(this).remove();		  
+
+          //query semua invoice yang dimiliki
+			jQuery('#resultsInvoice tbody tr').remove();
+
+     		var invoicelistOptional = '';
+
+		    jQuery.ajax({
+		    	type: "GET",
+		    	url: CI_ROOT+"payment/payments/get_optional_payment_option_no_name",
+		    	async:false,
+		     	success: function(data)
+		     	{
+		     		console.log(data);
+
+		            for (index = 0; index < data.length; ++index) {
+		                name = data[index]['name'];
+		                amount = data[index]['amount'];
+
+			            if (index % 2 == 0) {
+		                 	invoicelistOptional += '<tr class="odd billed">';
+		                }
+		                else {
+		                 	invoicelistOptional += '<tr class="even billed">';		
+		                }
+		                	invoicelistOptional +=
+	                    		'<td class="items">'+
+		                 			'<input type="hidden" class="id-invoice" value="0">'+
+		                 			'<input type="hidden" class="pay-invoice" value="'+amount+'">'+
+		                 			'<input type="hidden" class="item-name" value="'+name+'">'+
+		                			'<input type="hidden" class="fine-terlambat" value="0">'+
+		                					'<input type="hidden" class="day-terlambat" value="0">'+
+	                    			'<h5><span class="judul">'+name+'</span>';
+		                	invoicelistOptional +=
+										'<a href="#" class="add all">'+
+											'<i class="fa fa-plus"></i>'+
+										'</a>'+
+									'<div class="bills-info">'+
+					 	  			   '<div class="panel-group">'+
+						            		'<div class="panel">'+
+						            			'<h5><span class="price" value="'+amount+'">'+amount+'</span></h5>'+
+							          		'</div>'+
+						          		'</div>'+						          																									
+									'</div>'+
+			                    '</td>'+
+			                    '<td>Invoice Accidental</td>'+
+			                 '</tr>';		
+		            }
+
+			            jQuery('#resultsInvoice > tbody:first').append(invoicelistOptional);					
+
+						jQuery('.price').formatCurrency({region: 'id-ID'});
+
+						/* Initialise datatables */
+					    var oTable = jQuery('#resultsInvoice').dataTable();
+
+					    /* Add event listener to the dropdown input */
+					    $('select#filter').change( function() { 
+					    	oTable.fnFilter( $(this).val() );
+						});		            
+										
+						jQuery('#ajax-loader').hide(); 
+
+				      jQuery('#invoicePanel').fadeIn(function(){
+				      });          		            
+
+	            },
+			    error: function (data)
+			    {
+			    	console.log('terjadi error dalam pengambilan accidental item');
+			    	console.log(data);
+			    }
+			});
+
+        });
+		return false;	
 	});
 
 </script>

@@ -74,6 +74,14 @@ class Payments extends Operator_base {
 
 	}
 
+	public function get_optional_payment_option_no_name() 
+	{
+		$data = $this->m_payments->get_optional_payment_option_no_name();
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+
+	}
+
 	public function payment_create_nota() 
 	{
 		foreach ($_POST as $value => $val) {
