@@ -66,6 +66,18 @@ class Scholarship extends Operator_base {
 	    echo json_encode($data);
 	}
 
+	public function save_scholarship()
+	{
+		foreach ($_POST as $value) {
+			//$params['nis'] = $value['nis'];
+			$params['id'] = $value['id'];
+			$params['sholarship'] = $value['scholarship'];
+		}
+		$data = $this->m_payments->edit_invoices($params);
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+	}
+
 	public function add_process() {		
 		$this->check_auth('C');
 		$this->form_validation->set_rules('name', 'Scholarship Name', 'required|trim|xss_clean|callback_check_duplicate_scholarship');

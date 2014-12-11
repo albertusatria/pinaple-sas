@@ -57,12 +57,12 @@ jQuery(document).ready(function() {
 	    	data: item,
 	     	success: function(data)
 	     	{
+	     		jQuery('#searchResult div').remove();
 			    if (data.length > 0)
 			    {
 			   		//tampilkan list siswanya
-				   	jQuery('#searchResult div').remove();
-					var nis; var nama; var unit; var grade; var alamat; var current;
-		           for (index = 0; index < data.length; ++index) {
+				   	var nis; var nama; var unit; var grade; var alamat; var current;
+		           	for (index = 0; index < data.length; ++index) {
 		                nis = data[index]['nis'];
 		                nama = data[index]['full_name'];
 		                unit = data[index]['name'];
@@ -70,36 +70,38 @@ jQuery(document).ready(function() {
 		                alamat = data[index]['living_address'];
 		                current = data[index]['current_level'];
 		                start = data[index]['start_level'];
-						
-						//delay append data while loading
-						setTimeout(function() {
-							jQuery('#searchResult').append(
-							'<div class="col-md-4 students-id">'+
-								'<div class="people-item">'+
-								  '<div class="media">'+
-								    '<div class="media-body">'+
-								      '<h5 class="student-id text-info">'+nis+'</h5>'+
-								      '<h4 class="student-name text-primary">'+nama+'</h4>'+
-								      '<input type="hidden" class="student-unit" value="'+unit_id+'">'+
-								      '<input type="hidden" class="student-start" value="'+start+'">'+
-								      '<input type="hidden" class="student-current" value="'+current+'">'+
-								      '<div class="text-muted"><i class="fa fa-puzzle-piece"></i>'+unit+' ('+unit_id+'), Start '+start+', Tingkat '+current+'</div>'+
-								      '<div class="text-muted"><i class="fa fa-map-marker"></i>'+alamat+'</div>'+
-								      '<a href="#" class="btn btn-danger daftar" data-toggle="modal" data-target="#initScholarship">Assign Scholarship!</a>'+
-								    '</div>'+
-								  '</div>'+
-								'</div>'+
-							'</div>'
-							);							
-							jQuery('#ajax-loader').hide();    
-						}, 1000); // <-- time in milliseconds						
+												
+						jQuery('#searchResult').append(
+						'<div class="col-md-4 students-id">'+
+							'<div class="people-item">'+
+							  '<div class="media">'+
+							    '<div class="media-body">'+
+							      '<h5 class="student-id text-info">'+nis+'</h5>'+
+							      '<h4 class="student-name text-primary">'+nama+'</h4>'+
+							      '<input type="hidden" class="student-unit" value="'+unit_id+'">'+
+							      '<input type="hidden" class="student-start" value="'+start+'">'+
+							      '<input type="hidden" class="student-current" value="'+current+'">'+
+							      '<div class="text-muted"><i class="fa fa-puzzle-piece"></i>'+unit+' ('+unit_id+'), Start '+start+', Tingkat '+current+'</div>'+
+							      '<div class="text-muted"><i class="fa fa-map-marker"></i>'+alamat+'</div>'+
+							      '<a href="#" class="btn btn-danger daftar" data-toggle="modal" data-target="#initScholarship">Assign Scholarship!</a>'+
+							    '</div>'+
+							  '</div>'+
+							'</div>'+
+						'</div>'
+						);														
 		            }
 				}
 				else 
 				{
 				 	//bila tidak ketemu
 				 	console.log('tidak ditemukan');
-				}		    
+				}
+
+				//delay append data while loading
+				setTimeout(function() {
+					jQuery('#ajax-loader').hide();    
+				}, 1000); // <-- time in milliseconds		    
+
 	     	},
 		    error: function (data)
 		    {
@@ -110,10 +112,6 @@ jQuery(document).ready(function() {
 
 	    return false;
 	}
-
-	jQuery('#searchResult').on('click','a.daftar',function(){
-		console.log(jQuery(this).closest('div').find('h5.student-id').text());
-	});
 	
 });
 </script>

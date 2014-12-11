@@ -200,6 +200,7 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	        <button type="button" class="btn btn-primary next-assign">Next</button>
+	        <button type="button" class="btn btn-primary next-save">Save</button>
 	      </div>
 
 		  </form>
