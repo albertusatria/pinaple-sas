@@ -14,6 +14,6 @@
 
 <script type="text/javascript" language="javascript">
   function gotoback(){
-      window.location = "<?php echo base_url(); ?>master/invoice_packet/";
+      window.location = "<?php echo base_url(); ?>master/items_type_optional/";
   }
 </script>

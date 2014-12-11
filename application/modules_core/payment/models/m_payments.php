@@ -116,5 +116,9 @@ class M_payments extends CI_Model {
         } else {
             return false;
         }        
+    }
+
+    function edit_invoices($params) {
+        $this->db->update('invoices',$params,array('id'=>$params['id']));
     }    
 }
