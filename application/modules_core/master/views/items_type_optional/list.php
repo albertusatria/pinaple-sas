@@ -45,7 +45,7 @@
 				<div class="form-group">
 				
 				  <div class="col-lg-5">	  
-					<select name="u_id" id="u_id" class="form-control" required>
+					<select name="u_id" id="u_id" class="form-control input-sm" required>
 			  				<option value="all"> All Unit </option>
 		              <?php foreach ($ls_unit as $unit): ?>
 		                  <?php if($unit->id!='0000'){ ?>
@@ -90,8 +90,8 @@
 			
 			        <div class="form-group">
 					  <div class="col-sm-12">
-					  	<div class="input-group">
-					  		<select name="unit_id" id="jenjangSekolah" class="form-control">
+					  	<div class="input-group selec choose-new-levels">
+					  		<select name="unit_id" id="jenjangSekolah" class="form-control input-sm">
 					  				<option value=""> All Unit </option>
 				              <?php foreach ($ls_unit as $unit): ?>
 				                  <?php if($unit->id!='0000'){ ?>
