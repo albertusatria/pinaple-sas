@@ -38,7 +38,7 @@
 						<?php endif;?>
 					<?php endif;?>
 					<div class="row row-pad-5">        
-				      <div class="table-responsive">
+				      <div class="table-responsive list-type-table">
 				      <table class="table table-hidaction table-hover mb30">
 				        <thead>
 				          <tr>
