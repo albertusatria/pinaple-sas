@@ -58,4 +58,8 @@ class m_scholarship extends CI_Model {
        $this->db->delete('scholarship',$params,array('id'=>$params['id']));
     }
 
+    function add_scholarship_allocation($params) {
+        $this->db->insert('scholarship_allocation',$params);
+    }
+
 }

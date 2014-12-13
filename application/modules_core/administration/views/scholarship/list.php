@@ -188,9 +188,18 @@
 			  <label class="col-sm-3 control-label">Allocations Fund<span class="asterisk">*</span></label>
 			  <div class="col-sm-9">
 			  	<div class="input-group">
+				  	<select name="scholarship-value" id="scholarship-value" class="form-control scholarship-value" required>
+			  				<option value=""> - choose scholarship - </option>
+		              <?php foreach ($ls_scholarship as $sc): ?>
+		                    <option value="<?php echo $sc->id."_".$sc->amount; ?>" required>
+		                    <?php echo $sc->name." (Rp ".number_format($sc->amount,0,',','.').")"; ?></option>
+		                  <?php endforeach; ?>
+					</select>
+					<!--
 			  		<span class="input-group-addon">Rp</span>
 			  		<input type="text" class="form-control scholarship-value" placeholder="example: 3000000">
 			  		<span class="input-group-addon change-value"><i class="fa fa-edit"></i></span>
+					-->
                 </div>
 			  </div>
 			</div>
