@@ -66,14 +66,26 @@ class Scholarship extends Operator_base {
 	    echo json_encode($data);
 	}
 
-	public function save_scholarship()
+	public function save_scholarship_allocation()
+	{
+		foreach ($_POST as $value) {
+			$params['scholarship_id'] = $value['scholarship_id'];
+			$params['nis'] = $value['nis'];
+			$params['amount'] = $value['amount'];
+			$params['notes'] = $value['notes'];
+		}
+		$data = $this->m_scholarship->add_scholarship_allocation($params);
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+	}
+	public function save_scholarship_invoices()
 	{
 		foreach ($_POST as $value) {
 			//$params['nis'] = $value['nis'];
 			$params['id'] = $value['id'];
-			$params['sholarship'] = $value['scholarship'];
+			$params['scholarship'] = $value['scholarship'];
+			$data = $this->m_payments->edit_invoices($params);
 		}
-		$data = $this->m_payments->edit_invoices($params);
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}
