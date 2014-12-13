@@ -46,7 +46,7 @@
             <label class="col-sm-3 control-label">School Unit <span class="asterisk">*</span></label>
             <div class="col-sm-3">
               <div class="input-group">
-                <select name="unit_id" class="form-control">
+                <select name="unit_id" class="form-control input-sm">
                     <option value=""> All Unit </option>
                       <?php foreach ($ls_unit as $unit): ?>
                           <?php if($unit->id<>"0000"){ ?>

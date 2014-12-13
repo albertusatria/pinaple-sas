@@ -1,3 +1,5 @@
+<link href="<?php echo base_url();?>bracket/css/custom.items.type.optional.css" rel="stylesheet">
+
 <script src="<?php echo base_url();?>bracket/js/jquery-1.10.2.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/bootstrap.min.js"></script>
