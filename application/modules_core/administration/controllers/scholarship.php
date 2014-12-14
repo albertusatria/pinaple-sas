@@ -36,6 +36,7 @@ class Scholarship extends Operator_base {
 		$data['school_year']= $this->m_school_year->get_active_year();
 		$sy_id = $data['school_year']->id;
 		$data['ls_scholarship'] = $this->m_scholarship->get_scholarship_by_year($sy_id);
+		$data['ls_scholarship2'] = $this->m_scholarship->get_notyet_used_scholarship_by_year($sy_id);
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
 		$data['eror'] = $this->session->flashdata('eror');
@@ -51,7 +52,7 @@ class Scholarship extends Operator_base {
 		foreach ($_POST as $value) {
 			$keyword = $value['keyword'];
 		}
-		$data = $this->m_registration->get_list_siswa($keyword);
+		$data = $this->m_scholarship->get_list_siswa_for_scholarship($keyword);
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}

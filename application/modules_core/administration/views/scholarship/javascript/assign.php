@@ -203,19 +203,17 @@ jQuery(document).ready(function() {
 		var amount = jQuery(this).closest('div').find('input.hidden-amount').val();
 		console.log('amount : '+amount);
 		console.log('new total : '+newTotal);
-		/*
 		if(amount<assigned){
 			alert('Scholarship must be greater than Cost');
-			params.value=0;
-			params.focus();
-			return false
+			jQuery(this).attr('value','');
+			jQuery(this).focus();
+			return false;
 		}
-		*/
 		if(newTotal<0){
 			alert('Scholarship can not be negative');
 			jQuery(this).attr('value','');
 			jQuery(this).focus();
-			return false
+			return false;
 		}
 		jQuery('.value-of-scholarship').attr('value', newTotal).text(newTotal).formatCurrency({region: 'id-ID'});
 		return false;
