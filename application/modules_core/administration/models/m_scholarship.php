@@ -15,6 +15,57 @@ class m_scholarship extends CI_Model {
         return $this->db->get_where('scholarship',array('school_year_id'=>$sy_id))->result();
     }
 
+    function get_notyet_used_scholarship_by_year($sy_id){
+        $sql = "SELECT *
+                FROM school_year
+                WHERE status = 'aktif'
+                LIMIT 1";
+        $query = $this->db->query($sql);
+        $schoolyear = $query->row();
+        $id = $schoolyear->id;
+
+        $sql = "SELECT *
+                FROM scholarship 
+                WHERE school_year_id='$sy_id'
+                AND id NOT IN (
+                    SELECT scholarship_id
+                    FROM scholarship_allocation
+                    WHERE school_year_id='$sy_id'
+                )";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }        
+    }
+
+    function get_list_siswa_for_scholarship($keyword) {
+        $sql = "SELECT *
+                FROM school_year
+                WHERE status = 'aktif'
+                LIMIT 1";
+        $query = $this->db->query($sql);
+        $schoolyear = $query->row();
+        $id = $schoolyear->id;
+
+        $sql = "SELECT s.*, u.name FROM users_student s 
+                LEFT JOIN units u ON s.unit_id = u.id 
+                LEFT JOIN invoices i ON i.nis = s.nis
+                WHERE (s.nis LIKE '%$keyword%' OR s.full_name LIKE '%$keyword%') AND s.status = 'SISWA' AND 
+                EXISTS (SELECT *
+                    FROM   re_registration r
+                    WHERE  s.nis = r.nis AND r.school_year_id = '$id')
+                HAVING SUM(i.amount) > 0 AND SUM(i.scholarship) = 0
+                LIMIT 12";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
     function get_total_rows(){
         return $this->db->get('scholarship')->num_rows();
     }
