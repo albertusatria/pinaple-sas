@@ -1,0 +1,45 @@
+/*----------------------------------------------------------------------------*/
+/* Balance Sheet Style
+/*----------------------------------------------------------------------------*/
+
+/* Table */
+
+tbody td, tfoot td
+{
+	vertical-align: middle !important;
+}
+
+tbody .group-heading td
+{
+	text-transform: uppercase;
+}
+tbody .group-content input
+{
+	float: right;
+	width: 100%;
+	text-align: right;
+}
+tfoot td
+{
+	border: 0 !important;
+}
+tfoot .total-label
+{
+	text-align: right;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+tfoot input
+{
+	border: 1px !important;
+	background-color: #f2f2f2 !important;
+	float: right;
+	height: 38px;
+	width: 100%;
+	text-align: right;
+}
+
+.panel-footer button
+{
+	display: none;
+}
