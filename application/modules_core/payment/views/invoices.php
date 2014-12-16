@@ -29,7 +29,8 @@
 
  					<div class="table-container">
 						<div class="table-actions-wrapper">
-							<div class="col-md-3 col-sm-12 right bulk-actions">
+							<div class="col-md-4 col-sm-12 right bulk-actions">
+								<button class="btn btn-sm btn-success table-group-action-submit"><i class="fa fa-check"></i> Submit</button>							
 							<select class="table-group-action-input form-control input-inline input-small input-sm">
 								<option value="">Select...</option>
 								<option value="Cancel">Cancel</option>
@@ -37,7 +38,7 @@
 								<option value="Cancel">On Hold</option>
 								<option value="Close">Close</option>
 							</select>
-							<button class="btn btn-sm btn-success table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
+							<label class="bulk-label">Bulk Actions</label>
 							</div>
 						</div>
 						<table class="table table-striped table-bordered table-hover" id="datatable_orders">
@@ -110,6 +111,15 @@
 						</tr>
 						</thead>
 						<tbody>
+							<tr>
+								<td><input type="checkbox" class="checkable"></td>
+								<td>#123123</td>
+								<td>06 January 2013</td>
+								<td>Simon M</td>
+								<td>SD</td>
+								<td>Paid</td>
+								<td><a href="#">View Order</a></td>
+							</tr>
 						</tbody>
 						</table>
 						</div>

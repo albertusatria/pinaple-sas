@@ -11,9 +11,16 @@
 {
 	margin-bottom: 15px;
 }
-.bulk-actions select, .bulk-actions button
+.bulk-actions select, .bulk-actions button, .bulk-actions label
 {
-	float: left;
+	float: right;
+}
+.bulk-actions label
+{
+	display: inline-block;
+	line-height: 30px;
+	vertical-align: middle;
+	margin: 0 12px 0 0;
 }
 .bulk-actions select
 {
