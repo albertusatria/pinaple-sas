@@ -149,3 +149,29 @@
 .off-price{
 	color: #ccc;
 }
+
+/* Confirmation Payment */
+#confirmationPayment .modal-body .table,
+#confirmationPayment .metode-pembayaran .col-sm-12,
+#confirmationPayment .metode-pembayaran .col-sm-7
+{
+	float: none;
+}
+
+#confirmationPayment .table > thead > tr > th:nth-child(6),
+#confirmationPayment .table > tbody > tr > td:nth-child(6),
+#cardsOption
+{
+	display: none;
+}
+
+/* Payment Methods */
+#confirmationPayment .metode-pembayaran .col-sm-12,
+#confirmationPayment .metode-pembayaran .col-sm-7
+{
+	line-height: normal;
+}
+#confirmationPayment .metode-pembayaran .col-sm-7
+{
+	margin-left: 25px;
+}

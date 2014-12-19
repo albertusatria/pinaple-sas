@@ -173,8 +173,7 @@
             </table>
             
             <div class="text-right btn-invoice">
-                <button class="btn btn-white" onclick="javascript:window.print();"><i class="fa fa-print mr5"></i> Print Invoice</button>
-                <button class="btn btn-primary mr5" id="bayarDab"><i class="fa fa-money mr5"></i> Make A Payment</button>                
+                <button class="btn btn-primary mr5" data-toggle="modal" data-target="#confirmationPayment" id="makePayment"><i class="fa fa-money mr5"></i> Make A Payment</button>                
             </div>
             
             <div class="mb40"></div>
@@ -190,3 +189,48 @@
   
   
 </div><!-- contentpanel -->
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Konfirmasi Pembelian</h4>
+      </div>
+      <div class="modal-body">
+        <div class="table-item">
+        </div>
+        <hr/>
+        <div class="metode-pembayaran">
+			<div class="col-sm-12">
+				<div class="rdio rdio-primary">
+				  <input type="radio" id="cash" value="cash" name="payment_method" required="">
+				  <label for="cash">Cash</label>
+				</div><!-- rdio -->
+				
+				<div class="rdio rdio-primary">
+				  <input type="radio" value="cc/debet" id="cards" name="payment_method">
+				  <label for="cards">Credit Card / Debet</label>
+				</div><!-- rdio -->
+				<label class="error" for="payment_method"></label>
+			</div> 
+			<div class="col-sm-7">
+            <select id="cardsOption" class="form-control input-sm" >
+				<option value="">Choose one from available CC or Debet cards</option>
+				<option value="BCA">BCA</option>
+				<option value="BNI">BNI</option>
+				<option value="BRI">BRI</option>
+				<option value="HSBC">HSBC</option>
+            </select>
+            <label class="error" for="fruits"></label>
+          </div>       	
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary" id="doPayment">Bayar dan Cetak</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
