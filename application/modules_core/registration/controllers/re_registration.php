@@ -109,10 +109,11 @@ class Re_registration extends Operator_base {
 					'amount' => $invo['amount'],
 					'period_id' => NULL,
 					'scholarship' => 0,
-					'dc' => $this->get_now()
+					'dc' => $this->get_now(),
 					);
 				if ($invo['period_id'] != '' OR $invo['period_id'] != NULL) {
 					$params['period_id'] = $invo['period_id'];
+					$params['payment_deadline'] = date('Y').'-07-10';
 					$jumlah = $invo['amount'];
 				} 
 				$this->m_registration->add_invoices($params);
@@ -120,7 +121,16 @@ class Re_registration extends Operator_base {
 
 			// generate 11 SPP
 			for ($i = 2; $i <= 12 ; $i++) { 
-				$params = array(
+
+				if ($i >= 7) {
+					$year = date('Y') + 1;
+					$month = '0'.($i-6);
+				} else {					
+					$year = date('Y');
+					$month = ($i+6);
+				}
+
+				$params = array(					
 					'nis' => $this->input->post('nis'),
 					'packet_id' => NULL,
 					'item_type_id' => '6',
@@ -128,7 +138,8 @@ class Re_registration extends Operator_base {
 					'amount' => $jumlah,
 					'period_id' => $i,
 					'scholarship' => 0,
-					'dc' => $this->get_now()
+					'dc' => $this->get_now(),
+					'payment_deadline' => $year.'-'.$month.'-10'
 					);
 				$this->m_registration->add_invoices($params);
 			}
