@@ -49,13 +49,14 @@
 <?php $lg=""; $no = 1; foreach ($balance_sheet_debet as $result): ?>					
 	<?php if($lg!=$result['group']){ ?>					
 						<tr class="group-heading">
-	    					<td colspan="3">Group: <?php echo $result['group'] ?></td>
+	    					<td class="account-group" colspan="3">Group: <?php echo $result['group'] ?></td>
 						</tr>
 	<?php $lg=$result['group'];} ?>
 						<tr class="group-content">
-							<td><?php echo $result['id'] ?></td>
-							<td><?php echo $result['name'] ?></td>
-							<td><input type="text" class="value-activa price" data-value="0"/></td>
+							<td class="account-id"><?php echo $result['id'] ?></td>
+							<td class="account-name"><?php echo $result['name'] ?></td>
+							<td><input type="text" class="value-activa price" data-value="0"/>
+							<input type="hidden" class="account-id" data-value="<?php echo $result['id'] ?>"/></td>
 						</tr>
 					
 <?php $no++; endforeach ; ?>
@@ -89,13 +90,14 @@
 <?php $lg=""; $no = 1; foreach ($balance_sheet_credit as $result): ?>					
 	<?php if($lg!=$result['group']){ ?>					
 						<tr class="group-heading">
-	    					<td colspan="3">Group: <?php echo $result['group'] ?></td>
+	    					<td class="account-group" colspan="3">Group: <?php echo $result['group'] ?></td>
 						</tr>
 	<?php $lg=$result['group'];} ?>
 						<tr class="group-content">
-							<td><?php echo $result['id'] ?></td>
-							<td><?php echo $result['name'] ?></td>
-							<td><input type="text" class="value-activa price" data-value="0"/></td>
+							<td class="account-id"><?php echo $result['id'] ?></td>
+							<td class="account-name"><?php echo $result['name'] ?></td>
+							<td><input type="text" class="value-activa price" data-value="0"/>
+							<input type="hidden" class="account-id" data-value="<?php echo $result['id'] ?>"/></td>
 						</tr>
 					
 <?php $no++; endforeach ; ?>
