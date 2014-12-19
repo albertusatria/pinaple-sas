@@ -20,7 +20,7 @@
 
  
 <div class="row">
-  	<div class="col-md-4">
+  	<div class="col-md-4 search-wrapper">
 
     <!-- search panel -->
     <div class="panel panel-default search-panel" id="searchPanel">
@@ -109,7 +109,7 @@
 	</div>
 	
 	<!-- Form Invoice--> 
-	<div class="col-md-8">
+	<div class="col-md-8 invoice-wrapper">
 	  <div class="panel panel-default">
 	  
 		<div class="panel-body">
@@ -131,7 +131,7 @@
                     <h5 class="subtitle mb10">Invoice No.</h5>
                     <h4 class="text-primary">INV-000464F4-00</h4>
                     
-                    <h5 class="subtitle mb10">To</h5>
+                    <h5 class="subtitle mb10 addressed-to">To</h5>
                     <address>
                     	<input type="hidden" id="nisPembayar" value="" />
                         <strong><input type="text" id="namaPembayar" placeholder="Payer name here ..." readonly></strong><br>
@@ -152,7 +152,7 @@
                 <th>Qty</th>
                 <th>Price</th>
                 <th>Fine</th>
-                <th>Subtotal</th>
+                <th class="right">Subtotal</th>
                 <th></th>
               </tr>
             </thead>
@@ -173,7 +173,7 @@
             </table>
             
             <div class="text-right btn-invoice">
-                <button class="btn btn-white"><i class="fa fa-print mr5"></i> Print Invoice</button>
+                <button class="btn btn-white" onclick="javascript:window.print();"><i class="fa fa-print mr5"></i> Print Invoice</button>
                 <button class="btn btn-primary mr5" id="bayarDab"><i class="fa fa-money mr5"></i> Make A Payment</button>                
             </div>
             

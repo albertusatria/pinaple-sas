@@ -1,4 +1,8 @@
 /* CSS Invoice */
+#namaPembayar
+{
+	text-align: right;
+}
 #resultsInvoice_length,
 #resultsInvoice thead, #resultsInvoice .sorting_asc, #resultsInvoice > tbody > tr > td:nth-child(2){
 	display: none;
@@ -95,7 +99,8 @@
 	width: 5%;
 }
 
-.table-invoice thead > tr > th:nth-child(4){
+.table-invoice thead > tr > th:nth-child(4),
+.table-invoice thead > tr > th:nth-child(5){
 	text-align: right;
 }
 .table-invoice tbody > tr > td:last-child{
