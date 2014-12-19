@@ -1,0 +1,128 @@
+/*----------------------------------------------------------------------------*/
+/* Stylesheet for Printing Invoice
+/*----------------------------------------------------------------------------*/
+@media print {
+
+	/* B5 Layout */
+	body {
+		width: 320px;
+		height: auto;
+		background: #ffffff;
+		margin: 0 auto;
+		line-height: normal !important;
+	}
+	
+	/* hide all unimportant elems */
+	.leftpanel, .mainpanel .headerbar, .mainpanel .pageheader, .search-wrapper, img,
+	button
+	{
+		display: none !important;
+	}
+
+	/* Reset all typography size */
+	div, p, label, span, h4
+	{
+		font-size: 6px !important;
+	}
+	h5
+	{
+		font-size: 6.5px !important;
+	}
+	h4, h5
+	{
+		line-height: normal !important;
+	}
+	h4, h5, .mb10
+	{
+		margin: 0 !important;
+	}
+	abbr[title], abbr[data-original-title]
+	{
+		border: none;
+	}
+	/*----------------------------------------------------------------------------*/
+	/* Main Panel
+	/*----------------------------------------------------------------------------*/	
+	.mainpanel
+	{
+		margin: 0 !important;
+	}	
+	.invoice-wrapper
+	{
+		width: 100% !important;
+		margin: 0 auto; padding: 0;
+	}
+	.col-sm-6
+	{
+		float: left;
+		width: 50% !important;
+	}
+	.col-sm-6.text-right
+	{
+		display: block !important;
+		background: red;
+	}
+	
+	/* Invoice To */
+	.addressed-to
+	{
+		margin-top: 8px !important;
+	}
+	address
+	{
+		margin: 0;
+	}
+	
+	/* Table Item */
+	.table, .table-invoice
+	{
+		margin: 0 !important;
+	}
+	.table thead
+	{
+		line-height: normal;
+		height: auto;
+	}
+	.table thead > tr > th
+	{
+		line-height: normal;
+		vertical-align: top;
+		padding: 4px;
+		border: none;
+	}
+	.table > thead > tr > th:nth-child(6),
+	.table > tbody > tr > td:nth-child(6)
+	{
+		display: none;
+	}
+	
+	.table > thead > tr > th:nth-child(5),
+	.table > thead > tr > td:nth-child(5)
+	{
+		float: right;
+		text-align: right;
+	}
+	
+	#invoiceTable > tbody > tr > td
+	{
+		padding: 7px 3px 3px 3px !important;
+		line-height: 0;
+	}
+	
+	/* Installment */
+	.installment
+	{
+		margin: 8px 0 0 0 !important;
+	}
+	.installment span
+	{
+		border: none;
+	}
+	
+	/* Table Grand Total */
+	.table-total td.price
+	{
+		float: right;
+		text-align: right;
+	}
+}

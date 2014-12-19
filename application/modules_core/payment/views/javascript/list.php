@@ -1,5 +1,6 @@
 <link href="<?php echo base_url();?>bracket/css/custom.invoice.css" rel="stylesheet">
 <link href="<?php echo base_url()?>bracket/js/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<link href="<?php echo base_url();?>bracket/css/print-css/print.invoice.css" rel="stylesheet" media="print" type="text/css"></script>
 
 <script src="<?php echo base_url();?>bracket/js/jquery-1.10.2.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/jquery-migrate-1.2.1.min.js"></script>
