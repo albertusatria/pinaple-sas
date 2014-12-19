@@ -18,5 +18,50 @@
   jQuery(document).ready(function() {
     jQuery('.price').autoNumeric('init', {pSign:'p', aSep:'.', aDec:',' });
 	neracaSaldo.init();
+
+	jQuery('.btn-success.btn-lg.btn-block').on('click',function(){
+		var itemsd = {};
+		var itemsc = {};
+		var x = 0;
+
+		jQuery(".neraca table.table-debet tr.group-content").each(function(){
+			itemsd[x] ={};
+			itemsd[x]['id']=jQuery(this).find('input.account-id').attr('data-value');
+			itemsd[x]['amount']=jQuery(this).find('input.value-activa.price').attr('data-value');
+			console.log(itemsd[x]['id']);
+			console.log(itemsd[x]['amount']);
+			x++;
+		});
+		//console.log('-----------------------');
+		jQuery(".neraca table.table-credit tr.group-content").each(function(){
+			itemsc[x] ={};
+			itemsc[x]['id']=jQuery(this).find('input.account-id').attr('data-value');
+			itemsc[x]['amount']=jQuery(this).find('input.value-activa.price').attr('data-value');
+			console.log(itemsc[x]['id']);
+			console.log(itemsc[x]['amount']);
+			x++;
+		});
+		alert("Save Successfully!!");		
+/*
+		jQuery.ajax({
+	    	type: "POST",
+	    	url: CI_ROOT+"master/balance_sheet/save_process",
+	    	async:false,
+	    	data: item,
+	     	success: function(data)
+	     	{
+				console.log('success masuk');
+		    	console.log(data);	 
+	     	},
+		    error: function (data)
+		    {
+		    	console.log('terjadi error');
+		    	console.log(data);
+		    }
+		});  	
+*/
+	    return false;
+	});
+
   });
 </script>
