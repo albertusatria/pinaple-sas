@@ -17,9 +17,10 @@
 <script src="<?php echo base_url();?>bracket/js/custom.js"></script>
 
 <script type="text/javascript" language="javascript">
-  function hapus(no,id,nama){
+  function hapus(no,id,nama,nis){
     if(confirm('Are you sure to delete '+nama+'?')) {
-      window.location = "<?php echo base_url(); ?>administration/extras_second/delete/"+no+"/"+id;      
+      // alert('extra id : '+no+' nis'+nis);return false;
+      window.location = "<?php echo base_url(); ?>administration/extras_second/delete/"+no+"/"+nis+"/"+id;      
     }
     return false;
   }

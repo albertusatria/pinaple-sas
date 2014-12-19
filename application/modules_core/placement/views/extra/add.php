@@ -27,7 +27,7 @@
       </p><br><br>
     </div>
     <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>placement/extras_first/add_process/<?php echo $result->id?>">
-
+      <input type="hidden" name="amount" value="<?php echo $result->amount; ?>"/>
     <div class="panel-body">
       <div class="table-responsive">
         <table class="table" id="table1">

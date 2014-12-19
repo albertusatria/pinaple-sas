@@ -11,6 +11,7 @@ class Extras_second extends Operator_base {
 		$this->load->model('master/m_units');
 		$this->load->model('placement/m_extra');
 		$this->load->model('placement/m_class');
+		$this->load->model('registration/m_registration');
 		// load permission
 		$this->load->helper('text');
 		// page title
@@ -140,7 +141,28 @@ class Extras_second extends Operator_base {
 	            	'half_period' 	=> '2',
 	            	'status' 	=> "BERJALAN"
 	            	);
-				$this->m_extra->add_extra_student($params);
+				$idx = $this->m_extra->add_extra_student($params);
+
+				//generate invoice 07-12
+				for ($i = 7; $i <= 12 ; $i++) { 
+
+					$year = $this->input->post('year');
+					$month = '0'.($i-6);
+
+					$params = array(					
+						'nis' => $value['nis'],
+						'packet_id' => NULL,
+						'item_type_id' => '8',
+						'qty' => 1,
+						'amount' => $this->input->post('amount'),
+		            	'extra_id' 	=> $idx,
+						'period_id' => $i,
+						'scholarship' => 0,
+						'dc' => $this->get_now(),
+						'payment_deadline' => $year.'-'.$month.'-10'
+						);
+					$this->m_registration->add_invoices($params);
+				}
 			}
 				// echo "<pre>"; print_r($_POST); die;
 
@@ -149,19 +171,28 @@ class Extras_second extends Operator_base {
 			$data['message'] = "Data successfully added";
 
 			$this->session->set_flashdata($data);
-			redirect('administration/extras_first/placement/'.$id);
+			redirect('administration/extras_second/placement/'.$id);
 	}
 
-	public function delete($id = "",$c_id)
+	public function delete($id = "",$nis = "",$c_id)
 	{
 	// user_auth
 		$this->check_auth('D');
 		$params['id']=$id;
+		$params['nis']=$nis;		
 		if ($this->m_extra->delete_extra_student($params)) {
 			$data['message'] = "Data successfully deleted";
 		}
 		$this->session->set_flashdata($data);
-		redirect('administration/extras_first/placement/'.$c_id);
+		redirect('administration/extras_second/placement/'.$c_id);
+	}
+
+	public function get_now() {
+	    $this->load->helper('date');
+        $datestring = '%Y-%m-%d %H:%i:%s';
+        $time = time();
+        $now = mdate($datestring, $time);
+        return $now;
 	}
 
 	// page title

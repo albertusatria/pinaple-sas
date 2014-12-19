@@ -53,7 +53,7 @@
                       <td><?php echo $siswa->full_name; ?></td>
                       <td><?php echo $siswa->status; ?></td>
                       <td>
-                         <a href='#' onclick="hapus('<?php echo $siswa->id; ?>','<?php echo $result->id; ?>','<?php echo $siswa->full_name; ?>')" >
+                         <a href='#' onclick="hapus('<?php echo $siswa->id; ?>','<?php echo $result->id; ?>','<?php echo $siswa->full_name; ?>','<?php echo $siswa->nis; ?>')" >
                           <i class="fa fa-trash-o"></i></a>                                            
                       </td>
                   </tr>

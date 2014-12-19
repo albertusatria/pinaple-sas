@@ -119,15 +119,19 @@ class m_extra extends CI_Model {
     function add_extra_student($params) {
         $insert = $this->db->insert('extra_students',$params);        
         if($insert) {
-            return true;
+            return $this->db->insert_id();
         } else {
             return false;
         }
     }
 
     function delete_extra_student($params) {
-        $del=$this->db->delete('extra_students',$params,array('id'=>$params['id']));
+        $del=$this->db->delete('extra_students',array('id'=>$params['id']));
         if($del) {
+            $this->db->where('status','UNPAID');
+            $this->db->where('extra_id',$params['id']);
+            $this->db->where('nis',$params['nis']);
+            $del = $this->db->delete('invoices');
             return true;
         } else {
             return false;
@@ -163,7 +167,10 @@ class m_extra extends CI_Model {
             return true;
         } else {
             return false;
-        }    }
+        }    
+    }
+
+
 
 
 
