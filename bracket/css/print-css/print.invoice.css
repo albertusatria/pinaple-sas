@@ -125,4 +125,12 @@
 		float: right;
 		text-align: right;
 	}
+	
+	
+	/* Confirmation Dialog */
+	#confirmationPayment
+	{
+		display: none !important;
+	}
+	
 }

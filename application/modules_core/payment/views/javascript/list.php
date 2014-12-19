@@ -605,8 +605,39 @@ function updateGrandTotal()
 		}
 	});
 	
-	jQuery("#bayarDab").on('click',function(){
-
+	/* Payment Handling */
+	jQuery("#makePayment").on('click',function(){
+		jQuery('#confirmationPayment .table-item').find('table').remove();
+		jQuery('#invoiceTable').clone().prependTo(jQuery('#confirmationPayment .table-item'));
+		
+		var tbodyCount = jQuery('#confirmationPayment #invoiceTable tbody tr').length;
+		if(tbodyCount < 1)
+		{
+			jQuery('#confirmationPayment #doPayment').addClass('disabled');
+		}
+		else
+		{
+			jQuery('#confirmationPayment #doPayment').removeClass('disabled');
+		}
+	});
+	
+	
+	/* CC / Debet Cards handling */
+	jQuery('input[id=cards]').change(function(){
+		if (jQuery(this).is(':checked')){
+			jQuery('#cardsOption').show();
+		}
+	});
+	jQuery('input[id=cash]').change(function(){
+		if (jQuery(this).is(':checked')){
+			jQuery('#cardsOption').hide();
+		}
+	});	
+	
+	/* Do 'Pay' and Printing */
+	jQuery("#doPayment").on('click',function(){
+		javascript:window.print();
+		
 		//buat nota
         var item = {};
         var x = 1;
