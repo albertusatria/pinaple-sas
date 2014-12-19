@@ -27,6 +27,8 @@
       </p><br><br>
     </div>
     <form id="sasPanel" class="form-horizontal form-bordered" method="POST" action="<?php echo base_url(); ?>administration/extras_second/add_process/<?php echo $result->id?>">
+      <input type="hidden" name="amount" value="<?php echo $result->amount; ?>"/>
+      <input type="hidden" name="year" value="<?php echo substr($year->name,-2) ?>" />
 
     <div class="panel-body">
       <div class="table-responsive">
@@ -58,7 +60,7 @@
          <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
               <button class="btn btn-danger">Tambah</button>&nbsp;
-              <button class="btn btn-default">Cancel</button>
+              <a href="<?php echo base_url() ?>administration/extras_second/placement/<?php echo $result->id?>" class="btn btn-default">Cancel</a>
             </div>
          </div>
       </div><!-- panel-footer -->
