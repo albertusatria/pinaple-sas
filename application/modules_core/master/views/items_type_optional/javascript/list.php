@@ -79,12 +79,13 @@ jQuery(document).ready(function() {
 						jQuery('#searchResult').append(
 						'<div class="col-md-4 students-id">'+
 							'<div class="people-item">'+
-							  '<div class="media">'+
 							    '<div class="media-body">'+
-							      '<h5 class="student-id text-info">'+name+'</h5>'+
-							      '<h4 class="student-name text-primary"> Rp '+amount+'</h4>'+
-							      '<a href='+CI_ROOT+'master/items_type_optional/edit/'+id+'><i class="fa fa-pencil"></i></a>'+
-			                  	  '<a href="#" class="delete-row" onclick="hapus(\''+id+'\',\''+name+'\')"><i class="fa fa-trash-o"></i></a>'+
+							    '<table class="table table-hover"><tr>'+
+							      '<td><label class="student-id text-info">'+name+'</label></td>'+
+							      '<td><label class="student-name text-primary"> Rp '+amount+'</label></td>'+
+							      '<td align="right"><a href='+CI_ROOT+'master/items_type_optional/edit/'+id+'><i class="fa fa-pencil"></i></a>'+
+			                  	  '<a href="#" class="delete-row" onclick="hapus(\''+id+'\',\''+name+'\')"><i class="fa fa-trash-o"></i></a></td>'+
+							    '</tr></table>'+
 							    '</div>'+
 							  '</div>'+
 							'</div>'+
