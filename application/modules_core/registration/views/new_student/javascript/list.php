@@ -49,11 +49,11 @@ jQuery(document).ready(function() {
 		}
 	});	
 	
-	jQuery("#tgl_lahir").mask("99/99/9999");
-	jQuery("#tgl_lahir_wali").mask("99/99/9999");
+	jQuery("#tgl_lahir").mask("99-99-9999");
+	jQuery("#tgl_lahir_wali").mask("99-99-9999");
 	jQuery("#achievement_id").mask("9999");
-	jQuery("#tglIjazah").mask("99/99/9999"); 
-	jQuery("#tglIjazah").mask("99/99/9999");
+	jQuery("#tglIjazah").mask("99-99-9999"); 
+	jQuery("#tglIjazah").mask("99-99-9999");
 	jQuery("#telepon").mask("(999) 9999-9999");
 	jQuery("#handphone").mask("(9999) 9999-9999");
 	jQuery("#penghasilan").mask("999.999.999.999");	  
@@ -183,7 +183,7 @@ jQuery(document).ready(function() {
      //address information
 	 jQuery('#fathAddress').keyup(function() {
 	    var fatherAddress = jQuery(this).val();
-	    jQuery('#studAddress').val(fatherAddress).attr('disabled',true);
+	    jQuery('#studAddress').val(fatherAddress).attr('readonly',true);
 	  }).keyup();     
 	  
 	 jQuery('.student-address').on('change',function(){
@@ -194,15 +194,15 @@ jQuery(document).ready(function() {
 
 		 if(selectedAddress == 'Parents')
 		 {
-			 jQuery('#studAddress').val(fatherAddress).attr('disabled',true);
+			 jQuery('#studAddress').val(fatherAddress).attr('readonly',true);
 		 }
 		 else if(selectedAddress == 'Father')
 		 {
-			 jQuery('#studAddress').val(fatherAddress).attr('disabled',true);			 
+			 jQuery('#studAddress').val(fatherAddress).attr('readonly',true);			 
 		 }
 		 else if(selectedAddress == 'Mother')
 		 {
-			 jQuery('#studAddress').val(motherAddress).attr('disabled',true);
+			 jQuery('#studAddress').val(motherAddress).attr('readonly',true);
 		 }
 		 else
 		 {

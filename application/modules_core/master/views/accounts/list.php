@@ -110,8 +110,8 @@
 					
 					<div class="form-group">
 			          <label class="col-sm-3 control-label">Id <span class="asterisk">*</span></label>
-			          <div class="col-sm-9">
-			            <input type="text" name="id" class="form-control" maxlength="5" size="5" placeholder="Type Accounts Id... (must 5 char)" required />
+			          <div class="col-sm-4">
+			            <input type="text" name="id" class="form-control" maxlength="5" size="5" placeholder="Type Account Code..." required />
 			          </div>
 			        </div>
 
@@ -124,8 +124,8 @@
 
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">Group <span class="asterisk">*</span></label>
-			          <div class="col-sm-9">
-			            <input type="text" name="group" class="form-control" placeholder="Type Accounts name..." required />
+			          <div class="col-sm-5">
+			            <input type="text" name="group" class="form-control" placeholder="Type Accounts name..." maxlength="20" size="20" required />
 			          </div>
 			        </div>
 			        

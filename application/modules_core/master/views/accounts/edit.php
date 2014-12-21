@@ -30,7 +30,7 @@
           
 			<div class="form-group">
 	          <label class="col-sm-3 control-label">Account Code <span class="asterisk">*</span></label>
-	          <div class="col-sm-9">
+	          <div class="col-sm-2">
 	            <input type="text" name="id_show" value="<?php echo $result->id?>" class="form-control" placeholder="Type accounts code's..." required disabled/>
               <input type="hidden" name="id" value="<?php echo $result->id?>" required/>
 	          </div>
@@ -45,8 +45,8 @@
 
           <div class="form-group">
             <label class="col-sm-3 control-label">Group <span class="asterisk">*</span></label>
-            <div class="col-sm-9">
-              <input type="text" name="group" class="form-control" placeholder="Type account group name..." required value="<?php echo $result->group?>"/>
+            <div class="col-sm-6">
+              <input maxlength="20" size="20" type="text" name="group" class="form-control" placeholder="Type account group name..." required value="<?php echo $result->group?>"/>
             </div>
           </div>
 	        
