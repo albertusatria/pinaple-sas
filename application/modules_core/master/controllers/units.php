@@ -166,7 +166,7 @@ class Units extends Operator_base {
 				'web'			=> $this->input->post('web')
 			);
 			$this->session->set_flashdata($data);
-			redirect('master/units/edit/'.$this->input->post('id_unit'));
+			redirect('master/units/edit/'.$this->input->post('id'));
 		}
 	}
 

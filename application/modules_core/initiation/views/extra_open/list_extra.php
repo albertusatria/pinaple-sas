@@ -53,7 +53,7 @@
                       <td><?php echo $extra->name; ?></td>
                       <td><?php echo $extra->homeroom_1_name; ?></td>
                       <td><?php echo $extra->homeroom_2_name; ?></td>
-                      <td>Rp. <?php echo $extra->amount; ?></td>
+                      <td>Rp &nbsp;<?php echo number_format($extra->amount,2,',','.'); ?></td>
                       <td>
                          <a href="<?php echo base_url(); ?>initiation/extra_open/edit/<?php echo $unit->id; ?>/<?php echo $extra->id; ?>">
                           <i class="fa fa-pencil"></i></a>

@@ -61,8 +61,12 @@
 
        <div class="form-group">
           <label class="col-sm-3 control-label">Monthly Cost / Student</label>
-          <div class="col-sm-7">
-            <input name="extra_price" class="form-control" maxlength="100" type="text" value="<?php echo $extra->amount; ?>" required />
+          <div class="col-sm-3">
+          <div class="input-group">
+            <span class="input-group-addon">Rp</span>
+            <input name="extra_price" class="form-control" maxlength="100" type="text" value="<?php echo number_format($extra->amount,0,'',''); ?>" placeholder="Ex : 3000000" required />
+            <span class="input-group-addon">.00</span>
+          </div>
             <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
           </div>
         </div>

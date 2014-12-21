@@ -117,7 +117,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">NIS <span class="asterisk">*</span></label>
             <div class="col-sm-6">
-              <input type="text" name="siswa[siswa_nis]" placeholder="Nama Induk Siswa / No Pendaftaran" class="form-control" required />
+              <input type="text" name="siswa[siswa_nis]" placeholder="Nama Induk Siswa / No Pendaftaran" class="form-control" required style="10" maxlength="10" />
               <div id='nis_availability_result'>
               	<img class="loading-image-nis" src="<?php echo base_url()?>bracket/images/loaders/loader1.gif" alt="loaders nim">
               	<p class="nis-result"></p>
