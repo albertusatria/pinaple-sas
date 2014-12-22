@@ -17,6 +17,10 @@ class M_registration extends CI_Model {
         }
     }
 
+    function get_student_by_nis($nis){
+        return $this->db->get_where('users_student',array('nis'=>$nis))->row();
+    }
+
     function import_students($dataarray)
     {
         foreach ($dataarray as $params) {
