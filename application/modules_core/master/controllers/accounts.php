@@ -31,9 +31,8 @@ class Accounts extends Operator_base {
 		$data['user']	= $this->user;
 		//message
 		$data['message'] = $this->session->flashdata('message');
-
 		//all items
-		$data['rs_accounts'] = $this->m_accounts->get_all_accounts();		
+		$data['rs_accounts'] = $this->m_accounts->get_accounting_nested();		
 		//$data['rs_accounts_rows'] = $this->m_accounts->get_total_rows();
 		$data['layout'] = "master/accounts/list";
 		$data['javascript'] = "master/accounts/javascript/list";
@@ -47,22 +46,24 @@ class Accounts extends Operator_base {
 	}
 
 	// add process
-	public function add_accounts() {
+	public function add_sub_accounts() {
 		// form validation
 		
 		$this->check_auth('C');
-		$this->form_validation->set_rules('id', 'Id', 'required|trim|xss_clean|exact_length[5]|callback_check_duplicate_accounts_id');
-		$this->form_validation->set_rules('name', 'Accounts Name', 'required|trim|xss_clean|callback_check_duplicate_accounts');
-		$this->form_validation->set_rules('group', 'Group Name', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_tipe', 'Code Type', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_parent_id', 'Parent Code', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_accounting_id', 'Account Code', 'required|trim|xss_clean|callback_check_duplicate_accounts_id');
+		$this->form_validation->set_rules('new_sub_name', 'Accounts Name', 'required|trim|xss_clean|callback_check_duplicate_accounts');
+		$this->form_validation->set_rules('new_sub_description', 'Description', 'required|trim|xss_clean');
 		
 		if ($this->form_validation->run() == TRUE) {
 			// insert
 			$data = array(
-				'id'			=> $this->input->post('id'),
-				'name'			=> $this->input->post('name'),
-				'group'			=> $this->input->post('group'),
-				'description'	=> $this->input->post('description')
+				'accounting_id'			=> $this->input->post('new_sub_accounting_id'),
+				'name'			=> $this->input->post('new_sub_name'),
+				'parent_id'		=> $this->input->post('new_sub_parent_id'),
+				'tipe'			=> $this->input->post('new_sub_tipe'),
+				'description'	=> $this->input->post('new_sub_description')
 			);
 		
 			$this->m_accounts->add_accounts($data);
@@ -71,11 +72,40 @@ class Accounts extends Operator_base {
 			redirect('master/accounts/');
 		} else {
 			$data = array(
-				'message'		=> str_replace("\n", "", validation_errors()),
-				'id'			=> $this->input->post('id'),
-				'name'			=> $this->input->post('name'),
-				'group'			=> $this->input->post('group'),
-				'description'	=> $this->input->post('description')
+			'message'		=> str_replace("\n", "", validation_errors()),
+			);
+			$this->session->set_flashdata($data);
+			redirect('master/accounts/');
+		}
+	}
+
+	// add process
+	public function add_accounts() {
+		// form validation
+		
+		$this->check_auth('C');
+		$this->form_validation->set_rules('new_sub_tipe', 'Code Type', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_accounting_id', 'Account Code', 'required|trim|xss_clean|callback_check_duplicate_accounts_id');
+		$this->form_validation->set_rules('new_sub_name', 'Accounts Name', 'required|trim|xss_clean|callback_check_duplicate_accounts');
+		$this->form_validation->set_rules('new_sub_description', 'Description', 'required|trim|xss_clean');
+		
+		if ($this->form_validation->run() == TRUE) {
+			// insert
+			$data = array(
+				'accounting_id'			=> $this->input->post('new_sub_accounting_id'),
+				'name'			=> $this->input->post('new_sub_name'),
+				'parent_id'		=> NULL,
+				'tipe'			=> $this->input->post('new_sub_tipe'),
+				'description'	=> $this->input->post('new_sub_description')
+			);
+		
+			$this->m_accounts->add_accounts($data);
+			$data['message'] = "Data successfully added";
+			$this->session->set_flashdata($data);
+			redirect('master/accounts/');
+		} else {
+			$data = array(
+			'message'		=> str_replace("\n", "", validation_errors()),
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/accounts/');
@@ -138,7 +168,7 @@ class Accounts extends Operator_base {
 		// user_auth
 		$this->check_auth('D');
 		
-		$params['id']=$id;
+		$params['accounting_id']=$id;
 		$this->m_accounts->delete_accounts($params);
 		$data['message'] = "Data successfully deleted";
 		$this->session->set_flashdata($data);

@@ -33,13 +33,38 @@
 		  jQuery(element).closest('.form-group').removeClass('has-error').css('margin-bottom', '-20px');
 		}
 	});
+
+	jQuery('#form-add-sub').on('click','button.save-new-sub',function(){
+		// jQuery('#form-add-sub').validate();
+		// if (jQuery('#form-add-sub').valid() == true) {
+		// 	console.log('stasfas');
+		// } else {
+
+		// }
+		// return false;		
+	});
   
-  });   
+});   
 </script>
 <script type="text/javascript">
   function hapus(no,nama){
     if(confirm('Are you sure to delete this account: '+no+'?'))
       window.location = "<?php echo base_url(); ?>master/accounts/delete/"+no;
   }
+  function new_submenu(parent_id,parent_name,tipe) {
+  	jQuery("#add-sub-parent-code").val(parent_id);
+  	jQuery("#add-sub-parent-name").val(parent_name);
+  	jQuery("#add-sub-tipe").val(tipe);
+  	jQuery("#add-sub-code").val('');
+  	jQuery("#add-sub-name").val('');
+  	jQuery("#add-sub-description").val('');
+  }
+  function new_account(tipe) {
+  	jQuery("#add-new-tipe").val(tipe);
+  	jQuery("#add-new-code").val('');
+  	jQuery("#add-new-name").val('');
+  	jQuery("#add-new-description").val('');
+  }
+
 </script>
 
