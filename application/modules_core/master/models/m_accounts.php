@@ -18,8 +18,57 @@ class M_accounts extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_accounting_nested()
+    function get_status_opening_balance() {
+        return $this->db->get('accounting_first_balance_status_setup')->row_array();        
+    }
+
+    function change_status_opening_balance() {
+        $params['setup_status'] = 1;
+        return $this->db->update('accounting_first_balance_status_setup',$params);        
+    }
+
+    function get_opening_year() {
+        $sql = "SELECT *,min(id)'opening_id' FROM school_year WHERE opening = 'YA' LIMIT 1";
+        return $this->db->query($sql)->row_array();        
+    }
+
+    function get_accounting_balance() {
+        $sql = "SELECT min(id)'id' FROM school_year WHERE opening = 'YA' LIMIT 1";
+        $query = $this->db->query($sql)->row_array();
+        $id = $query['id'];
+
+        $this->db->where('a.tipe','AKTIVA');
+        $this->db->order_by('a.tipe','a.accounting_id');
+        $this->db->select('a.*,o.accounting_year,o.amount,o.amount_type');
+        $this->db->from('accounting_account a');
+        $this->db->join('accounting_opening_balance o','a.accounting_id = o.accounting_id AND o.accounting_year = "'.$id.'"','left');
+        // $this->db->where('',$id);
+        $accounting = $this->db->get()->result_array();
+        
+        $array = array();
+        foreach ($accounting as $acc) {
+            if (! $acc['parent_id']) {
+                // This page has no parent
+                $array[$acc['accounting_id']] = $acc;
+            }
+            else {
+                // This is a child page
+                $array[$acc['parent_id']]['children'][] = $acc;
+            }
+        }
+        // echo "<pre>"; print_r($array);die;
+        return $array;        
+    }
+
+    function save_opening_balance($params) {
+        return $this->db->insert('accounting_opening_balance',$params);
+    }
+
+    public function get_accounting_nested($opening=false)
     {
+        if ($opening == true) {
+            $this->db->where('tipe','AKTIVA');
+        }
         $this->db->order_by('tipe','accounting_id');
         $accounting = $this->db->get('accounting_account')->result_array();
         
