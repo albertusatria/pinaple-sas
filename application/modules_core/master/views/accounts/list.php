@@ -33,7 +33,7 @@
 					<input type="hidden" name="account-name" class="account-name" value="debet"/>
 					<thead>
 						<tr role="row" class="heading">
-							<th width="100%" colspan="3" style="text-align:center">
+							<th width="100%" colspan="4" style="text-align:center">
 								PENDAPATAN
 							</th>
 						</tr>
@@ -113,7 +113,7 @@
 					<input type="hidden" name="account-name" class="account-name" value="credit"/>
 					<thead>
 						<tr role="row" class="heading">
-							<th width="100%" colspan="3" style="text-align:center">
+							<th width="100%" colspan="4" style="text-align:center">
 								PENGELUARAN
 							</th>
 						</tr>
