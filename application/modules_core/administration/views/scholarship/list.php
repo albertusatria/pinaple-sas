@@ -190,10 +190,12 @@
 			  	<div class="input-group">
 				  	<select name="scholarship-value" id="scholarship-value" class="form-control scholarship-value" required>
 			  				<option value=""> - choose scholarship - </option>
-		              <?php foreach ($ls_scholarship2 as $sc): ?>
+		              	<?php foreach ($ls_scholarship2 as $sc): ?>
+		                	<?php if($sc->amount>0){?>
 		                    <option value="<?php echo $sc->id."_".$sc->amount; ?>" required>
 		                    <?php echo $sc->name." (Rp ".number_format($sc->amount,0,',','.').")"; ?></option>
-		                  <?php endforeach; ?>
+		              		<?php }?>
+		              	<?php endforeach; ?>
 					</select>
 					<!--
 			  		<span class="input-group-addon">Rp</span>
