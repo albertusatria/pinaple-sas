@@ -28,7 +28,6 @@
 	<div class="panel-body">
 	    <div class="row">
 	        <div class="neraca col-md-12">
-      
 	      	<div class="col-md-6">
 				<table class="table table-bordered table-debet">
 					<input type="hidden" name="account-name" class="account-name" value="debet"/>
@@ -54,7 +53,8 @@
 	<?php $lg=$result['group'];} ?>
 						<tr class="group-content">
 							<td class="account-id"><?php echo $result['id'] ?></td>
-							<td class="account-name"><?php echo $result['name'] ?></td>
+							<td class="account-name"><?php echo $result['name'] ?>
+							</td>
 							<td><input type="text" class="value-activa price" data-value="0"/>
 							<input type="hidden" class="account-id" data-value="<?php echo $result['id'] ?>"/></td>
 						</tr>

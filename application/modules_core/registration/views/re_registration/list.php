@@ -79,8 +79,7 @@
 			  <label class="col-sm-3 control-label">Paket yang digunakan <span class="asterisk">*</span></label>
 			  <div class="col-sm-9">
 			  	<select class="form-control" id="pilihPaket" name="id_paket">
-			  		<option value="">Paket Pra Yueliang dan Yueliang</option>
-			  		<option value="">Paket Pra Taiyang</option>
+			  		<option value="">Pilih Paket</option>
 			  	</select>
 			  </div>
 			</div>
