@@ -19,7 +19,7 @@
   <?php endif ; ?>
 
 
- 	<div class="panel panel-default">
+ 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3>Accounting Code Management</h3>
 		</div>
@@ -29,7 +29,85 @@
 	    <div class="row">
 	        <div class="neraca col-md-12">
 	      	<div class="col-md-6">
-				<table class="table table-hidaction table-debet">
+				<table class="table table-hidaction table-striped table-debet">
+					<input type="hidden" name="account-name" class="account-name" value="debet"/>
+					<thead>
+						<tr role="row" class="heading">
+							<th width="100%" colspan="3" style="text-align:center">
+								AKTIVA
+							</th>
+						</tr>
+						<tr role="row" class="heading">
+							<th width="15%">
+								Code
+							</th>
+							<th width="85%" colspan="3">
+								Account Name
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($rs_accounts as $acc) : ?>
+							<?php if ($acc['tipe'] == 'AKTIVA') : ?>
+								<tr class="group-content">
+									<td class="account-id"><span class="text text-danger"><?php echo $acc['accounting_id']?></span></td>
+									<td class="account-name" colspan="2"><strong><?php echo $acc['name']?></strong>
+											</td>
+					                <td class="table-action-hide">
+									<a title="" data-placement="left" data-toggle="tooltip" class="glyphicon glyphicon-question-sign tooltips" 
+										data-original-title="
+											<?php if(isset($acc['description'])) : echo $acc['description']; 
+											else : echo "No Information"; endif; ?>"></a>
+					                  <a href="#"><i class="fa fa-pencil"></i></a>
+					                  <a href="<?php echo base_url()?>master/accounts/delete/<?php echo $acc['accounting_id']?>" class="delete-row" 
+					                  	onclick="return confirm('are you sure? you cannot abort this action once deleted')">
+					                  	<i class="fa fa-trash-o"></i>
+					                  </a>
+					                </td>
+								</tr>
+								<?php if (isset($acc['children']) && count($acc['children'])) : ?>								
+									<?php foreach ($acc['children'] as $item) : ?>
+										<tr class="group-content">
+											<td class="account-id"></td>
+											<td class="account-id" width="10%">
+												<span class="text text-danger"><?php echo $item['accounting_id']?></span>
+											</td>
+											<td class="account-name"><?php echo $item['name']?></td>
+							                <td class="table-action-hide">
+											<a title="" data-placement="left" data-toggle="tooltip" class="glyphicon glyphicon-question-sign tooltips" 
+												data-original-title="
+													<?php if(isset($item['description'])) : echo $item['description']; 
+													else : echo "No Information"; endif; ?>"></a>
+							                  <a href="#"><i class="fa fa-pencil"></i></a>
+							                  <a href="<?php echo base_url()?>master/accounts/delete/<?php echo $item['accounting_id']?>" class="delete-row" 
+							                  	onclick="return confirm('are you sure? you cannot abort this action once deleted')">
+							                  	<i class="fa fa-trash-o"></i>
+							                  </a>
+							                </td>
+										</tr>
+									<?php endforeach; ?>
+								<?php endif; ?>							
+								<tr class="group-content">
+									<td class="account-id"></td>
+									<td class="account-name" colspan="3">
+										<a href="#" class="new-sub-account" 
+											data-toggle="modal" data-target="#modal-subnew"
+											onclick="new_submenu('<?=$acc['accounting_id']?>','<?=$acc['name']?>','<?=$acc['tipe']?>')"><i class="fa fa-plus"></i> NEW SUBCODE<a></td>
+								</tr>	
+							<?php endif; ?>
+						<?php endforeach; ?>
+						<tr class="group-content">
+							<td class="account-name" colspan="4">
+							<a href="#" class="new-sub-account" 
+								data-toggle="modal" data-target="#modal-new-code"
+								onclick="new_account('AKTIVA')"><i class="fa fa-plus"></i> NEW CODE<a>
+							</td>
+							</td>
+						</tr>	
+					</tbody>
+				</table>
+
+				<table class="table table-hidaction table-striped table-debet">
 					<input type="hidden" name="account-name" class="account-name" value="debet"/>
 					<thead>
 						<tr role="row" class="heading">
@@ -106,10 +184,11 @@
 						</tr>	
 					</tbody>
 				</table>
+
 			</div>
 
 			<div class="col-md-6">
-				<table class="table table-hidaction table-credit">
+				<table class="table table-hidaction table-striped table-credit">
 					<input type="hidden" name="account-name" class="account-name" value="credit"/>
 					<thead>
 						<tr role="row" class="heading">
