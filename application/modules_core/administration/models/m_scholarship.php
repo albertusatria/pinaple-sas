@@ -24,14 +24,19 @@ class m_scholarship extends CI_Model {
         $schoolyear = $query->row();
         $id = $schoolyear->id;
 
-        $sql = "SELECT *
-                FROM scholarship 
-                WHERE school_year_id='$sy_id'
-                AND id NOT IN (
-                    SELECT scholarship_id
-                    FROM scholarship_allocation
-                    WHERE school_year_id='$sy_id'
-                )";
+        $sql = "SELECT 
+                  s.id,
+                  s.name,
+                  s.school_year_id,
+                  s.description,
+                  s.amount - SUM(sa.amount) AS amount 
+                FROM
+                  scholarship s 
+                  LEFT JOIN scholarship_allocation sa 
+                    ON sa.scholarship_id = s.id 
+                WHERE s.school_year_id = '$sy_id' 
+                GROUP BY s.id
+                ";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
             return $query->result();

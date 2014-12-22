@@ -25,6 +25,10 @@ jQuery(document).ready(function() {
 		var split = jQuery('.scholarship-value').val().split("_");
 		var scholarship = split[1];
 		scholarid_pub = split[0];
+		if(scholarid_pub==''){
+			alert('Please select the scholarship first!');
+			return false;
+		}
 		console.log(split[0]);
 		console.log(split[1]);
 		applyScholarship(scholarship);
