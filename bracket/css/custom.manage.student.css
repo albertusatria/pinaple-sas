@@ -1,0 +1,45 @@
+/*----------------------------------------------------------------------------*/
+/* Search List
+/*----------------------------------------------------------------------------*/
+
+/* bulk action */
+.right
+{
+	float: right;
+}
+.bulk-actions 
+{
+	margin-bottom: 15px;
+}
+.bulk-actions select, .bulk-actions button, .bulk-actions label
+{
+	float: right;
+}
+.bulk-actions label
+{
+	display: inline-block;
+	line-height: 30px;
+	vertical-align: middle;
+	margin: 0 12px 0 0;
+}
+.bulk-actions select
+{
+	width: 140px;
+	margin-top: 0;
+	margin-right: 4px
+}
+.bulk-actions button
+{
+	max-height: 30px;
+}
+
+/* Table Invoice */
+#datatable_orders td.actions button
+{
+	float: left;
+}
+
+#datatable_orders td.actions .btn-warning
+{
+	margin-right: 8px;
+}

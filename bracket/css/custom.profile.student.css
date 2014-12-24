@@ -1,0 +1,18 @@
+/*----------------------------------------------------------------------------*/
+/* Basic Info
+/*----------------------------------------------------------------------------*/
+.rdio label
+{
+	margin-bottom: 0 !important;
+	margin-right: 15px;
+	padding: 0 0 0 3px;
+}
+.rdio label:before
+{
+	top: 5px;
+}
+.rdio input[type="radio"]:checked + label:after
+{
+	top: 9px;
+	left: 4px;
+}
