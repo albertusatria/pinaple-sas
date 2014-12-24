@@ -125,13 +125,13 @@
 					<div class="form-group">
 					  <label class="col-sm-3 control-label">Grades <span class="asterisk">*</span></label>
 					  <div class="col-sm-5">
-					    <select name="unit_id" id="jenjangSekolah" class="form-control" required>
+					    <select name="unit_id" id="jenjangSekolah" class="form-control input-sm" required>
 					     <option value="" selected="selected">Choose School Units</option>
 					    </select>
 					    <label class="error" for="jenjangSekolah"></label>
 					  </div>
 					   <div class="col-sm-4">
-					    <select name="stage" id="jenjangKelas" class="form-control" required>
+					    <select name="stage" id="jenjangKelas" class="form-control input-sm" required>
 					      <option value="" selected="selected">Choose Units Level</option>
 					    </select>
 					    <label class="error" for="jenjangKelas"></label>
@@ -141,7 +141,7 @@
 			        <div class="form-group">
 			          <label class="col-sm-3 control-label">New Student <span class="asterisk">*</span></label>
 			          <div class="col-sm-3">
-			            <select name="for_new_student" class="form-control" >
+			            <select name="for_new_student" class="form-control input-sm" >
 				    
 				            <option value="FALSE" required>NO</option>
 				            <option value="TRUE" required>YES</option>

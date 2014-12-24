@@ -1,10 +1,10 @@
 <div class="pageheader">
-    <h2><i class="fa fa-folder-open-o"></i>Invoice Management</h2>
+    <h2><i class="fa fa-sort-alpha-asc"></i>Student Management</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-        <li class="active">Student Payment &nbsp;/&nbsp; Invoices Management</li>
+        <li class="active">Student Management</li>
       </ol>
     </div>
 </div>
@@ -22,7 +22,7 @@
   		<div class="col-md-12">
 		  	<div class="panel panel-default">
 		        <div class="panel-heading">
-		          <h4 class="panel-title">Invoices</h4>
+		          <h4 class="panel-title">Manage Student</h4>
 		        </div><!-- panel-heading -->
 		        
 		        <div class="panel-body">
@@ -48,19 +48,19 @@
 								<input type="checkbox" class="group-checkable">
 							</th>
 							<th width="10%">
-								Invoice Order&nbsp;#
-							</th>
-							<th width="10%">
-								 Invoice&nbsp;Date
+								NIS&nbsp;#
 							</th>
 							<th width="15%">
-								 Bill to NIS
+								 Name
 							</th>
 							<th width="10%">
-								 Institution
+								 Unit
 							</th>
-							<th width="10%">
-								 Status
+							<th width="12%">
+								 Last Level Attended
+							</th>
+							<th width="8%">
+								 Group
 							</th>
 							<th width="12%">
 								 Actions
@@ -70,36 +70,28 @@
 							<td>
 							</td>
 							<td>
-								<input type="text" class="form-control form-filter input-sm" name="order_id">
+								<input type="text" class="form-control form-filter input-sm" name="nis_student">
 							</td>
 							<td>
-								<div class="input-group">
-									<input type="text" class="form-control datepicker" placeholder="From">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-								</div>								
-								<div class="input-group">
-									<input type="text" class="form-control datepicker" placeholder="To">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-								</div>								
+								<input type="text" class="form-control form-filter input-sm" name="name_student">
 							</td>
 							<td>
-								<input type="text" class="form-control form-filter input-sm" name="order_customer_nis" placeholder="Bill to student, input NIS">
-							</td>
-							<td>
-								<select name="order_status" class="form-control form-filter input-sm">
+								<select name="unit_student" class="form-control form-filter input-sm">
 									<option value="">Select...</option>
 									<option value="TK">TK</option>
+									<option value="KB">KB</option>
+									<option value="SD">SD</option>
 									<option value="SMP">SMP</option>
-									<option value="SMA">SMA</option>
 								</select>
 							</td>
 							<td>
+								<input type="text" class="form-control form-filter input-sm" name="last_level_student">
+							</td>
+							<td>
 								<select name="order_status" class="form-control form-filter input-sm">
 									<option value="">Select...</option>
-									<option value="pending">Pending</option>
-									<option value="closed">Closed</option>
-									<option value="hold">On Hold</option>
-									<option value="fraud">Fraud</option>
+									<option value="siswa">Siswa</option>
+									<option value="alumni">Alumni</option>
 								</select>
 							</td>
 							<td class="actions">
@@ -114,11 +106,11 @@
 							<tr>
 								<td><input type="checkbox" class="checkable"></td>
 								<td>#123123</td>
-								<td>06 January 2013</td>
 								<td>Simon M</td>
-								<td>SD</td>
-								<td>Paid</td>
-								<td><a href="#">View Order</a></td>
+								<td>TK</td>
+								<td>Yuliang B</td>
+								<td>Siswa</td>
+								<td><a href="manage/profile/123123" class="view-student">Details</a></td>
 							</tr>
 						</tbody>
 						</table>
