@@ -21,15 +21,25 @@
 
  	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3>Opening Balance for as 01/07/2014 of period 2014/2015</h3>
+			<h3>Opening Balance for period <?php echo $opening_year['name'] ?></h3>
+			<small>This setup is set manually once. Afterward, the opening balance will be automatically set by system.</small>
 		</div>
 
 
 	<div class="panel-body">
 	    <div class="row">
 	        <div class="neraca col-md-12">
+      		<form action="<?php echo base_url()?>master/opening_balance/save_opening_balance" method="POST">
+	      	<div class="form-group">
+		      	<div class="col-md-6">
+		      		<label class="form-label">Opening Balance Date</label>
+		      		<div>
+		    	        <input type="text" placeholder="Opening Balance Date: dd-mm-yyyy" name="opening_date" 
+		    	        	id="tgl_opening" class="form-control" required readonly>
+	    	        </div>
+		      	</div>
+	      	</div>
 	      	<div class="col-md-12">
-	      		<form action="<?php echo base_url()?>master/opening_balance/save_opening_balance" method="POST">
 				<table class="table table-hidaction table-striped table-debet">
 					<!-- <input type="hidden" name="account-name" class="account-name" value="debet"/> -->
 					<thead>
@@ -111,8 +121,8 @@
 				<?php if ($setup['setup_status'] == 0) : ?>
 				<button type="submit" class="btn btn-primary">Simpan</button>
 				<?php endif; ?>
-				</form>
 			</div>
+			</form>
 			</div>
 	    </div>
 	</div>        

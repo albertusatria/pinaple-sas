@@ -8,6 +8,7 @@ class Items_type_optional extends Operator_base {
 		// load model
 		$this->load->model('master/m_units');
 		$this->load->model('master/m_items_type');
+		$this->load->model('master/m_accounts');
 		//$this->load->model('initiation/m_school_year');
 		//$this->load->model('registration/m_registration');
 		//$this->load->model('administration/m_scholarship');
@@ -35,7 +36,9 @@ class Items_type_optional extends Operator_base {
 		// get tahun ajaran
 		//$data['school_year']= $this->m_school_year->get_active_year();
 		//$sy_id = $data['school_year']->id;
+		$data['account'] = $this->m_accounts->get_pendapatan_account_list();
 		$data['ls_items_type_optional'] = $this->m_items_type->get_items_type_by_type("OPTIONAL");
+		$data['rs_items_type'] = $this->m_items_type->get_all_items_type(false);		
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
 		$data['eror'] = $this->session->flashdata('eror');
@@ -62,6 +65,8 @@ class Items_type_optional extends Operator_base {
 		$this->form_validation->set_rules('name', 'Items Type Name', 'required|trim|xss_clean|callback_check_duplicate_items_type');
 		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('amount', 'Amount', 'required|trim|xss_clean|numeric|greater_than[0]');
+		$this->form_validation->set_rules('accounting_code', 'Accounting Code', 'required|trim|xss_clean');
+
 		if ($this->form_validation->run() == TRUE) {
 			// insert
 			$data = array(
@@ -69,7 +74,9 @@ class Items_type_optional extends Operator_base {
 				'description'	=> $this->input->post('description'),
 				'amount'		=> $this->input->post('amount'),
 				'unit_id'		=> $this->input->post('unit_id'),
-				'type'			=> 'OPTIONAL'
+				'type'			=> 'OPTIONAL',
+				'accounting_code'	=> $this->input->post('accounting_code'),
+				'packet'	=> '0',
 			);
 			$this->m_items_type->add_items_type($data);
 			$data['message'] = "Data successfully added";
@@ -108,6 +115,7 @@ class Items_type_optional extends Operator_base {
 		// get message flashdata		
 		$data['message']= $this->session->flashdata('message');
 		$data['eror'] 	= $this->session->flashdata('eror');
+
 		// load template
 		$data['title']	= "Items Type Optional";
 		$data['layout'] = "master/items_type_optional/edit";
@@ -119,13 +127,16 @@ class Items_type_optional extends Operator_base {
 		$this->form_validation->set_rules('name', 'Scholarship Name', 'required|trim|xss_clean|callback_check_duplicate_items_type_ex_self');
 		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('amount', 'Amount', 'required|trim|xss_clean|numeric|greater_than[0]');
+		$this->form_validation->set_rules('accounting_code', 'Accounting Code', 'required|trim|xss_clean');
 		if ($this->form_validation->run() == TRUE) {
 			$data = array(
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
 				'description'	=> $this->input->post('description'),
 				'amount'		=> $this->input->post('amount'),
-				'unit_id'		=> $this->input->post('unit_id')
+				'unit_id'		=> $this->input->post('unit_id'),
+				'accounting_code'	=> $this->input->post('accounting_code'),
+				'packet'	=> '0',
 			);
 		
 			$this->m_items_type->edit_items_type($data);

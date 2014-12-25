@@ -8,6 +8,7 @@ class Items_type extends Operator_base {
 
 		// load all the related model here
 		$this->load->model('m_items_type');		
+		$this->load->model('m_accounts');		
 
 		// load portal
 		$this->load->helper('text');
@@ -31,8 +32,8 @@ class Items_type extends Operator_base {
 		$data['user']	= $this->user;
 		//message
 		$data['message'] = $this->session->flashdata('message');
-
 		//all items
+		$data['account'] = $this->m_accounts->get_pendapatan_account_list();
 		$data['rs_items_type'] = $this->m_items_type->get_all_items_type();		
 		$data['rs_num_rows'] = $this->m_items_type->get_total_rows();
 		$data['layout'] = "master/items_type/list";
@@ -54,13 +55,16 @@ class Items_type extends Operator_base {
 		
 		$this->form_validation->set_rules('name', 'Item Type Name', 'required|trim|xss_clean|callback_check_duplicate_items');
 		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('accounting_code', 'Accounting Code', 'required|trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
 			// insert
 			$data = array(
 				//'id'			=> $this->m_items_type->get_total_rows(),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'accounting_code'	=> $this->input->post('accounting_code'),
+				'packet'	=> '1'
 			);
 		
 			$this->m_items_type->add_items_type($data);
@@ -72,7 +76,8 @@ class Items_type extends Operator_base {
 				'message'		=> str_replace("\n", "", validation_errors()),
 				//'id'			=> $this->m_items_type->get_total_rows(),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'accounting_code'	=> $this->input->post('description')
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/items_type/');
@@ -88,6 +93,7 @@ class Items_type extends Operator_base {
 		// user detail
 		$data['user'] = $this->user;
 		$data['result'] = $this->m_items_type->get_item_by_id($id);
+		$data['account'] = $this->m_accounts->get_pendapatan_account_list();
 
 		// load template
 		$data['message']= $this->session->flashdata('message');
@@ -108,7 +114,9 @@ class Items_type extends Operator_base {
 			$data = array(
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'accounting_code'	=> $this->input->post('accounting_code'),
+				'packet'	=> '1'
 			);
 		
 			$this->m_items_type->edit_items_type($data);
@@ -120,7 +128,8 @@ class Items_type extends Operator_base {
 				'message'		=> str_replace("\n", "", validation_errors()),
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
-				'description'	=> $this->input->post('description')
+				'description'	=> $this->input->post('description'),
+				'accounting_code'	=> $this->input->post('accounting_code'),
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/items_type/edit/'.$this->input->post('id'));
