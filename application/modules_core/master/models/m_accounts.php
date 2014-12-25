@@ -18,11 +18,18 @@ class M_accounts extends CI_Model {
         return $query->result_array();
     }
 
+    function get_pendapatan_account_list() {
+        $this->db->where('tipe','PENDAPATAN');
+        $this->db->where('postable','DA');
+        return $this->db->get('accounting_account')->result_array();        
+    }
+
     function get_status_opening_balance() {
         return $this->db->get('accounting_first_balance_status_setup')->row_array();        
     }
 
-    function change_status_opening_balance() {
+    function change_status_opening_balance($opening_date) {
+        $params['date_begin'] = $opening_date;
         $params['setup_status'] = 1;
         return $this->db->update('accounting_first_balance_status_setup',$params);        
     }

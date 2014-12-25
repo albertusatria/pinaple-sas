@@ -7,8 +7,18 @@ class m_items_type extends CI_Model {
         parent::__construct();
     }
 
-    function get_all_items_type(){
-        return $this->db->get('items_type')->result();
+    function get_all_items_type($packet=true){
+        if ($packet == true) {
+            $this->db->where('packet','1');            
+        } else {
+            $this->db->where('packet','0');                        
+        }
+        $this->db->order_by('i.id','ASC');
+        $this->db->select('i.id, i.name as item_name, i.description, i.mandatory, i.accounting_code, a.name as code_name, i.unit_id, u.name as unit_name, i.amount');
+        $this->db->from('items_type i');
+        $this->db->join('accounting_account a','a.accounting_id = i.accounting_code','left');
+        $this->db->join('units u','u.id = i.unit_id','left');
+        return $this->db->get()->result();
     }
 
     function get_total_rows(){

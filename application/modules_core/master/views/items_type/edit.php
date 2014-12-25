@@ -49,6 +49,18 @@
 	            <textarea rows="5" name="description" class="form-control" placeholder="Type Items Type description..." required><?php echo $result->description?></textarea>
 	          </div>
 	        </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Accounted to<span class="asterisk">*</span></label>
+              <div class="col-sm-9">
+                <select class="form-control" name="accounting_code">
+                  <?php foreach($account as $acc) : ?>
+                    <option value="<?php echo $acc['accounting_id'] ?>" 
+                        <?php if ($acc['accounting_id'] == $result->accounting_code) : echo "selected"; endif; ?> ><?php echo $acc['name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+
          
           
         </div><!-- panel-body -->

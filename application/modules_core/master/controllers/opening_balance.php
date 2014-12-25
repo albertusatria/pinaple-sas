@@ -48,12 +48,13 @@ class Opening_balance extends Operator_base {
 	}
 
 	public function save_opening_balance(){
-		// echo "<pre>"; print_r($this->input->post()); die;
+		// echo "<pre>"; echo date('Y-m-d',strtotime($this->input->post('opening_date'))); die;//print_r($this->input->post()); die;
 		foreach ($this->input->post('balance_value') as $value) {
 			// echo "<pre>"; print_r($value);
 			$this->m_accounts->save_opening_balance($value);
 		}
-		$this->m_accounts->change_status_opening_balance();
+		$opening_date = date('Y-m-d',strtotime($this->input->post('opening_date')));
+		$this->m_accounts->change_status_opening_balance($opening_date);
 		$this->session->set_flashdata('message', 'Opening Balance has succesfully set');
 		redirect('master/opening_balance');
 		// die;

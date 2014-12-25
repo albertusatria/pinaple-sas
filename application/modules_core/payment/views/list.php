@@ -32,7 +32,7 @@
 		  	<div class="form-group">				  
 	          	<div class="col-lg-8">
 	            	<input type="text" name="name" id="keyword" class="form-control" 
-	            	placeholder="Type student's Name or NIS..." required="" value="0496">
+	            	placeholder="Type student's Name or NIS..." required="" value="123123123">
                     <a href="" id="no-nis-transaction-mode">Tanpa NIS</a>
 	          	</div>
 	        
@@ -196,7 +196,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Konfirmasi Pembelian</h4>
+        <h4 class="modal-title" id="myModalLabel">Konfirmasi Pembayaran</h4>
       </div>
       <div class="modal-body">
         <div class="table-item">

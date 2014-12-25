@@ -361,6 +361,7 @@ function updateGrandTotal()
 					var timeDiff;
 					var diffDays;	
 					var tahun_period;
+					var extra_name;
 
 		            for (index = 0; index < data.length; ++index) {
 		            	invoice_id = data[index]['id'];
@@ -370,6 +371,12 @@ function updateGrandTotal()
 		                amount_paid = data[index]['amount_paid'];
 		                period_name = data[index]['period_name'];
 		                deadline = data[index]['payment_deadline'];
+		                extra_name = data[index]['extra_name'];
+
+		                if (extra_name != null) {
+		                	item_name = item_name + ' ' + extra_name;
+		                }
+
 
 		                if (period_name != null) {
 							date2 = new Date(deadline);
