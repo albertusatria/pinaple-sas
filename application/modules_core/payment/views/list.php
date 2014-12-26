@@ -76,27 +76,11 @@
 	            	<table class="table" id="resultsInvoice">
 	              		<thead>
 							<tr>
-    	                		<th></th>
-	        	            	<th></th>
+              		<th></th>
+  	            	<th></th>
 							</tr>
 		             	</thead>
 	              		<tbody class="table-striped">
-<!-- 	                 <tr class="even accidental">
-	                    <td class="items">
-	                    	<h4>Seragam</h4>
-							<a href="#" class="add all">
-								<i class="fa fa-plus"></i>
-							</a>  
-							<div class="bills-info">
-					          <div class="panel-group">
-					            <div class="panel">
-					            	<h5><span class="price" value="500000">500000</span></h5>
-					            </div>
-					          </div>
-							</div>							          	
-	                    </td>
-	                    <td>Invoice Accidental</td>	                    
-	                 </tr> -->
 	              </tbody>
 	           </table>
 			 </div><!-- table-responsive -->		  
@@ -135,8 +119,14 @@
                     <address>
                     	<input type="hidden" id="nisPembayar" value="" />
                         <strong><input type="text" id="namaPembayar" placeholder="Payer name here ..." readonly></strong><br>
-                        Kelas 7 , Sekolah Menengah Pertama<br>
-                        Tahun Ajaran 2014/2015<br>
+                        <div id="infoSiswa">
+                        <span id="unitPembayar">Unit Info here ...</span><br/>                        
+                        <span id="kelasPembayar">Class Info here ...</span><br/>
+                      </div>
+                        <input type="hidden" id="unitIDPembayar" value=""/> <br>
+                        <input type="hidden" id="transaction_date" value="<?php echo date('Y-m-d') ?>"/> <br>
+                        <input type="hidden" id="thn_ajaran_id" value="<?php echo $active_school_year->id ?>"/><br>
+                        <input type="hidden" id="thn_ajaran_aktif" value="<?php echo $active_school_year->name ?>"/><br>
                     </address>
                     
                     <p><strong>Invoice Date:</strong> <?php echo date('d-m-Y')?></p>
@@ -145,7 +135,7 @@
             </div><!-- row -->
             
             <div class="table-responsive">
-            <table class="table table-invoice" id="invoiceTable">
+            <table class="table table-invoice table-utama" id="invoiceTable">
             <thead>
               <tr>
                 <th>Item</th>
@@ -199,32 +189,58 @@
         <h4 class="modal-title" id="myModalLabel">Konfirmasi Pembayaran</h4>
       </div>
       <div class="modal-body">
+        <div class="payer-info">
+          <div class="col-sm-6">
+            Nis : <span id="konfirmasiNIS"> - </span> <br>
+            Nama : <strong><input type="text" id="konfirmasiNama" placeholder="Payer name here ..." readonly></strong><br>
+          </div>
+          <div class="col-sm-6">
+            Unit : <span id="konfirmasiUnit"> - </span> <br>
+            Kelas : <span id="konfirmasiKelas"> - </span> <br>
+          </div>
+
+        </div>
         <div class="table-item">
         </div>
         <hr/>
         <div class="metode-pembayaran">
 			<div class="col-sm-12">
-				<div class="rdio rdio-primary">
+        <!-- 				<div class="rdio rdio-primary">
 				  <input type="radio" id="cash" value="cash" name="payment_method" required="">
 				  <label for="cash">Cash</label>
-				</div><!-- rdio -->
-				
-				<div class="rdio rdio-primary">
+				</div>
+         -->
+			<!--
+			<div class="rdio rdio-primary">
 				  <input type="radio" value="cc/debet" id="cards" name="payment_method">
-				  <label for="cards">Credit Card / Debet</label>
-				</div><!-- rdio -->
+				  <label for="cards">Transfer</label>
+				</div>
 				<label class="error" for="payment_method"></label>
 			</div> 
-			<div class="col-sm-7">
-            <select id="cardsOption" class="form-control input-sm" >
-				<option value="">Choose one from available CC or Debet cards</option>
-				<option value="BCA">BCA</option>
-				<option value="BNI">BNI</option>
-				<option value="BRI">BRI</option>
-				<option value="HSBC">HSBC</option>
-            </select>
-            <label class="error" for="fruits"></label>
-          </div>       	
+      -->
+      <!--  
+	    <div class="col-sm-7">
+        <select id="cardsOption" class="form-control input-sm" >
+  				<option value="">Choose one from available CC or Debet cards</option>
+  				<option value="BCA">BCA</option>
+  				<option value="BNI">BNI</option>
+  				<option value="BRI">BRI</option>
+  				<option value="HSBC">HSBC</option>
+        </select>
+        <label class="error" for="fruits"></label>
+      </div>       
+      -->
+      <div class="col-sm-7">
+        <select id="paymentMethodOption" class="form-control input-sm" required>
+          <option value="">Choose one from avaiable method below</option>
+          <?php foreach ($payment_methods as $methods) : ?>
+            <option value="<?php echo $methods['accounting_id'] ?>"><?php echo $methods['name'] ?></option>
+          <?php endforeach; ?>
+        </select>
+        <label class="error" for="fruits"></label>
+      </div>        
+
+
         </div>
       </div>
       <div class="modal-footer">
