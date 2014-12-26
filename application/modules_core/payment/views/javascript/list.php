@@ -61,6 +61,7 @@ jQuery(document).ready(function() {
 		var detailList	= dethis.next().find('.list-details-items').html();
 
 		var id 			= dethis.closest('td').find('input.id-invoice').val();
+		var akun 		= dethis.closest('td').find('input.item-akuntansi').val();
 		var is_editable	= '';
 		var need_to_pay = dethis.closest('td').find('input.pay-invoice').val();
 		var hari_terlambat = dethis.closest('td').find('input.day-terlambat').val();
@@ -85,6 +86,7 @@ jQuery(document).ready(function() {
 		newRow += 
 			'<tr>'+
 			'<td>'+
+     			'<input type="hidden" class="akun-invoice-dab" value="'+akun+'">'+
      			'<input type="hidden" class="id-invoice-dab" value="'+id+'">'+
      			'<input type="hidden" class="name-invoice-dab" value="'+itemTitle+'">'+
      			'<input type="hidden" class="init-invoice-dab" value="'+need_to_pay+'">'+
@@ -261,8 +263,8 @@ function updateGrandTotal()
 	     	{
 			    if (data.length > 0)
 			    {
-			   		// console.log(data);
-			   		// return false;
+			   		console.log(data);
+			   		//return false;
 			   		//tampilkan list siswanya
 
 				   	jQuery('#resultSiswa tbody tr').remove();
@@ -275,16 +277,19 @@ function updateGrandTotal()
 		                alamat = data[index]['living_address'];
 		                current = data[index]['current_level'];
 		                start = data[index]['start_level'];
+		                kelas = data[index]['class_name'];
 		            jQuery('#resultSiswa > tbody:first').append(
 		                 '<tr>'+
 		                    '<td>'+
 		                    	'<input type="hidden" class="nisSiswa" name="nisSiswa" value="'+nis+'">'+
 		                    	'<input type="hidden" class="namaSiswa" name="namaSiswa" value="'+nama+'">'+
 		                    	'<input type="hidden" class="unitId" name="unitId" value="'+unit_id+'">'+
+		                    	'<input type="hidden" class="unitNama" name="unitNama" value="'+unit+'">'+
+		                    	'<input type="hidden" class="unitKelas" name="unitKelas" value="'+kelas+'">'+
 		                    	'<strong class="text-danger"> '+nama+' </strong>'+
-		                    	'<div class="text-muted"><i class="fa fa-user"></i>'+nis+'</div>'+
+		                    	'<br><small>'+nis+'</small>'+
 		                    	'<div class="text-muted"><i class="fa fa-puzzle-piece"></i>'+unit+'</div>'+
-		                    	'<div class="text-muted"><i class="fa fa-map-marker"></i>(kelas)</div>'+
+		                    	'<div class="text-muted"><i class="fa fa-map-marker"></i>'+kelas+'</div>'+
 		                    '</td>'+
 		                    '<td>'+
 		                    	'<a href="#" class="pilih-siswa">'+
@@ -362,6 +367,7 @@ function updateGrandTotal()
 					var diffDays;	
 					var tahun_period;
 					var extra_name;
+					var kode_akun
 
 		            for (index = 0; index < data.length; ++index) {
 		            	invoice_id = data[index]['id'];
@@ -372,6 +378,7 @@ function updateGrandTotal()
 		                period_name = data[index]['period_name'];
 		                deadline = data[index]['payment_deadline'];
 		                extra_name = data[index]['extra_name'];
+		                kode_akun = data[index]['accounting_code'];
 
 		                if (extra_name != null) {
 		                	item_name = item_name + ' ' + extra_name;
@@ -414,7 +421,8 @@ function updateGrandTotal()
 	                    		'<td class="items">'+
 		                 			'<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
 		                 			'<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
-		                 			'<input type="hidden" class="item-name" value="'+item_name+'">';
+		                 			'<input type="hidden" class="item-name" value="'+item_name+'">'+
+		                 			'<input type="hidden" class="item-akuntansi" value="'+kode_akun+'">';
 
                 			if (diffDays != 'tidak ada') {
                 				if (terlambat == '0') {
@@ -470,6 +478,8 @@ function updateGrandTotal()
 				            for (index = 0; index < data.length; ++index) {
 				                name = data[index]['name'];
 				                amount = data[index]['amount'];
+				                kode_akun = data[index]['accounting_code'];
+
 
 					            if (index % 2 == 0) {
 				                 	invoicelistOptional += '<tr class="odd billed">';
@@ -483,6 +493,7 @@ function updateGrandTotal()
 				                 			'<input type="hidden" class="pay-invoice" value="'+amount+'">'+
 				                 			'<input type="hidden" class="item-name" value="'+name+'">'+
 				                			'<input type="hidden" class="fine-terlambat" value="0">'+
+				                 			'<input type="hidden" class="item-akuntansi" value="'+kode_akun+'">'+
 				                					'<input type="hidden" class="day-terlambat" value="0">'+
 			                    			'<h5><span class="judul">'+name+'</span> <span class="label label-info">optional</span></h5>';
 				                	invoicelistOptional +=
@@ -541,10 +552,17 @@ function updateGrandTotal()
 		var id = jQuery(this).closest('tr').find('input.nisSiswa').val();
 		var nama = jQuery(this).closest('tr').find('input.namaSiswa').val();
 		var unit_id = jQuery(this).closest('tr').find('input.unitId').val();
+		var unit_nama = jQuery(this).closest('tr').find('input.unitNama').val();
+		var kelas = jQuery(this).closest('tr').find('input.unitKelas').val();
 		// console.log(id + ' ' + nama);
 
         jQuery('#nisPembayar').val(id);
         jQuery('#namaPembayar').val(nama);
+        jQuery('#unitIDPembayar').val(unit_id);
+        jQuery('#unitPembayar').text(unit_nama);
+        jQuery('#kelasPembayar').text(kelas);
+
+        // if (unit_id = )
 
 
 		//menghilangkan 
@@ -614,10 +632,29 @@ function updateGrandTotal()
 	
 	/* Payment Handling */
 	jQuery("#makePayment").on('click',function(){
+
+        jQuery('#konfirmasiNIS').text(jQuery('#nisPembayar').val());
+        jQuery('#konfirmasiNama').val(jQuery('#namaPembayar').val());
+        jQuery('#konfirmasiKelas').text(jQuery('#kelasPembayar').text());
+        jQuery('#konfirmasiUnit').text(jQuery('#unitPembayar').text());
+
+		// var id = jQuery(this).closest('tr').find('input.nisSiswa').val();
+		// var nama = jQuery(this).closest('tr').find('input.namaSiswa').val();
+		// var unit_id = jQuery(this).closest('tr').find('input.unitId').val();
+		// var unit_nama = jQuery(this).closest('tr').find('input.unitNama').val();
+		// var kelas = jQuery(this).closest('tr').find('input.unitKelas').val();
+		// // console.log(id + ' ' + nama);
+
+		  // jQuery('#nisPembayar').val(id);
+		  // jQuery('#namaPembayar').val(nama);
+		  // jQuery('#unitPembayar').text(unit_nama);
+		  // jQuery('#kelasPembayar').text(kelas);
+
+
 		jQuery('#confirmationPayment .table-item').find('table').remove();
-		jQuery('#invoiceTable').clone().prependTo(jQuery('#confirmationPayment .table-item'));
+		jQuery('#invoiceTable').clone().attr('id', 'confirmationTable').prependTo(jQuery('#confirmationPayment .table-item'));
 		
-		var tbodyCount = jQuery('#confirmationPayment #invoiceTable tbody tr').length;
+		var tbodyCount = jQuery('#confirmationPayment #confirmationTable tbody tr').length;
 		if(tbodyCount < 1)
 		{
 			jQuery('#confirmationPayment #doPayment').addClass('disabled');
@@ -639,11 +676,17 @@ function updateGrandTotal()
 		if (jQuery(this).is(':checked')){
 			jQuery('#cardsOption').hide();
 		}
+
+		// if (jQuery('input[id=cash]').is(':checked')) 
+		// {
+		// 	if (jQuery)
+		// }
+
 	});	
 	
 	/* Do 'Pay' and Printing */
 	jQuery("#doPayment").on('click',function(){
-		javascript:window.print();
+		// javascript:window.print();
 		
 		//buat nota
         var item = {};
@@ -652,10 +695,26 @@ function updateGrandTotal()
         if (jQuery('#nisPembayar').val() != '') {
 	        item[x]['nis'] = jQuery('#nisPembayar').val();
         }
-        item[x]['payer_name'] = jQuery('#namaPembayar').val();
+        item[x]['payer_name'] = jQuery('#konfirmasiNama').val();
         item[x]['amount'] = jQuery('#totalPayment').val();
         item[x]['payer_method'] = '0';
         console.log(item[x]);
+
+		var d = new Date();
+		var month = new Array();
+		month[0] = "01";
+		month[1] = "02";
+		month[2] = "03";
+		month[3] = "04";
+		month[4] = "05";
+		month[5] = "06";
+		month[6] = "07";
+		month[7] = "08";
+		month[8] = "09";
+		month[9] = "10";
+		month[10] = "11";
+		month[11] = "12";
+		var n = month[d.getMonth()];
 
         //update span
         jQuery.ajax({
@@ -674,11 +733,12 @@ function updateGrandTotal()
 		        var itemx = {};
 		        itemx[num] = {};
 
+		        var pendapatan = {};
+		        pendapatan[num] = {};
 
 		        jQuery("#invoiceTable tbody tr").each(function() {
 		        /* get Qty and EA Price */
 		        // console.log(jQuery(this).find('td input.bayar-invoice-dab').val());
-
 			        if ( jQuery(this).find('td input.bayar-invoice-dab').val() == 'YA') {
 
 			            itemx[num] = {};
@@ -720,8 +780,24 @@ function updateGrandTotal()
 				            items[num]['status'] = 'INSTALMENT';
 				            items[num]['amount_paid'] = jQuery(this).find('td input.instalment-invoice-dab').val();
 			            } 
+
+
+				        pendapatan[num] = {};
+			            //journal data
+				        pendapatan[num]['accounting_code'] = jQuery(this).find('td input.akun-invoice-dab').val();
+				        pendapatan[num]['accounting_period'] = jQuery('#thn_ajaran_id').val();
+				        pendapatan[num]['month'] = n ;
+				        pendapatan[num]['invoice_id'] = items[num]['id'];
+				        pendapatan[num]['transaction_date'] = jQuery('#transaction_date').val(); //today
+				        pendapatan[num]['transaction_ref'] = data; //data
+				        pendapatan[num]['description'] = itemx[num]['remark'];
+				        pendapatan[num]['amount_type'] = 'D';
+				        pendapatan[num]['amount'] = items[num]['amount_paid'];
+
 			            // console.log(JSON.stringify(items[num]));                        
 			            // console.log(JSON.stringify(itemx[num]));                        
+			            console.log(JSON.stringify(pendapatan[num]));      
+
 			            num = num + 1;
 			        } else {
 			        	console.log('tidak dibayarkan')
@@ -729,11 +805,40 @@ function updateGrandTotal()
 
 		        });
 
+		       //kas / bank
+		        var aktiva = {};
+		        var y = 1;
+		        aktiva[y] = {}
+		        aktiva[y]['accounting_period'] = jQuery('#thn_ajaran_id').val();
+		        aktiva[y]['month'] = n ;
+		        aktiva[y]['transaction_date'] = jQuery('#transaction_date').val(); //today
+		        aktiva[y]['transaction_ref'] = data; //data
+		        aktiva[y]['accounting_code'] = jQuery('#paymentMethodOption').val(); //pilihan dari checkbox
+		        aktiva[y]['description'] = 'Transaksi Pembayaran';
+		        aktiva[y]['amount_type'] = 'D';
+		        aktiva[y]['amount'] = jQuery('#totalPayment').val();
+
+		        jQuery.ajax({
+		          	type: "POST",
+		          	url: CI_ROOT+"payment/payments/save_to_journal",
+		          	async:false,
+		          	data: aktiva,
+		            success: function(data)
+		            {                    
+		            	console.log(data);
+		            },
+		            error: function (data)
+		            {  
+		            	console.log('pait');
+		            }
+		        });	
+
 				// return false;	
 		        // return false;
 		        jQuery.ajax({
 		          	type: "POST",
 		          	url: CI_ROOT+"payment/payments/payment_create_nota_detail",
+		          	async:false,
 		          	data: itemx,
 		            success: function(data)
 		            {                    
@@ -742,12 +847,11 @@ function updateGrandTotal()
 				        jQuery.ajax({
 				          	type: "POST",
 				          	url: CI_ROOT+"payment/payments/payment_process",
+				          	async:false,
 				          	data: items,
 				            success: function(data)
 				            {                    
-				            	console.log(data);
-				                window.location.replace(CI_ROOT + 'payment/payments');
-				                return false;
+				            	console.log(data);				            	
 				            },
 				            error: function (data)
 				            {  
@@ -760,6 +864,24 @@ function updateGrandTotal()
 		            	console.log('pait');
 		            }
 		        });       
+
+		        jQuery.ajax({
+		          	type: "POST",
+		          	url: CI_ROOT+"payment/payments/save_to_journal",
+		          	async:false,
+		          	data: pendapatan,
+		            success: function(data)
+		            {                    
+		            	console.log(data);
+		                window.location.replace(CI_ROOT + 'payment/payments');
+		                return false;
+		            },
+		            error: function (data)
+		            {  
+		            	console.log('pait');
+		            }
+		        });				            	
+
       
             },
             error: function (data)
@@ -777,6 +899,17 @@ function updateGrandTotal()
 	
 	jQuery('#no-nis-transaction-mode').on('click',function(){
 		jQuery('#namaPembayar').removeAttr('readonly').attr('required','required');
+        jQuery('#unitPembayar').remove();
+        jQuery('#kelasPembayar').remove();
+        jQuery('#infoSiswa').remove();
+
+
+		jQuery('#konfirmasiNama').removeAttr('readonly').attr('required','required');
+        // jQuery('#konfirmasiNIS').hide();
+        // jQuery('#konfirmasiNama').show();
+        // jQuery('#konfirmasiKelas').hide();
+        // jQuery('#konfirmasiUnit').hide();
+
 
         jQuery('#searchPanel').fadeOut(function(){
           jQuery(this).remove();		  

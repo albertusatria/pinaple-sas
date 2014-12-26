@@ -8,6 +8,7 @@ class Payments extends Operator_base {
 
 		// load all the related model here
 		$this->load->model('m_payments');
+		$this->load->model('initiation/m_school_year');
 
 		// load portal
 		$this->load->helper('text');
@@ -36,8 +37,8 @@ class Payments extends Operator_base {
 		//$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		
 		// get active school year
-		//$data['active_school_year'] = $this->m_school_year->get_active_year();		
-		
+		$data['active_school_year'] = $this->m_school_year->get_active_year();		
+		$data['payment_methods'] = $this->m_payments->get_payment_methods();
 		$data['layout'] = "payment/list";
 		$data['javascript'] = "payment/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
@@ -101,6 +102,12 @@ class Payments extends Operator_base {
 	    echo json_encode($data);				
 	}
 
+	public function save_to_journal() {
+		foreach ($_POST as $value => $val) {
+			$data = $this->m_payments->save_to_journal($val);
+		}
+		$this->session->set_flashdata('message', 'Transaksi berhasil disimpan');
+	}
 
 
 	public function payment_process()
@@ -114,7 +121,8 @@ class Payments extends Operator_base {
 
 			$data = $this->m_payments->payment_process($val['id'],$params);
 		}
-		$this->session->set_flashdata('message', 'Transaksi berhasil disimpan');
+		header('Content-Type: application/json');
+	    echo json_encode($data);				
 	}
 
 	public function get_now() {

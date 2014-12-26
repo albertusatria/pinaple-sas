@@ -16,9 +16,10 @@ class M_payments extends CI_Model {
         $schoolyear = $query->row();
         $id = $schoolyear->id;
 
-        $sql = "SELECT s.*, u.name FROM (SELECT * FROM re_registration r WHERE r.school_year_id = '$id') regis
+        $sql = "SELECT s.*, u.name,c.name'class_name' FROM (SELECT * FROM re_registration r WHERE r.school_year_id = '$id') regis
                 LEFT JOIN users_student s ON s.nis = regis.nis
                 LEFT JOIN units u ON s.unit_id = u.id 
+                LEFT JOIN classes c ON c.id = s.class_id 
                 WHERE s.nis LIKE '%$keyword%' OR s.full_name LIKE '%$keyword%'
                 LIMIT 10";
         $query = $this->db->query($sql);
@@ -30,7 +31,7 @@ class M_payments extends CI_Model {
     }
 
     function get_siswa_invoice($nis) {
-        $sql = "SELECT i.*,t.name as item_name, p.name as period_name, y.name as packet_name, e.name as extra_name
+        $sql = "SELECT i.*,t.name as item_name, p.name as period_name, y.name as packet_name, e.name as extra_name, t.accounting_code
                 FROM
                 (SELECT * FROM invoices WHERE nis = '$nis' AND status != 'PAID' ) i
                 LEFT JOIN items_type t ON i.item_type_id = t.id
@@ -47,7 +48,7 @@ class M_payments extends CI_Model {
 
     function get_optional_payment_option($data) {
         $unit_id = $data['unit_id'];
-        $sql = "SELECT id,name,amount,unit_id
+        $sql = "SELECT id,name,amount,unit_id,accounting_code
                 FROM items_type 
                 WHERE type = 'optional' AND is_deleted = '0'
                 ";
@@ -70,6 +71,16 @@ class M_payments extends CI_Model {
                 FROM items_type 
                 WHERE type = 'optional' AND is_deleted = '0'
                 ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return array();
+        }        
+    }
+
+    function get_payment_methods() {
+        $sql = "SELECT * FROM accounting_account WHERE tipe = 'AKTIVA' AND postable = 'DA'";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
             return $query->result_array();
@@ -112,6 +123,15 @@ class M_payments extends CI_Model {
 
     function payment_create_nota_detail($params) {
         $insert = $this->db->insert('payments_detail',$params);
+        if ($insert) {
+            return true;
+        } else {
+            return false;
+        }        
+    }
+
+    function save_to_journal($params) {
+        $insert = $this->db->insert('accounting_general_journal',$params);
         if ($insert) {
             return true;
         } else {
