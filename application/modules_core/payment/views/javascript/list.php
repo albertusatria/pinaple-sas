@@ -43,6 +43,7 @@ jQuery(document).ready(function() {
 	//init currency format
 	jQuery('.price').autoNumeric('init', {aSign:'Rp', pSign:'p', aSep:'.', aDec:',' });
 	jQuery('.dataTables_filter input').attr("placeholder", "enter seach terms here");
+	jQuery('#resultsInvoice').dataTable({"paging":false});
 
 });
 </script>
@@ -997,7 +998,7 @@ function updateGrandTotal()
 						jQuery('.price').formatCurrency({region: 'id-ID'});
 
 						/* Initialise datatables */
-					    var oTable = jQuery('#resultsInvoice').dataTable();
+					    var oTable = jQuery('#resultsInvoice').dataTable({"paging":false});
 
 					    /* Add event listener to the dropdown input */
 					    $('select#filter').change( function() { 
