@@ -118,7 +118,7 @@
                     <h5 class="subtitle mb10 addressed-to">To</h5>
                     <address>
                     	<input type="hidden" id="nisPembayar" value="" />
-                        <strong><input type="text" id="namaPembayar" placeholder="Payer name here ..." readonly></strong><br>
+                        <strong><input type="text" id="namaPembayar" class="input-sm" placeholder="Payer name here ..." readonly></strong><br>
                         <div id="infoSiswa">
                         <span id="unitPembayar">Unit Info here ...</span><br/>                        
                         <span id="kelasPembayar">Class Info here ...</span><br/>
@@ -181,8 +181,8 @@
 </div><!-- contentpanel -->
 
 <!-- Modal -->
-<div class="modal fade" id="confirmationPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade-full" id="confirmationPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -202,46 +202,21 @@
         </div>
         <div class="table-item">
         </div>
+		
+		<h3>Metode Pembayaran</h3>
         <hr/>
         <div class="metode-pembayaran">
-			<div class="col-sm-12">
-        <!-- 				<div class="rdio rdio-primary">
-				  <input type="radio" id="cash" value="cash" name="payment_method" required="">
-				  <label for="cash">Cash</label>
-				</div>
-         -->
-			<!--
-			<div class="rdio rdio-primary">
-				  <input type="radio" value="cc/debet" id="cards" name="payment_method">
-				  <label for="cards">Transfer</label>
-				</div>
-				<label class="error" for="payment_method"></label>
-			</div> 
-      -->
-      <!--  
-	    <div class="col-sm-7">
-        <select id="cardsOption" class="form-control input-sm" >
-  				<option value="">Choose one from available CC or Debet cards</option>
-  				<option value="BCA">BCA</option>
-  				<option value="BNI">BNI</option>
-  				<option value="BRI">BRI</option>
-  				<option value="HSBC">HSBC</option>
-        </select>
-        <label class="error" for="fruits"></label>
-      </div>       
-      -->
-      <div class="col-sm-7">
-        <select id="paymentMethodOption" class="form-control input-sm" required>
-          <option value="">Choose one from avaiable method below</option>
-          <?php foreach ($payment_methods as $methods) : ?>
-            <option value="<?php echo $methods['accounting_id'] ?>"><?php echo $methods['name'] ?></option>
-          <?php endforeach; ?>
-        </select>
-        <label class="error" for="fruits"></label>
-      </div>        
 
+	      <div class="col-sm-12">
+	        <select id="paymentMethodOption" class="form-control input-sm" required>
+	          <option value="">Choose one from available method below</option>
+	          <?php foreach ($payment_methods as $methods) : ?>
+	            <option value="<?php echo $methods['accounting_id'] ?>"><?php echo $methods['name'] ?></option>
+	          <?php endforeach; ?>
+	        </select>
+	        <label class="error" for="fruits"></label>
+	      </div>        
 
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

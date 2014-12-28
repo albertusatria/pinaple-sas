@@ -106,23 +106,30 @@
 .table-invoice tbody > tr > td:last-child{
 	width: 1%;
 }
-#invoiceTable > tbody > tr > td:nth-child(1){
+#invoiceTable > tbody > tr > td:nth-child(1),
+#confirmationTable > tbody > tr > td:nth-child(1){
 	width: 300px;
 }
 #invoiceTable > tbody > tr > td:nth-child(3),
-#invoiceTable > tbody > tr > td:nth-child(4){
+#invoiceTable > tbody > tr > td:nth-child(4),
+#confirmationTable > tbody > tr > td:nth-child(3),
+#confirmationTable > tbody > tr > td:nth-child(4){
 	width: 180px;
 	text-align: right;
 }
-#invoiceTable dl{
+#invoiceTable dl,
+#confirmationTable dl{
 	width: 100%;
 	margin: 10px;
 }
-#invoiceTable dl dd, #invoiceTable dl dt{
+#invoiceTable dl dd, #invoiceTable dl dt,
+#confirmationTable dl dd, #confirmationTable dl dt{
 	width: 50%;
 	float: left;
 }
-#invoiceTable dl dt{
+#invoiceTable dl dt,
+#confirmationTable dl dt,
+#confirmationTable dl dd{
 	text-align: left;
 }
 #invoiceTable dl dd{
@@ -174,4 +181,16 @@
 #confirmationPayment .metode-pembayaran .col-sm-7
 {
 	margin-left: 25px;
+}
+
+/* set installment on confirmation order */
+.is-cicilan
+{
+	display: none;
+}
+
+/* Payment w/o NIS */
+#namaPembayar
+{
+	border-radius: 0;
 }

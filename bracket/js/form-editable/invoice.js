@@ -57,6 +57,7 @@ var FormEditableInvoice = function () {
 					var qty = dethis.closest('tr').find('span.qty').text();
 					subTotal = (parseInt(newValue) * qty) + parseInt(denda);
 					dethis.closest('tr').find('span.inst-credit').formatCurrency({region: 'id-ID'});					
+					dethis.closest('tr').find('.is-cicilan').text('CICILAN ');
 				}
 				else
 				{
@@ -107,6 +108,19 @@ var FormEditableInvoice = function () {
 
 				dethis.closest('tr').find('span.denda-price').text(denda).attr('value',denda);
 				dethis.closest('tr').find('span.denda-price').formatCurrency({region: 'id-ID'});
+
+				var daysOfLate = '';
+				if(newValue > 1)
+				{
+					daysOfLate = ' days';
+				}
+				else
+				{
+					daysOfLate = ' day';
+				}
+				
+				dethis.closest('tr').find('.days-late').attr('data-value',newValue);
+				dethis.closest('tr').find('.days-late small').text(newValue+daysOfLate);
 
 				dethis.closest('tr').find('span.subtotal').text(subTotal).attr('value',subTotal);
 				dethis.closest('tr').find('span.subtotal').formatCurrency({region: 'id-ID'});
