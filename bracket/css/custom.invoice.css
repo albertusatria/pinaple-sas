@@ -1,7 +1,25 @@
-/* CSS Invoice */
+/*----------------------------------------------------------------------------*/
+/* CSS Invoice
+/*----------------------------------------------------------------------------*/
+
+
+/* Invoice List */
 #namaPembayar
 {
 	text-align: right;
+}
+
+/* -- Result Invoice */
+#resultsInvoice
+{
+	margin-bottom: 0;
+}
+#resultsInvoice tbody
+{
+	max-height: 400px;
+	display: list-item;
+	overflow: scroll;
+	overflow-y: scroll;
 }
 #resultsInvoice_length,
 #resultsInvoice thead, #resultsInvoice .sorting_asc, #resultsInvoice > tbody > tr > td:nth-child(2){
@@ -55,6 +73,14 @@
 	margin-right: 5px;
 }
 
+/* -- Hide Pagination */
+#resultsInvoice_paginate,
+#resultsInvoice_info
+{
+	display: none;
+}
+
+/* -- Detail Invoice List */
 .bills-info, .details-info{
 	clear: both;
 }
