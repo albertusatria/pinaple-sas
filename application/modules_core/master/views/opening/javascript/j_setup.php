@@ -24,9 +24,18 @@
 
 
   jQuery(document).ready(function() {
-    
+	
+	/* validation & mask */
+	jQuery("#openingBalanceSetup").validate({
+		highlight: function(element) {
+			jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		},
+		success: function(element) {
+			jQuery(element).closest('.form-group').removeClass('has-error');
+		}
+	});	
+	    
 	jQuery("#tgl_opening").mask("99-99-9999");
-
     jQuery('#tgl_opening').datepicker({ 
       dateFormat: 'dd-mm-yy',
       altField: '#hidden_dob' ,
