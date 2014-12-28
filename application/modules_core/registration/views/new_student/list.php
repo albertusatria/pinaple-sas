@@ -139,7 +139,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Full Name <span class="asterisk">*</span></label>
             <div class="col-sm-6">
-              <input type="text" name="siswa[siswa_nama_lengkap]" placeholder="Full Name" class="form-control" required />
+              <input type="text" name="siswa[siswa_nama_lengkap]" placeholder="Student Full Name.. " class="form-control" required />
             </div>
           </div>
 
@@ -202,7 +202,7 @@
         </div>                        
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Citizen <span class="asterisk">*</span></label>
+          <label class="col-sm-3 control-label">Nationality <span class="asterisk">*</span></label>
 		  <div class="col-sm-8">
               <div class="rdio rdio-primary">
                 <input type="radio" id="ina_siswa" value="WNI" name="siswa[siswa_kewarganegaraan]" required="">
@@ -233,24 +233,23 @@
                   <input type="text" placeholder="Achievement Name, ex: Juara I Lomba Mewarnai" name="siswa_prestasi<?php echo $a?>[nama_prestasi]" class="form-control" />
                 </div>
               <div class="col-sm-2">
-                <select class="form-control chosen-select" data-placeholder="Pilih Jenis Prestasi..." name="siswa_prestasi<?php echo $a?>[jenis_prestasi]">
+                <select class="form-control chosen-select" data-placeholder="Pilih Jenis Prestasi.." name="siswa_prestasi<?php echo $a?>[jenis_prestasi]">
                   <option value="" selected>Type of Achievement </option>
-                  <option value="AKADEMIS">Academics</option>
-                  <option value="NON AKADEMIS">Non Academics</option>
+                  <option value="AKADEMIS">Academic</option>
+                  <option value="NON AKADEMIS">Non Academic</option>
                 </select>
               </div>
               <div class="col-sm-2">
-                <select class="form-control chosen-select" data-placeholder="Pilih tingkat Prestasi..." name="siswa_prestasi<?php echo $a?>[tingkat_prestasi]">
-                  <option value="" selected>Choose Achievement Regional</option>
+                <select class="form-control chosen-select" data-placeholder="Pilih tingkat Prestasi.." name="siswa_prestasi<?php echo $a?>[tingkat_prestasi]">
                   <option value="INTERN">Intern</option>
                   <option value="KOTA">City</option>
-                  <option value="PROVINCE">Province</option>
-                  <option value="NATIONAL">National</option>
-                  <option value="INTERNATIONAL">International</option>
+                  <option value="PROPINSI">Province</option>
+                  <option value="NASIONAL">National</option>
+                  <option value="INTERNASIONAL">International</option>
                 </select>
               </div>
               <div class="col-sm-1">
-                <input type="text" id="tahun_prestasi" name="siswa_prestasi<?php echo $a?>[tahun_prestasi]" class="form-control" placeholder="Achievement Year..." />
+                <input type="text" id="tahun_prestasi" name="siswa_prestasi<?php echo $a?>[tahun_prestasi]" class="form-control" placeholder="Year.." />
               </div>
 
               </div>
@@ -270,7 +269,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Full Name <span class="asterisk">*</span></label>
                 <div class="col-sm-6">
-                  <input type="text" name="siswa[nama_lengkap_ayah]" placeholder="nama lengkap ayah" class="form-control" required />
+                  <input type="text" name="siswa[nama_lengkap_ayah]" placeholder="Father Full Name.." class="form-control" required />
                 </div>
             </div>
 
@@ -294,14 +293,14 @@
                 </div>
               </div>              
             </div>     
-            
-			<div class="form-group">
+        <!--    
+			   <div class="form-group">
               <label class="col-sm-3 control-label">Address <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="siswa-mother-address" placeholder="Address where student's father life" class="form-control" id="fathAddress" required/>
               </div>                       
             </div>                                                      
-
+        -->
 	   		 <div class="form-group">
 	              <label class="col-sm-3 control-label">Jobs</label>
 	              <div class="col-sm-2">
@@ -325,11 +324,11 @@
               <label class="col-sm-3 control-label">Nationality</label>
 			  <div class="col-sm-8">
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="ina_ayah" value="ina" name="siswa[kewarganegaraan_ayah]" required="">
+	                <input type="radio" id="ina_ayah" value="WNI" name="siswa[kewarganegaraan_ayah]" required="">
 	                <label for="ina_ayah">Indonesian</label>
 	              </div>
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="foreign_ayah" value="foreign" name="siswa[kewarganegaraan_ayah]" required="">
+	                <input type="radio" id="foreign_ayah" value="WNA" name="siswa[kewarganegaraan_ayah]" required="">
 	                <label for="foreign_ayah">Foreign</label>
 	              </div>
 				  <label class="error" for="siswa[kewarganegaraan_ayah]"></label>
@@ -346,7 +345,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Full Name <span class="asterisk">*</span></label>
                 <div class="col-sm-6">
-                  <input type="text" name="siswa[nama_lengkap_ibu]" placeholder="nama lengkap ibu" class="form-control" required />
+                  <input type="text" name="siswa[nama_lengkap_ibu]" placeholder="Mother Full Name.." class="form-control" required />
                 </div>
             </div>
 
@@ -370,14 +369,14 @@
                 </div>
               </div>              
             </div>                                              
-
-			<div class="form-group">
+<!--
+			    <div class="form-group">
               <label class="col-sm-3 control-label">Address <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="siswa-mother-address" placeholder="Address where student's mother life" class="form-control" id="momAddress" required/>
               </div>                       
-            </div> 
-
+          </div> 
+-->
         	 <div class="form-group">
                   <label class="col-sm-3 control-label">Jobs</label>
                   <div class="col-sm-2">
@@ -401,11 +400,11 @@
               <label class="col-sm-3 control-label">Nationality</label>
 			  <div class="col-sm-8">
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="ina_ibu" value="ina" name="siswa[kewarganegaraan_ibu]" required="">
+	                <input type="radio" id="ina_ibu" value="WNI" name="siswa[kewarganegaraan_ibu]" required="">
 	                <label for="ina_ibu">Indonesian</label>
 	              </div>
 	              <div class="rdio rdio-primary">
-	                <input type="radio" id="foreign_ibu" value="foreign" name="siswa[kewarganegaraan_ibu]" required="">
+	                <input type="radio" id="foreign_ibu" value="WNA" name="siswa[kewarganegaraan_ibu]" required="">
 	                <label for="foreign_ibu">Foreign</label>
 	              </div>
 				  <label class="error" for="siswa[kewarganegaraan_ibu]"></label>	              
@@ -424,11 +423,12 @@
               <label class="col-sm-3 control-label">Student life with</label>
               <div class="col-sm-3">
                 <select class="form-control chosen-select student-address" data-placeholder="Student life with ..." name="siswa[tinggal_bersama]">
-                  <option value="Parents" selected>Parents</option>
-                  <option value="Father">Father</option>
-                  <option value="Mother">Mother</option>
-                  <option value="Family Siblings">Family Siblings</option>
-                  <option value="Others">Others</option>
+                  <option value=""> - select - </option>
+                  <option value="Ayah dan Ibu">Parents</option>
+                  <option value="Ayah">Father</option>
+                  <option value="Ibu">Mother</option>
+                  <option value="Saudara">Family Siblings</option>
+                  <option value="Lain-lain">Others</option>
                 </select>
               </div>
             </div>
@@ -460,7 +460,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Home Teacher Name</label>
                 <div class="col-sm-6">
-                  <input type="text" name="siswa[nama_lengkap_wali]" placeholder="nama lengkap wali" class="form-control" />
+                  <input type="text" name="siswa[nama_lengkap_wali]" placeholder="Home Teacher Full Name.." class="form-control" />
                 </div>
             </div>                                           
 
@@ -472,14 +472,14 @@
             </div>            
 
 			  <div class="form-group">
-				  <label class="col-sm-3 control-label">Citizen</label>
+				  <label class="col-sm-3 control-label">Nationality</label>
 				  <div class="col-sm-8">
 			          <div class="rdio rdio-primary">
-			            <input type="radio" id="ina" value="ina" name="siswa[kewarganegaraan_wali]" required="">
+			            <input type="radio" id="ina" value="WNI" name="siswa[kewarganegaraan_wali]" required="">
 			            <label for="ina">Indonesian</label>
 			          </div>
 			          <div class="rdio rdio-primary">
-			            <input type="radio" id="foreign" value="foreign" name="siswa[kewarganegaraan_wali]" required="">
+			            <input type="radio" id="foreign" value="WNA" name="siswa[kewarganegaraan_wali]" required="">
 			            <label for="foreign">Foreign</label>
 			          </div>
 					  <label class="error" for="siswa[kewarganegaraan_wali]"></label>
