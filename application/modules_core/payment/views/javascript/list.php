@@ -69,17 +69,45 @@ jQuery(document).ready(function() {
 		var subtot = Number(price) + Number(denda_terlambat);
 		// console.log(id + ' ' +need_to_pay);
 		// return false;
-		                 			// '<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
-		                 			// '<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
+		// '<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
+		// '<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
 
 
+		var late_info = '';
+		if(hari_terlambat > 0)
+		{
+			var daysOfLate = '';
+			if(hari_terlambat > 1)
+			{
+				daysOfLate = ' days';
+			}
+			else
+			{
+				daysOfLate = ' day';
+			}		
+			
+			late_info +=
+				'<dt><small>Late for : </dt>'+
+				'<dd class="days-late" data-value="'+hari_terlambat+'"><small>'+hari_terlambat+daysOfLate+'</dd>'
+		}
+		else
+		{
+			late_info = "";
+		}
+		
+		var more_detail_info = '';
 		if (detailList == undefined)
 		{
 			detailList = "";
+			more_detail_info = "";
 		}
 		else
 		{
 			is_editable	= "";
+			more_detail_info +=
+				'<dt><small>Detail information </dt>'+
+				'<dd><small>'+detailList+' days</dd>'
+			
 		}
 		var newRow = '';
 
@@ -95,8 +123,8 @@ jQuery(document).ready(function() {
      			'<input type="hidden" class="day-late-invoice-dab" value="'+hari_terlambat+'">'+
      			'<input type="hidden" class="fine-invoice-dab" value="'+denda_terlambat+'">'+
      			'<input type="hidden" class="bayar-invoice-dab" value="YA">'+
-				'<div class="text-primary"><strong>'+itemTitle+'</strong></div>'+
-				'<dl><small>'+detailList+'</small></dl>'+
+				'<div class="text-primary"><strong><b class="is-cicilan"></b>'+itemTitle+'</strong></div>'+
+				'<dl>'+late_info+more_detail_info+'</dl>'+
 			'</td>';
 		if (id == '0') {
 			console.log('bisa diedit jumlahnya');
@@ -121,7 +149,7 @@ jQuery(document).ready(function() {
 			'<td>'+
 				'<span class="price each denda-price" value='+denda_terlambat+'>'+denda_terlambat+'</span><br/>'+
 				'<p class="installment">'+
-					'<span class="label-fines">days : </span><span class="days-credit" value="'+hari_terlambat+'">'+hari_terlambat+'</span>'+
+					'<span class="label-fines">Rp500,00 * </span><span class="days-credit" value="'+hari_terlambat+'">'+hari_terlambat+'</span>'+
 			'</p></td>';
 			} 
 			else 
@@ -663,6 +691,9 @@ function updateGrandTotal()
 		{
 			jQuery('#confirmationPayment #doPayment').removeClass('disabled');
 		}
+		
+		jQuery('#confirmationTable .is-cicilan').show();
+		jQuery('#confirmationTable .installment').hide();		
 	});
 	
 	
