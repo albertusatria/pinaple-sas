@@ -29,7 +29,7 @@
 	<div class="panel-body">
 	    <div class="row">
 	        <div class="neraca col-md-12">
-      		<form action="<?php echo base_url()?>master/opening_balance/save_opening_balance" method="POST">
+      		<form id="openingBalanceSetup" action="<?php echo base_url()?>master/opening_balance/save_opening_balance" method="POST">
 	      	<div class="form-group">
 		      	<div class="col-md-6">
 		      		<label class="form-label">Opening Balance Date</label>
@@ -68,12 +68,12 @@
 									<td class="account-id" style="vertical-align:middle"><span class="text text-danger"><?php echo $acc['accounting_id']?></span></td>
 									<td class="account-name" colspan="2" style="vertical-align:middle"><strong><?php echo $acc['name']?></strong></td>
 									<td style="vertical-align:middle">
-										<select name="balance_value[<?=$i?>][amount_type]" class="form-control">
+										<select name="balance_value[<?=$i?>][amount_type]" class="form-control input-sm">
 											<option value="D" selected>Debet</option>
 											<option value="K">Kredit</option>
 										</select>
 									</td>
-									<td style="vertical-align:middle"><input type="text" name="balance_value[<?=$i?>][amount]" class="form-control input-sm" value="0"/> </td>
+									<td style="vertical-align:middle"><input type="text" name="balance_value[<?=$i?>][amount]" class="amount form-control input-sm" value="0"/> </td>
 								</tr>
 								<?php if (isset($acc['children']) && count($acc['children'])) : ?>								
 									<?php foreach ($acc['children'] as $item) : ?>
@@ -82,7 +82,7 @@
 											<td class="account-id" width="10%">
 												<span class="text text-danger"><?php echo $item['accounting_id']?></span>
 											</td>
-											<td class="account-name"><?php echo $item['name']?></td>
+											<td class="account-name amount"><?php echo $item['name']?></td>
 										</tr>
 									<?php endforeach; ?>
 								<?php endif; ?>							
@@ -98,7 +98,7 @@
 									<td style="vertical-align:middle">
 										<?php echo $acc['amount_type'] ?>										
 									</td>
-									<td style="vertical-align:middle"><?php echo $acc['amount']?></td>
+									<td style="vertical-align:middle" class="amount"><?php echo $acc['amount']?></td>
 								</tr>
 								<?php if (isset($acc['children']) && count($acc['children'])) : ?>								
 									<?php foreach ($acc['children'] as $item) : ?>
@@ -107,7 +107,7 @@
 											<td class="account-id" width="10%">
 												<span class="text text-danger"><?php echo $item['accounting_id']?></span>
 											</td>
-											<td class="account-name"><?php echo $item['name']?></td>
+											<td class="account-name amount"><?php echo $item['name']?></td>
 										</tr>
 									<?php endforeach; ?>
 								<?php endif; ?>							
