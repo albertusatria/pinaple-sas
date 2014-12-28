@@ -1,69 +1,100 @@
 var neracaSaldo = function () {
 
+	var addRow = function(){
+		jQuery('.editable-label').editable(); 		
+	}
 	var setValue = function(){
-		jQuery('.value-activa').bind('blur focusout keypress keyup', function () {
-			var thisVal = jQuery(this).autoNumeric('get');
-			jQuery(this).attr('data-value', thisVal);
-			return false;
+		jQuery('.editable').editable({
+			success: function(response, newValue) {
+				var dethis = jQuery(this);
+				dethis.closest('td').attr('data-value',newValue);
+				if(dethis.closest('td').hasClass('activa-debit'))
+				{
+					totalDebet();
+				}
+				else if(dethis.closest('td').hasClass('activa-credit'))
+				{
+					totalKredit();
+				}
+				else
+				{
+					alert('Error! Missing classname to do calculate.');
+				}
+				outOfBalance();
+			}		
 		});
+		jQuery('.add-row').on('click',function(){
+			jQuery('.table-journal tr:last').after(
+			'<tr>'+
+				'<td class="acct-id"><span class="editable-label editable-click">{kode}</span></td>'+
+				'<td class="name">'+
+					'<label class="editable-label editable-click">{input nama journal}</label>'+
+				'</td>'+
+				'<td class="activa-debit" data-value="0"><span class="editable editable-click">0</span></td>'+
+				'<td class="activa-credit" data-value="0"><span class="editable editable-click">0</span></td>'+
+			'</tr>'
+			);
+			addRow();
+			return false;
+		});		
 	}
 	var totalDebet = function () {
-		jQuery('.table-debet .value-activa').on('blur', function () {
-			var grandTotal = 0;
-			if((".table-debet tbody").length){
-				jQuery(".table-debet tbody .group-content").each(function() {
-				    jQuery("td .price",this).each(function() {
-						var dethis = jQuery(this);
-						grandTotal += Number(dethis.attr("data-value"));
-				    }); 
-				
-					jQuery(".table-debet tfoot input").val(grandTotal).formatCurrency({region: 'id-ID'}).attr("data-value", grandTotal);
-			    });		
-			}
-		});	
+		var grandTotal = 0;
+		if((".table-total tbody").length){
+			jQuery(".table-journal tbody tr").each(function() {
+			    jQuery(".activa-debit",this).each(function() {
+					var dethis = jQuery(this);
+					grandTotal += Number(dethis.attr("data-value"));
+			    }); 
+
+				jQuery(".table-total .total-debit").text(grandTotal).formatCurrency({region: 'id-ID'}).attr("data-value", grandTotal);
+		    });		
+		}
 		return false;
     }
     
     var totalKredit = function () {
-		jQuery('.table-credit .value-activa').on('blur', function () {
-			var grandTotal = 0;
-			if((".table-credit tbody").length){
-				jQuery(".table-credit tbody .group-content").each(function() {
-				    jQuery("td .price",this).each(function() {
-						var dethis = jQuery(this);
-						grandTotal += Number(dethis.attr("data-value"));
-				    }); 
-				
-					jQuery(".table-credit tfoot input").val(grandTotal).formatCurrency({region: 'id-ID'}).attr("data-value", grandTotal);
-			    });		
-			}
-		});	
+		var grandTotal = 0;
+		if((".table-total tbody").length){
+			jQuery(".table-journal tbody tr").each(function() {
+			    jQuery(".activa-credit",this).each(function() {
+					var dethis = jQuery(this);
+					grandTotal += Number(dethis.attr("data-value"));
+			    }); 
+			
+				jQuery(".table-total .total-credit").text(grandTotal).formatCurrency({region: 'id-ID'}).attr("data-value", grandTotal);
+		    });		
+		}
 		return false;
     }
 
-   var showSave = function() {
-	   jQuery('.value-activa').bind('blur focusout keypress keyup', function () {
-		   var debetValue = jQuery(".table-debet tfoot input").attr("data-value");
-	   	   var creditValue = jQuery(".table-credit tfoot input").attr("data-value");
-	   	   
-	   	   if((debetValue && creditValue > 0) && (debetValue == creditValue))
-	   	   {
-		   	   jQuery('.panel-footer button').show();
-	   	   }
-	   	   else
-	   	   {
-		   	    jQuery('.panel-footer button').hide();
-	   	   }
-	   });
-   }
+    var outOfBalance = function () {
+		var totalDebit = Number(jQuery('.table-total .total-debit').attr('data-value'));
+		var totalCredit = Number(jQuery('.table-total .total-credit').attr('data-value'));		
+
+		var outBalance = totalDebit - totalCredit;	
+		jQuery(".table-total .out-balance").text(outBalance).formatCurrency({region: 'id-ID'}).attr("data-value", outBalance);
+		
+		if(outBalance < 0)
+		{
+			jQuery(".table-total .out-balance").css('color','#cc00000');
+		}
+		else if(outBalance > 0)
+		{
+			jQuery(".table-total .out-balance").css('color','#58B535');			
+		}
+		else
+		{
+			jQuery(".table-total .out-balance").css('color','#636e7b');
+		}
+		return false;
+    }
 
     return {
         //main function to initiate the module
         init: function () {
         	setValue();
-            totalDebet();
-			totalKredit();
-			showSave();
+        	addRow();
         }
 
     };
