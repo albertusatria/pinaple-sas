@@ -1,53 +1,7 @@
 var neracaSaldo = function () {
 
 	var addRow = function(){
-		jQuery('.editable-label').editable(); 		
-		jQuery('.editable-click').editable(); 				
-	}
-
-	var initEditable = function() {
-		jQuery('#tableJournalList span.editable').editable({
-			success: function(response, newValue) {
-				var dethis = jQuery(this);
-				console.log('syalala');
-				dethis.closest('td').attr('data-value',newValue);
-				if(dethis.closest('td').hasClass('activa-debit'))
-				{
-					totalDebet();
-				}
-				else if(dethis.closest('td').hasClass('activa-credit'))
-				{
-					totalKredit();
-				}
-				else
-				{
-					alert('Error! Missing classname to do calculate.');
-				}
-				outOfBalance();
-			}		
-		});		
-	}
-
-	var setValue = function(){
-		jQuery('.editable').editable({
-			success: function(response, newValue) {
-				var dethis = jQuery(this);
-				dethis.closest('td').attr('data-value',newValue);
-				if(dethis.closest('td').hasClass('activa-debit'))
-				{
-					totalDebet();
-				}
-				else if(dethis.closest('td').hasClass('activa-credit'))
-				{
-					totalKredit();
-				}
-				else
-				{
-					alert('Error! Missing classname to do calculate.');
-				}
-				outOfBalance();
-			}		
-		});
+		
 		var acc_code,acc_name,acc_tipe,include;
 		jQuery('.add-row').on('click',function(){
 		    jQuery.ajax({
@@ -64,8 +18,8 @@ var neracaSaldo = function () {
 		     			acc_tipe = data[index]['tipe'];
 
 		     			include = false;
-						$("#tableJournalList tbody tr").each(function() {
-							if ($(this).find('td.acct-id').text() == acc_code) {
+						jQuery("#tableJournalList tbody tr").each(function() {
+							if (jQuery(this).find('td.acct-id').text() == acc_code) {
 								//if code already in the use list
 								include = true;
 							}
@@ -115,11 +69,35 @@ var neracaSaldo = function () {
 				'<td class="activa-credit" data-value="0"><span class="editable editable-click">0</span></td>'+
 			'</tr>'
 			);
-			addRow();
-			// return false;
-		});		
+			initEditable();
+		});	
 
 	}
+
+	var initEditable = function() {
+		jQuery('#tableJournalList .editable').editable({
+			success: function(response, newValue) {
+				var dethis = jQuery(this);
+				console.log(newValue);
+				dethis.closest('td').attr('data-value',newValue);
+				if(dethis.closest('td').hasClass('activa-debit'))
+				{
+					totalDebet();
+				}
+				else if(dethis.closest('td').hasClass('activa-credit'))
+				{
+					totalKredit();
+				}
+				else
+				{
+					alert('Error! Missing classname to do calculate.');
+				}
+				outOfBalance();
+			}		
+		});		
+	}
+	
+	
 	var totalDebet = function () {
 		var grandTotal = 0;
 		if((".table-total tbody").length){
@@ -178,9 +156,8 @@ var neracaSaldo = function () {
     return {
         //main function to initiate the module
         init: function () {
-        	setValue();
         	addRow();
-        	// initEditable();
+        	initEditable();
         }
 
     };
