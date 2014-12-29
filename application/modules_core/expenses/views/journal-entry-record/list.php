@@ -26,12 +26,13 @@
         </div>
         <div class="panel-body">
         <form id="formJournal" class="form-horizontal">
+            <input type="hidden" id="accounting-period" value="<?php echo $active_school_year->id ?>" />
         	<div class="row">
     				<div class="col-sm-5">             
     					<div class="form-group">
     						<label class="col-sm-4 control-label">General Journal #</label>
     						<div class="col-sm-8">
-    							<input type="text" name="journal_id" class="form-control" placeholder="input journal ID">
+    							<input type="text" id="journal-ref" name="journal_id" class="form-control" placeholder="input journal ID">
     						</div>
     					</div>
     				</div>  
@@ -39,7 +40,7 @@
     					<div class="form-group">
     						<label class="col-sm-4 control-label">Date</label>
     						<div class="col-sm-8">
-    							<input type="text" name="journal_date" class="form-control" readonly placeholder="journal date, format : dd-mm-yyyy">
+    							<input type="text" id="journal-date" name="journal_date" class="form-control" readonly placeholder="journal date, format : dd-mm-yyyy">
     						</div>
     					</div>				    				    				
     				</div>      	
@@ -49,7 +50,7 @@
               <div class="form-group">
                 <label class="col-sm-4 control-label">Memo #</label>
                 <div class="col-sm-8">
-                  <textarea name="memo" class="form-control" placeholder="input memo"></textarea>
+                  <textarea id="journal-memo" name="memo" class="form-control" placeholder="input memo"></textarea>
                 </div>
               </div>
             </div>  
@@ -62,10 +63,11 @@
 	            <table class="table table-journal" id="tableJournalList">
 	            <thead>
 	              <tr>
-	                <th>Acct #</th>
-	                <th>Name</th>
-	                <th>Debit</th>
-	                <th>Credit</th>
+	                <th width="15%">Acct #</th>
+	                <th width="35%">Name</th>
+	                <th width="20%">Debit</th>
+	                <th width="20%">Credit</th>
+                  <th width="5%"></th>
 	              </tr>
 	            </thead>
 	            <tbody>
@@ -113,7 +115,7 @@
                 </tbody>
             </table>
             <div class="text-right btn-invoice">
-                <button class="btn btn-primary mr5" id="entry-record" disabled><i class="fa fa-check-circle-o mr5"></i> Record</button>
+                <a href="#" class="btn btn-primary mr5" id="entry-record" disabled><i class="fa fa-check-circle-o mr5"></i> Record</a>
                 <button class="btn btn-white"> Cancel</button>
             </div>
         </form>
