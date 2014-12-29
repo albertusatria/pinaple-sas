@@ -24,9 +24,16 @@
 <script src="<?php echo base_url();?>bracket/js/jquery.formatCurrency.id-ID.js"></script>
 <script src="<?php echo base_url();?>bracket/js/bootstrap-editable/js/bootstrap-editable.js"></script>
 <script src="<?php echo base_url()?>bracket/js/neraca.saldo.js"></script>
+
+<script type="text/javascript">
+        CI_ROOT = "<?=base_url() ?>";
+</script>
+
 <script>
   jQuery(document).ready(function() {
     
+
+
     /* mask & init picker */
 	jQuery('input[name="journal_date"]').mask('99-99-9999');
     jQuery('input[name="journal_date"]').datepicker({ 
