@@ -823,7 +823,7 @@ function updateGrandTotal()
 				        pendapatan[num]['transaction_date'] = jQuery('#transaction_date').val(); //today
 				        pendapatan[num]['transaction_ref'] = data; //data
 				        pendapatan[num]['description'] = itemx[num]['remark'];
-				        pendapatan[num]['amount_type'] = 'D';
+				        pendapatan[num]['amount_type'] = 'K';
 				        pendapatan[num]['amount'] = items[num]['amount_paid'];
 
 			            // console.log(JSON.stringify(items[num]));                        
