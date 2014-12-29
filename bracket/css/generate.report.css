@@ -1,0 +1,47 @@
+/*----------------------------------------------------------------------------*/
+/* Generate Report Stylesheet
+/*----------------------------------------------------------------------------*/
+
+/* datepicker and label */
+.form-group .datepicker
+{
+	padding: 8px 6px;
+}
+.range-label
+{
+	float: left;
+	line-height: 35px;
+	margin-right: 18px;
+}
+
+/* Label with borderline for custom report */
+.wrapper-option-label:before
+{
+	display: none !important;
+}
+.option-label {
+  line-height: 0.5;
+  text-align: center;
+  font-size: 25px;
+}
+.option-label span {
+  display: inline-block;
+  position: relative;  
+}
+.option-label span:before,
+.option-label span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid #8694A6;
+  top: 0;
+  width: 300px;
+}
+.option-label span:before {
+  right: 80%;
+  margin-right: 55px;
+}
+.option-label span:after {
+  left: 80%;
+  margin-left: 55px;
+}
