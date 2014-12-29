@@ -59,4 +59,9 @@ function stopPropagation(evt) {
 		evt.cancelBubble = true;
 	}
 }
+
+function hapus(no,nama,nis){
+    if(confirm('Are you sure to delete invoice: '+nama+' ?'))
+      window.location = "<?php echo base_url(); ?>master/students/update_delete_invoices_process/"+no+"/"+nis;
+}
 </script>

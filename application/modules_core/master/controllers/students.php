@@ -10,6 +10,7 @@ class Students extends Operator_base {
 		// load model
 		$this->load->model('m_students');
 		$this->load->model('registration/m_registration');
+		$this->load->model('payment/m_payments');
 
 		// load portal
 		$this->load->helper('text');
@@ -40,6 +41,7 @@ class Students extends Operator_base {
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
 		$data['eror'] = $this->session->flashdata('eror');
+		$data['act'] = $this->session->flashdata('act');
 
 		$data['layout'] = "master/students/list";
 		$data['javascript'] = "master/students/javascript/j_list";
@@ -77,6 +79,11 @@ class Students extends Operator_base {
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
 		$data['eror'] = $this->session->flashdata('eror');
+		$actval=$this->session->flashdata('act');
+		if(isset($actval) && !empty($actval))
+			$data['act'] = $this->session->flashdata('act');
+		else
+			$data['act'] ="BI";
 
 		$data['layout'] = "master/students/profile";
 		$data['javascript'] = "master/students/javascript/j_profile";
@@ -135,6 +142,7 @@ class Students extends Operator_base {
 			$insert = $this->m_students->edit_student($input);
 		}
 		$data['message'] = "Student data successfully updated";
+		$data['act'] = "BI";
 		$this->session->set_flashdata($data);
 		redirect('master/students/manage_profile/'.$nis);	
 	}
@@ -153,12 +161,19 @@ class Students extends Operator_base {
 			$insert = $this->m_students->edit_achievement($input);
 		}
 		$data['message'] = "Achievement data successfully updated";
+		$data['act'] = "SA";
 		$this->session->set_flashdata($data);
 		redirect('master/students/manage_profile/'.$nis);
 	}
 
-	public function delete_invoices_process(){
-
+	public function update_delete_invoices_process($id,$nis){
+		$params['id']=$id;
+		$params['deleted']=1;
+		$this->m_payments->edit_invoices($params);
+		$data['message'] = "Invoices data successfully deleted";
+		$data['act'] = "IH";
+		$this->session->set_flashdata($data);
+		redirect('master/students/manage_profile/'.$nis);
 	}
 
 	// page title
