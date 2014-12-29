@@ -61,11 +61,13 @@ class M_students extends CI_Model {
     function get_invoices_student_by_nis($nis){
         $sql = "SELECT i.*,t.name as item_name, p.name as period_name, y.name as packet_name, e.name as extra_name, t.accounting_code
                 FROM
-                (SELECT * FROM invoices WHERE nis = '$nis' AND status = 'PAID' ) i
+                (SELECT * FROM invoices WHERE nis = '$nis') i
                 LEFT JOIN items_type t ON i.item_type_id = t.id
                 LEFT JOIN periods p ON p.id = i.period_id
                 LEFT JOIN extras e ON e.id = i.extra_id
-                LEFT JOIN packets_year y ON i.packet_id = y.id";
+                LEFT JOIN packets_year y ON i.packet_id = y.id
+                WHERE i.deleted=0
+                ORDER BY i.dc";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
             return $query->result();
