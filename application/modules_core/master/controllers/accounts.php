@@ -213,4 +213,11 @@ class Accounts extends Operator_base {
       	}
 	}
 
+	function get_accounting_code() {
+		$data = $this->m_accounts->get_all_accounts();
+		header('Content-Type: application/json');
+	    echo json_encode($data);
+		
+	}
+
 }

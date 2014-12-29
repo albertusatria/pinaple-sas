@@ -11,7 +11,7 @@ class M_accounts extends CI_Model {
         $sql = "SELECT a.accounting_id, a.name, a.tipe, a.parent_id, c.name'parent_name', a.description
                 FROM accounting_account a
                 LEFT JOIN accounting_account c ON a.parent_id = c.accounting_id
-                ORDER BY a.tipe,a.accounting_id";
+                ORDER BY a.tipe DESC,a.accounting_id";
         $query = $this->db->query($sql);
         // $this->db->select('pages.*, p.slug as parent_slug, p.title as parent_title');
         // $this->db->join('pages as p', 'pages.parent_id=p.id', 'left');
