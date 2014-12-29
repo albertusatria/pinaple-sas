@@ -10,6 +10,8 @@ class Journal_entry extends Operator_base {
 
 		// load portal
 		$this->load->helper('text');
+		$this->load->model('m_entry');
+		$this->load->model('initiation/m_school_year');
 		// page title
 		$this->page_title();
 
@@ -31,9 +33,20 @@ class Journal_entry extends Operator_base {
 		$data['user']				= $this->user;
 		$data['message'] = $this->session->flashdata('message');
 		
+		$data['active_school_year'] = $this->m_school_year->get_active_year();		
 		$data['layout'] = "expenses/journal-entry-record/list";
 		$data['javascript'] = "expenses/journal-entry-record/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
+	}
+
+	function save_entry() {
+		foreach ($_POST as $value) {
+			$value['transaction_date'] = date('Y-m-d',strtotime($value['transaction_date']));
+			$value['month'] = date('m',strtotime($value['transaction_date']));;
+			$data = $this->m_entry->save_entry($value);
+		}
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
 	}
 
 	// page title
