@@ -41,9 +41,9 @@ class Student_registrations extends Operator_base {
 		$data['user'] = $this->user;
 
 		//data
-		$data['ls_report'] = $this->m_reports->get_all_students();
-		$data['ls_sy'] = $this->m_school_year->get_all_school_year();
 		$data['rs_asy'] = $this->m_school_year->get_active_year();
+		$data['ls_report'] = $this->m_reports->get_all_students_for_student_registrations($data['rs_asy']->id);
+		$data['ls_sy'] = $this->m_school_year->get_all_school_year();
 
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
@@ -60,8 +60,10 @@ class Student_registrations extends Operator_base {
 		$params['full_name'] = $_POST['full_name'];
 		$params['unit_name'] = $_POST['unit_name'];
 		$params['current_level'] = $_POST['current_level'];
-		$params['status'] = $_POST['status'];
-		$data = $this->m_reports->get_siswa_list_by_filters($params);
+		$params['registration_type'] = $_POST['registration_type'];
+		$params['reg_status'] = $_POST['reg_status'];
+		$params['school_year_id'] = $_POST['school_year_id'];
+		$data = $this->m_reports->get_siswa_list_by_filters_for_student_registrations($params);
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}
