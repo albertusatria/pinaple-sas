@@ -91,20 +91,22 @@ var Report = function () {
 			jQuery('.wrapper-option-label').hide();
 			jQuery('.range-report').hide();
 		}
-		
-		generateReport(selectedReportIs);
+		jQuery('#report-type').val(selectedReportIs);
+		jQuery('#date-choosen-report').val(jQuery('#reportrange').find('span').text());
+		// generateReport(selectedReportIs);
 	}
 	
 	
 	var generateReport = function (params) {
 		var daterange = jQuery('#reportrange').find('span').text();
 	    jQuery('#generate-report').on('click', function(){
+			// console.log(daterange); return false;			
 			jQuery('#ajax-loader').show();			
 			var timeout;
 			clearTimeout(timeout);
 			timeout = setTimeout(function() {
 				jQuery('#ajax-loader').hide();
-				 window.location.href = CI_ROOT+"payment_reports/financial_report/result/"+params;
+				 // window.location.href = CI_ROOT+"payment_reports/financial_report/result/"+params;
 			}, 1000);
 			return false;
 	    });

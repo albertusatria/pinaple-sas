@@ -54,7 +54,8 @@ class Accounts extends Operator_base {
 		$this->form_validation->set_rules('new_sub_parent_id', 'Parent Code', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('new_sub_accounting_id', 'Account Code', 'required|trim|xss_clean|callback_check_duplicate_accounts_id');
 		$this->form_validation->set_rules('new_sub_name', 'Accounts Name', 'required|trim|xss_clean|callback_check_duplicate_accounts');
-		$this->form_validation->set_rules('new_sub_description', 'Description', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_postable', 'Postable Type', 'required|trim|xss_clean');
 		
 		if ($this->form_validation->run() == TRUE) {
 			// insert
@@ -63,7 +64,10 @@ class Accounts extends Operator_base {
 				'name'			=> $this->input->post('new_sub_name'),
 				'parent_id'		=> $this->input->post('new_sub_parent_id'),
 				'tipe'			=> $this->input->post('new_sub_tipe'),
-				'description'	=> $this->input->post('new_sub_description')
+				'description'	=> $this->input->post('new_sub_description'),
+				'postable'		=> $this->input->post('new_sub_postable'),
+				'branchable'	=> '0',
+				'mandatory'		=> '0'
 			);
 		
 			$this->m_accounts->add_accounts($data);
@@ -87,17 +91,28 @@ class Accounts extends Operator_base {
 		$this->form_validation->set_rules('new_sub_tipe', 'Code Type', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('new_sub_accounting_id', 'Account Code', 'required|trim|xss_clean|callback_check_duplicate_accounts_id');
 		$this->form_validation->set_rules('new_sub_name', 'Accounts Name', 'required|trim|xss_clean|callback_check_duplicate_accounts');
-		$this->form_validation->set_rules('new_sub_description', 'Description', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_sub_postable', 'Postable Type', 'required|trim|xss_clean');
 		
 		if ($this->form_validation->run() == TRUE) {
 			// insert
+
 			$data = array(
 				'accounting_id'			=> $this->input->post('new_sub_accounting_id'),
 				'name'			=> $this->input->post('new_sub_name'),
 				'parent_id'		=> NULL,
 				'tipe'			=> $this->input->post('new_sub_tipe'),
-				'description'	=> $this->input->post('new_sub_description')
+				'description'	=> $this->input->post('new_sub_description'),
+				'postable'		=> $this->input->post('new_sub_postable'),
+				'branchable'	=> '0',
+				'mandatory'		=> '0'
 			);
+
+			if ($this->input->post('new_sub_postable') == 'HA') {
+				$data['branchable'] = '1';
+			} else {				
+				$data['branchable'] = '0';
+			}
 		
 			$this->m_accounts->add_accounts($data);
 			$data['message'] = "Data successfully added";
@@ -131,35 +146,37 @@ class Accounts extends Operator_base {
 	}
 
 	// add process
-	public function edit_process() {
+	public function edit_accounts() {
 		// form validation
-		$this->form_validation->set_rules('name', 'Accounts Name', 'required|trim|xss_clean|callback_check_duplicate_accounts_ex_self');
-		$this->form_validation->set_rules('group', 'Group Name', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('edit_accounting_id', 'Account Code', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('edit_name', 'Accounts Name', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('edit_description', 'Description', 'trim|xss_clean');
 
 		if ($this->form_validation->run() == TRUE) {
 			// insert
 			$data = array(
-				'id'			=> $this->input->post('id'),
-				'name'			=> $this->input->post('name'),
-				'group'			=> $this->input->post('group'),
-				'description'	=> $this->input->post('description')
+				'name'			=> $this->input->post('edit_name'),
+				'description'	=> $this->input->post('edit_description')
 			);
 		
-			$this->m_accounts->edit_accounts($data);
-			$data['message'] = "Data successfully edited";
-			$this->session->set_flashdata($data);
-			redirect('master/accounts/');
+			$data = $this->m_accounts->edit_accounts($data,$this->input->post('edit_accounting_id'));
+			if ($data == true) {
+				$data['message'] = "Data successfully edited";
+			} else {
+				$data = array(
+					'message'		=> 'Something Bad Happened. Failed to delete this account!',
+				);
+			}
+				$this->session->set_flashdata($data);
+				redirect('master/accounts/');
 		} else {
 			$data = array(
 				'message'		=> str_replace("\n", "", validation_errors()),
-				'id'			=> $this->input->post('id'),
-				'name'			=> $this->input->post('name'),
-				'group'			=> $this->input->post('group'),
-				'description'	=> $this->input->post('description')
+				'name'			=> $this->input->post('edit_name'),
+				'description'	=> $this->input->post('edit_description')
 			);
 			$this->session->set_flashdata($data);
-			redirect('master/accounts/edit/'.$this->input->post('id'));
+			redirect('master/accounts/');
 		}
 	}
 	
@@ -169,8 +186,18 @@ class Accounts extends Operator_base {
 		$this->check_auth('D');
 		
 		$params['accounting_id']=$id;
-		$this->m_accounts->delete_accounts($params);
-		$data['message'] = "Data successfully deleted";
+		$response = $this->m_accounts->delete_accounts($params);
+		if ($response == 'mandatory') {
+			$data['message'] = "Cannot delete!. This account is mandatory account. ";
+		} elseif($response == 'use') {
+			$data['message'] = "Cannot delete!. This account has been used before";
+		} elseif($response == 'child_use') {
+			$data['message'] = "Cannot delete! Child Account has been used before";
+		} elseif($response == 'berhasil') {
+			$data['message'] = "Data successfully deleted";
+		} else {
+			$data['message'] = "Opps! Something bad happened";
+		}
 		$this->session->set_flashdata($data);
 		redirect('master/accounts');
 	}
