@@ -35,7 +35,7 @@
            <div class="form-group">
               <label class="col-sm-3 control-label">NIK *</label>
               <div class="col-sm-2">
-                <input class="form-control" maxlength="20" type="text" value="<?php echo $result->nik; ?>" disabled/>
+                <input class="form-control" maxlength="10" type="text" value="<?php echo $result->nik; ?>" disabled/>
                 <input name="nik" class="form-control" maxlength="20" type="hidden" value="<?php echo $result->nik; ?>" required />
               </div>
             </div>
@@ -98,8 +98,8 @@
 
              <div class="form-group">
               <label class="col-sm-3 control-label">Postal Code</label>
-              <div class="col-sm-3">
-                <input name="postal_code" type="postal_code" class="form-control" maxlength="30" value="<?php echo  $result->postal_code;?>"/>
+              <div class="col-sm-2">
+                <input name="postal_code" type="postal_code" class="form-control" maxlength="5" value="<?php echo  $result->postal_code;?>"/>
               </div>
             </div>
 
@@ -108,12 +108,12 @@
               <div class="col-sm-2">
                 <select class="form-control input-sm mb15" name="religion">
                   <option value="">-- SELECT --</option>
-                  <option value="Budha" <?php if($result->religion=="Budha"){echo "selected='selected'";}?>>Budha</option>
-                  <option value="Hindhu" <?php if($result->religion=="Hindhu"){echo "selected='selected'";}?>>Hindhu</option>
-                  <option value="Islam" <?php if($result->religion=="Islam"){echo "selected='selected'";}?>>Islam</option>
-                  <option value="Katolik" <?php if($result->religion=="Katolik"){echo "selected='selected'";}?>>Katolik</option>
-                  <option value="Kong Hu Chu" <?php if($result->religion=="Kong Hu Chu"){echo "selected='selected'";}?>>Kong Hu Chu</option>
-                  <option value="Kristen" <?php if($result->religion=="Kristen"){echo "selected='selected'";}?>>Kristen</option>
+                  <option value="BUDHA" <?php if($result->religion=="BUDHA"){echo "selected='selected'";}?>>Budha</option>
+                  <option value="HINDHU" <?php if($result->religion=="HINDHU"){echo "selected='selected'";}?>>Hindhu</option>
+                  <option value="ISLAM" <?php if($result->religion=="ISLAM"){echo "selected='selected'";}?>>Islam</option>
+                  <option value="KATHOLIK" <?php if($result->religion=="KATHOLIK"){echo "selected='selected'";}?>>Katolik</option>
+                  <option value="KONG HU CHU" <?php if($result->religion=="KONG HU CHU"){echo "selected='selected'";}?>>Kong Hu Chu</option>
+                  <option value="KRISTEN" <?php if($result->religion=="KRISTEN"){echo "selected='selected'";}?>>Kristen</option>
                   <!--
                     <?php foreach ($rs_class as $data) : ?>
                         <option value="<?php echo $data->id; ?>"><?php echo $data->class; ?></option>
@@ -158,14 +158,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Position</label>
               <div class="col-sm-2">
-              <select class="form-control input-sm mb15" name="position">
-                 <option value="">-- SELECT --</option>
-                  <!--
-                    <?php foreach ($rs_position as $data) : ?>
-                        <option value="<?php echo $data->id; ?>"><?php echo $data->position; ?></option>
-                    <?php endforeach ; ?>
-                  -->
-              </select>
+                <input name="position" type="text" class="form-control" maxlength="50" value="<?php echo $result->position;?>"/>
               </div>
             </div>
 
@@ -199,18 +192,18 @@
               </select>
               </div>
             </div>
-
+<!--
             <div class="form-group">
               <label class="col-sm-3 control-label">Photo</label>
               <div class="col-sm-7">
                  <input name="uefile" class="form-control"  class="span5" type="file" />
               </div>
             </div>
-
+-->
             <div class="form-group">
               <label class="col-sm-3 control-label">Start Date *</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" id="datepicker_mulai" 
+                <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_mulai" 
                 value="<?php echo date("d-m-Y",strtotime($result->start_date));?>" />
                 <input type="hidden" name="start_date" id="h_mulai" value="<?php echo $result->start_date;?>">
                 <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
@@ -220,8 +213,8 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">End Date</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" id="datepicker_keluar" 
-                value="<?php echo date("d-m-Y",strtotime($result->end_date));?>"/>
+                <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_keluar" 
+                value="<?php if($result->end_date!='0000-00-00') echo date("d-m-Y",strtotime($result->end_date));?>"/>
                 <input type="hidden" name="end_date" id="h_keluar" value="<?php echo $result->end_date;?>">
                 <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
               </div>

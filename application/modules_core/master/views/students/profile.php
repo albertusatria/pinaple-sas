@@ -1,5 +1,5 @@
 <div class="pageheader">
-    <h2><i class="fa fa-smile-o"></i>Student Information #&nbsp;<?php echo $rs_student->nis?></h2>
+    <h2><i class="fa fa-smile-o"></i>Student Information <?php echo $rs_student->nis?> - <?php echo $rs_student->full_name?></h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
