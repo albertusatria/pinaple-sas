@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
 							'<td class="td-current_level">'+current_level+'</td>'+
 							'<td class="td-status">'+registration_type+'</td>'+
 							'<td class="td-status">'+reg_status+'</td>'+
-							'<td><a href="students/manage_profile/'+nis+'" class="view-student">Detail</a></td>'+
+							'<td></td>'+
 						'</tr>'
 						);
 

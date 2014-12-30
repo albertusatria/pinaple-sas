@@ -14,6 +14,7 @@ class M_reports extends CI_Model {
                 LEFT JOIN units u ON us.unit_id = u.id 
                 LEFT JOIN classes c ON c.id = us.class_id
                 LEFT JOIN re_registration r ON r.nis=us.nis AND r.school_year_id='$sy_id'
+                LIMIT 50
                 ";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
@@ -60,4 +61,37 @@ class M_reports extends CI_Model {
         }
     }
 
+    function get_student_by_class_id($class_id){
+        $sql = "SELECT cs.*, us.full_name
+                FROM class_students cs
+                LEFT JOIN users_student us ON us.nis=cs.nis 
+                WHERE cs.class_id='$class_id'
+                ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    function get_student_by_extra_id($extra_id,$period=''){
+        if($period)
+            $sp = "AND es.half_period=".$period;
+        else
+            $sp = "";
+
+        $sql = "SELECT es.*, us.full_name
+                FROM extra_students es
+                LEFT JOIN users_student us ON us.nis=es.nis 
+                WHERE es.extra_id='$extra_id' 
+                ".$sp."
+                ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
 }

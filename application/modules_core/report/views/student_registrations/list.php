@@ -61,7 +61,7 @@
 							<th width="10%">
 								 Status
 							</th>
-							<th width="10%">
+							<th width="11%">
 								 Regis. Status
 							</th>
 							<th width="10%">
@@ -100,7 +100,7 @@
 								<select name="reg_status_student" class="form-control form-filter input-sm reg_status_student">
 									<option value="ALL"> - select - </option>
 									<option value="1">Registered</option>
-									<option value="0">Un-registered</option>
+									<option value="0">Unregistered</option>
 								</select>
 							</td>
 							<td class="actions">
