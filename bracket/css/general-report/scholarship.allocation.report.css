@@ -1,0 +1,17 @@
+/*----------------------------------------------------------------------------*/
+/* Scholarship Allocation Report Stylesheet
+/*----------------------------------------------------------------------------*/
+/* Panel Heading */
+.panel-heading-print
+{
+	display: none;
+}
+/* Total Result */
+tfoot .grand-total
+{
+	background-color: #f5f5f5 !important;
+}
+.total-label
+{
+	text-transform: uppercase;
+}

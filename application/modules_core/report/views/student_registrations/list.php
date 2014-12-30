@@ -26,12 +26,19 @@
 		          <h4 class="panel-title">Student Registrations</h4>
 		        </div><!-- panel-heading -->
 		        
+				<div class="panel-heading-print" style="display:none;">
+				  <h4 class="panel-title">Laporan <br/>Registrasi Siswa</h4>
+				  <h4>Tahun Ajaran <label class="academic-year"></label></h4>
+				</div>		        
 		        <div class="panel-body">
 
  					<div class="table-container">
 						<div class="table-actions-wrapper">
+						<div class="col-md-7 col-sm-12">
+							<a onclick="window.print()" class="btn btn-white print-report-button"><i class="fa fa-print"></i> Print Report</a>
+						</div>
 						<div class="col-md-5 col-sm-12 right bulk-actions">
-							<select class="table-group-action-input form-control input-inline input-small input-sm opti-schoolyear">
+							<select class="table-group-action-input form-control input-inline input-small input-sm opti-schoolyear" onchange="academicYear()">
 								<?php foreach ($ls_sy as $result): ?>
 								<option value="<?php echo $result->id?>" 
 								<?php if($rs_asy->id==$result->id){ echo "selected";} ?>

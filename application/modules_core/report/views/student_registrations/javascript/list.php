@@ -1,5 +1,6 @@
 <link href="<?php echo base_url();?>bracket/css/dataTables.bootstrap3.css" rel="stylesheet">
 <link href="<?php echo base_url();?>bracket/css/custom.manage.student.css" rel="stylesheet">
+<link href="<?php echo base_url();?>bracket/css/print-css/student.registration.report.css" rel="stylesheet" media="print" type="text/css"></script>
 
 <script src="<?php echo base_url();?>bracket/js/jquery-1.10.2.min.js"></script>
 <script src="<?php echo base_url();?>bracket/js/jquery-migrate-1.2.1.min.js"></script>
@@ -28,6 +29,7 @@
 // General Setting
 jQuery(document).ready(function() {
 	//Management.init();
+	academicYear();
 	 jQuery('table').on('click', '.filter-submit', function(){
     	var detable = jQuery(this).closest('table');
 	    var nis = jQuery('input[name="nis_student"]').val();
@@ -109,4 +111,10 @@ function stopPropagation(evt) {
 		evt.cancelBubble = true;
 	}
 }
+
+function academicYear() {
+	var selectedYear = jQuery('.opti-schoolyear option:selected').text();
+	jQuery('.panel-heading-print').find('.academic-year').text(selectedYear);
+}
+
 </script>

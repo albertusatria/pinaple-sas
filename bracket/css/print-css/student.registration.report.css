@@ -1,0 +1,78 @@
+/*----------------------------------------------------------------------------*/
+/* Stylesheet for Printing Report
+/*----------------------------------------------------------------------------*/
+@media print {
+
+	/* A4 Layout */
+	body {
+		width: auto;
+		height: auto;
+		background: #ffffff;
+		margin: 0 auto;
+		line-height: normal !important;
+	}
+	
+	/* hide all unimportant elems */
+	.leftpanel, .mainpanel .headerbar, .mainpanel .pageheader, .search-wrapper, img,
+	button, .panel-heading, .print-report-button, thead .filter,
+	thead > tr > th:last-of-type, tbody > tr > td:last-of-type,
+	.bulk-actions
+	{
+		display: none !important;
+	}
+
+	/* Reset all typography size */
+	div, p, label, span, h4
+	{
+		font-size: 6px !important;
+	}
+	h5
+	{
+		font-size: 6.5px !important;
+	}
+	h4, h5
+	{
+		line-height: normal !important;
+		color: #000000 !important;
+	}
+	h4, h5, .mb10
+	{
+		margin: 0 !important;
+	}
+	abbr[title], abbr[data-original-title]
+	{
+		border: none;
+	}
+	/*----------------------------------------------------------------------------*/
+	/* Result Body
+	/*----------------------------------------------------------------------------*/	
+	.mainpanel, .panel-body
+	{
+		margin: 0 !important;
+	}	
+	.row
+	{
+		width: 100% !important;
+		margin: 0 auto; padding: 0;
+	}
+	.panel-heading-print
+	{
+		display: block !important;
+		margin-bottom: 25px !important;	
+		border: none !important;
+	}
+	.panel-heading-print h4,
+	.panel-heading-print h4 label
+	{
+		width: 100%;
+		text-align: center;
+		text-transform: uppercase;	
+		font-size: 13px !important;		
+	}
+
+	.panel-footer
+	{
+		display: none !important;
+	}
+	
+}
