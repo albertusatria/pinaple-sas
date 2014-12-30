@@ -22,7 +22,10 @@
   <div class="row">
 	  <div class="col-md-12">
 		  <!-- Form -->
-		  <form id="generateForm" action="#" class="form-horizontal" novalidate="novalidate">
+		  <form id="generateForm" action="<?php echo base_url() ?>payment_reports/financial_report/result" method="POST" class="form-horizontal" novalidate="novalidate">
+			<input type="hidden" name="date-range" id="date-choosen-report" val="">
+			<input type="hidden" name="report-type" id="report-type" val="">
+
 		  <div class="panel panel-info" id="generateReport">
 				<div class="panel-heading">
 					<h5 class="panel-title">Generate Financial Report</h5>
