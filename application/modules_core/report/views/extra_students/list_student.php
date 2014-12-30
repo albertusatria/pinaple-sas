@@ -17,10 +17,23 @@
 
     <div class="panel-heading">
       <h4 class="panel-title">Student List on <b><?php echo $extra->name; ?></b>, Unit <b><?php echo $unit->name; ?></b></h4>
+      	<div class="row">
+			<div class="col-md-12">
+			<br/>
+			<a onclick="window.print()" class="btn btn-white print-report-button"><i class="fa fa-print"></i> Print Report</a>
+			</div>
+		</div>
     </div>
-  
-    <div class="panel-body panel-body-nopadding">               
-      <table class="table table-striped table-bordered table-hover table-students" id="datatable_orders">
+    
+	<div class="panel-heading-print" style="display:none;">
+	  <h4 class="panel-title">Laporan Daftar Siswa</h4>
+	  <h4>Ekstraulikuler <?php echo $extra->name; ?></h4>
+	  <h4>Unit <?php echo $unit->name ?></h4>
+	  <h4>Yayasan Budi Utama</h4>
+	</div>
+	
+    <div class="panel-body">               
+      <table class="table table-striped table-bordered table-students" id="datatable_orders">
         <thead>
         <tr role="row" class="heading">
           <th width="5%">

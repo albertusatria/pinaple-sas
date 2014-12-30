@@ -41,6 +41,7 @@
     <div class="panel-heading-print" style="display:none;">
 	  <h4 class="panel-title">Laporan Ekstrakulikuler</h4>
 	  <h4>Unit <?php echo $unit->name ?></h4>
+	  <h4>Yayasan Budi Utama</h4>	  
 	</div>
     <div class="panel-body">
       <div class="table-responsive">
