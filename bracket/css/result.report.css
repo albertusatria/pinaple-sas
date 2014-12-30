@@ -1,0 +1,66 @@
+/*----------------------------------------------------------------------------*/
+/* Result Report Stylesheet
+/*----------------------------------------------------------------------------*/
+
+/* Panel Heading */
+#resultReport .panel-heading h5 label
+{
+	color: #fff1de;
+	text-transform: uppercase;
+}
+#resultReport .panel-heading p a
+{
+	color: darkblue;
+}
+
+/* Body Result */
+.report-title 
+{
+	margin-bottom: 25px;
+}
+.report-title h4
+{
+	text-align: center;
+	text-transform: uppercase;
+}
+.report-title h4.range
+{
+	text-transform: capitalize;
+}
+.report-body table th
+{
+	text-align: center;
+	text-transform: uppercase;	
+}
+.report-body table .price
+{
+	text-align: right;
+	float: right;
+}
+
+/* Total Result */
+.total-label
+{
+	text-transform: uppercase;
+}
+
+
+/* Inventaris Table */
+.wrapper-table-inventaris
+{
+	margin-left: 10px;
+}
+
+
+/* Creator & Supervisor Report */
+.creator
+{
+	margin: 50px 0px 20px 0px !important;
+	text-align: center;
+}
+.person-in-charge,
+.supervisor
+{
+	display: inline-block !important;
+	margin: 80px 0 0 0 !important;
+}

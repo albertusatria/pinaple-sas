@@ -3,18 +3,26 @@
 /*----------------------------------------------------------------------------*/
 
 /* datepicker and label */
-.form-group .datepicker
+#reportrange
 {
-	padding: 8px 6px;
+	color: #333333;
+	background-color: #e5e5e5;
 }
-.range-label
+.daterangepicker .ranges ul li, .daterangepicker .ranges .range_inputs .input-mini,
+.daterangepicker .ranges .range_inputs button
 {
-	float: left;
-	line-height: 35px;
-	margin-right: 18px;
+	border-radius: 0;
+}
+.daterangepicker .ranges ul li, .daterangepicker .ranges .range_inputs .input-mini
+{
+	color: #000000;
 }
 
 /* Label with borderline for custom report */
+.wrapper-option-label, .range-report
+{
+	display: none;
+}
 .wrapper-option-label:before
 {
 	display: none !important;

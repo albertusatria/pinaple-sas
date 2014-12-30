@@ -43,6 +43,29 @@ class Financial_report extends Operator_base {
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
+
+	public function result($id)
+	{
+		// don't forget to give user_auth to every function before
+		$this->check_auth('R');
+
+		// two of these is a must
+		// menu
+		$data['menu']	 = $this->menu();
+		// user detail
+		$data['user']	 = $this->user;
+		//message
+		$data['message'] = $this->session->flashdata('message');
+		
+		$data['id']	= $id;
+		// get active school year
+		//$data['active_school_year'] = $this->m_school_year->get_active_year();		
+		
+		$data['layout'] = "payment_reports/financial-report/result";
+		$data['javascript'] = "payment_reports/financial-report/javascript/j_result";
+		$this->load->view('dashboard/admin/template', $data);
+	}
+	
 	public function get_now() {
 	    $this->load->helper('date');
         $datestring = '%Y-%m-%d %H:%i:%s';
