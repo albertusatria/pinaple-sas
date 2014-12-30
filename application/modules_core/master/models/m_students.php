@@ -76,4 +76,43 @@ class M_students extends CI_Model {
         }
     }
 
+    function get_student_classes_by_nis($nis){
+        $sql = "SELECT cs.*,
+                    sy.id school_year_id, sy.name school_year_name,
+                    c.name class_name,
+                    c.level class_level,
+                    u.name unit_name
+                FROM class_students cs
+                LEFT JOIN classes c ON c.id = cs.class_id
+                LEFT JOIN units u ON u.id = c.unit_id
+                LEFT JOIN school_year sy ON sy.id=c.school_year_id
+                WHERE cs.nis='$nis'
+                ORDER BY sy.name";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
+
+    function get_student_extras_by_nis($nis){
+        $sql = "SELECT es.*,
+                    sy.id school_year_id, sy.name school_year_name,
+                    e.name extra_name,
+                    u.name unit_name
+                FROM extra_students es
+                LEFT JOIN extras e ON e.id = es.extra_id
+                LEFT JOIN units u ON u.id = e.unit_id
+                LEFT JOIN school_year sy ON sy.id=e.school_year_id
+                WHERE es.nis='$nis'
+                ORDER BY sy.name";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }   
+    }
+
 }

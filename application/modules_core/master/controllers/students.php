@@ -75,6 +75,8 @@ class Students extends Operator_base {
 		$data['rs_student'] = $this->m_registration->get_student_by_nis($nis);
 		$data['ls_achievement'] = $this->m_students->get_achievement_student_by_nis($nis);
 		$data['ls_invoices'] = $this->m_students->get_invoices_student_by_nis($nis);
+		$data['student_classes'] = $this->m_students->get_student_classes_by_nis($nis);
+		$data['student_extras'] = $this->m_students->get_student_extras_by_nis($nis);
 
 		// get message flashdata		
 		$data['message'] = $this->session->flashdata('message');
