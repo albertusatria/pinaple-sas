@@ -27,10 +27,10 @@
              No <!--<input type="checkbox" class="group-checkable">-->
           </th>
           <th width="15%">
-             Nis
+             NIS
           </th>
           <th width="30%">
-             Name
+             Student Name
           </th>
           <th width="20%">
              Class
