@@ -7,11 +7,13 @@ class M_reports extends CI_Model {
         parent::__construct();
     }
 
-    function get_all_students(){
-        $sql = "SELECT us.*, u.name unit_name, c.name class_name
+    function get_all_students_for_student_registrations($sy_id){
+        $sql = "SELECT us.*, u.name unit_name, c.name class_name,
+                IF(r.id IS NOT NULL, 'Registered', 'Unregistered') reg_status
                 FROM users_student us 
                 LEFT JOIN units u ON us.unit_id = u.id 
-                LEFT JOIN classes c ON c.id = us.class_id 
+                LEFT JOIN classes c ON c.id = us.class_id
+                LEFT JOIN re_registration r ON r.nis=us.nis AND r.school_year_id='$sy_id'
                 ";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
@@ -21,53 +23,35 @@ class M_reports extends CI_Model {
         }
     }
 
-    function get_siswa_list_by_filters($params){
+    function get_siswa_list_by_filters_for_student_registrations($params){
         $nis       = '%'.$params['nis'].'%';
         $full_name = '%'.$params['full_name'].'%';
         $unit_name = '%'.$params['unit_name'].'%';
         $current_level = '%'.$params['current_level'].'%';
-        $status    = '%'.$params['status'].'%';
+        $registration_type = '%'.$params['registration_type'].'%';
+        
+        if($params['reg_status']=="ALL")
+            $reg_status = "";
+        elseif($params['reg_status'])
+            $reg_status = "AND r.id IS NOT NULL";
+        else
+            $reg_status = "AND r.id IS NULL";
 
-        $sql = "SELECT us.*, u.name unit_name, c.name class_name
+        $sy_id = $params['school_year_id'];
+
+        $sql = "SELECT us.*, u.name unit_name, c.name class_name,
+                IF(r.id IS NOT NULL, 'Registered', 'Unregistered') reg_status
                 FROM users_student us 
                 LEFT JOIN units u ON us.unit_id = u.id 
-                LEFT JOIN classes c ON c.id = us.class_id 
+                LEFT JOIN classes c ON c.id = us.class_id
+                LEFT JOIN re_registration r ON r.nis=us.nis AND r.school_year_id='$sy_id' 
                 WHERE us.nis LIKE '$nis'
                 AND us.full_name LIKE '$full_name'
                 AND u.name LIKE '$unit_name'
                 AND us.current_level LIKE '$current_level'
-                AND us.status LIKE '$status'
+                AND us.registration_type LIKE '$registration_type'
+                ".$reg_status."
                 ";
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0 ) {
-            return $query->result();
-        } else {
-            return array();
-        }
-    }
-
-    function edit_student($params){
-        $this->db->update('users_student',$params,array('nis'=>$params['nis']));
-    }
-
-    function get_achievement_student_by_nis($nis){
-        return $this->db->get_where('students_achievement',array('nis'=>$nis))->result_array();
-    }
-
-    function edit_achievement($params){
-        $this->db->update('students_achievement',$params,array('id'=>$params['id']));
-    }
-
-    function get_invoices_student_by_nis($nis){
-        $sql = "SELECT i.*,t.name as item_name, p.name as period_name, y.name as packet_name, e.name as extra_name, t.accounting_code
-                FROM
-                (SELECT * FROM invoices WHERE nis = '$nis') i
-                LEFT JOIN items_type t ON i.item_type_id = t.id
-                LEFT JOIN periods p ON p.id = i.period_id
-                LEFT JOIN extras e ON e.id = i.extra_id
-                LEFT JOIN packets_year y ON i.packet_id = y.id
-                WHERE i.deleted=0
-                ORDER BY i.dc";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
             return $query->result();

@@ -34,8 +34,9 @@ var Management = function () {
 						console.log(detable.find('thead select.unit_student').val());
 						console.log(detable.find('thead input.current_level_student').val());
 						console.log(detable.find('thead select.status_student').val());
-						var nis; var full_name; var unit_name; var current_level; var status;
+						var no; var nis; var full_name; var unit_name; var current_level; var status;
 			           	for (index = 0; index < data.length; ++index) {
+			                no = index+1;
 			                nis = data[index]['nis'];
 			                full_name = data[index]['full_name'];
 			                unit_name = data[index]['unit_name'];
@@ -44,7 +45,7 @@ var Management = function () {
 
 			                detable.find('tbody:first').append(
 							'<tr>'+
-								'<td><input type="checkbox" class="checkable"></td>'+
+								'<td>'+no+'</td>'+
 								'<td class="td-nis">'+nis+'</td>'+
 								'<td class="td-full_name">'+full_name+'</td>'+
 								'<td class="td-unit_name">'+unit_name+'</td>'+

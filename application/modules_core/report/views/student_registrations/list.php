@@ -32,7 +32,6 @@
 						<div class="table-actions-wrapper">
 						<div class="col-md-5 col-sm-12 right bulk-actions">
 							<select class="table-group-action-input form-control input-inline input-small input-sm opti-schoolyear">
-								<option value=""> - School Year - </option>
 								<?php foreach ($ls_sy as $result): ?>
 								<option value="<?php echo $result->id?>" 
 								<?php if($rs_asy->id==$result->id){ echo "selected";} ?>
@@ -91,7 +90,7 @@
 								<input type="text" class="form-control form-filter input-sm current_level_student" name="current_level_student">
 							</td>
 							<td>
-								<select name="registration_type" class="form-control form-filter input-sm registration_type">
+								<select name="registration_type_student" class="form-control form-filter input-sm registration_type_student">
 									<option value=""> - select - </option>
 									<option value="NEW">New</option>
 									<option value="TRANSFER">Transfer</option>
@@ -99,7 +98,7 @@
 							</td>
 							<td>
 								<select name="reg_status_student" class="form-control form-filter input-sm reg_status_student">
-									<option value=""> - select - </option>
+									<option value="ALL"> - select - </option>
 									<option value="1">Registered</option>
 									<option value="0">Un-registered</option>
 								</select>
