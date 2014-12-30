@@ -36,7 +36,7 @@
            <div class="form-group">
               <label class="col-sm-3 control-label">NIK *</label>
               <div class="col-sm-2">
-                <input name="nik" class="form-control" maxlength="20" type="text" value="<?php echo $this->session->flashdata('nik'); ?>" required />
+                <input name="nik" class="form-control" maxlength="10" type="text" value="<?php echo $this->session->flashdata('nik'); ?>" required />
               </div>
             </div>
 
@@ -83,7 +83,7 @@
 
              <div class="form-group">
               <label class="col-sm-3 control-label">Address</label>
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <input name="address" type="text" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('address');?>"/>
               </div>
             </div>
@@ -97,8 +97,8 @@
 
              <div class="form-group">
               <label class="col-sm-3 control-label">Postal Code</label>
-              <div class="col-sm-3">
-                <input name="postal_code" type="postal_code" class="form-control" maxlength="30" value="<?php echo $this->session->flashdata('postal_code');?>"/>
+              <div class="col-sm-2">
+                <input name="postal_code" type="postal_code" class="form-control" maxlength="5" value="<?php echo $this->session->flashdata('postal_code');?>"/>
               </div>
             </div>
 
@@ -107,17 +107,12 @@
               <div class="col-sm-2">
               <select class="form-control input-sm mb15" name="religion">
                   <option value="">-- SELECT --</option>
-                  <option value="Budha" <?php if($this->session->flashdata('religion')=="Budha"){echo "selected='selected'";}?>>Budha</option>
-                  <option value="Hindhu" <?php if($this->session->flashdata('religion')=="Hindhu"){echo "selected='selected'";}?>>Hindhu</option>
-                  <option value="Islam" <?php if($this->session->flashdata('religion')=="Islam"){echo "selected='selected'";}?>>Islam</option>
-                  <option value="Katolik" <?php if($this->session->flashdata('religion')=="Katolik"){echo "selected='selected'";}?>>Katolik</option>
-                  <option value="Kong Hu Chu" <?php if($this->session->flashdata('religion')=="Kong Hu Chu"){echo "selected='selected'";}?>>Kong Hu Chu</option>
-                  <option value="Kristen" <?php if($this->session->flashdata('religion')=="Kristen"){echo "selected='selected'";}?>>Kristen</option>
-                  <!--
-                    <?php foreach ($rs_class as $data) : ?>
-                        <option value="<?php echo $data->id; ?>"><?php echo $data->class; ?></option>
-                    <?php endforeach ; ?>
-                  -->
+                  <option value="BUDHA" <?php if($this->session->flashdata('religion')=="BUDHA"){echo "selected='selected'";}?>>Budha</option>
+                  <option value="HINDHU" <?php if($this->session->flashdata('religion')=="HINDHU"){echo "selected='selected'";}?>>Hindhu</option>
+                  <option value="ISLAM" <?php if($this->session->flashdata('religion')=="ISLAM"){echo "selected='selected'";}?>>Islam</option>
+                  <option value="KATHOLIK" <?php if($this->session->flashdata('religion')=="KATHOLIK"){echo "selected='selected'";}?>>Katolik</option>
+                  <option value="KONG HU CHU" <?php if($this->session->flashdata('religion')=="KONG HU CHU"){echo "selected='selected'";}?>>Kong Hu Chu</option>
+                  <option value="KRISTEN" <?php if($this->session->flashdata('religion')=="KRISTEN"){echo "selected='selected'";}?>>Kristen</option>
                 </select>
               </div>
             </div>
@@ -156,15 +151,8 @@
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Position</label>
-              <div class="col-sm-2">
-              <select class="form-control input-sm mb15" name="position">
-                 <option value="">-- SELECT --</option>
-                  <!--
-                    <?php foreach ($rs_position as $data) : ?>
-                        <option value="<?php echo $data->id; ?>"><?php echo $data->position; ?></option>
-                    <?php endforeach ; ?>
-                  -->
-              </select>
+              <div class="col-sm-3">
+                 <input name="position" type="text" class="form-control" maxlength="50" value="<?php echo $this->session->flashdata('postion');?>"/>
               </div>
             </div>
 
@@ -198,29 +186,28 @@
               </select>
               </div>
             </div>
-
+<!--
             <div class="form-group">
               <label class="col-sm-3 control-label">Photo</label>
               <div class="col-sm-7">
                  <input name="uefile" class="form-control"  class="span5" type="file" />
               </div>
             </div>
-
+-->
             <div class="form-group">
               <label class="col-sm-3 control-label">Start Date *</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" id="datepicker_mulai" />
+                <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_mulai" />
                 <input type="hidden" name="start_date" id="h_mulai" value="<?php echo $this->session->flashdata('start_date');?>">
                 <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
               </div>
             </div>
-
+<!--
             <div class="form-group">
               <label class="col-sm-3 control-label">End Date</label>
               <div class="col-sm-2">
                 <input type="text" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" id="datepicker_keluar" />
                 <input type="hidden" name="end_date" id="h_keluar" value="<?php echo $this->session->flashdata('end_date');?>">
-                <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
               </div>
             </div>
 
@@ -230,7 +217,7 @@
                 <textarea name="note_out" placeholder="Enter text here..." class="form-control" rows="10"><?php echo $this->session->flashdata('note_out'); ?></textarea> 
               </div>
             </div>
-
+-->
         </div><!-- panel-body -->
         
         <div class="panel-footer">

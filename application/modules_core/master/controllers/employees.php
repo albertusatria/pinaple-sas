@@ -92,9 +92,9 @@ class Employees extends Operator_base {
 				'position'		=> $this->input->post('position'),
 				'class'			=> $this->input->post('class'),
 				//'photo'		=> $this->input->post('photo'),
-				'start_date'	=> $this->input->post('start_date'),
-				'end_date'		=> $this->input->post('end_date'),
-				'note_out'		=> $this->input->post('note_out')
+				'start_date'	=> $this->input->post('start_date')
+				//'end_date'		=> $this->input->post('end_date'),
+				//'note_out'		=> $this->input->post('note_out')
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/employees/add');
