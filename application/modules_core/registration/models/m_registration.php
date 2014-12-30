@@ -101,23 +101,40 @@ class M_registration extends CI_Model {
         }
     }
 
-    function get_list_siswa($keyword) {
-        $sql = "SELECT *
-                FROM school_year
-                WHERE status = 'aktif'
-                LIMIT 1";
-        $query = $this->db->query($sql);
-        $schoolyear = $query->row();
-        $id = $schoolyear->id;
+    function get_list_siswa($keyword,$id='',$next_id='') {
+        if ($id == '') {
+            //if this year registration
+            $sql = "SELECT *
+                    FROM school_year
+                    WHERE status = 'aktif'
+                    LIMIT 1";
+            $query = $this->db->query($sql);
+            $schoolyear = $query->row();
+            $id = $schoolyear->id;
 
-
-        $sql = "SELECT s.*, u.name FROM users_student s 
-                LEFT JOIN units u ON s.unit_id = u.id 
-                WHERE (s.nis LIKE '%$keyword%' OR s.full_name LIKE '%$keyword%') AND s.status = 'SISWA' AND 
-                NOT EXISTS (SELECT *
-                    FROM   re_registration r
-                    WHERE  s.nis = r.nis AND r.school_year_id = '$id')
-                LIMIT 10";
+            $sql = "SELECT s.*, u.name,st.id'stage_id' FROM users_student s 
+                    LEFT JOIN units u ON s.unit_id = u.id 
+                    LEFT JOIN stage st ON st.level = s.current_level AND st.unit = s.unit_id 
+                    WHERE (s.nis LIKE '%$keyword%' OR s.full_name LIKE '%$keyword%') AND s.status = 'SISWA'
+                    AND s.start_school_year_id != '$next_id' 
+                    AND
+                    NOT EXISTS (SELECT *
+                        FROM   re_registration r
+                        WHERE  s.nis = r.nis AND r.school_year_id = '$id')
+                    LIMIT 10";
+        } 
+        else {
+            $sql = "SELECT s.*, u.name,st.id'stage_id' FROM users_student s 
+                        LEFT JOIN units u ON s.unit_id = u.id 
+                        LEFT JOIN stage st ON st.level = s.current_level AND st.unit = s.unit_id 
+                        WHERE (s.nis LIKE '%$keyword%' OR s.full_name LIKE '%$keyword%') AND s.status = 'SISWA' 
+                        AND s.start_school_year_id = '$id' 
+                        AND 
+                        NOT EXISTS (SELECT *
+                            FROM   re_registration r
+                            WHERE  s.nis = r.nis AND r.school_year_id = '$id')
+                        LIMIT 10";            
+        }
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0 ) {
             return $query->result_array();

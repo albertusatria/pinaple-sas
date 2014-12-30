@@ -20,6 +20,17 @@ class m_school_year extends CI_Model {
         return $this->db->get_where('school_year',array('name'=>$name))->row();
     }
 
+    function get_pmb_school_year() {
+        $this->db->limit('1');
+        $this->db->where('phase','PMB');
+        $query = $this->db->get('school_year');
+        if ($query->num_rows > 0) {
+            return $query->row();
+        } else {
+            return array();
+        }
+    }
+
     function get_school_year_name($ta,$id){
         $sql = "SELECT *
                 FROM school_year

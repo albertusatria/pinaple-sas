@@ -1,16 +1,16 @@
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once( APPPATH . 'modules_core/base/controllers/operator_base.php' );
 
 class Next_year_registrations extends Operator_base {
-
 	public function __construct() {
 		// call the controller construct
 		parent::__construct();
 
 		// load all the related model here
+		$this->load->model('initiation/m_school_year');
 		$this->load->model('master/m_units');
 		$this->load->model('registration/m_registration');
-		$this->load->model('initiation/m_school_year');
 		// load portal
 		$this->load->helper('text');
 		// page title
@@ -37,110 +37,91 @@ class Next_year_registrations extends Operator_base {
 		//unit
 		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		// get active school year
-		$data['school_year'] = $this->m_school_year->get_year_after_active_year();		
+		$data['pmb_year'] = $this->m_school_year->get_pmb_school_year();		
 		
 		$data['layout'] = "administration/next_year_registration/list";
 		$data['javascript'] = "administration/next_year_registration/javascript/list";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 
-	public function get_siswa_daftar_ulang()
+	public function add_process()
 	{
-		foreach ($_POST as $value) {
-			$keyword = $value['keyword'];
-		}
-		$data = $this->m_registration->get_list_siswa_next_year($keyword);
-		header('Content-Type: application/json');
-	    echo json_encode($data);
-	}
-
-	public function get_list_paket()
-	{
-
-		$data['year']	= $this->m_school_year->get_year_after_active_year();
-		$sy_id = $data['year']->id;
 
 		foreach ($_POST as $value) {
-			$unit_id = $value['unit_id'];
-			$current = $value['current'];
-			$start = $value['start'];
-		}
-		$data = $this->m_registration->get_list_paket($unit_id,$current,$start,$sy_id);
-		header('Content-Type: application/json');
-	    echo json_encode($data);
-	}
+			if ($value['profil'] == 'yes') {
+				$input = array(
 
-	public function get_list_packet_item()
-	{
-		foreach ($_POST as $value) {
-			$packet_id = $value['packet_id'];
-		}
-		$data = $this->m_registration->get_list_packet_item($packet_id);
-		header('Content-Type: application/json');
-	    echo json_encode($data);
+					'start_school_year_id' => $value['siswa_tahun_mulai'],
+		            'previous_school' => $value['siswa_originschool'],
+		            'previous_school_type' => $value['siswa_sekolah_asal'],
+		            'unit_id' => $value['siswa_kelas'],
+		            'start_level' => $value['siswa_jenjang'],
+		            'current_level' => $value['siswa_jenjang'],
+		            'nis' => $value['siswa_nis'],
 
-	}
+		            'full_name' => $value['siswa_nama_lengkap'],
+		            'nick_name' => $value['siswa_nama_panggilan'],
+		            'sex' => $value['siswa_jk'],
+		            'pob' => $value['siswa_tempat_lahir'],
+		            'dob' => $value['siswa_tgl_lahir'],
+		            'children_to' => $value['siswa_anak_ke'],
+		            'sibling_number' => $value['siswa_saudara'],
+		            'religion' => $value['siswa_agama'],
+		            'nationality' => $value['siswa_kewarganegaraan'],
 
-	public function next_year_registration_process()
-	{
-		// echo '<pre>';print_r($this->input->post());die;
-		// user_auth
-		$this->check_auth('C');
 
-		$this->form_validation->set_rules('nis', 'nis', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('school_year_id', 'school year id', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('invoice', 'Invoice List', 'required|trim|xss_clean');
+		            'father_full_name' => $value['nama_lengkap_ayah'],
+		            'father_pob' => $value['tempat_lahir_ayah'],
+		            'father_dob' => $value['tgl_lahir_ayah'],
+		            'father_cell_phone' => $value['hp_ayah'],
+		            'father_job' => $value['pekerjaan_ayah'],
+		            'father_salary' => $value['penghasilan_ayah'],
+		            'father_citizen' => $value['kewarganegaraan_ayah'],
 
-		$params = array(
-				'nis'			 => $this->input->post('nis'),
-				'school_year_id' => $this->input->post('school_year_id'),
-				'created_on'	 => $this->get_now()
-			);
+		            'mother_full_name' => $value['nama_lengkap_ibu'],
+		            'mother_pob' => $value['tempat_lahir_ibu'],
+		            'mother_dob' => $value['tgl_lahir_ibu'],
+		            'mother_cell_phone' => $value['hp_ibu'],
+		            'mother_job' => $value['pekerjaan_ibu'],
+		            'mother_salary' => $value['penghasilan_ibu'],
+		            'mother_citizen' => $value['kewarganegaraan_ibu'],
 
-		$jumlah = 0;
-		if ($this->m_registration->add_re_registration($params)) {
+		            'stay_with' => $value['tinggal_bersama'],
+		            'living_address' => $value['alamat_lengkap'],
+		            'home_phone' => $value['telpon_rumah'],
 
-			foreach ($this->input->post('invoice') as $invo) {
-				$params = array(
-					'nis' => $this->input->post('nis'),
-					'packet_id' => $invo['packet_id'],
-					'item_type_id' => $invo['item_type_id'],
-					'qty' => 1,
-					'amount' => $invo['amount'],
-					'period_id' => NULL,
-					'scholarship' => 0,
-					'dc' => $this->get_now()
-					);
-				if ($invo['period_id'] != '' OR $invo['period_id'] != NULL) {
-					$params['period_id'] = $invo['period_id'];
-					$jumlah = $invo['amount'];
-				} 
-				$this->m_registration->add_invoices($params);
+		            'guardian_full_name' => $value['nama_lengkap_wali'],
+		            'guardian_job' => $value['pekerjaan_wali'],
+		            'guardian_citizen' => $value['kewarganegaraan_wali'],
+
+		            'status'			=> 'SISWA',
+		            'registration_type'	=> $value['registration_type'],
+					'created_on'		=> $this->get_now(),
+					'updated_on'		=> $this->get_now()
+				);
+				//masukan ke tabel siswa
+				$insert = $this->m_registration->add_new_student($input);
+				//ambil id siswa
+				$nis = $value['siswa_nis'];
 			}
-
-			// generate 11 SPP
-			for ($i = 2; $i <= 12 ; $i++) { 
-				$params = array(
-					'nis' => $this->input->post('nis'),
-					'packet_id' => NULL,
-					'item_type_id' => '6',
-					'qty' => 1,
-					'amount' => $jumlah,
-					'period_id' => $i,
-					'scholarship' => 0,
-					'dc' => $this->get_now()
-					);
-				$this->m_registration->add_invoices($params);
+			else {
+				$input = array(   
+					'nis' => $nis,
+			        'achievement' 	=> $value['nama_prestasi'],
+			        'type' 			=> $value['jenis_prestasi'],
+			        'level' 		=> $value['tingkat_prestasi'],
+			        'year' 			=> $value['tahun_prestasi'],
+					'created_on'	=> $this->get_now(),
+					'updated_on'	=> $this->get_now()
+				);
+				//masukan ke tabel siswa_prestasi
+				$insert = $this->m_registration->add_new_student_achievement($input);
 			}
-
-
-
-			// $this->_generate_invoice($params,$id_unit);
-			$data['message'] = "Siswa nis : ".$this->input->post('nis')." telah berhasil didaftarulangkan..";
 		}
-		$this->session->set_flashdata($data);		
-		redirect('administration/next_year_registrations/');
-	}	
+		$data['message'] = "Data successfully added";
+		$this->session->set_flashdata($data);
+		redirect('administration/next_year_registrations/');		
+	}
 
 	public function get_now() {
 	    $this->load->helper('date');
@@ -150,9 +131,15 @@ class Next_year_registrations extends Operator_base {
         return $now;
 	}
 
+	function check_nis() {
+		$data = $this->m_registration->check_nis($_POST['nis']);
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+	}
+
 	// page title
 	public function page_title() {
-		$data['page_title'] = 'Next Year Registration Form';
+		$data['page_title'] = 'New Students Registration Form';
 		$this->session->set_userdata($data);
 	}
 }

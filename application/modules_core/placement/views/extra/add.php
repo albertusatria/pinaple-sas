@@ -4,9 +4,8 @@
     <span class="label">You are here:</span>
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
-      <li>Student Placement</li>
       <li><a href="<?php echo base_url();?>placement/extras_first">Extra Placement</a></li>
-      <li><a href="<?php echo base_url();?>placement/extras_first/list_extra/<?php echo $unit->id?>">Menu <?php echo $unit->name?></a></li>
+      <li><a href="<?php echo base_url();?>placement/extras_first/list_extra/<?php echo $unit->id?>"><?php echo $unit->name?></a></li>
       <li><a href="<?php echo base_url();?>placement/extras_first/placement/<?php echo $result->id?>">Extra <?php echo $result->name?></a></li>
       <li class="active">Add Student</li>
     </ol>
@@ -44,6 +43,8 @@
                 <td><input name="siswa<?php echo $siswa->nis ?>[check]" type="checkbox"></td>
                 <input type="hidden" name="siswa<?php echo $siswa->nis ?>[nis]" value="<?php echo $siswa->nis ?>">
                 <input type="hidden" name="siswa<?php echo $siswa->nis ?>[extra_id]" value="<?php echo $result->id ?>">                                            
+                <input type="hidden" name="siswa<?php echo $siswa->nis ?>[stage_id]" value="<?php echo $siswa->stage_id ?>">                                            
+                <input type="hidden" name="siswa<?php echo $siswa->nis ?>[period_year]" value="<?php echo $year->name ?>">                                            
                 <td><?php echo $siswa->nis; ?></td>
                 <td><?php echo $siswa->full_name; ?></td>
                 <td><?php echo $siswa->unit_name; ?></td>

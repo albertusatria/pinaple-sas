@@ -37,7 +37,7 @@
 	          	</div>
 	        
 	         	<div class="col-lg-4">
-	        	    <a id="btnCari" class="btn btn-primary btn-block">Search</a>
+	        	    <a id="btnCari" class="btn btn-primary btn-block" style="line-height:26px">Search</a>
 	         	 </div>      		                  	
 
 	          	<div class="table-responsive">
