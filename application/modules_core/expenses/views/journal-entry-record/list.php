@@ -45,7 +45,7 @@
     					</div>				    				    				
     				</div>      	
         	</div>
-          <div class="row">
+          <div class="row" style="margin-top:5px">
             <div class="col-sm-5">             
               <div class="form-group">
                 <label class="col-sm-4 control-label">Memo #</label>
@@ -55,6 +55,17 @@
               </div>
             </div>  
             <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Unit</label>
+                <div class="col-sm-8">
+                  <select id="journal-unit" class="form-control input-sm">
+                    <option value="">select related unit</option>
+                    <?php foreach ($ls_unit as $unit) : ?>
+                    <option value="<?php echo $unit->id ?>"><?php echo $unit->name ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+              </div>
             </div>        
 
           </div>

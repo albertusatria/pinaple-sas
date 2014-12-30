@@ -14,12 +14,26 @@ class m_items_type extends CI_Model {
             $this->db->where('packet','0');                        
         }
         $this->db->order_by('i.id','ASC');
-        $this->db->select('i.id, i.name as item_name, i.description, i.mandatory, i.accounting_code, a.name as code_name, i.unit_id, u.name as unit_name, i.amount');
+        $this->db->select('i.id, i.name as item_name, i.description, i.mandatory, i.accounting_code, 
+                a.name as code_name, i.unit_id, u.name as unit_name, i.amount');
         $this->db->from('items_type i');
         $this->db->join('accounting_account a','a.accounting_id = i.accounting_code','left');
         $this->db->join('units u','u.id = i.unit_id','left');
         return $this->db->get()->result();
     }
+
+    function get_all_option_of_mandatory_items_type($id,$type){
+        if ($type == 'template') {
+            $sql = "SELECT * FROM items_type i WHERE i.packet = 1 AND i.id NOT IN
+                        (SELECT p.item_type_id FROM packet_detail p WHERE p.packet_id = '$id')";            
+        } else {
+            $sql = "SELECT * FROM items_type i WHERE i.packet = 1 AND i.id NOT IN
+                        (SELECT p.item_type_id FROM packet_detail_year p WHERE p.packet_id = '$id')";                        
+        }
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
+
 
     function get_total_rows(){
         return $this->db->get('items_type')->num_rows();

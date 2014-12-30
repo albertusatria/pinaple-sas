@@ -17,6 +17,10 @@
 <script src="<?php echo base_url();?>bracket/js/custom.js"></script>
 
 <script type="text/javascript">
+        CI_ROOT = "<?=base_url() ?>";
+</script>
+
+<script type="text/javascript">
 // General Setting
 jQuery(document).ready(function() {
 
@@ -104,6 +108,8 @@ jQuery(document).ready(function() {
 		//set validator
 		var thisInput = jQuery(this).closest('.form-group').find('input'); 
 		var inputNIS = thisInput.val();
+		var text = "";
+		var text_type = "";
 		if(inputNIS == "")
 		{
 			thisInput.closest('.form-group').closest('.form-group').addClass('has-error');
@@ -114,19 +120,44 @@ jQuery(document).ready(function() {
 			//reset all elements used for validation
 			thisInput.closest('.form-group').closest('.form-group').removeClass('has-error');
 			thisInput.next().hide();
-			jQuery('.nis-result').removeClass('text-danger').hide();
-			
+			jQuery('.nis-result').removeClass('text-danger').removeClass('text-success').hide();
 			//loader show
 			jQuery('.loading-image-nis').show();
-	
+
+			//check nis validation
+
+		    jQuery.ajax({
+		    	type: "POST",
+		    	url: CI_ROOT+"registration/new_student/check_nis",
+		    	data: {
+		    		'nis':inputNIS
+		    	},
+		     	success: function(data)
+		     	{
+		     		if (data == true) {
+		     			//you cannot use this nis
+		     			text = "Too bad! You cannot use this nis";
+		     			text_type = "text-danger";
+		     		} else {
+		     			//congratz you can use this nis
+		     			text = "Hooray! This nis avaiable";
+		     			text_type = "text-success";
+		     		}
+		     	},
+			    error: function (data)
+			    {
+			    	console.log(data);
+	     			text = "Upps! Something bad happened. Please Try again";
+	     			text_type = "text-danger";
+			    }
+			}); 	
 			//loader hide
 			var timeout;
 			clearTimeout(timeout);
 			timeout = setTimeout(function() {
-			    jQuery(".loading-image-nis").hide();                                                     
-	
+			    jQuery(".loading-image-nis").hide();                                            
 			    //result info
-				jQuery('.nis-result').addClass('text-danger').text('text buat hasil checking NIS, jika NIS sudah belum ganti kelas jadi : text-success').show();		    
+				jQuery('.nis-result').addClass(text_type).text(text).show();		    
 			}, 2000);	
 		}
 		return false;

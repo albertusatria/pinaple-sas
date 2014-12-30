@@ -84,6 +84,7 @@ var neracaSaldo = function () {
 			item = {};
 			number = 1;
 
+
 			jQuery("#tableJournalList tbody tr").each(function() {
 				if (jQuery(this).find('td.acct-id').text() != "") {
 					item[number] = {};
@@ -100,11 +101,12 @@ var neracaSaldo = function () {
 						item[number]['amount_type'] = 'K';					
 						item[number]['amount'] = jQuery(this).find('td.activa-credit').attr("data-value");
 					}
+					item[number]['unit_id'] = jQuery('#journal-unit').val();
 		            console.log(JSON.stringify(item[number]));      
 		            number = number + 1;
 				}
 			});
-
+			// return false;
 		    jQuery.ajax({
 		    	type: "POST",
 		    	url: CI_ROOT+"expenses/journal_entry/save_entry",

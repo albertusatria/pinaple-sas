@@ -1,12 +1,12 @@
 <div class="pageheader">
-    <h2><i class="fa fa-folder-o"></i>Packet</h2>
+    <h2><i class="fa fa-folder-o"></i>Setup Packet Template</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
         <li>Payment Configuration</li>
-        <li><a href="<?php echo base_url();?>master/invoice_packet" >Invoice Packet</a></li>
-        <li class="active">Packet Edit</li>
+        <li><a href="<?php echo base_url();?>master/invoice_packet" >Setup Packet Template</a></li>
+        <li class="active">Edit Packet Info</li>
       </ol>
     </div>
 </div>

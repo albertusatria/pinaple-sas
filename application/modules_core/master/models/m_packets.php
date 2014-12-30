@@ -12,7 +12,7 @@ class m_packets extends CI_Model {
                 LEFT JOIN units u ON u.id = p.unit_id
                 ORDER BY p.unit_id, p.id
                 ";
-
+        // echo '<pre>'; print_r($this->db->query($sql)->result());die;
         return $this->db->query($sql)->result();
     }
 

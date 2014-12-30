@@ -232,7 +232,7 @@ class Invoice_initiation extends Operator_base {
 		$data['r_packet'] = $this->m_packets_initiation->get_packet_by_id($id);
 		$data['rs_packet_items'] = $this->m_packet_items_year->get_all_packet_items_by_p_id($id);
 		// echo "<pre>"; print_r($data['rs_packet_items']);die;
-		$data['rs_items_type'] = $this->m_items_type->get_all_items_type();		
+		$data['rs_items_type'] = $this->m_items_type->get_all_option_of_mandatory_items_type($id,'init');		
 		$data['layout'] = "master/invoice_initiation/list_items";
 		$data['javascript'] = "master/invoice_initiation/javascript/list_items";
 		$this->load->view('dashboard/admin/template', $data);

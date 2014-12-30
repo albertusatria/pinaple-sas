@@ -259,6 +259,12 @@ class New_student extends Operator_base {
 		redirect('registration/new_student/import_excel');
 	}
 
+	function check_nis() {
+		$data = $this->m_registration->check_nis($_POST['nis']);
+		header('Content-Type: application/json');
+	    echo json_encode($data);		
+	}
+
 	// page title
 	public function page_title() {
 		$data['page_title'] = 'New Students Registration Form';

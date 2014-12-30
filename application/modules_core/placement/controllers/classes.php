@@ -31,7 +31,7 @@ class Classes extends Operator_base {
 		// user detail
 		$data['user']		= $this->user;
 		// get portal list
-		$data['ls_unit']	= $this->m_units->get_all_unit();
+		$data['ls_unit']	= $this->m_units->get_all_unit_academic();
 		// get tahun ajaran
 		$data['year']		= $this->m_school_year->get_active_year();
 		// load template

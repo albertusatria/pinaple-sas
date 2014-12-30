@@ -1,24 +1,25 @@
 <div class="pageheader">
-    <h2><i class="fa fa-folder-o"></i>Packet</h2>
+    <h2><i class="fa fa-folder-o"></i>Setup Packet Template</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
         <li>Payment Configuration</li>
-        <li><a href="<?php echo base_url();?>master/invoice_packet" >Invoice Packet</a></li>
-        <li class="active">Packet Items</li>
+      	<li><a href="<?php echo base_url();?>master/invoice_packet" >Setup Packet Template</a></li>
+        <li class="active">Edit Item List</li>
       </ol>
     </div>
 </div>
+
 <div class="contentpanel">
 
 	<div class="row">
 		<div class="col-md-6">
-		  <div class="panel panel-default">
+		  <div class="panel panel-primary">
 		  
 		    <div class="panel-heading">
-		      <h4 class="panel-title">List Packet Items <b><?php echo @$r_packet->name; ?></b></h4>
-		      <p>List of all available Packet Items</p>
+		      <h4 class="panel-title"><?php echo @$r_packet->name; ?></h4>
+		      <small>List of all item list</small>
 		    </div>
 			<!-- Table Results -->
 			<div class="panel panel-default">
@@ -40,11 +41,11 @@
 					<?php endif;?>
 					<div class="row row-pad-5">        
 				      <div class="table-responsive">
-				      <table class="table table-hidaction table-hover mb30">
+				      <table class="table table-hidaction table-striped table-hover mb30">
 				        <thead>
 				          <tr>
 				            <th>No #</th>
-				            <th>Packet Items Name</th>
+				            <th>Items Name</th>
 				            <th></th>
 				          </tr>
 				        </thead>
@@ -82,8 +83,8 @@
 			        <div class="panel-btns">
 			          <a href="#" class="minimize">&minus;</a>
 			        </div>
-			        <h4 class="panel-title">New Packet Items <b><?php echo @$r_packet->name; ?></b> Form</h4>
-			        <p>Please provide the name and description for new packet.</p>		      			        
+			        <h4 class="panel-title">Add new Item List</h4>
+			        <small>Please choose from one of avaiable option below.</small>		      			        
 			      </div>
 			      <div class="panel-body">
 					<?php if ($message != null ) : ?>
@@ -106,16 +107,16 @@
 			        
 			        <input type="hidden" name="packet_id" value="<?php echo $r_packet->id; ?>" required />		        
 			        <div class="form-group">
-			          <label class="col-sm-3 control-label">Name <span class="asterisk">*</span></label>
+			          <label class="col-sm-3 control-label">Item Name <span class="asterisk">*</span></label>
 			          <div class="col-sm-9">
 			           <input type="hidden" value="" name="payment_type" id="inputType">
 			           <select class="form-control input-sm mb15" name="item_type_id" id="inputName" required>
 	                   <option value="">-- SELECT --</option>
-	                   <?php foreach ($rs_items_type as $result): ?>
-	                    <option value="<?php echo @$result->id; ?>" 
-	                  	<?php if($this->session->flashdata('item_type_id')==$result->id){ echo "selected='selected'"; } ?>
-	                    ><?php echo @$result->name; ?>
-	                    </option>
+		                   <?php foreach ($rs_items_type as $result): ?>
+		                    <option value="<?php echo @$result->id; ?>" 
+		                  	<?php if($this->session->flashdata('item_type_id')==$result->id){ echo "selected='selected'"; } ?>
+		                    ><?php echo @$result->name; ?>
+		                    </option>
 		               <?php endforeach ; ?>
 		               </select>
 			          </div>
@@ -125,8 +126,8 @@
 			      <div class="panel-footer">
 			        <div class="row">
 			          <div class="col-sm-9 col-sm-offset-3">
-			            <button class="btn btn-primary">Submit</button>
-			            <button type="reset" class="btn btn-default">Reset</button>
+			            <button class="btn btn-primary">Add!</button>
+			            <!-- <button type="reset" class="btn btn-default">Reset</button> -->
 			          </div>
 			        </div>
 			      </div>

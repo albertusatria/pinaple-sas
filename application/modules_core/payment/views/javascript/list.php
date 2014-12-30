@@ -68,6 +68,7 @@ jQuery(document).ready(function() {
 		var hari_terlambat = dethis.closest('td').find('input.day-terlambat').val();
 		var denda_terlambat = dethis.closest('td').find('input.fine-terlambat').val();
 		var subtot = Number(price) + Number(denda_terlambat);
+		var unit_id = dethis.closest('td').find('input.unit-id').val()
 		// console.log(id + ' ' +need_to_pay);
 		// return false;
 		// '<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
@@ -124,6 +125,7 @@ jQuery(document).ready(function() {
      			'<input type="hidden" class="day-late-invoice-dab" value="'+hari_terlambat+'">'+
      			'<input type="hidden" class="fine-invoice-dab" value="'+denda_terlambat+'">'+
      			'<input type="hidden" class="bayar-invoice-dab" value="YA">'+
+     			'<input type="hidden" class="unit-id-dab" value="'+unit_id+'">'+
 				'<div class="text-primary"><strong><b class="is-cicilan"></b>'+itemTitle+'</strong></div>'+
 				'<dl>'+late_info+more_detail_info+'</dl>'+
 			'</td>';
@@ -396,7 +398,8 @@ function updateGrandTotal()
 					var diffDays;	
 					var tahun_period;
 					var extra_name;
-					var kode_akun
+					var kode_akun;
+					var unit_id
 
 		            for (index = 0; index < data.length; ++index) {
 		            	invoice_id = data[index]['id'];
@@ -408,7 +411,8 @@ function updateGrandTotal()
 		                deadline = data[index]['payment_deadline'];
 		                extra_name = data[index]['extra_name'];
 		                kode_akun = data[index]['accounting_code'];
-
+		                unit_id = jQuery('#unitIDPembayar').val();
+		                console.log(unit_id);
 		                if (extra_name != null) {
 		                	item_name = item_name + ' ' + extra_name;
 		                }
@@ -451,7 +455,8 @@ function updateGrandTotal()
 		                 			'<input type="hidden" class="id-invoice" value="'+invoice_id+'">'+
 		                 			'<input type="hidden" class="pay-invoice" value="'+need_to_pay+'">'+
 		                 			'<input type="hidden" class="item-name" value="'+item_name+'">'+
-		                 			'<input type="hidden" class="item-akuntansi" value="'+kode_akun+'">';
+		                 			'<input type="hidden" class="item-akuntansi" value="'+kode_akun+'">'+
+		                 			'<input type="hidden" class="unit-id" value="'+unit_id+'">';
 
                 			if (diffDays != 'tidak ada') {
                 				if (terlambat == '0') {
@@ -508,7 +513,7 @@ function updateGrandTotal()
 				                name = data[index]['name'];
 				                amount = data[index]['amount'];
 				                kode_akun = data[index]['accounting_code'];
-
+				                unit_id = data[index]['unit_id']
 
 					            if (index % 2 == 0) {
 				                 	invoicelistOptional += '<tr class="odd billed">';
@@ -523,7 +528,8 @@ function updateGrandTotal()
 				                 			'<input type="hidden" class="item-name" value="'+name+'">'+
 				                			'<input type="hidden" class="fine-terlambat" value="0">'+
 				                 			'<input type="hidden" class="item-akuntansi" value="'+kode_akun+'">'+
-				                					'<input type="hidden" class="day-terlambat" value="0">'+
+				                 			'<input type="hidden" class="unit-id" value="'+unit_id+'">'+
+		                					'<input type="hidden" class="day-terlambat" value="0">'+
 			                    			'<h5><span class="judul">'+name+'</span> <span class="label label-info">optional</span></h5>';
 				                	invoicelistOptional +=
 												'<a href="#" class="add all">'+
@@ -559,9 +565,7 @@ function updateGrandTotal()
 				    /* Add event listener to the dropdown input */
 				    $('select#filter').change( function() { 
 				    	oTable.fnFilter( $(this).val() );
-					});		            
-
-					
+					});					
 				}	    
 	     	},
 		    error: function (data)
@@ -816,6 +820,7 @@ function updateGrandTotal()
 
 				        pendapatan[num] = {};
 			            //journal data
+				        pendapatan[num]['unit_id'] = jQuery(this).find('td input.unit-id-dab').val();
 				        pendapatan[num]['accounting_code'] = jQuery(this).find('td input.akun-invoice-dab').val();
 				        pendapatan[num]['accounting_period'] = jQuery('#thn_ajaran_id').val();
 				        pendapatan[num]['month'] = n ;
@@ -836,6 +841,7 @@ function updateGrandTotal()
 			        }
 
 		        });
+				// return false;
 
 		       //kas / bank
 		        var aktiva = {};

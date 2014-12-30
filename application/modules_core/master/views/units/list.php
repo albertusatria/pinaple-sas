@@ -19,17 +19,17 @@
       <?php endif ; ?>
 
       
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Manage Unit</h3>
-          <p>
-        Don't Touch this data unless you're confident. <br><br>
-            <a href="<?php echo base_url(); ?>master/units/add" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add New Unit</a>
-          </p>
+          <small>
+            You can edit the general information for each Unit here. For security and integration reason, you cannot create unit yourself
+            <!-- <a href="<?php echo base_url(); ?>master/units/add" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add New Unit</a> -->
+          </small>
         </div>
         <div class="panel-body">
           <div class="table-responsive">
-            <table class="table" id="table1">
+            <table class="table table-striped">
 		                            <thead>
 		                                <tr>
 		                                    <th>ID</th>
@@ -48,7 +48,7 @@
                                             <td><?php echo $result->name; ?></td>
                                             <td><?php echo $result->headmaster_name; ?></td>
                                             <td><?php echo $result->registration_number; ?></td>                                            
-                                            <td>
+                                            <td style="text-align:center">
 	                                               <a href="<?php echo base_url(); ?>master/units/edit/<?php echo $result->id; ?>">
 	                                                <i class="fa fa-edit"></i></a>
 	                                                &nbsp;&nbsp;
