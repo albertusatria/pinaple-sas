@@ -70,6 +70,14 @@ class Financial_report extends Operator_base {
 		}
 		else
 		{
+			if($id == 'a02')
+			{
+				$data['report_title'] = 'earns';
+			}
+			else
+			{
+				$data['report_title'] = 'loss';
+			}
 			$data['layout'] = "payment_reports/financial-report/result_single";
 		}
 

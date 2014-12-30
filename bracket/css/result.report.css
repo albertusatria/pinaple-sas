@@ -78,3 +78,16 @@
 {
 	text-transform: uppercase;
 }
+
+/*----------------------------------------------------------------------------*/
+/* Daily Earns/Loss Result Report Stylesheet
+/*----------------------------------------------------------------------------*/
+.group-item td
+{
+	text-transform: uppercase;
+}
+
+.table-cashflow > tbody > tr.total-item > td.amount
+{
+	background: #f5f5f5;
+}
