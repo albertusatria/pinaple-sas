@@ -14,7 +14,7 @@
 	
 	/* hide all unimportant elems */
 	.leftpanel, .mainpanel .headerbar, .mainpanel .pageheader, .search-wrapper, img,
-	button, .panel-heading
+	button, .panel-heading, .print-report-button
 	{
 		display: none !important;
 	}

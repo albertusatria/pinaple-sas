@@ -29,6 +29,7 @@
 				</div>
 				<div class="panel-body report-body">
 					<div class="row">
+					<a onclick="window.print()" class="btn btn-white print-report-button"><i class="fa fa-print"></i> Print Report</a>
 						<div class="col-md-12 report-title">
 							<h4>Laporan Pendapatan dan Biaya</h4>
 							<h4>KB-TK-SD-SMP BUDI UTAMA</h4>
