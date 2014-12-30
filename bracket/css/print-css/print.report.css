@@ -85,5 +85,13 @@
 	.kas-saldo .bank-value
 	{
 		background: #f5f5f5 !important;
-	}	
+	}
+
+	/*----------------------------------------------------------------------------*/
+	/* Daily Earns/Loss Result Report Stylesheet
+	/*----------------------------------------------------------------------------*/	
+	.table-cashflow > tbody > tr.total-item > td.amount
+	{
+		background: #f5f5f5 !important;
+	}
 }
