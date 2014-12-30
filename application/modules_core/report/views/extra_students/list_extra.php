@@ -30,10 +30,21 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Extras on Unit <b><?php echo $unit->name ?></b></h3>
+		<div class="row">
+			<div class="col-md-12">
+			<br/>
+			<a onclick="window.print()" class="btn btn-white print-report-button"><i class="fa fa-print"></i> Print Report</a>
+			</div>
+		</div>
+      
     </div>
+    <div class="panel-heading-print" style="display:none;">
+	  <h4 class="panel-title">Laporan Ekstrakulikuler</h4>
+	  <h4>Unit <?php echo $unit->name ?></h4>
+	</div>
     <div class="panel-body">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <th style="width:5%;">No</th>
             <th style="width:25%;">Extra Name</th>
