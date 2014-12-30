@@ -5,8 +5,8 @@
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
       <li>General Reports</li>
-      <li><a href="<?php echo base_url();?>report/class_students">Class Student</a></li>
-      <li><a href="<?php echo base_url();?>report/class_students/class_list/<?php echo $unit->id ?>">Menu <?php echo $unit->name ?></a></li>
+      <li><a href="<?php echo base_url();?>report/extra_students">Extra Student</a></li>
+      <li><a href="<?php echo base_url();?>report/extra_students/extra_list/<?php echo $unit->id ?>"><?php echo $unit->name ?></a></li>
       <li class="active">Student List</li>
     </ol>
   </div>
@@ -16,7 +16,7 @@
   <div class="panel panel-default">
 
     <div class="panel-heading">
-      <h4 class="panel-title">Student List on Unit <?php echo $unit->name; ?></h4>
+      <h4 class="panel-title">Student List on <b><?php echo $extra->name; ?></b>, Unit <b><?php echo $unit->name; ?></b></h4>
     </div>
   
     <div class="panel-body panel-body-nopadding">               
@@ -29,8 +29,11 @@
           <th width="15%">
              Nis
           </th>
-          <th width="50%">
+          <th width="30%">
              Name
+          </th>
+          <th width="20%">
+             Class
           </th>
           <th width="15%">
              Status
@@ -49,6 +52,7 @@
               <td><?php echo $no; ?><!--<input type="checkbox" class="checkable">--></td>
               <td><?php echo @$result->nis; ?></td>
               <td><?php echo @$result->full_name; ?></td>
+              <td><?php echo @$result->class_name; ?></td>
               <td><?php echo @$result->status; ?></td>
               <td><?php echo @$result->conclusion; ?></td>
             </tr>

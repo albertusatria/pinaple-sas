@@ -32,7 +32,7 @@
                       <td><?php echo $unit->name; ?></td>
                       <td>
                          <a href="<?php echo base_url(); ?>report/class_students/class_list/<?php echo $unit->id; ?>">
-                         Buka Kelas</a>
+                         class detail</a>
                       </td>
                   </tr>
               <?php $no++; endforeach ; ?>

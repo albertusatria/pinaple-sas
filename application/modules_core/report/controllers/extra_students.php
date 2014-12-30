@@ -112,8 +112,8 @@ class Extra_students extends Operator_base {
 		$data['student'] = $this->m_reports->get_student_by_extra_id($extra_id,$hp);
 		// load template
 		$data['title']	 = "Class Open Setup PinapleSAS";
-		$data['layout']  = "report/class_students/list_student";
-		$data['javascript'] = "report/class_students/javascript/list_student";
+		$data['layout']  = "report/extra_students/list_student";
+		$data['javascript'] = "report/extra_students/javascript/list_student";
 		$this->load->view('dashboard/admin/template', $data);
 	}
 

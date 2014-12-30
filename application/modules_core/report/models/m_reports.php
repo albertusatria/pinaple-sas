@@ -81,9 +81,10 @@ class M_reports extends CI_Model {
         else
             $sp = "";
 
-        $sql = "SELECT es.*, us.full_name
+        $sql = "SELECT es.*, us.full_name,c.name class_name
                 FROM extra_students es
-                LEFT JOIN users_student us ON us.nis=es.nis 
+                LEFT JOIN users_student us ON us.nis=es.nis
+                LEFT JOIN classes c ON c.id=us.class_id
                 WHERE es.extra_id='$extra_id' 
                 ".$sp."
                 ";

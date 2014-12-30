@@ -16,7 +16,7 @@
   <div class="panel panel-default">
 
     <div class="panel-heading">
-      <h4 class="panel-title">Student List on Unit <?php echo $unit->name; ?></h4>
+      <h4 class="panel-title">Student List on Class <b><?php echo $class->name; ?></b>, Unit <b><?php echo $unit->name; ?></b></h4>
     </div>
   
     <div class="panel-body panel-body-nopadding">               
