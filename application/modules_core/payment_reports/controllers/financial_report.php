@@ -60,8 +60,19 @@ class Financial_report extends Operator_base {
 		$data['id']	= $id;
 		// get active school year
 		//$data['active_school_year'] = $this->m_school_year->get_active_year();		
-		
-		$data['layout'] = "payment_reports/financial-report/result";
+		if(($id == 'a01') || ($id == 'a05'))
+		{
+			$data['layout'] = "payment_reports/financial-report/result_profit_loss";			
+		}
+		elseif($id == 'a04')
+		{
+			$data['layout'] = "payment_reports/financial-report/result_cashflow";
+		}
+		else
+		{
+			$data['layout'] = "payment_reports/financial-report/result_single";
+		}
+
 		$data['javascript'] = "payment_reports/financial-report/javascript/j_result";
 		$this->load->view('dashboard/admin/template', $data);
 	}

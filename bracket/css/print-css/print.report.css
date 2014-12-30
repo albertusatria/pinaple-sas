@@ -77,4 +77,13 @@
 	{
 		float: left;
 	}
+	
+	/*----------------------------------------------------------------------------*/
+	/* Cashflow Result Report Stylesheet
+	/*----------------------------------------------------------------------------*/
+	.kas-saldo .bank-name,
+	.kas-saldo .bank-value
+	{
+		background: #f5f5f5 !important;
+	}	
 }
