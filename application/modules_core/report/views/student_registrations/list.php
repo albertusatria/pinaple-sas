@@ -29,6 +29,7 @@
 				<div class="panel-heading-print" style="display:none;">
 				  <h4 class="panel-title">Laporan <br/>Registrasi Siswa</h4>
 				  <h4>Tahun Ajaran <label class="academic-year"></label></h4>
+				  <h4>Yayasan Budi Utama</h4>				  
 				</div>		        
 		        <div class="panel-body">
 

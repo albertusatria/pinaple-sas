@@ -24,6 +24,7 @@
   
 	<div class="panel-heading-print">
       <h4 class="panel-title">Laporan <br/>Alokasi Dana Beasiswa <?php echo $scholarship->name; ?></h4>
+	  <h4>Yayasan Budi Utama</h4>
     </div>
   
     <div class="panel-body">    
