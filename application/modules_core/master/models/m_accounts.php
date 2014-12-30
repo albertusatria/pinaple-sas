@@ -73,25 +73,28 @@ class M_accounts extends CI_Model {
 
     public function get_accounting_nested($opening=false)
     {
-        if ($opening == true) {
+        if ($opening == true) 
+        {
             $this->db->where('tipe','AKTIVA');
         }
-        $this->db->order_by('tipe','accounting_id');
+        // $this->db->order_by('tipe','accounting_id');
         $accounting = $this->db->get('accounting_account')->result_array();
         
-        $array = array();
+        $arr = array();
         foreach ($accounting as $acc) {
-            if (! $acc['parent_id']) {
+            if ($acc['parent_id'] == NULL) {
                 // This page has no parent
-                $array[$acc['accounting_id']] = $acc;
-            }
-            else {
-                // This is a child page
-                $array[$acc['parent_id']]['children'][] = $acc;
+                $arr[$acc['accounting_id']] = $acc;
             }
         }
-        // echo "<pre>"; print_r($array);die;
-        return $array;
+        foreach ($accounting as $acc) {
+            if ($acc['parent_id'] != NULL) {
+                // This is a child page
+                $arr[$acc['parent_id']]['children'][] = $acc;
+            }
+        }
+        // echo "<pre>"; print_r($arr);die;
+        return $arr;
     }
 
     function get_total_rows(){
@@ -128,12 +131,50 @@ class M_accounts extends CI_Model {
         return $this->db->get_where('accounting_account',array('accounting_id'=>$id))->row();
     }
 
-    function edit_accounts($params) {
-        $this->db->update('accounting_account',$params,array('accounting_id'=>$params['id']));
+    function edit_accounts($params,$id) {
+        $this->db->where('accounting_id',$id);
+        $update = $this->db->update('accounting_account',$params);
+        if ($update) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function delete_accounts($params) {
-       $this->db->delete('accounting_account',$params,array('accounting_id'=>$params['id']));
+        $acc = $this->db->get_where('accounting_account',array('accounting_id'=>$params['accounting_id']))->row();
+        if ($acc->mandatory == 1) {
+            //cek if mandatory
+            return 'mandatory';
+            // echo 'mandatory';
+        } else {
+            $child = $this->db->get_where('accounting_account',array('parent_id'=>$params['accounting_id']));
+            if ($child->num_rows() > 0) {
+                //if has children
+                foreach ($child->result_array() as $val) {
+                    $x = $this->db->get_where('accounting_general_journal',array('accounting_code'=>$val['id']));
+                    if ($x->num_rows() > 0) {
+                        return 'child_use';
+                        // echo 'child_use';
+                    } 
+                }
+            } else {
+                //don't have children
+                $rows = $this->db->get_where('accounting_general_journal',array('accounting_code'=>$params['accounting_id']));
+                if ($rows->num_rows() > 0) {
+                    return 'use';
+                    // echo 'use';
+                } 
+            }
+        }
+        // echo "sukses";
+        // die;
+        $delete = $this->db->delete('accounting_account',$params,array('accounting_id'=>$params['accounting_id']));
+        if ($delete) {
+            return 'berhasil';
+        } else {
+            return 'gagal';
+        }
     }
 
 }

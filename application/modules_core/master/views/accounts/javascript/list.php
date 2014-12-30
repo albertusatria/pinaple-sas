@@ -64,6 +64,14 @@
   	jQuery("#add-new-code").val('');
   	jQuery("#add-new-name").val('');
   	jQuery("#add-new-description").val('');
+	document.getElementById("add-new-postable").selectedIndex = "0";
+  }
+  function edit_account(code,name,description) {
+  	jQuery("#edit-code").val(code);
+  	jQuery("#edit-name").val(name);
+  	jQuery("#edit-description").text(description);
+  	jQuery("#edit-description").val(description);
+	// document.getElementById("add-new-postable").selectedIndex = "0";
   }
 
 </script>
