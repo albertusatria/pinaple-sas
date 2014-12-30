@@ -95,4 +95,19 @@ class M_reports extends CI_Model {
             return array();
         }
     }
+
+    function get_student_scholarship_by_id($ss_id){
+        $sql = "SELECT sa.*, us.full_name,c.name class_name
+                FROM scholarship_allocation sa
+                LEFT JOIN users_student us ON us.nis=sa.nis
+                LEFT JOIN classes c ON c.id=us.class_id
+                WHERE sa.scholarship_id='$ss_id' 
+                ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+            return $query->result();
+        } else {
+            return array();
+        }
+    }
 }

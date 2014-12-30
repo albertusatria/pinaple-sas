@@ -47,10 +47,10 @@
 								 No
 							</th>
 							<th width="10%">
-								 NIS&nbsp;#
+								 NIS
 							</th>
 							<th width="18%">
-								 Name
+								 Student Name
 							</th>
 							<th width="15%">
 								 Unit

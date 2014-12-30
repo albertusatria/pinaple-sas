@@ -111,7 +111,7 @@ class Class_students extends Operator_base {
 		// get unit list
 		$data['student'] = $this->m_reports->get_student_by_class_id($class_id);
 		// load template
-		$data['title']	 = "Class Open Setup PinapleSAS";
+		$data['title']	 = "Class Students";
 		$data['layout']  = "report/class_students/list_student";
 		$data['javascript'] = "report/class_students/javascript/list_student";
 		$this->load->view('dashboard/admin/template', $data);
