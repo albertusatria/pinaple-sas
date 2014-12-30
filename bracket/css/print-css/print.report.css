@@ -1,0 +1,80 @@
+/*----------------------------------------------------------------------------*/
+/* Stylesheet for Printing Report
+/*----------------------------------------------------------------------------*/
+@media print {
+
+	/* A4 Layout */
+	body {
+		width: auto;
+		height: auto;
+		background: #ffffff;
+		margin: 0 auto;
+		line-height: normal !important;
+	}
+	
+	/* hide all unimportant elems */
+	.leftpanel, .mainpanel .headerbar, .mainpanel .pageheader, .search-wrapper, img,
+	button, .panel-heading
+	{
+		display: none !important;
+	}
+
+	/* Reset all typography size */
+	div, p, label, span, h4
+	{
+		font-size: 6px !important;
+	}
+	h5
+	{
+		font-size: 6.5px !important;
+	}
+	h4, h5
+	{
+		line-height: normal !important;
+		color: #000000 !important;
+	}
+	h4, h5, .mb10
+	{
+		margin: 0 !important;
+	}
+	abbr[title], abbr[data-original-title]
+	{
+		border: none;
+	}
+	/*----------------------------------------------------------------------------*/
+	/* Result Body
+	/*----------------------------------------------------------------------------*/	
+	.mainpanel, .panel-body
+	{
+		margin: 0 !important;
+	}	
+	.report-body, .row
+	{
+		width: 100% !important;
+		margin: 0 auto; padding: 0;
+	}
+	.report-title 
+	{
+		margin-bottom: 25px !important;	
+	}
+	.report-title h4
+	{
+		font-size: 13px !important;
+		line-height: 18px !important;
+	}
+	.col-md-6 .table-earns,
+	.col-md-6 .table-loss,
+	.wrapper-table-inventaris,
+	.col-md-6.creator
+	{
+		width: 48% !important;
+	}	
+	.col-md-6 .table-loss
+	{
+		margin-left: 5px !important;
+	}
+	.col-md-6.creator
+	{
+		float: left;
+	}
+}
