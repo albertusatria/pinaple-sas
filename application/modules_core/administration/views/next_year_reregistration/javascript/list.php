@@ -65,7 +65,7 @@ jQuery(document).ready(function() {
 		jQuery('#ajax-loader').show(); 
 	    jQuery.ajax({
 	    	type: "POST",
-	    	url: CI_ROOT+"registration/re_registration/get_siswa_daftar_ulang",
+	    	url: CI_ROOT+"administration/next_year_reregistrations/get_siswa_daftar_ulang",
 	    	data: item,
 	     	success: function(data)
 	     	{

@@ -159,7 +159,9 @@ class Extras_first extends Operator_base {
 						'period_id' => $i,
 						'scholarship' => 0,
 						'dc' => $this->get_now(),
-						'payment_deadline' => $year.'-'.$month.'-10'
+						'payment_deadline' => $year.'-'.$month.'-10',
+						'period_year' => $value['period_year'],
+						'stage_id' => $value['stage_id']
 						);
 					$this->m_registration->add_invoices($params);
 				}				

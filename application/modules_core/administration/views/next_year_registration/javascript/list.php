@@ -14,7 +14,6 @@
 <script src="<?php echo base_url()?>bracket/js/bootstrap-wizard.min.js"></script>
 <script src="<?php echo base_url()?>bracket/js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url()?>bracket/js/dropzone.min.js"></script>
-<script src="<?php echo base_url()?>bracket/js/autoNumeric.js"></script>
 <script src="<?php echo base_url();?>bracket/js/custom.js"></script>
 
 <script type="text/javascript">
@@ -24,17 +23,12 @@
 <script type="text/javascript">
 // General Setting
 jQuery(document).ready(function() {
+
+	// Chosen Select
+	jQuery(".chosen-select").chosen({'width':'100%','white-space':'nowrap'});
     
-
-	jQuery('#btnCari').on('click',function(){
-		var keyword = jQuery('#keyword').val();
-		searchSiswa(keyword);
-		//pencarian
-		//yang dicari
-	});
-
 	// With Form Validation Wizard
-	var $validator = jQuery("#reRegis").validate({
+	var $validator = jQuery("#regisForm").validate({
 		highlight: function(element) {
 		  jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		},
@@ -43,239 +37,208 @@ jQuery(document).ready(function() {
 		}
 	});
 	
+	jQuery('#validationWizard').bootstrapWizard({
+		tabClass: 'nav nav-pills nav-justified nav-disabled-click',
+		onTabClick: function(tab, navigation, index) {
+		  return false;
+		},
+		onNext: function(tab, navigation, index) {
+		  var $valid = jQuery('#regisForm').valid();
+		  if(!$valid) {
+		    
+		    $validator.focusInvalid();
+		    return false;
+		  }
+		  jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+	});	
+	
+	jQuery("#tgl_lahir").mask("99-99-9999");
+	jQuery("#tgl_lahir_wali").mask("99-99-9999");
+	jQuery("#achievement_id").mask("9999");
+	jQuery("#tglIjazah").mask("99-99-9999"); 
+	jQuery("#tglIjazah").mask("99-99-9999");
+	jQuery("#telepon").mask("(999) 9999-9999");
+	jQuery("#handphone").mask("(9999) 9999-9999");
+	jQuery("#penghasilan").mask("999.999.999.999");	  
 
-	jQuery('.form-control.price').autoNumeric('init', {aSign:'Rp ', pSign:'p' });
+	//End General Setting
 
-	jQuery('.students-id')
-	  .mouseenter(function() {
-		jQuery(this).addClass('hovered');
-	  })
-	  .mouseleave(function() {
-		jQuery(this).removeClass('hovered');
-	});
- 
-	function searchSiswa(id) {
-		var item  = {};
-		var num   = 1;
-		item[num] = {};
-		item[num]['keyword'] = id;
-
-		//cari , jika katemu tampilkan pop up, pilih
-	 
-	    jQuery.ajax({
-	    	type: "POST",
-	    	url: CI_ROOT+"administration/next_year_registrations/get_siswa_daftar_ulang",
-	    	data: item,
-	     	success: function(data)
-	     	{
-			    if (data.length > 0)
-			    {
-			   		console.log(data);
-			   		//tampilkan list siswanya
-			   		jQuery('#ajax-loader').show();
-				   	jQuery('#searchResult div').remove();
-					var nis; var nama; var unit; var grade; var alamat; var current;
-		            for (index = 0; index < data.length; ++index) {
-		                nis = data[index]['nis'];
-		                nama = data[index]['full_name'];
-		                unit = data[index]['name'];
-		                unit_id = data[index]['unit_id'];
-		                alamat = data[index]['living_address'];
-		                current = data[index]['current_level'];
-		                start = data[index]['start_level'];
-						
-						//delay append data while loading
-						setTimeout(function() {
-							jQuery('#searchResult').append(
-							'<div class="col-md-6 students-id">'+
-								'<div class="people-item">'+
-								  '<div class="media">'+
-								    '<div class="media-body">'+
-								      '<h5 class="student-id text-info">'+nis+'</h5>'+
-								      '<h4 class="student-name text-primary">'+nama+'</h4>'+
-								      '<input type="hidden" class="student-unit" value="'+unit_id+'">'+
-								      '<input type="hidden" class="student-start" value="'+start+'">'+
-								      '<input type="hidden" class="student-current" value="'+current+'">'+
-								      '<div class="text-muted"><i class="fa fa-puzzle-piece"></i>'+unit+' ('+unit_id+'), Start '+start+', Tingkat '+current+'</div>'+
-								      '<div class="text-muted"><i class="fa fa-map-marker"></i>'+alamat+'</div>'+
-								      '<a href="#" class="btn btn-danger daftar" data-toggle="modal" data-target="#initPacket">Daftar Ulang!</a>'+
-								    '</div>'+
-								  '</div>'+
-								'</div>'+
-							'</div>'
-							);							
-							jQuery('#ajax-loader').hide();    
-						}, 1000); // <-- time in milliseconds						
-		            }
-				}
-				else 
-				{
-				 	//bila tidak ketemu
-				 	console.log('tidak ditemukan');
-				}		    
-	     	},
-		    error: function (data)
-		    {
-		    	console.log('terjadi error');
-		    	console.log(data);
-		    }
-		});  	
-		
-	    return false;
-	}
-
-    // Delete row in a table
-    jQuery('#searchResult').on('click','.daftar',function(){
-
-		var unit =  jQuery(this).closest('div').find('input.student-unit').val();		
-		var current =  jQuery(this).closest('div').find('input.student-current').val();		
-		var start =  jQuery(this).closest('div').find('input.student-start').val();		
-		console.log('student unit : '+unit);
-		console.log('student start : '+start);
-		console.log('student current : '+current);
-		queryPaket(unit,start,current);
+	jQuery('#tgl_lahir').datepicker({ 
+      dateFormat: 'dd-mm-yy',
+      altField: '#hidden_dob' ,
+      altFormat: 'yy-mm-dd'
     });
 
-	jQuery('.row').on('click', '.students-id', function(){
-		var idStudent = jQuery(this).find('.student-id').text();
-		jQuery('#initPacketLabel').find('strong').text(idStudent);
-		jQuery('#nis_choosen').val(idStudent);
+  	jQuery('#tgl_lahir_ayah').datepicker({ 
+      dateFormat: 'dd-mm-yy',
+      altField: '#hidden_dob_ayah' ,
+      altFormat: 'yy-mm-dd'
+    });
+
+    jQuery('#tgl_lahir_ibu').datepicker({ 
+      dateFormat: 'dd-mm-yy',
+      altField: '#hidden_dob_ibu' ,
+      altFormat: 'yy-mm-dd'
+    });
+
+});
+</script>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+	//Js Handling Originate School
+	jQuery("#others").change(function(){
+	    if (jQuery("#others").is(':checked')){
+			jQuery(".others").show();
+	    }
 	});
+	jQuery("#bu").change(function(){
+	    if (jQuery(this).is(':checked')){
+			jQuery(".others").hide();
+	    }
+	});	
+	//End Js Handling Originate School
+	
+	//check NIS
+	jQuery('.loading-image-nis').hide();
+	jQuery('#check-nis').click(function(){
+		//set validator
+		var thisInput = jQuery(this).closest('.form-group').find('input'); 
+		var inputNIS = thisInput.val();
+		var text = "";
+		var text_type = "";
+		if(inputNIS == "")
+		{
+			thisInput.closest('.form-group').closest('.form-group').addClass('has-error');
+			jQuery('.nis-result').addClass('text-danger').text('This field is required');
+		}
+		else
+		{
+			//reset all elements used for validation
+			thisInput.closest('.form-group').closest('.form-group').removeClass('has-error');
+			thisInput.next().hide();
+			jQuery('.nis-result').removeClass('text-danger').removeClass('text-success').hide();
+			//loader show
+			jQuery('.loading-image-nis').show();
 
-	function queryPaket(unit,start,current) {
-		var item  = {};
-		var num   = 1;
-		item[num] = {};
-		item[num]['unit_id'] = unit;
-		item[num]['start'] = start;
-		item[num]['current'] = current;
-		console.log(item[num]['unit_id']);
-		console.log(item[num]['start']);
-		console.log(item[num]['current']);
+			//check nis validation
 
-		//cari , jika katemu tampilkan pop up, pilih
-		
-		jQuery('#ajax-loader').show(); 
-	    jQuery.ajax({
-	    	type: "POST",
-	    	url: CI_ROOT+"administration/next_year_registrations/get_list_paket",
-	    	data: item,
-	     	success: function(data)
-	     	{
-			    if (data.length > 0)
-			    {
-			   		console.log(data);
-			   		//tampilkan list siswanya
-				   	jQuery('#pilihPaket option').remove();
-				   	jQuery('#pilihPaket').append('<option value="" selected>PILIH PAKET</option>');
-					var id; var name;
-		            for (index = 0; index < data.length; ++index) {
-		                id = data[index]['id'];
-		                name = data[index]['name'];
-
-					   	jQuery('#pilihPaket').append('<option value="'+id+'">'+name+'</option>');
-		            }
-				}
-				else 
-				{
-				 	//bila tidak ketemu
-				 	console.log('tidak ditemukan');
-				}		    
-	     	},
-		    error: function (data)
-		    {
-		    	console.log('terjadi error');
-		    	console.log(data);
-		    }
-		});  	
-		
-		jQuery('#ajax-loader').hide(); 
-	    return false;
-	}
-
-	jQuery('#pilihPaket').on('change',function(){
-		if (jQuery(this).val() == '') {
-		  	jQuery('#paymentItemList div').remove();
-		} else {
-			console.log('query disini');			
-
-			var item  = {};
-			var num   = 1;
-			item[num] = {};
-			item[num]['packet_id'] = jQuery(this).val();
-
-
-			jQuery('#ajax-loader').show(); 
 		    jQuery.ajax({
 		    	type: "POST",
-		    	url: CI_ROOT+"administration/next_year_registrations/get_list_packet_item",
-		    	data: item,
+		    	url: CI_ROOT+"registration/new_student/check_nis",
+		    	data: {
+		    		'nis':inputNIS
+		    	},
 		     	success: function(data)
 		     	{
-				    if (data.length > 0)
-				    {
-				   		console.log(data);
-
-					   	jQuery('#paymentItemList div').remove();
-						var id; var name; var amount; var period_id; var period_nama; var packet_id;
-			            for (index = 0; index < data.length; ++index) {
-			                packet_id = data[index]['packet_id'];
-			                id = data[index]['item_type_id'];
-			                name = data[index]['name'];
-			                amount = data[index]['amount'];
-			                period_id = data[index]['period_id'];
-			                period_nama = data[index]['name_of_period'];
-
-			                var index2 = "packet_id";
-			                var index3 = "item_type_id";
-			                var index4 = "amount";
-			                var index5 = "period_id";
-
-			                if (period_id == null) {
-								jQuery('#paymentItemList').append(
-									'<div class="form-group">'+
-									  '<input type="hidden" name="invoice['+index+']['+index2+']" value="'+packet_id+'">'+
-									  '<input type="hidden" name="invoice['+index+']['+index3+']" value="'+id+'">'+
-									  '<input type="hidden" name="invoice['+index+']['+index5+']" value="">'+
-									  '<label class="col-sm-3 control-label">'+name+' <span class="asterisk">*</span></label>'+
-									  '<div class="col-sm-9">'+
-									    '<input type="text" name="invoice['+index+']['+index4+']" class="form-control dpp price" value="'+amount+'" required/>'+
-									  '</div>'+
-									'</div>'
-								);				               
-			                } 
-			                else {
-								jQuery('#paymentItemList').append(
-									'<div class="form-group">'+
-									  '<input type="hidden" name="invoice['+index+']['+index2+']" value="'+packet_id+'">'+
-									  '<input type="hidden" name="invoice['+index+']['+index3+']" value="'+id+'">'+
-									  '<input type="hidden" name="invoice['+index+']['+index5+']" value="'+period_id+'">'+
-									  '<label class="col-sm-3 control-label">'+name+' bulan '+period_nama+' <span class="asterisk">*</span></label>'+
-									  '<div class="col-sm-9">'+
-									    '<input type="text" name="invoice['+index+']['+index4+']" class="form-control dpp price" placeholder="Biaya DPP ..." value="'+amount+'" required/>'+
-									  '</div>'+
-									'</div>'
-								);				               			                	
-			                }
-			            }				   		
-					}
-					else 
-					{
-					 	//bila tidak ketemu
-					 	console.log('tidak ditemukan');
-					}		    
+		     		if (data == true) {
+		     			//you cannot use this nis
+		     			text = "Too bad! You cannot use this nis";
+		     			text_type = "text-danger";
+		     		} else {
+		     			//congratz you can use this nis
+		     			text = "Hooray! This nis avaiable";
+		     			text_type = "text-success";
+		     		}
 		     	},
 			    error: function (data)
 			    {
-			    	console.log('terjadi error');
 			    	console.log(data);
+	     			text = "Upps! Something bad happened. Please Try again";
+	     			text_type = "text-danger";
 			    }
-			});
-
+			}); 	
+			//loader hide
+			var timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+			    jQuery(".loading-image-nis").hide();                                            
+			    //result info
+				jQuery('.nis-result').addClass(text_type).text(text).show();		    
+			}, 2000);	
 		}
-		jQuery('#ajax-loader').hide(); 
 		return false;
 	});
+	
+	//Get All Unit & Jenjang
+    var modelMakeJsonList = {"modelMakeTable" : 
+        [
+            {"modelMakeID" : "0","modelMake" : "Choose School Units"},        
+            <?php $no = 1; foreach ($ls_unit as $unit): ?>
+                {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->name ?>"},
+            <?php $no++; endforeach ; ?>
+        ]};
+	var modelTypeJsonList = {
+	
+	    <?php $no = 1; foreach ($ls_unit as $unit): ?>
+	
+	      "<?php echo $unit->name ?>" :
+	        [
+	            <?php for ($i = 1; $i <= $unit->stage; $i++) : ?>
+	                {"modelTypeID" : "<?php echo $unit->id ?>","modelType" : "<?php echo $i ?>"}
+	              <?php if ($i + 1 <= $unit->stage) : ?>
+	              ,
+	              <?php endif; ?>
+	            <?php endfor; ?>
+	        ],
+	    <?php $no++; endforeach ; ?>		
+			};
 
+	
+		//Now that the doc is fully ready - populate the lists   
+		//Next comes the make
+	      var ModelListItems= "";
+	      for (var i = 0; i < modelMakeJsonList.modelMakeTable.length; i++){
+	        ModelListItems+= "<option value='" + modelMakeJsonList.modelMakeTable[i].modelMakeID + "'>" + modelMakeJsonList.modelMakeTable[i].modelMake + "</option>";
+	      }
+	      $("#jenjangSekolah").html(ModelListItems);
+	    
+	    var updateSelectSchoolBox = function(make) {
+	        console.log('updating with',make);
+	        var listItems= "";
+	        for (var i = 0; i < modelTypeJsonList[make].length; i++){
+	            listItems+= "<option value='" + modelTypeJsonList[make][i].modelTypeID + "'>" + modelTypeJsonList[make][i].modelType + "</option>";
+	        }
+	        $("select#jenjangKelas").html(listItems);
+	    }
+	   
+	    $("select#jenjangSekolah").on('change',function(){
+	        var selectedMake = $('#jenjangSekolah option:selected').text();
+	        updateSelectSchoolBox(selectedMake);
+	    });    		
+     //Get All Unit & Jenjang
+     
+     //address information
+	 jQuery('#fathAddress').keyup(function() {
+	    var fatherAddress = jQuery(this).val();
+	    jQuery('#studAddress').val(fatherAddress).attr('readonly',true);
+	  }).keyup();     
+	  
+	 jQuery('.student-address').on('change',function(){
+		 var selectedAddress = jQuery(this).find(':selected').text();
+	 	 var fatherAddress = document.getElementById('fathAddress').value;
+	 	 var motherAddress = document.getElementById('momAddress').value;
+	 	 console.log(fatherAddress);
+
+		 if(selectedAddress == 'Parents')
+		 {
+			 jQuery('#studAddress').val(fatherAddress).attr('readonly',true);
+		 }
+		 else if(selectedAddress == 'Father')
+		 {
+			 jQuery('#studAddress').val(fatherAddress).attr('readonly',true);			 
+		 }
+		 else if(selectedAddress == 'Mother')
+		 {
+			 jQuery('#studAddress').val(motherAddress).attr('readonly',true);
+		 }
+		 else
+		 {
+			 jQuery('#studAddress').val('');
+		 }
+	 });
 });
 </script>

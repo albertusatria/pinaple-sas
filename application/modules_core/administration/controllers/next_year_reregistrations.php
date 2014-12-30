@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once( APPPATH . 'modules_core/base/controllers/operator_base.php' );
 
-class Re_registration extends Operator_base {
+class Next_year_reregistrations extends Operator_base {
 
 	public function __construct() {
 		// call the controller construct
@@ -9,7 +9,7 @@ class Re_registration extends Operator_base {
 
 		// load all the related model here
 		$this->load->model('master/m_units');
-		$this->load->model('m_registration');
+		$this->load->model('registration/m_registration');
 		$this->load->model('initiation/m_school_year');
 		// load portal
 		$this->load->helper('text');
@@ -17,8 +17,8 @@ class Re_registration extends Operator_base {
 		$this->page_title();
 
 		// active page
-		$active['parent_active'] = "registration_data";
-		$active['child_active'] = "re-registration";
+		$active['parent_active'] = "school_administration";
+		$active['child_active'] = "next_year_reregistrations";
 		$this->session->set_userdata($active);		
 	}
 
@@ -37,22 +37,21 @@ class Re_registration extends Operator_base {
 		//unit
 		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
 		// get active school year
-		$data['active_school_year'] = $this->m_school_year->get_active_year();		
+		$data['pmb_year'] = $this->m_school_year->get_pmb_school_year();		
 		
-		$data['layout'] = "registration/re_registration/list";
-		$data['javascript'] = "registration/re_registration/javascript/list";
-		$this->load->view('dashboard/admin/template', $data);
+		$data['layout'] = "administration/next_year_reregistration/list";
+		$data['javascript'] = "administration/next_year_reregistration/javascript/list";
+		$this->load->view('dashboard/admin/template', $data);		
 	}
 
 	public function get_siswa_daftar_ulang()
 	{
 		$data['pmb_year'] = $this->m_school_year->get_pmb_school_year();		
 		$id = $data['pmb_year']->id;
-
 		foreach ($_POST as $value) {
 			$keyword = $value['keyword'];
 		}
-		$data = $this->m_registration->get_list_siswa($keyword,"",$id);
+		$data = $this->m_registration->get_list_siswa($keyword,$id);
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}
@@ -60,7 +59,7 @@ class Re_registration extends Operator_base {
 	public function get_list_paket()
 	{
 
-		$data['year']	= $this->m_school_year->get_active_year();
+		$data['year']	= $this->m_school_year->get_year_after_active_year();
 		$sy_id = $data['year']->id;
 
 		foreach ($_POST as $value) {
@@ -84,7 +83,7 @@ class Re_registration extends Operator_base {
 
 	}
 
-	public function re_registration_process()
+	public function next_year_registration_process()
 	{
 		// echo '<pre>';print_r($this->input->post());die;
 		// user_auth
@@ -112,13 +111,10 @@ class Re_registration extends Operator_base {
 					'amount' => $invo['amount'],
 					'period_id' => NULL,
 					'scholarship' => 0,
-					'period_year' => $this->input->post('period_year'),
-					'stage_id' => $this->input->post('stage_id'),
-					'dc' => $this->get_now(),
+					'dc' => $this->get_now()
 					);
 				if ($invo['period_id'] != '' OR $invo['period_id'] != NULL) {
 					$params['period_id'] = $invo['period_id'];
-					$params['payment_deadline'] = date('Y').'-07-10';
 					$jumlah = $invo['amount'];
 				} 
 				$this->m_registration->add_invoices($params);
@@ -126,16 +122,7 @@ class Re_registration extends Operator_base {
 
 			// generate 11 SPP
 			for ($i = 2; $i <= 12 ; $i++) { 
-
-				if ($i >= 7) {
-					$year = date('Y') + 1;
-					$month = '0'.($i-6);
-				} else {					
-					$year = date('Y');
-					$month = ($i+6);
-				}
-
-				$params = array(					
+				$params = array(
 					'nis' => $this->input->post('nis'),
 					'packet_id' => NULL,
 					'item_type_id' => '6',
@@ -143,10 +130,7 @@ class Re_registration extends Operator_base {
 					'amount' => $jumlah,
 					'period_id' => $i,
 					'scholarship' => 0,
-					'dc' => $this->get_now(),
-					'payment_deadline' => $year.'-'.$month.'-10',
-					'period_year' => $this->input->post('period_year'),
-					'stage_id' => $this->input->post('stage_id')
+					'dc' => $this->get_now()
 					);
 				$this->m_registration->add_invoices($params);
 			}
@@ -157,7 +141,7 @@ class Re_registration extends Operator_base {
 			$data['message'] = "Siswa nis : ".$this->input->post('nis')." telah berhasil didaftarulangkan..";
 		}
 		$this->session->set_flashdata($data);		
-		redirect('registration/re_registration/');
+		redirect('administration/next_year_registrations/');
 	}	
 
 	public function get_now() {
@@ -170,7 +154,7 @@ class Re_registration extends Operator_base {
 
 	// page title
 	public function page_title() {
-		$data['page_title'] = 'Re-registration Form';
+		$data['page_title'] = 'Next Year Registration Form';
 		$this->session->set_userdata($data);
 	}
 }

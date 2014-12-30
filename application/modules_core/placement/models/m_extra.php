@@ -69,9 +69,10 @@ class m_extra extends CI_Model {
     function get_registered_student_not_enroll_in_this_extra($extra_id = '',$u_id ='',$sy_id='',$half=0)
     {      
         //ambil semua siswa yang belum diregiskan
-        $sql = "SELECT rr.*, us.full_name, us.current_level, u.name unit_name
+        $sql = "SELECT rr.*, us.full_name, us.current_level, u.name unit_name, s.id'stage_id'
                 FROM re_registration rr 
                 LEFT JOIN users_student us ON us.nis=rr.nis
+                LEFT JOIN stage s ON s.level = us.current_level AND s.unit = us.unit_id 
                 LEFT JOIN units u ON u.id=us.unit_id
                 WHERE us.unit_id = '$u_id'
                 AND us.status = 'SISWA'

@@ -28,7 +28,7 @@
 	      <div class="panel-btns">
 	        <a href="#" class="minimize">−</a>
 	      </div>
-	      <h4 class="panel-title">Search Students of School Year: <strong><?php echo $active_school_year->name ?></strong></h4>
+	      <h4 class="panel-title">Search Students of School Year: <strong><?php echo $pmb_year->name ?></strong></h4>
 	      <small>This is form to search students who wants to <strong> re-register </strong> their ID</small>
 	    </div>
 	    
@@ -70,10 +70,10 @@
 	      </div>
 
 	      <div class="modal-body">
-		    <input type="hidden" id="school_year_id" name="school_year_id" class="form-control"  value="<?php echo $active_school_year->id ?>"/>
+		    <input type="hidden" id="school_year_id" name="school_year_id" class="form-control"  value="<?php echo $pmb_year->id ?>"/>
 		    <input type="hidden" id="nis_choosen" name="nis" class="form-control" value="" />
 		    <input type="hidden" id="stage_choosen" name="stage_id" class="form-control" value="" />
-		    <input type="hidden" id="period_year" name="period_year" class="form-control" value="<?php echo $active_school_year->name ?>" />
+		    <input type="hidden" id="period_year" name="period_year" class="form-control" value="<?php echo $pmb_year->name ?>" />
 
 			<div class="form-group">
 			  <label class="col-sm-4 control-label">Paket Invoice <span class="asterisk">*</span></label>
