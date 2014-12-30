@@ -5,7 +5,7 @@
     <ol class="breadcrumb">
       <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
       <li>General Reports</li>
-      <li><a href="<?php echo base_url();?>report/class_students">Class Student</a></li>
+      <li><a href="<?php echo base_url();?>report/extra_students">Extra Student</a></li>
       <li class="active">Unit <?php echo $unit->name ?></li>
     </ol>
   </div>
@@ -29,7 +29,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Classes on Unit <?php echo $unit->name ?></h3>
+      <h3 class="panel-title">Classes on Unit <b><?php echo $unit->name ?></b></h3>
     </div>
     <div class="panel-body">
       <div class="table-responsive">

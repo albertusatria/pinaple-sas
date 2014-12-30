@@ -29,7 +29,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Extras on Unit <?php echo $unit->name ?></h3>
+      <h3 class="panel-title">Extras on Unit <b><?php echo $unit->name ?></b></h3>
     </div>
     <div class="panel-body">
       <div class="table-responsive">
@@ -37,9 +37,9 @@
           <thead>
             <th style="width:5%;">No</th>
             <th style="width:25%;">Extra Name</th>
-            <th style="width:20%;">Homeroom Teacher 1</th>
-            <th style="width:20%;">Homeroom Teacher 2</th>
-            <th style="width:15%;">Half Period</th>
+            <th style="width:20%;">Extra Teacher 1</th>
+            <th style="width:20%;">Extra Teacher 2</th>
+            <th style="width:15%;text-align:center;">Half Period</th>
           </thead>
           <tbody>
             <?php if (count($extras) > 0) : ?>
@@ -49,12 +49,12 @@
                       <td><?php echo $extra->name; ?></td>
                       <td><?php echo $extra->homeroom_1_name; ?></td>
                       <td><?php echo $extra->homeroom_2_name; ?></td>
-                      <td>
+                      <td align="center">
                          <a href="<?php echo base_url(); ?>report/extra_students/student_list/<?php echo $unit->id; ?>/<?php echo $extra->id;?>/1">
-                          One</a>                                         
+                          Odd</a>                                         
                       &nbsp;&nbsp; | &nbsp;&nbsp;
                          <a href="<?php echo base_url(); ?>report/extra_students/student_list/<?php echo $unit->id; ?>/<?php echo $extra->id;?>/2">
-                          Two</a>                                         
+                          Even</a>                                         
                       </td>
                   </tr>
               <?php $no++; endforeach ; ?>
