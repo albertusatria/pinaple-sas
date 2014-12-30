@@ -11,6 +11,7 @@ class Invoice_packet extends Operator_base {
 		$this->load->model('m_packets');	
 		$this->load->model('m_packet_items');
 		$this->load->model('m_items_type');
+		$this->load->model('initiation/m_school_year');
 		
 		// load portal
 		$this->load->helper('text');
@@ -35,8 +36,10 @@ class Invoice_packet extends Operator_base {
 		$data['user']	= $this->user;
 
 		$data['message'] = $this->session->flashdata('message');
-		$data['ls_unit'] = $this->m_units->get_all_unit_academic();
-		
+		// get tahun ajaran
+		$data['year']		= $this->m_school_year->get_active_year();
+
+		$data['ls_unit'] = $this->m_units->get_all_unit_academic();		
 		$data['rs_packet'] = $this->m_packets->get_all_packet();
 		// echo "<pre>"; print_r($data['rs_packet']); die;
 		$data['rs_unit'] = $this->m_units->get_all_unit();				
@@ -192,7 +195,7 @@ class Invoice_packet extends Operator_base {
 		$data['r_packet'] = $this->m_packets->get_packet_by_id($id);
 		$data['rs_packet_items'] = $this->m_packet_items->get_all_packet_items_by_p_id($id);
 		// echo "<pre>"; print_r($data['rs_packet_items']);die;
-		$data['rs_items_type'] = $this->m_items_type->get_all_items_type();		
+		$data['rs_items_type'] = $this->m_items_type->get_all_option_of_mandatory_items_type($id,'template');		
 		$data['layout'] = "master/invoice_packet/list_items";
 		$data['javascript'] = "master/invoice_packet/javascript/list_items";
 		$this->load->view('dashboard/admin/template', $data);

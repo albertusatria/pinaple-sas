@@ -22,14 +22,14 @@
   <!-- Search Form -->  
   <div class="row">
 	<div class="col-md-12">
-	  <div class="panel panel-default">
+	  <div class="panel panel-primary">
 	  
 	    <div class="panel-heading">
 	      <div class="panel-btns">
 	        <a href="#" class="minimize">−</a>
 	      </div>
 	      <h4 class="panel-title">Search Students of School Year: <strong><?php echo $active_school_year->name ?></strong></h4>
-	      <p>This is form to search students who wants to <strong> re-register </strong> their ID</p>
+	      <small>This is form to search students who wants to <strong> re-register </strong> their ID</small>
 	    </div>
 	    
 		<div class="panel-body">
@@ -37,17 +37,15 @@
 			  <div class="form-group">
 				  
 		          <div class="col-lg-8">
-		            <input type="text" name="name" id="keyword" class="form-control" placeholder="Type student's Name or NIS..." required="">
+		            <input type="text" name="name" id="keyword" class="form-control input-xs" placeholder="Type student's Name or NIS..." required="">
 		          </div>
 		          
 		          <div class="col-lg-4">
-		            <a id="btnCari" class="btn btn-primary btn-block">Search</a>
-		          </div>      
-		                  	
+		            <a id="btnCari" class="btn btn-danger btn-block" style="line-height:26px">Search</a>
+		          </div>      		                  	
 		    </div>
 		  </div><!-- row -->
 		</div><!-- panel-body -->
-	    
 	  </div><!-- panel -->
 	</div>
   </div>

@@ -8,6 +8,7 @@ class m_school_year extends CI_Model {
     }
 
     function get_all_school_year(){
+        $this->db->order_by('id','DESC');
         return $this->db->get('school_year')->result();
     }
 

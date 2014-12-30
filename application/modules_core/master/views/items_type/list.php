@@ -39,7 +39,7 @@
 					<?php endif;?>
 					<div class="row row-pad-5">        
 				      <div class="table-responsive list-type-table">
-				      <table class="table table-hidaction table-hover mb30">
+				      <table class="table table-hidaction table-striped table-hover mb30">
 				        <thead>
 				          <tr>
 				            <th width="10%">#</th>
@@ -84,7 +84,7 @@
 
 		<div class="col-md-6">
 			<form id="newPacket" method="POST" action="<?php echo base_url(); ?>master/items_type/add_items" class="form-horizontal">
-			  <div class="panel panel-default">
+			  <div class="panel panel-info">
 			      <div class="panel-heading">
 			        <div class="panel-btns">
 			          <a href="#" class="minimize">&minus;</a>

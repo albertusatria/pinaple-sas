@@ -1,11 +1,11 @@
 <div class="pageheader">
-    <h2><i class="fa fa-folder-o"></i>Accounts</h2>
+    <h2><i class="fa fa-folder-o"></i>Opening Balance</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
         <li>Master Data</li>
-        <li class="active">Accounts</li>
+        <li class="active">Opening Balance</li>
       </ol>
     </div>
 </div>
@@ -21,7 +21,7 @@
 
  	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3>Opening Balance for period <?php echo $opening_year['name'] ?></h3>
+			<h3 class="panel-title">Opening Balance for period <?php echo $opening_year['name'] ?></h3>
 			<small>This setup is set manually once. Afterward, the opening balance will be automatically set by system.</small>
 		</div>
 
@@ -32,11 +32,15 @@
       		<form id="openingBalanceSetup" action="<?php echo base_url()?>master/opening_balance/save_opening_balance" method="POST">
 	      	<div class="form-group">
 		      	<div class="col-md-6">
+					<?php if ($setup['setup_status'] == 0) : ?>
 		      		<label class="form-label">Opening Balance Date</label>
 		      		<div>
 		    	        <input type="text" placeholder="Opening Balance Date: dd-mm-yyyy" name="opening_date" 
 		    	        	id="tgl_opening" class="form-control" required readonly>
 	    	        </div>
+		    	    <?php else : ?>
+		      		<label class="form-label">Opening Balance Date : <strong> <?php echo date('d-m-Y',strtotime($setup['date_begin'])); ?> </strong> </label>   
+			    	<?php endif; ?>
 		      	</div>
 	      	</div>
 	      	<div class="col-md-12">
@@ -67,7 +71,7 @@
 									<input name="balance_value[<?=$i?>][accounting_id]" type="hidden" value="<?php echo $acc['accounting_id']?>">
 									<td class="account-id" style="vertical-align:middle"><span class="text text-danger"><?php echo $acc['accounting_id']?></span></td>
 									<td class="account-name" colspan="2" style="vertical-align:middle"><strong><?php echo $acc['name']?></strong></td>
-									<td style="vertical-align:middle">
+									<td style="vertical-align:middle;text-align:center">
 										<select name="balance_value[<?=$i?>][amount_type]" class="form-control input-sm">
 											<option value="D" selected>Debet</option>
 											<option value="K">Kredit</option>
@@ -95,10 +99,10 @@
 								<tr class="group-content">
 									<td class="account-id" style="vertical-align:middle"><span class="text text-danger"><?php echo $acc['accounting_id']?></span></td>
 									<td class="account-name" colspan="2" style="vertical-align:middle"><strong><?php echo $acc['name']?></strong></td>
-									<td style="vertical-align:middle">
+									<td style="vertical-align:middle;text-align:center">
 										<?php echo $acc['amount_type'] ?>										
 									</td>
-									<td style="vertical-align:middle" class="amount"><?php echo $acc['amount']?></td>
+									<td style="vertical-align:middle;text-align:center" class="amount">Rp. <?php echo number_format($acc['amount'],'2',',','.') ?></td>
 								</tr>
 								<?php if (isset($acc['children']) && count($acc['children'])) : ?>								
 									<?php foreach ($acc['children'] as $item) : ?>

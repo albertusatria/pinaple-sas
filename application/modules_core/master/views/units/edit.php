@@ -40,7 +40,7 @@
               </div>
             </div>
 
-            <div class="form-group">
+<!--             <div class="form-group">
               <label class="col-sm-3 control-label">Parent</label>
               <div class="col-sm-4">
               <select class="form-control input-sm mb15" name="parent_id">
@@ -51,7 +51,7 @@
                     <?php endforeach ; ?>
               </select>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label class="col-sm-3 control-label">Unit Name<em class="danger">*</em></label>
@@ -60,7 +60,7 @@
               </div>
             </div>
 
-             <div class="form-group">
+<!--              <div class="form-group">
               <label class="col-sm-3 control-label">Category<em class="danger">*</em></label>
               <div class="col-sm-3">
                 <select class="form-control input-sm mb15" name="category" required>
@@ -69,14 +69,14 @@
                     <option <?php if($result->category=="non akademis"){ echo "selected='selected'";}?> value="NON AKADEMIS">NON AKADEMIS</option>
                 </select>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group">
+<!--             <div class="form-group">
               <label class="col-sm-3 control-label">Level<em class="danger">*</em></label>
               <div class="col-sm-1">
                 <input name="stage" type="text" class="form-control" maxlength="1" value="<?php echo $result->stage;?>" required/>
               </div>
-            </div>
+            </div> -->
             
 <!--             <div class="form-group">
               <label class="col-sm-3 control-label">Logo</label>

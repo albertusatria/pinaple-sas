@@ -20,17 +20,15 @@
       <?php endif ; ?>
 
       
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">School Year Management</h3>
-          <p>
-        Don't Touch this data unless you're confident. <br><br>
-            <a href="<?php echo base_url(); ?>initiation/school_year/add" data-title="Add Data" class="tip"><i class="fa fa-plus"></i> Add New School Year</a>
-          </p>
+          <small> Don't Touch this data unless you're confident.</small>
         </div>
         <div class="panel-body">
+          <a href="<?php echo base_url(); ?>initiation/school_year/add" data-title="Add Data" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New School Year</a>
           <div class="table-responsive">
-            <table class="table" id="table1">
+            <table class="table table-striped">
 		                            <thead>
 		                                <tr>
 		                                    <th>#</th>
@@ -38,7 +36,7 @@
 		                                    <th>Start</th>
                                         <th>End</th>
 		                                    <th>Status</th>
-		                                    <th style="width:33%;"></th>
+		                                    <th style="width:10%;"></th>
 		                                </tr>
 		                            </thead>
 		                            <tbody>
@@ -49,14 +47,13 @@
 		                                        <td><?php echo date("d-m-Y",strtotime($result->start)); ?></td>
 		                                        <td><?php echo date("d-m-Y",strtotime($result->end)); ?></td>
 		                                        <td><?php echo strtoupper($result->status); ?></td>
-                                            <td>
+                                            <td style="text-align:center">
 	                                              <a href="<?php echo base_url(); ?>initiation/school_year/edit/<?php echo $result->id; ?>">
 	                                                <i class="fa fa-pencil"></i></a>
-	                                                &nbsp;&nbsp;
-                                               <!-- <a href="<?php echo base_url(); ?>initiation/school_year/list_costs/<?php echo $result->id; ?>">
-                                                  <i class="fa fa-file"></i></a> -->
-                                                  &nbsp;&nbsp;
-	                                                <i class="fa fa-trash-o" onclick="hapus('<?php echo $result->id ?>','<?php echo $result->name ?>')"></i>
+                                                  &nbsp;
+                                                <a href="#" onclick="hapus('<?php echo $result->id ?>','<?php echo $result->name ?>')">
+	                                                <i class="fa fa-trash-o"></i>
+                                                </a>
 		                                        </td>
 		                                    </tr>
 		                                <?php $no++; endforeach ; ?>

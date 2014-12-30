@@ -109,7 +109,19 @@ jQuery(document).ready(function() {
 				else 
 				{
 				 	//bila tidak ketemu
-				 	console.log('tidak ditemukan');
+				 	// console.log('tidak ditemukan');
+				   	jQuery('#searchResult div').remove();
+					jQuery('#searchResult').append(
+						'<div class="col-md-12 students-id">'+							
+							'<div class="people-item">'+
+							  '<div class="media">'+
+							    '<div class="media-body">'+
+							      '<h5 class="student-id text-danger">NIS cannot be found. Please try again using another keyword</h5>'+
+							    '</div>'+
+							  '</div>'+
+							'</div>'+
+						'</div>'
+					);					 	
 				}		    
 	     	},
 		    error: function (data)

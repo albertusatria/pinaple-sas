@@ -1,11 +1,11 @@
 <div class="pageheader">
-    <h2><i class="fa fa-folder-o"></i>Packet</h2>
+    <h2><i class="fa fa-folder-o"></i>Setup Packet Template</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">You are here:</span>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>dashboard">Pinaple SAS</a></li>
         <li>Payment Configuration</li>
-      	<li class="active">Invoice Packet</li>
+      	<li class="active">Setup Packet Template</li>
       </ol>
     </div>
 </div>
@@ -13,11 +13,11 @@
 
 	<div class="row">
 		<div class="col-md-6">
-		  <div class="panel panel-default">
+		  <div class="panel panel-primary">
 		  
 		    <div class="panel-heading">
-		      <h4 class="panel-title">List Packet</h4>
-		      <p>List of all available Packet</p>
+		      <h4 class="panel-title">List Packet Template</h4>
+		      <small>List of all template</small>
 		    </div>
 			<!-- Table Results -->
 			<div class="panel panel-default">
@@ -39,7 +39,7 @@
 					<?php endif;?>
 					<div class="row row-pad-5">        
 				      <div class="table-responsive">
-				      <table class="table table-hidaction table-hover mb30">
+				      <table class="table table-hidaction table-striped table-hover mb30">
 				        <thead>
 				          <tr>
 				            <th width="10%">No.</th>
@@ -93,8 +93,8 @@
 			        <div class="panel-btns">
 			          <a href="#" class="minimize">&minus;</a>
 			        </div>
-			        <h4 class="panel-title">New Packet Form</h4>
-			        <p>Please provide the name and description for new packet.</p>		      			        
+			        <h4 class="panel-title">New Template Form</h4>
+			        <small>Please provide the name and description for new packet.</small>		      			        
 			      </div>
 			      <div class="panel-body">
 					<?php if ($message != null ) : ?>
@@ -128,13 +128,13 @@
 					    <select name="unit_id" id="jenjangSekolah" class="form-control input-sm" required>
 					     <option value="" selected="selected">Choose School Units</option>
 					    </select>
-					    <label class="error" for="jenjangSekolah"></label>
+					    <!-- <label class="error" for="jenjangSekolah"></label> -->
 					  </div>
 					   <div class="col-sm-4">
 					    <select name="stage" id="jenjangKelas" class="form-control input-sm" required>
 					      <option value="" selected="selected">Choose Units Level</option>
 					    </select>
-					    <label class="error" for="jenjangKelas"></label>
+					    <!-- <label class="error" for="jenjangKelas"></label> -->
 					  </div>					  
 					</div> 			        
 					

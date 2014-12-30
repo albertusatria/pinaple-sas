@@ -11,6 +11,7 @@ class Journal_entry extends Operator_base {
 		// load portal
 		$this->load->helper('text');
 		$this->load->model('m_entry');
+		$this->load->model('master/m_units');
 		$this->load->model('initiation/m_school_year');
 		// page title
 		$this->page_title();
@@ -32,7 +33,8 @@ class Journal_entry extends Operator_base {
 		// user detail
 		$data['user']				= $this->user;
 		$data['message'] = $this->session->flashdata('message');
-		
+		// get portal list
+		$data['ls_unit']	= $this->m_units->get_all_unit_academic();
 		$data['active_school_year'] = $this->m_school_year->get_active_year();		
 		$data['layout'] = "expenses/journal-entry-record/list";
 		$data['javascript'] = "expenses/journal-entry-record/javascript/list";
