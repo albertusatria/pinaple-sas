@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Result Report Stylesheet
+/* General Result Report Stylesheet
 /*----------------------------------------------------------------------------*/
 
 /* Panel Heading */
@@ -63,4 +63,18 @@
 {
 	display: inline-block !important;
 	margin: 80px 0 0 0 !important;
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* Cashflow Result Report Stylesheet
+/*----------------------------------------------------------------------------*/
+.kas-saldo .bank-name,
+.kas-saldo .bank-value
+{
+	background: #f5f5f5;
+}
+.kas-saldo .bank-name
+{
+	text-transform: uppercase;
 }
