@@ -37,7 +37,7 @@
 								<h4>Laporan Total Pengeluaran Harian</h4>
 							<?php endif;?>
 							<h4>SMP BUDI UTAMA</h4>
-							<h4 class="range">Periode 31 Desember 2014 <label class="periode-range"></label></h4>
+							<h4 class="range">Periode <?php echo $periode ?> <label class="periode-range"></label></h4>
 						</div>
 					</div>
 					<div class="row">
@@ -49,15 +49,17 @@
 										<th width="5%">
 											No
 										</th>
-										<th width="40%">
+										<th width="60%">
 											Subjek
 										</th>
-										<th width="55%">
-											 Nominal
+										<th width="35%">
+											Nominal
 										</th>
 									</tr>
 		        				</thead>
 		        				<tbody>
+									<?php if($report_title == 'earns'):?>
+
 		        					<tr class="group-item">
 		        						<td rowspan="4">1</td>
 		        						<td colspan="2"><strong>Seragam</strong></td>
@@ -97,6 +99,50 @@
 		        							<span class="price" data-value="0" readonly>0</span>
 		        						</td>
 		        					</tr>		        					
+
+
+									<?php else :?>
+
+										<?php $num = 1; $pengeluaran = 0; foreach ($rs_accounts as $acc) : ?>
+
+											<?php if ($acc['tipe'] == 'PENGELUARAN') : ?>
+
+												<?php if (isset($acc['children']) && count($acc['children'])) : ?>
+													<!-- headerf first -->
+						        					<tr class="group-item">
+						        						<td rowspan="<?php echo (count($acc['children'])+1); ?>"><?php echo $num ?></td>
+						        						<td colspan="2"><strong><?php echo $acc['name']?></strong></td>
+						        					</tr>
+													<!-- calling child -->
+													<?php foreach ($acc['children'] as $item) : ?>
+						        					<tr class="single-item">
+						        						<td><?php echo $item['name']?></td>		        					
+						        						<td><span class="price" data-value="<?php echo ($acc['debet'] - $acc['kredit']) ?>" readonly>
+						        							<?php echo ($acc['debet'] - $acc['kredit']) ?> </span>
+							        						<?php $pengeluaran = $pengeluaran + ($item['debet'] - $item['kredit']) ?>
+						        						</td>
+						        					</tr>
+													<?php endforeach; ?>
+	
+												<?php else : ?>
+													<!-- don't have children -->
+						        					<tr class="single-item">
+						        						<td><?php echo $num ?></td>
+						        						<td><?php echo $acc['name']?></td>		        					
+						        						<td><span class="price" data-value="<?php echo ($acc['debet'] - $acc['kredit']) ?>" readonly>
+						        							<?php echo ($acc['debet'] - $acc['kredit']) ?> </span>
+							        						<?php $pengeluaran = $pengeluaran + ($acc['debet'] - $acc['kredit']) ?>
+						        						</td>
+						        					</tr>
+												<?php endif; ?>
+
+											<?php endif; ?>
+
+											<?php $num++; ?>
+
+										<?php endforeach; ?> <!-- $rs_accounts -->
+
+									<?php endif;?>
 		        				</tbody>
 		        				<tfoot>
 		        					<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -108,7 +154,11 @@
 												Total Pengeluaran Harian SMP
 											<?php endif;?>										
 										</td>
-			        					<td><span class="price" data-value="2649500" readonly>2649500</span></td>
+											<?php if($report_title == 'earns'):?>
+					        					<td><span class="price" data-value="2649500" readonly>2649500</span></td>
+											<?php else :?>
+					        					<td><span class="price" data-value="<?php echo $pengeluaran ?>" readonly><?php echo $pengeluaran ?></span></td>
+											<?php endif;?>										
 		        					</tr>			        					
 		        				</tfoot>
 		        			</table>

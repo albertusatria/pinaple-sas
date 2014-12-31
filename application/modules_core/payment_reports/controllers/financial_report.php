@@ -65,8 +65,6 @@ class Financial_report extends Operator_base {
 		$start = $start_year.'-'.$start_month.'-'.$start_day;
 		$end = $end_year.'-'.$end_month.'-'.$end_day;
 		// echo $start; echo "<br>"; echo $end; echo "<br>";
-		$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
-		$data['periode'] = $datestring;
 		// echo "<pre>"; print_r($this->input->post()); die;
 
 		// two of these is a must
@@ -78,10 +76,12 @@ class Financial_report extends Operator_base {
 		$data['message'] = $this->session->flashdata('message');
 		
 		$data['id']	= $id;
-		// get active school year
-		//$data['active_school_year'] = $this->m_school_year->get_active_year();		
+
+
 		if(($id == 'a01') || ($id == 'a05'))
 		{
+			$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+			$data['periode'] = $datestring;
 			//sum all journal group by acount code
 			$data['layout'] = "payment_reports/financial-report/result_profit_loss";			
 		}
@@ -97,6 +97,8 @@ class Financial_report extends Operator_base {
 			}
 			else
 			{
+				$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+				$data['periode'] = $datestring;
 				$data['report_title'] = 'loss';
 			}
 			$data['layout'] = "payment_reports/financial-report/result_single";
