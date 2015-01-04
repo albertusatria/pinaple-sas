@@ -60,45 +60,80 @@
 		        				<tbody>
 									<?php if($report_title == 'earns'):?>
 
-		        					<tr class="group-item">
-		        						<td rowspan="4">1</td>
-		        						<td colspan="2"><strong>Seragam</strong></td>
-		        					</tr>
-		        					<tr class="single-item">
-		        						<td>Siswa Baru (14/15)</td>		        					
-		        						<td>
-		        							<span class="price" data-value="100000" readonly>100000</span>
-		        						</td>
-		        					</tr>
-		        					<tr class="single-item">
-		        						<td>Siswa Baru (15/16)</td>		        					
-		        						<td>
-		        							<span class="price" data-value="100000" readonly>100000</span>
-		        						</td>
-		        					</tr>
-		        					<tr class="total-item">
-		        						<td>&nbsp;</td>		        					
-		        						<td class="amount">
-		        							<span class="price" data-value="200000" readonly>200000</span>
-		        						</td>
-		        					</tr>
-		        					<!-- /group-item-->
-		        					<tr class="group-item">
-		        						<td rowspan="3">2</td>
-		        						<td colspan="2"><strong>Pendapatan Lain-lain</strong></td>
-		        					</tr>
-		        					<tr class="single-item">
-		        						<td>Pengembalian Fieldtrip</td>				
-		        						<td>
-		        							<span class="price" data-value="0" readonly>0</span>
-		        						</td>
-		        					</tr>
-		        					<tr class="total-item">
-		        						<td>&nbsp;</td>		        					
-		        						<td class="amount">
-		        							<span class="price" data-value="0" readonly>0</span>
-		        						</td>
-		        					</tr>		        					
+
+										<?php $num = 1; $pendapatan = 0; foreach ($profit as $acc) : ?>
+
+											<?php if ($acc['tipe'] == 'PENDAPATAN') : ?>
+
+												<?php if (isset($acc['children']) && count($acc['children'])) : ?>
+													<!-- headerf first -->
+						        					<tr class="group-item">
+						        						<td rowspan="<?php echo (count($acc['children'])+1); ?>"><?php echo $num ?></td>
+						        						<td colspan="2"><strong><?php echo $acc['name']?></strong></td>
+						        					</tr>
+													<!-- calling child -->
+													<?php foreach ($acc['children'] as $item) : ?>
+						        					<tr class="single-item">
+						        						<td><?php echo $item['name']?></td>		        					
+						        						<td><span class="price" data-value="<?php echo ($item['kredit'] - $item['debet']) ?>" readonly>
+						        							<?php echo ($item['kredit'] - $item['debet']) ?> </span>
+							        						<?php $pendapatan = $pendapatan + ($item['kredit'] - $item['debet']) ?>
+						        						</td>
+						        					</tr>
+													<?php endforeach; ?>
+												<?php else : ?>
+													<!-- don't have children -->
+
+														<!-- cek if have period -->
+														<?php if (isset($acc['period']) && count($acc['period'])) : ?>
+															<!-- headerf first -->
+								        					<tr class="group-item">
+								        						<td rowspan="<?php echo (count($acc['period'])+2); ?>"><?php echo $num ?></td>
+								        						<td colspan="2"><strong><?php echo $acc['name']?></strong></td>
+								        					</tr>
+															<!-- calling child -->
+															<?php foreach ($acc['period'] as $item) : ?>
+																	<?php if (isset($item['kelas']) && count($item['kelas'])) : ?>
+											        					<tr class="single-item">
+											        						<td colspan='2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $item['period_year']?></td>		        					
+											        					</tr>																
+																		<!-- calling child -->
+																		<?php foreach ($item['kelas'] as $x) : ?>
+											        					<tr class="single-item">
+											        						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $x['nama']?></td>		        					
+											        						<td><span class="price" data-value="<?php echo ($x['kredit'] - $x['debet']) ?>" readonly>
+											        							<?php echo ($x['kredit'] - $x['debet']) ?> </span>
+												        						<?php $pendapatan = $pendapatan + ($x['kredit'] - $x['debet']) ?>
+											        						</td>
+											        					</tr>
+																		<?php endforeach; ?>
+																	<?php else : ?>
+											        					<tr class="single-item">
+											        						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $item['period_year']?></td>		        					
+											        						<td><span class="price" data-value="<?php echo ($item['kredit'] - $item['debet']) ?>" readonly>
+											        							<?php echo ($item['kredit'] - $item['debet']) ?> </span>
+												        						<?php $pendapatan = $pendapatan + ($item['kredit'] - $item['debet']) ?>
+											        						</td>
+											        					</tr>																
+																	<?php endif; ?>
+															<?php endforeach; ?>
+															<!-- cek if have class -->
+														<?php else : ?>
+								        					<tr class="single-item">
+								        						<td><?php echo $num ?></td>
+								        						<td><?php echo $acc['name']?></td>		        					
+								        						<td><span class="price" data-value="<?php echo ($acc['kredit'] - $acc['debet']) ?>" readonly>
+								        							<?php echo ($acc['kredit'] - $acc['debet']) ?> </span>
+									        						<?php $pendapatan = $pendapatan + ($acc['kredit'] - $acc['debet']) ?>
+								        						</td>
+								        					</tr>														
+														<?php endif; ?>
+												<?php endif; ?>
+												<?php $num++; ?>
+											<?php endif; ?>
+
+
+										<?php endforeach; ?> <!-- $rs_accounts -->     					
 
 
 									<?php else :?>
@@ -117,8 +152,8 @@
 													<?php foreach ($acc['children'] as $item) : ?>
 						        					<tr class="single-item">
 						        						<td><?php echo $item['name']?></td>		        					
-						        						<td><span class="price" data-value="<?php echo ($acc['debet'] - $acc['kredit']) ?>" readonly>
-						        							<?php echo ($acc['debet'] - $acc['kredit']) ?> </span>
+						        						<td><span class="price" data-value="<?php echo ($item['debet'] - $item['kredit']) ?>" readonly>
+						        							<?php echo ($item['debet'] - $item['kredit']) ?> </span>
 							        						<?php $pengeluaran = $pengeluaran + ($item['debet'] - $item['kredit']) ?>
 						        						</td>
 						        					</tr>
@@ -135,10 +170,10 @@
 						        						</td>
 						        					</tr>
 												<?php endif; ?>
+											<?php $num++; ?>
 
 											<?php endif; ?>
 
-											<?php $num++; ?>
 
 										<?php endforeach; ?> <!-- $rs_accounts -->
 
@@ -155,7 +190,7 @@
 											<?php endif;?>										
 										</td>
 											<?php if($report_title == 'earns'):?>
-					        					<td><span class="price" data-value="2649500" readonly>2649500</span></td>
+					        					<td><span class="price" data-value="<?php echo $pendapatan ?>" readonly><?php echo $pendapatan ?></span></td>
 											<?php else :?>
 					        					<td><span class="price" data-value="<?php echo $pengeluaran ?>" readonly><?php echo $pengeluaran ?></span></td>
 											<?php endif;?>										

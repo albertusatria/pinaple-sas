@@ -32,7 +32,7 @@ class Journal_entry extends Operator_base {
 		$data['menu']				= $this->menu();
 		// user detail
 		$data['user']				= $this->user;
-		$data['message'] = $this->session->flashdata('message');
+		$data['message'] 			= $this->session->flashdata('message');
 		// get portal list
 		$data['ls_unit']	= $this->m_units->get_all_unit_academic();
 		$data['active_school_year'] = $this->m_school_year->get_active_year();		
@@ -47,6 +47,10 @@ class Journal_entry extends Operator_base {
 			$value['month'] = date('m',strtotime($value['transaction_date']));;
 			$data = $this->m_entry->save_entry($value);
 		}
+		$data = array(
+			'message'			=> 'Data has been successfully recorded'
+		);
+		$this->session->set_flashdata($data);
 		header('Content-Type: application/json');
 	    echo json_encode($data);		
 	}

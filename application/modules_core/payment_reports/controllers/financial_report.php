@@ -48,25 +48,26 @@ class Financial_report extends Operator_base {
 		// don't forget to give user_auth to every function before
 		$this->check_auth('R');
 
-		$id = $this->input->post('report-type');
-		// echo $id; die;
+		// $id = $this->input->post('report-type');
+		// // echo $id; die;
 
-		$datestring = $this->input->post('date-range');
-		$exp = explode(" ", $datestring); //1 December 2014 - 2 December 2014 
-		//convert Month
-		$start_day = $exp[0];
-		$start_month = $this->convert_month($exp[1]);
-		$start_year = $exp[2];
+		// $datestring = $this->input->post('date-range');
+		// // echo $datestring; die;
 
-		$end_day = $exp[4];
-		$end_month = $this-> convert_month($exp[5]);
-		$end_year = $exp[6];
+		// $exp = explode(" ", $datestring); //1 December 2014 - 2 December 2014 
+		// //convert Month
+		// $start_day = $exp[0];
+		// $start_month = $this->convert_month($exp[1]);
+		// $start_year = $exp[2];
 
-		$start = $start_year.'-'.$start_month.'-'.$start_day;
-		$end = $end_year.'-'.$end_month.'-'.$end_day;
+		// $end_day = $exp[4];
+		// $end_month = $this-> convert_month($exp[5]);
+		// $end_year = $exp[6];
+
+		// $start = $start_year.'-'.$start_month.'-'.$start_day;
+		// $end = $end_year.'-'.$end_month.'-'.$end_day;
 		// echo $start; echo "<br>"; echo $end; echo "<br>";
 		// echo "<pre>"; print_r($this->input->post()); die;
-
 		// two of these is a must
 		// menu
 		$data['menu']	 = $this->menu();
@@ -75,28 +76,52 @@ class Financial_report extends Operator_base {
 		//message
 		$data['message'] = $this->session->flashdata('message');
 		
-		$data['id']	= $id;
+		// $data['id']	= $id;
+		$start = '2014-12-01';
+		$end = '2015-01-31';
+		$datestring = '01 December 2014 - 31 January 2015';
 
+		$id = 'a04';
+		$data['id'] = $id;
 
-		if(($id == 'a01') || ($id == 'a05'))
+		if($id == 'a01')
 		{
 			$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
 			$data['periode'] = $datestring;
 			//sum all journal group by acount code
 			$data['layout'] = "payment_reports/financial-report/result_profit_loss";			
 		}
+		elseif($id == 'a05')
+		{
+			//laporan tahunan
+			$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+			$data['periode'] = $datestring;
+			//sum all journal group by acount code
+			$data['layout'] = "payment_reports/financial-report/result_profit_loss";						
+		}
 		elseif($id == 'a04')
 		{
+			//cash hari ini
+			// $data['total_cash'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+			//transfer
+			$data['cash_out'] = $this->m_account_report->get_summary_of_cash_out($start,$end);
+			//pendapatan dan pengeluaran total
+			$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+			$data['periode'] = $datestring;
 			$data['layout'] = "payment_reports/financial-report/result_cashflow";
 		}
 		else
 		{
 			if($id == 'a02')
 			{
+				$data['profit'] = $this->m_account_report->get_summary_of_profit($start,$end);
+				$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+				$data['periode'] = $datestring;
 				$data['report_title'] = 'earns';
 			}
 			else
 			{
+				$data['profit'] = $this->m_account_report->get_summary_of_profit($start,$end);
 				$data['rs_accounts'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
 				$data['periode'] = $datestring;
 				$data['report_title'] = 'loss';
