@@ -114,6 +114,8 @@ var neracaSaldo = function () {
 		     	success: function(data)
 		     	{
 		     		console.log('berhasil');
+	                window.location.replace(CI_ROOT + 'expenses/journal_entry');
+	                return false;
 		     	},
 			    error: function (data)
 			    {
