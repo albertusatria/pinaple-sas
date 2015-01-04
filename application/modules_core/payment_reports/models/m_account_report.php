@@ -166,36 +166,31 @@ class M_account_report extends CI_Model {
         return $arr;
     }
 
-    public function get_summary_of_cash_before_report() {
-        // input awal + cashflow waktu lebih besar dari input awal / neraca saldo
-        // $this->db->order_by('tipe','accounting_id');
-        $sql = "SELECT a.*,
+    public function get_summary_of_cash_before_report($start,$end) {
+        // $start = '2015-01-01';
+        //tahun buka
+        $sql = "SELECT min(id)'id' FROM school_year WHERE opening = 'YA' LIMIT 1";
+        $query = $this->db->query($sql)->row_array();
+        $id = $query['id'];
+
+        //get_begin_date buka
+        $sql = "SELECT date_begin FROM accounting_opening_balance WHERE accounting_year = '$id' LIMIT 1";
+        $query = $this->db->query($sql)->row_array();
+        $begin = $query['date_begin'];
+
+        $sql = "SELECT a.*, 
                 SUM(IF(j.amount_type='D',j.amount,0))'debet',
                 SUM(IF(j.amount_type='K',j.amount,0))'kredit'
-                FROM accounting_account a 
+                FROM accounting_opening_balance a
                 LEFT JOIN (SELECT * FROM accounting_general_journal 
-                            WHERE DATE(transaction_date) >= '$start' AND DATE(transaction_date) <= '$end') j ON a.accounting_id = j.accounting_code
-                WHERE tipe = 'AKTIVA'
+                            WHERE DATE(transaction_date) >= '$begin' AND DATE(transaction_date) < '$start') j ON a.accounting_id = j.accounting_code
+                WHERE a.accounting_year = '$id' AND 
+                    (a.accounting_id = 'A0101' OR a.accounting_id = 'A0102' OR a.accounting_id = 'A0103')
                 GROUP BY a.accounting_id";
         $accounting = $this->db->query($sql)->result_array();
-        // $accounting = $this->db->query($sql)->result_array();
-        // $accounting = $this->db->get('accounting_account')->result_array();
-        // echo '<pre>'; print_r($accounting->result_array());die;
-        $arr = array();
-        foreach ($accounting as $acc) {
-            if ($acc['parent_id'] == NULL) {
-                // This page has no parent
-                $arr[$acc['accounting_id']] = $acc;
-            }
-        }
-        foreach ($accounting as $acc) {
-            if ($acc['parent_id'] != NULL) {
-                // This is a child page
-                $arr[$acc['parent_id']]['children'][] = $acc;
-            }
-        }
-        // echo "<pre>"; print_r($arr);die;
-        return $arr;
+        // echo "<pre>"; print_r($accounting);die;
+        return $accounting;
+
     }
 
 }

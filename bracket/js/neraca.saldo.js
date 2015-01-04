@@ -102,6 +102,7 @@ var neracaSaldo = function () {
 						item[number]['amount'] = jQuery(this).find('td.activa-credit').attr("data-value");
 					}
 					item[number]['unit_id'] = jQuery('#journal-unit').val();
+					item[number]['is_transfer'] = jQuery('#journal-type').val();
 		            console.log(JSON.stringify(item[number]));      
 		            number = number + 1;
 				}
