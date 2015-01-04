@@ -4,42 +4,46 @@
   * Description	: Block for Student Invoice History
  */
 ?>
+<?php if(empty($ls_invoices)){ ?>
 <table class="table table-striped table-bordered table-hover table-students" id="datatable_orders">
-<thead>
-<tr role="row" class="heading">
-	<th width="2%">
-		 No <!--<input type="checkbox" class="group-checkable">-->
-	</th>
-	<th width="26%">
-		 Name
-	</th>
-	<th width="2%">
-		 Qty
-	</th>
-	<th width="16%">
-		 Amount
-	</th>
-	<th width="16%">
-		 Scholarship
-	</th>
-	<th width="16%">
-		 Paid
-	</th>
-	<th width="19%">
-		 Last Paid Date
-	</th>
-	<th width="3%">
-		 Delete
-	</th>
-</tr>
-</thead>
-<tbody>
-	<?php if(empty($ls_invoices)){ ?>
-   		<tr><td colspan="8" align="center"> -- there is no invoices -- </td></tr>
-   	<?php }else{ ?>	
-        <?php $no = 1; foreach ($ls_invoices as $result): ?>
-          <tr>
-          	<td><?php echo $no; ?><!--<input type="checkbox" class="checkable">--></td>
+		<tr><td colspan="8" align="center"> -- there is no invoices -- </td></tr>
+</table>
+	<?php }else{ $py=''?>	
+	<table class="table table-striped table-bordered table-hover table-students" id="datatable_orders">
+    <?php $no = 1; foreach ($ls_invoices as $result): ?>
+      <?php if($py!=$result->period_year){ $py=$result->period_year; $no = 1;?>
+        <tr>
+          	<th colspan="8">School Year: <?php echo $py; ?><span style="float:right;"><?php echo @$result->class_level; ?> - <?php echo @$result->class_name; ?></span></th>
+        </tr>
+		<tr role="row" class="heading">
+			<th width="2%">
+				 No <!--<input type="checkbox" class="group-checkable">-->
+			</th>
+			<th width="26%">
+				 Name
+			</th>
+			<th width="2%">
+				 Qty
+			</th>
+			<th width="16%">
+				 Amount
+			</th>
+			<th width="16%">
+				 Scholarship
+			</th>
+			<th width="16%">
+				 Paid
+			</th>
+			<th width="19%">
+				 Last Paid Date
+			</th>
+			<th width="3%">
+				 Delete
+			</th>
+		</tr>
+      <?php } ?>
+      	<tr>
+	      	<td><?php echo $no; ?><!--<input type="checkbox" class="checkable">--></td>
 			<td><?php echo @$result->item_name; if($result->period_name){ echo " (".@$result->period_name.")";} ?></td>
 			<td><?php echo @$result->qty; ?></td>
 			<td align="right"><span style="float:left;">Rp </span><?php echo number_format(@$result->amount,2,',','.'); ?></td>
@@ -59,8 +63,7 @@
 				<i class="fa fa-trash-o"></i></a>
 				<?php } ?>
 			</td>
-          </tr>
-         <?php $no++; endforeach ; ?>
-   	<?php } ?>
-</tbody>
+    	</tr>
+    <?php $no++; endforeach ; ?>
 </table>
+<?php } ?>

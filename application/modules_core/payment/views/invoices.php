@@ -45,10 +45,10 @@
 						<thead>
 						<tr role="row" class="heading">
 							<th width="2%">
-								<input type="checkbox" class="group-checkable">
+								 <input type="checkbox" class="group-checkable">
 							</th>
 							<th width="10%">
-								Invoice Order&nbsp;#
+								 Invoice Order&nbsp;#
 							</th>
 							<th width="10%">
 								 Invoice&nbsp;Date
@@ -125,8 +125,7 @@
 						</div>
 					</div>										
 		        </div>
-		        <!-- /panel-body -->
-		        
+		        <!-- /panel-body -->	        
 			</div>
 			<!-- /panel -->
   		</div>
