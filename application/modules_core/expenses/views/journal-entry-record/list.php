@@ -69,6 +69,19 @@
             </div>        
 
           </div>
+          <div class="row" style="margin-top:5px">
+            <div class="col-sm-5">             
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Type</label>
+                <div class="col-sm-8">
+                  <select id="journal-type" class="form-control input-sm">
+                    <option value="0">NOT TRANSFER</option>
+                    <option value="1">TRANSFER</option>
+                  </select>
+                </div>
+              </div>
+            </div>  
+          </div>
         	<hr/>
         	<div class="table-responsive">
 	            <table class="table table-journal" id="tableJournalList">

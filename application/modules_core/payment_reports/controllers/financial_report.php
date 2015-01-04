@@ -102,7 +102,7 @@ class Financial_report extends Operator_base {
 		elseif($id == 'a04')
 		{
 			//cash hari ini
-			// $data['total_cash'] = $this->m_account_report->get_summary_of_profit_loss($start,$end);
+			$data['total_cash'] = $this->m_account_report->get_summary_of_cash_before_report($start,$end);
 			//transfer
 			$data['cash_out'] = $this->m_account_report->get_summary_of_cash_out($start,$end);
 			//pendapatan dan pengeluaran total
