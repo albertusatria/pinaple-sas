@@ -23,6 +23,10 @@ em.danger{
 	float: left;
 }
 /* Page Header */
+.headerbar
+{
+	height: 50px;
+}
 .pageheader h2{
 	max-width: 300px;
 	margin-left: 50px;
