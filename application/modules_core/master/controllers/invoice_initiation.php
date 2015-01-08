@@ -69,12 +69,12 @@ class Invoice_initiation extends Operator_base {
 			$data = array(
 				'name'				=> $this->input->post('name'),
 				'description'		=> $this->input->post('description'),
-				'unit_id'			=> $this->input->post('stage'),
+				'unit_id'			=> $this->input->post('unit_id'),
 				'for_new_student'	=> $this->input->post('for_new_student'),
-				'stage'				=> $this->input->post('unit_id'),
+				'stage'				=> $this->input->post('stage'),
 				'school_year_id'=> $sy_id
 			);
-		
+			
 			$this->m_packets_initiation->add_packet($data);
 			$data['message'] = "Data successfully added";
 			$this->session->set_flashdata($data);
@@ -154,9 +154,9 @@ class Invoice_initiation extends Operator_base {
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
 				'description'	=> $this->input->post('description'),
-				'unit_id'			=> $this->input->post('stage'),
+				'unit_id'			=> $this->input->post('unit_id'),
 				'for_new_student'	=> $this->input->post('for_new_student'),
-				'stage'				=> $this->input->post('unit_id'),
+				'stage'				=> $this->input->post('stage'),
 			);
 		
 			$this->m_packets_initiation->edit_packet($data);
@@ -169,9 +169,9 @@ class Invoice_initiation extends Operator_base {
 				'id'			=> $this->input->post('id'),
 				'name'			=> $this->input->post('name'),
 				'description'	=> $this->input->post('description'),
-				'unit_id'			=> $this->input->post('stage'),
+				'unit_id'			=> $this->input->post('unit_id'),
 				'for_new_student'	=> $this->input->post('for_new_student'),
-				'stage'				=> $this->input->post('unit_id'),
+				'stage'				=> $this->input->post('stage'),
 			);
 			$this->session->set_flashdata($data);
 			redirect('master/invoice_initiation/edit/'.$this->input->post('id'));
@@ -184,10 +184,10 @@ class Invoice_initiation extends Operator_base {
 		$this->check_auth('D');
 		
 		$params['id']=$id;
-		$this->m_packets->delete_packet($params);
+		$this->m_packets->delete_packet_year($params);
 		$data['message'] = "Data successfully deleted";
 		$this->session->set_flashdata($data);
-		redirect('master/invoice_packet');
+		redirect('master/invoice_initiation');
 	}
 	
 	public function check_duplicate_packet($packet_name)
@@ -324,7 +324,7 @@ class Invoice_initiation extends Operator_base {
 		$this->m_packet_items->delete_packet_items($params);
 		$data['message'] = "Data successfully deleted";
 		$this->session->set_flashdata($data);
-		redirect('master/invoice_packet/list_items/'.$p_id);
+		redirect('master/invoice_initiation/list_items/'.$p_id);
 	}
 
 	public function get_detail_of_payment_item() {

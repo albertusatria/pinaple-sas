@@ -58,4 +58,8 @@ class m_packets extends CI_Model {
        $this->db->delete('packets',$params,array('id'=>$params['id']));
     }
 
+     function delete_packet_year($params) {
+       $this->db->delete('packets_year',$params,array('id'=>$params['id']));
+    }
+
 }

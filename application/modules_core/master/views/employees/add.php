@@ -75,7 +75,8 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Birthday</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" id="datepicker_lahir" />
+                <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_lahir"
+                value="<?php $d=$this->session->flashdata('dob');if(!empty($d)){echo date("d-m-Y",strtotime($d));}?>" />
                 <input type="hidden" name="dob" id="h_lahir" value="<?php echo $this->session->flashdata('dob');?>">
                 <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
               </div>
@@ -197,7 +198,8 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">Start Date *</label>
               <div class="col-sm-2">
-                <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_mulai" />
+                <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_mulai" 
+                value="<?php $d=$this->session->flashdata('start_date');if(!empty($d)){echo date("d-m-Y",strtotime($d));}?>"/>
                 <input type="hidden" name="start_date" id="h_mulai" value="<?php echo $this->session->flashdata('start_date');?>">
                 <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
               </div>
