@@ -44,7 +44,8 @@
        <div class="form-group">
           <label class="col-sm-3 control-label">Start *</label>
           <div class="col-sm-2">
-            <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_mulai" value="" required/>
+            <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_mulai" 
+            value="<?php $s=$this->session->flashdata('start');if(!empty($s)){echo date("d-m-Y",strtotime($s));}?>" required/>
             <input type="hidden" name="start" id="h_mulai" value="<?php echo $this->session->flashdata('start');?>">
             <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
           </div>
@@ -53,7 +54,8 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">End *</label>
           <div class="col-sm-2">
-            <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_akhir" value="" required/>
+            <input type="text" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" id="datepicker_akhir" 
+            value="<?php $e=$this->session->flashdata('end');if(!empty($e)){echo date("d-m-Y",strtotime($e));}?>" required/>
             <input type="hidden" name="end" id="h_akhir" value="<?php echo $this->session->flashdata('end');?>">
             <!-- <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
           </div>

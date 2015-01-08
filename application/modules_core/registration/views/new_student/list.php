@@ -249,7 +249,7 @@
                 </select>
               </div>
               <div class="col-sm-1">
-                <input type="text" id="tahun_prestasi" name="siswa_prestasi<?php echo $a?>[tahun_prestasi]" class="form-control" placeholder="Year.." />
+                <input type="text" id="tahun_prestasi" name="siswa_prestasi<?php echo $a?>[tahun_prestasi]" class="form-control" placeholder="Year.." maxlength="4"/>
               </div>
 
               </div>
