@@ -40,6 +40,8 @@ var Report = function () {
 	            },
 	            function (start, end) {
 	                jQuery('#reportrange span').html(start.format('DD MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
+	                jQuery('#date-choosen-report').val(start.format('DD MMMM YYYY')+' - '+end.format('D MMMM YYYY'));
+	                console.log( jQuery('#date-choosen-report').val());
 	            }
 	        );
 	        
@@ -65,7 +67,8 @@ var Report = function () {
 			jQuery('.daterangepicker').find('.ranges li').hide();
 			jQuery('.daterangepicker').find('.ranges li:nth-child(1), .ranges li:nth-child(2), .ranges li:nth-child(8)').show();		
 			jQuery('.daterangepicker').find('.ranges li:nth-child(1)').show().click();						
-			jQuery('.range-report').show();			
+			jQuery('.range-report').show();
+			jQuery('.panel-footer').find('.col-sm-7').show();
 		}
 		else if(selectedReportIs == "a01")
 		{
@@ -75,6 +78,7 @@ var Report = function () {
 			jQuery('.daterangepicker').find('.ranges li:nth-child(5), .ranges li:nth-child(6), .ranges li:nth-child(8)').show();		
 			jQuery('.daterangepicker').find('.ranges li:nth-child(5)').show().click();						
 			jQuery('.range-report').show();			
+			jQuery('.panel-footer').find('.col-sm-7').show();
 		}
 		else if(selectedReportIs == "a05")
 		{
@@ -83,7 +87,8 @@ var Report = function () {
 			jQuery('.daterangepicker').find('.ranges li').hide();
 			jQuery('.daterangepicker').find('.ranges li:nth-child(7), .ranges li:nth-child(8)').show();		
 			jQuery('.daterangepicker').find('.ranges li:nth-child(7)').show().click();						
-			jQuery('.range-report').show();			
+			jQuery('.range-report').show();		
+			jQuery('.panel-footer').find('.col-sm-7').show();	
 		}				
 		else
 		{
@@ -95,7 +100,6 @@ var Report = function () {
 		jQuery('#date-choosen-report').val(jQuery('#reportrange').find('span').text());
 		// generateReport(selectedReportIs);
 	}
-	
 	
 	var generateReport = function (params) {
 		var daterange = jQuery('#reportrange').find('span').text();

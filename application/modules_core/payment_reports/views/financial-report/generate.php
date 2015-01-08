@@ -70,7 +70,7 @@
 				
 				<div class="panel-footer">
 	                <div class="row">
-						<div class="col-sm-7 col-sm-offset-5">
+						<div class="col-sm-7 col-sm-offset-5" style="display:none;">
 							<button class="btn btn-primary" id="generate-report">Generate</button>
 							<button type="reset" class="btn btn-default">Reset</button>
 						</div>

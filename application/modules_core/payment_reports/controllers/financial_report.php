@@ -48,26 +48,26 @@ class Financial_report extends Operator_base {
 		// don't forget to give user_auth to every function before
 		$this->check_auth('R');
 
-		// $id = $this->input->post('report-type');
+		$id = $this->input->post('report-type');
 		// // echo $id; die;
 
-		// $datestring = $this->input->post('date-range');
+		$datestring = $this->input->post('date-range');
 		// // echo $datestring; die;
 
-		// $exp = explode(" ", $datestring); //1 December 2014 - 2 December 2014 
+		$exp = explode(" ", $datestring); //1 December 2014 - 2 December 2014 
 		// //convert Month
-		// $start_day = $exp[0];
-		// $start_month = $this->convert_month($exp[1]);
-		// $start_year = $exp[2];
+		$start_day = $exp[0];
+		$start_month = $this->convert_month($exp[1]);
+		$start_year = $exp[2];
 
-		// $end_day = $exp[4];
-		// $end_month = $this-> convert_month($exp[5]);
-		// $end_year = $exp[6];
+		$end_day = $exp[4];
+		$end_month = $this-> convert_month($exp[5]);
+		$end_year = $exp[6];
 
-		// $start = $start_year.'-'.$start_month.'-'.$start_day;
-		// $end = $end_year.'-'.$end_month.'-'.$end_day;
-		// echo $start; echo "<br>"; echo $end; echo "<br>";
-		// echo "<pre>"; print_r($this->input->post()); die;
+		$start = $start_year.'-'.$start_month.'-'.$start_day;
+		$end = $end_year.'-'.$end_month.'-'.$end_day;
+		//echo $start; echo "<br>"; echo $end; echo "<br>";
+		//echo "<pre>"; print_r($this->input->post()); die;
 		// two of these is a must
 		// menu
 		$data['menu']	 = $this->menu();
@@ -77,11 +77,11 @@ class Financial_report extends Operator_base {
 		$data['message'] = $this->session->flashdata('message');
 		
 		// $data['id']	= $id;
-		$start = '2014-12-01';
-		$end = '2015-01-31';
-		$datestring = '01 December 2014 - 31 January 2015';
+		//$start = '2014-12-01';
+		//$end = '2015-01-31';
+		//$datestring = '01 December 2014 - 31 January 2015';
 
-		$id = 'a04';
+		//$id = 'a04';
 		$data['id'] = $id;
 
 		if($id == 'a01')
