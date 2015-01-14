@@ -29,7 +29,7 @@ class m_scholarship extends CI_Model {
                   s.name,
                   s.school_year_id,
                   s.description,
-                  s.amount - SUM(sa.amount) AS amount 
+                  s.amount - IFNULL(SUM(sa.amount),0) AS amount 
                 FROM
                   scholarship s 
                   LEFT JOIN scholarship_allocation sa 
@@ -61,6 +61,7 @@ class m_scholarship extends CI_Model {
                 EXISTS (SELECT *
                     FROM   re_registration r
                     WHERE  s.nis = r.nis AND r.school_year_id = '$id')
+                GROUP BY nis
                 HAVING SUM(i.amount) > 0 AND SUM(i.scholarship) = 0
                 LIMIT 12";
         $query = $this->db->query($sql);
