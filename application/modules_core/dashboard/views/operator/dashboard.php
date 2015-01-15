@@ -140,15 +140,24 @@
 	
 	<div class="row">
 
-		<div class="col-sm-7">
+		<div class="col-sm-8">
 			<div class="panel panel-default">
 				<div class="panel-body">
 	              <h5 class="subtitle">Budi Utama's Students </h5>
 	              <p>Line Chart of Budi Utama's Total Students per Year</p>
-				  <div id="line-chart" style="height: 300px;"></div>	
+				  <div id="total-student-graphic" style="height: 300px;"></div>	
 				</div>
 			</div>
-		</div>
-        		
+		</div><!-- col-sm-7 -->        		
+		<div class="col-sm-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+            <h5 class="subtitle mb5">Budi Utama's Classroom</h5>
+            <p class="mb15">Classroom distribution in Budi Utama</p>
+            <div id="class-room" style="text-align: center; height: 300px;"></div>
+            </div><!-- panel-body -->
+          </div><!-- panel -->
+          
+        </div><!-- col-sm-4 -->        		
 	</div>  
 </div><!-- contentpanel -->
