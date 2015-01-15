@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
 	//BU students linechart
 	new Morris.Line({
 	    // ID of the element in which to draw the chart.
-	    element: 'line-chart',
+	    element: 'total-student-graphic',
 	    // Chart data records -- each entry in this array corresponds to a point on
 	    // the chart.
 	    data: [
@@ -17,11 +17,23 @@ jQuery(document).ready(function(){
 	    xkey: 'y',
 	    ykeys: ['a', 'b','c','d'],
 	    labels: ['KB', 'TK', 'SD', 'SMP'],
-	    lineColors: ['#428BCA','#5BC0DE','#E9A95E','#D9534F'],
+	    lineColors: ['#F6D84B','#1CAF9A','#D9534F','#428BCA'],
 	    lineWidth: '2px',
 	    hideHover: true
 	});
-          
+
+    // Total Class Room Donut Chart
+    new Morris.Donut({
+        element: 'class-room',
+        data: [
+          {label: "KB", value: 3},
+          {label: "TK", value: 3},
+          {label: "SD", value: 12},
+          {label: "SMP", value: 6},
+        ],
+        colors: ['#F6D84B','#1CAF9A','#D9534F','#428BCA']
+    });
+              
 	//format currency on dashboard
 	jQuery('.currency').autoNumeric('init', {aSign:'Rp ', pSign:'p', aPad: false, aSep: '.', aDec: ','});         
 });
