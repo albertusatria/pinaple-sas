@@ -61,13 +61,28 @@
           </div>
         </div>
 
-         <div class="form-group">
+        <div class="form-group">
           <label class="col-sm-3 control-label">Status *</label>
           <div class="col-sm-2">
             <select class="form-control input-sm mb15" name="status" required>
                 <option value="">-- SELECT --</option>
                 <option value="aktif" <?php if(@$this->session->flashdata('status')=="aktif"){ echo "selected='true'";}?>>AKTIF</option>
                 <option value="tidak aktif" <?php if(@$this->session->flashdata('status')=="tidak aktif"){ echo "selected='true'";}?>>TIDAK AKTIF</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Phase *</label>
+          <div class="col-sm-2">
+            <select class="form-control input-sm mb15" name="phase" required>
+                <option value="">-- SELECT --</option>
+                <option value="CLOSE" <?php if(@$this->session->flashdata('phase')=="CLOSE"){ echo "selected='true'";}?>>CLOSE</option>
+                <option value="FIRST" <?php if(@$this->session->flashdata('phase')=="FIRST"){ echo "selected='true'";}?>>FIRST</option>
+                <option value="PMB" <?php if(@$this->session->flashdata('phase')=="PMB"){ echo "selected='true'";}?>>PMB</option>
+                <option value="PREP" <?php if(@$this->session->flashdata('phase')=="PREP"){ echo "selected='true'";}?>>PREP</option>
+                <option value="RESULT" <?php if(@$this->session->flashdata('phase')=="RESULT"){ echo "selected='true'";}?>>RESULT</option>
+                <option value="SECOND" <?php if(@$this->session->flashdata('phase')=="SECOND"){ echo "selected='true'";}?>>SECOND</option>
             </select>
           </div>
         </div>
