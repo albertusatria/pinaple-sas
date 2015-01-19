@@ -75,6 +75,7 @@ class School_year extends Operator_base {
 				'start'			=> $this->input->post('start'),
 				'end'			=> $this->input->post('end'),
 				'status'		=> $this->input->post('status'),
+				'phase'			=> $this->input->post('phase'),
 				'description'	=> $this->input->post('description')
 			);
 			$this->session->set_flashdata($data);
@@ -121,6 +122,7 @@ class School_year extends Operator_base {
 				'start'			=> $this->input->post('start'),
 				'end'			=> $this->input->post('end'),
 				'status'		=> $this->input->post('status'),
+				'phase'			=> $this->input->post('phase'),
 				'description'	=> $this->input->post('description')
 			);
 			$this->session->set_flashdata($data);

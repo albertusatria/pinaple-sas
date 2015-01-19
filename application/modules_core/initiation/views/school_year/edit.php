@@ -60,13 +60,28 @@
           </div>
         </div>
 
-         <div class="form-group">
+        <div class="form-group">
           <label class="col-sm-3 control-label">Status *</label>
           <div class="col-sm-2">
             <select class="form-control input-sm mb15" name="status" required>
                 <option value="">-- SELECT --</option>
                 <option value="aktif" <?php if($result->status=="aktif"){ echo "selected='true'";}?> >AKTIF</option>
                 <option value="tidak aktif" <?php if($result->status=="tidak aktif"){ echo "selected='true'";}?>>TIDAK AKTIF</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Phase *</label>
+          <div class="col-sm-2">
+            <select class="form-control input-sm mb15" name="phase" required>
+                <option value="">-- SELECT --</option>
+                <option value="CLOSE" <?php if($result->phase=="CLOSE"){ echo "selected='true'";}?>>CLOSE</option>
+                <option value="FIRST" <?php if($result->phase=="FIRST"){ echo "selected='true'";}?>>FIRST</option>
+                <option value="PMB" <?php if($result->phase=="PMB"){ echo "selected='true'";}?>>PMB</option>
+                <option value="PREP" <?php if($result->phase=="PREP"){ echo "selected='true'";}?>>PREP</option>
+                <option value="RESULT" <?php if($result->phase=="RESULT"){ echo "selected='true'";}?>>RESULT</option>
+                <option value="SECOND" <?php if($result->phase=="SECOND"){ echo "selected='true'";}?>>SECOND</option>
             </select>
           </div>
         </div>

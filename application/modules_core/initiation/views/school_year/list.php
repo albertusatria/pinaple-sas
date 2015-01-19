@@ -36,6 +36,7 @@
 		                                    <th>Start</th>
                                         <th>End</th>
 		                                    <th>Status</th>
+                                        <th>Phase</th>
 		                                    <th style="width:10%;"></th>
 		                                </tr>
 		                            </thead>
@@ -47,6 +48,7 @@
 		                                        <td><?php echo date("d-m-Y",strtotime($result->start)); ?></td>
 		                                        <td><?php echo date("d-m-Y",strtotime($result->end)); ?></td>
 		                                        <td><?php echo strtoupper($result->status); ?></td>
+                                            <td><?php echo strtoupper($result->phase); ?></td>
                                             <td style="text-align:center">
 	                                              <a href="<?php echo base_url(); ?>initiation/school_year/edit/<?php echo $result->id; ?>">
 	                                                <i class="fa fa-pencil"></i></a>
