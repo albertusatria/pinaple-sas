@@ -52,7 +52,7 @@ class Re_registration extends Operator_base {
 		foreach ($_POST as $value) {
 			$keyword = $value['keyword'];
 		}
-		$data = $this->m_registration->get_list_siswa($keyword,"",$id);
+		$data = $this->m_registration->get_list_siswa($keyword,$id,"");
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	}

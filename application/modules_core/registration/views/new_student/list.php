@@ -475,11 +475,11 @@
 				  <label class="col-sm-3 control-label">Nationality</label>
 				  <div class="col-sm-8">
 			          <div class="rdio rdio-primary">
-			            <input type="radio" id="ina" value="WNI" name="siswa[kewarganegaraan_wali]" required="">
+			            <input type="radio" id="ina" value="WNI" name="siswa[kewarganegaraan_wali]" >
 			            <label for="ina">Indonesian</label>
 			          </div>
 			          <div class="rdio rdio-primary">
-			            <input type="radio" id="foreign" value="WNA" name="siswa[kewarganegaraan_wali]" required="">
+			            <input type="radio" id="foreign" value="WNA" name="siswa[kewarganegaraan_wali]" >
 			            <label for="foreign">Foreign</label>
 			          </div>
 					  <label class="error" for="siswa[kewarganegaraan_wali]"></label>

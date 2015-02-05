@@ -53,9 +53,9 @@ class New_student extends Operator_base {
 					'start_school_year_id' => $value['siswa_tahun_mulai'],
 		            'previous_school' => $value['siswa_originschool'],
 		            'previous_school_type' => $value['siswa_sekolah_asal'],
-		            'unit_id' => $value['siswa_kelas'],
-		            'start_level' => $value['siswa_jenjang'],
-		            'current_level' => $value['siswa_jenjang'],
+		            'unit_id' => $value['siswa_jenjang'],
+		            'start_level' => $value['siswa_kelas'],
+		            'current_level' => $value['siswa_kelas'],
 		            'nis' => $value['siswa_nis'],
 
 		            'full_name' => $value['siswa_nama_lengkap'],
