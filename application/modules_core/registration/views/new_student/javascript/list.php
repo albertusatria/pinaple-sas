@@ -168,7 +168,7 @@ jQuery(document).ready(function() {
         [
             {"modelMakeID" : "0","modelMake" : "Choose School Units"},        
             <?php $no = 1; foreach ($ls_unit as $unit): ?>
-                {"modelMakeID" : "<?php echo $no ?>","modelMake" : "<?php echo $unit->name ?>"},
+                {"modelMakeID" : "<?php echo $unit->id ?>","modelMake" : "<?php echo $unit->name ?>"},
             <?php $no++; endforeach ; ?>
         ]};
 	var modelTypeJsonList = {
@@ -178,7 +178,7 @@ jQuery(document).ready(function() {
 	      "<?php echo $unit->name ?>" :
 	        [
 	            <?php for ($i = 1; $i <= $unit->stage; $i++) : ?>
-	                {"modelTypeID" : "<?php echo $unit->id ?>","modelType" : "<?php echo $i ?>"}
+	                {"modelTypeID" : "<?php echo $i ?>","modelType" : "<?php echo $i ?>"}
 	              <?php if ($i + 1 <= $unit->stage) : ?>
 	              ,
 	              <?php endif; ?>
